@@ -1,0 +1,212 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
+}
+
+/* Header Styles */
+header {
+    background-color: #4A90E2;
+    color: white;
+    padding: 20px 20px; 
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+/* Header Left (Name) */
+.header-left h1 {
+    font-size: 1.5rem;
+    margin: 0;
+    font-weight: 700;
+}
+
+.main-content {
+    display: flex;
+    max-width: 1200px;
+    margin: 20px auto;
+    flex-direction: column;
+}
+
+.product-showcase {
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-showcase h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #007acc; 
+}
+
+/* Carousel Styling */
+.carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.arrow {
+    background: transparent;
+    border: none;
+    font-size: 30px;
+    color: #007acc; 
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10; 
+    transition: color 0.3s;
+}
+
+/* Hover effect */
+.arrow:hover {
+    color: #fff; 
+}
+
+/* Circle behind the arrow */
+.arrow:hover::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px; 
+    height: 50px; 
+    background-color: #f1c40f; 
+    border-radius: 50%; 
+    z-index: -1; 
+}
+
+.left-arrow {
+    left: 10px; 
+}
+
+.right-arrow {
+    right: 10px; 
+}
+
+.product-image {
+    text-align: center;
+    margin: 0 30px; 
+    position: relative;
+}
+
+.product-image img {
+    width: 100%;
+    height: auto;
+    max-width: 600px;
+    border-radius: 10px;
+}
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+.details {
+    width: 100%;
+}
+
+h3 {
+    margin-top: 20px;
+    color: #007acc; 
+    border-bottom: 2px solid #007acc;
+    padding-bottom: 5px;
+}
+
+.specs-container {
+    margin: 10px 0;
+}
+
+.specs {
+    list-style-type: none; 
+    padding-left: 0; 
+    margin-bottom: 20px; 
+}
+
+.specs li {
+    margin-bottom: 10px; 
+}
+
+.ports {
+    list-style-type: disc; 
+    padding-left: 20px; 
+    margin-top: 5px; 
+}
+
+.ports li {
+    margin-bottom: 5px; 
+}
+
+/* Key Features Section Styling */
+.feature-card {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    background: #e6f7ff; 
+    border-radius: 10px; 
+    padding: 20px;
+    margin-bottom: 20px; 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
+    text-align: center;
+}
+
+.feature-card img {
+    width: 100%; 
+    height: auto;
+    max-width: 700px; 
+    margin-bottom: 15px; 
+    border-radius: 10px; 
+}
+
+.feature-card h4 {
+    margin-bottom: 10px; 
+    font-size: 20px;
+    color: #333;
+}
+
+.feature-card p {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
+}
+
+/* Footer */
+footer {
+    background-color: #2F5C91;
+    color: white;
+    padding: 10px 20px; 
+    text-align: center;
+    margin-top: auto;
+}
+
+footer a {
+    color: #4A90E2;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Footer Text */
+footer p {
+    margin: 0;
+    font-size: 0.9rem; 
+}
