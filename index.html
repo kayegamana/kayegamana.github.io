@@ -1,60 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kaye Gamana | Developer Portfolio</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <title>KG | Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="images/kayeGamanaLogo.png" type="image/png">
 </head>
-<body>
-  <!-- Header with Name Left and No Nav Buttons -->
-  <header>
-    <div class="header-left">
-      <h1>Kaye Gamana</h1>
-    </div>
-    <div class="header-right">
-      <nav>
-        <ul>
-          <!-- Removed Home and Projects buttons -->
+
+<body data-bs-theme="dark" id="body" style="font-family: 'Montserrat', sans-serif;">
+  <!-- Navigation Bar -->
+  <nav id="nav-bar" class="navbar navbar-expand-lg bg-body-tertiary shadow"
+    style="background-color: #4A90E2 !important;">
+    <div class="container-fluid" style="padding: 10px;">
+      <a class="navbar-brand" href="https://kayegamana.github.io/">
+        <h1 class="header-left" style="font-size: 1.5rem; margin: 0; font-weight: 700; color: white;">Kaye
+          Gamana</h1>
+      </a>
+      <button id="navbarToggler" class="navbar-toggler" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0" id="navbarNavList">
+          <!-- script, NAVIGATION -->
         </ul>
-      </nav>
+      </div>
     </div>
-  </header>
+  </nav>
 
-  <!-- Main Content with Centered Welcome Message -->
-  <main>
-    <section class="intro">
-      <h2>Welcome to Kaye's Portfolio</h2>
-      <p class="subheading">Explore my projects below</p>
-    </section>
+  <!-- Video Background -->
+  <div class="videoContainer">
+    <video autoplay loop muted class="videoBackground">
+      <source src="videos/portfolioVidName.mp4" type="video/mp4" />
+    </video>
+  </div>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-      <div class="project-buttons">
-        <div class="project">
-          <a href="project1.html"><button class="project-btn">Project 1</button></a>
+  <div class="videoLineDivider"></div>
+
+  <!-- About Me -->
+  <div class="container">
+    <div class="row aboutMeSection" id="aboutMe">
+      <div class="titleText">ABOUT ME</div>
+
+      <div class="row" style="padding-bottom: 3vh;">
+        <div class="myLineDivider"></div>
+      </div>
+
+      <div class="row" style="display: flex; align-items: center; justify-content: center;">
+        <!-- About Me - Image -->
+        <div class="col-12 col-md-5">
+          <div class="img-container">
+            <img src="images/aboutMePicture.jpg" class="about-me-img">
+          </div>
         </div>
 
-        <div class="project">
-          <a href="../project%202/projectTwo.html"><button class="project-btn">Project 2</button></a>
-        </div>
+        <!-- About Me - Text -->
+        <div class="aboutMeText col-12 col-md-7">
+          <h1 class="aboutMeHello">
+            HELLO
+          </h1>
+          <p>
+            I'm Kaye Christine P. Gamana, a 20-year-old Gemini born on May 21, 2004. Hailing from Bay,
+            Laguna,
+            I’ve ventured beyond my comfort zone to pursue my passion for computers, choosing the path of
+            Information Technology at the Polytechnic University of the Philippines in Santo Tomas—a place
+            unfamiliar and far from my sanctuary.
 
-        <div class="project">
-          <a href="../project%203/index.html"><button class="project-btn">Project 3</button></a>
-        </div>
-
-        <div class="project">
-          <a href="../project%204/index.html"><button class="project-btn">Project 4</button></a>
+          </p>
+          <p>
+            I’m now in my third year of college, fully immersed in the exciting world of Web Development.
+            Join
+            me on this track, browse my portfolio, and discover my projects listed below as I transform
+            pieces
+            of code—HTML, CSS, JavaScript, and other ideas—into functional and user-friendly interfaces.
+          </p>
         </div>
       </div>
-    </section>
-  </main>
+
+      <!-- Experience and Skills Overview -->
+      <div class="row">
+        <div class="container">
+          <div class="skillsTitle">
+            Experience and Skills Overview
+          </div>
+          <div class="skills-container">
+            <img src="images/expSkill1.png" alt="Skill 1">
+            <img src="images/expSkill2.png" alt="Skill 2">
+            <img src="images/expSkill3.png" alt="Skill 3">
+            <img src="images/expSkill4.png" alt="Skill 4">
+            <img src="images/expSkill5.png" alt="Skill 5">
+            <img src="images/expSkill6.png" alt="Skill 6">
+            <img src="images/expSkill7.png" alt="Skill 7">
+            <img src="images/expSkill8.png" alt="Skill 8">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="textSkillsProg col-12">
+          <p>
+            The programming languages listed above, along with SQL, HTML, and CSS, reflect the technical
+            skills
+            and experiences I have gained throughout my academic journey and continue to refine. I have
+            utilized
+            these languages primarily for developing functional projects, creating games, and building
+            various
+            digital tools.
+          </p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="container">
+          <div class="skills-container" style="padding-top: 5vh;">
+            <img src="images/expSkill9.png" alt="Skill 1">
+            <img src="images/expSkill10.png" alt="Skill 2">
+            <img src="images/expSkill11.png" alt="Skill 3">
+            <img src="images/expSkill12.png" alt="Skill 4">
+            <img src="images/expSkill13.png" alt="Skill 5">
+            <img src="images/expSkill14.png" alt="Skill 6">
+            <img src="images/expSkill15.png" alt="Skill 7">
+            <img src="images/expSkill16.png" alt="Skill 8">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="textSkillsTools col-12">
+          <p>
+            Additionally, the software tools listed above are among my most frequently used for image,
+            audio, and video editing. With sufficient mastery of these tools, I have been able to create
+            visually engaging content, which has greatly supported my efforts in refining UI/UX design and
+            advancing the front-end development of my website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Projects -->
+  <div class="container">
+    <div class="row projectSection" id="projects">
+      <div class="row">
+        <div class="titleText">PROJECTS</div>
+      </div>
+
+      <div class="row" style="padding-bottom: 3vh;">
+        <div class="myLineDivider"></div>
+      </div>
+
+      <!-- Project Preview - Images -->
+      <div class="row" id="projectsContainer">
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact -->
+  <div class="container">
+    <div class="row contactSection" id="contact">
+      <div class="row">
+        <div class="titleText">CONTACT</div>
+      </div>
+
+      <div class="row" style="padding-bottom: 3vh;">
+        <div class="myLineDivider"></div>
+      </div>
+
+      <div class="row d-flex align-items-center" style="padding-bottom: 5vh;">
+        <div class="col-lg-6 col-md-12 d-flex justify-content-center">
+          <div class="gif-container">
+            <img src="images/contactGif.gif" class="contactGif" alt="Contact Gif">
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-md-12 d-flex flex-column align-items-center">
+          <div class="contactText">Let's Communicate, Collaborate, Create, Code, and Curate. Contact Me.</div>
+
+          <div class="contactInfoContainer" id="contactInfoContainer">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer -->
-  <footer>
-    <p>© 2024 Kaye's Portfolio. All Rights Reserved.</p>
-  </footer>
+  <div class="container-fluid py-2" style="background-color: #2F5C91;">
+    <p class="text-center text-white mb-0">© 2024 Kaye Gamana | Portfolio</p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+
+  <script type="text/javascript" src="script.js"></script>
 </body>
+
 </html>
