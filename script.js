@@ -20,40 +20,16 @@ for (var i = 0; i < navLinks.length; i++) {
 // PROJECTS showcase
 var projects = [
     {
-        link: "project%201/project1.html",
-        preview: "images/projectPreview1.png",
-        hover: "images/projectPreviewHover1.png",
-        alt: "Project 1"
+        link: "WD/index.html",
+        preview: "images/subjectProjectPreview1.png",
+        hover: "images/subjectProjectPreviewHover1.png",
+        alt: "WD Projects"
     },
     {
-        link: "project%202/projectTwo.html",
-        preview: "images/projectPreview2.png",
-        hover: "images/projectPreviewHover2.png",
-        alt: "Project 2"
-    },
-    {
-        link: "project%203/index.html",
-        preview: "images/projectPreview3.png",
-        hover: "images/projectPreviewHover3.png",
-        alt: "Project 3"
-    },
-    {
-        link: "project%204/index.html",
-        preview: "images/projectPreview4.png",
-        hover: "images/projectPreviewHover4.png",
-        alt: "Project 4"
-    },
-    {
-        link: "project%205/index.html",
-        preview: "images/projectPreview5.png",
-        hover: "images/projectPreviewHover5.png",
-        alt: "Project 5"
-    },
-    {
-        link: "project%206/index.html",
-        preview: "images/projectPreview6.png",
-        hover: "images/projectPreviewHover6.png",
-        alt: "Project 6"
+        link: "ADET/index.html",
+        preview: "images/subjectProjectPreview2.png",
+        hover: "images/subjectProjectPreviewHover2.png",
+        alt: "ADET Projects"
     }
 ];
 
@@ -61,7 +37,7 @@ var projectsContainer = document.getElementById('projectsContainer');
 
 for (var i = 0; i < projects.length; i++) {
     projectsContainer.innerHTML += `
-        <div class='col-md-4 mb-4'>
+        <div class='col-md-6 mb-4 px-5'>
             <a href=` + projects[i].link + ` target='_blank'>
                 <div class='project-img-container'>
                     <img src=` + projects[i].preview + ` alt=` + projects[i].alt + ` class='img-fluid project-img'>
