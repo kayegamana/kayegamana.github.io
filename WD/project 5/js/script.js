@@ -30,7 +30,7 @@ var memberImages = document.getElementById("memberImages");
 for (var i = 0; i < members.length; i++) {
     memberImages.innerHTML += `
     <div class="col-12 col-sm-6 col-md-3 mb-4">
-        <a href="` + members[i].link + `" target="_blank">
+        <a href="` + members[i].link + `">
             <img src="images/` + members[i].src + `" alt="` + members[i].alt + `" class="img-fluid rounded shadow">
         </a>
     </div>`;
