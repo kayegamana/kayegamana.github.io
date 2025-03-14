@@ -88,6 +88,21 @@
     border: 5px solid #e381a1;
 }
 
+.title-long{
+    display: block; 
+    width: 100%; 
+    padding: 10px 0; 
+    border-radius: 100px;
+    background-color: transparent;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
+    font-size: 3vh; 
+    color: white; 
+    border: 5px solid #e381a1;
+}
+
 /* MEMBERS section and SOLO RELEASE images*/
 .image-container, .image-container-solo-release{
     margin-right: 4vh;
