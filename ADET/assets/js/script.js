@@ -21,7 +21,7 @@ for (var i = 0; i < navLinks.length; i++) {
 var projects = [
     {
         link: "../../A02/index.php",
-        preview: "assets/images/projectPreviewComingSoon.png",
+        preview: "assets/images/projectPreview1.png",
         hover: "assets/images/projectPreviewHover1.png",
         alt: "Project1"
     },
