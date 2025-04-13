@@ -76,7 +76,7 @@ if (isset($_GET['page'])) {
         }
 
         .news-card:hover {
-            background-color:rgb(241, 248, 255);
+            background-color: rgb(241, 248, 255);
         }
     </style>
 </head>
@@ -98,31 +98,38 @@ if (isset($_GET['page'])) {
                     style="width: auto; height: 82vh; background-color: #f8f9fa;">
                     <ul class="list-group list-group-flush d-flex flex-column flex-grow-1">
                         <a href="?page=allNews" class="text-decoration-none">
-                            <li class="list-group-item h5 nav-item <?php echo ($page == 'allNews' ? 'active' : ''); ?>">
-                                <i class="bi bi-newspaper"></i> All News
+                            <li
+                                class="list-group-item nav-item d-flex align-items-center px-2 py-1 px-md-3 py-md-2 <?php echo ($page == 'allNews' ? 'active' : ''); ?>">
+                                <i class="bi bi-newspaper fs-6 fs-md-4"></i>
+                                <span class="d-none d-md-inline ms-2">All News</span>
                             </li>
                         </a>
                         <a href="?page=playstation" class="text-decoration-none">
                             <li
-                                class="list-group-item h5 nav-item <?php echo ($page == 'playstation' ? 'active' : ''); ?>">
-                                <i class="bi bi-playstation"></i> Playstation
+                                class="list-group-item nav-item d-flex align-items-center px-2 py-1 px-md-3 py-md-2 <?php echo ($page == 'playstation' ? 'active' : ''); ?>">
+                                <i class="bi bi-playstation fs-6 fs-md-4"></i>
+                                <span class="d-none d-md-inline ms-2">Playstation</span>
                             </li>
                         </a>
                         <a href="?page=xbox" class="text-decoration-none">
-                            <li class="list-group-item h5 nav-item <?php echo ($page == 'xbox' ? 'active' : ''); ?>">
-                                <i class="bi bi-xbox"></i> Xbox
+                            <li
+                                class="list-group-item nav-item d-flex align-items-center px-2 py-1 px-md-3 py-md-2 <?php echo ($page == 'xbox' ? 'active' : ''); ?>">
+                                <i class="bi bi-xbox fs-6 fs-md-4"></i>
+                                <span class="d-none d-md-inline ms-2">Xbox</span>
                             </li>
                         </a>
                         <a href="?page=nintendo" class="text-decoration-none">
                             <li
-                                class="list-group-item h5 nav-item <?php echo ($page == 'nintendo' ? 'active' : ''); ?>">
-                                <i class="bi bi-nintendo-switch"></i> Nintendo
+                                class="list-group-item nav-item d-flex align-items-center px-2 py-1 px-md-3 py-md-2 <?php echo ($page == 'nintendo' ? 'active' : ''); ?>">
+                                <i class="bi bi-nintendo-switch fs-6 fs-md-4"></i>
+                                <span class="d-none d-md-inline ms-2">Nintendo</span>
                             </li>
                         </a>
 
                         <div class="mt-auto">
-                            <li class="list-group-item">
-                                <i class="bi bi-person-circle me-2"></i> John Doe
+                            <li class="list-group-item d-flex align-items-center px-2 py-1 px-md-3 py-md-2">
+                                <i class="bi bi-person-circle fs-6 fs-md-4"></i>
+                                <span class="d-none d-md-inline ms-2">John Doe</span>
                             </li>
                         </div>
                     </ul>
