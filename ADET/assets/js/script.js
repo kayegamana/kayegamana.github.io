@@ -62,6 +62,11 @@ var projectsContainer = document.getElementById('projectsContainer');
 for (var i = 0; i < projects.length; i++) {
     projectsContainer.innerHTML += `
         <div class='col-md-4 mb-4'>
-            <img src=` + projects[i].preview + ` alt=` + projects[i].alt + ` class='img-fluid project-img'>
+            <a href=` + projects[i].link + ` target='_blank'>
+                <div class='project-img-container'>
+                    <img src=` + projects[i].preview + ` alt=` + projects[i].alt + ` class='img-fluid project-img'>
+                    <img src=` + projects[i].hover + ` alt=` + projects[i].alt + `Hover' class='img-fluid project-hover-img'>
+                </div>
+            </a>
         </div>`;
 }
