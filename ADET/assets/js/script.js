@@ -20,7 +20,7 @@ for (var i = 0; i < navLinks.length; i++) {
 // PROJECTS showcase
 var projects = [
     {
-        link: "../A02/index.php",
+        link: "../../A02/index.php",
         preview: "assets/images/projectPreviewComingSoon.png",
         hover: "assets/images/projectPreviewHover1.png",
         alt: "Project1"
