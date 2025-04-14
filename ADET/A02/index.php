@@ -78,6 +78,14 @@ if (isset($_GET['page'])) {
         .news-card:hover {
             background-color: rgb(241, 248, 255);
         }
+
+        @media (max-width: 991.98px) {
+            .icon-center {
+                margin-left: auto;
+                margin-right: auto;
+                display: block;
+            }
+        }
     </style>
 </head>
 
@@ -99,37 +107,38 @@ if (isset($_GET['page'])) {
                     <ul class="list-group list-group-flush d-flex flex-column flex-grow-1">
                         <a href="?page=allNews" class="text-decoration-none">
                             <li
-                                class="list-group-item nav-item d-flex align-items-center px-2 py-1 px-md-3 py-md-2 <?php echo ($page == 'allNews' ? 'active' : ''); ?>">
-                                <i class="bi bi-newspaper fs-6 fs-md-4"></i>
-                                <span class="d-none d-md-inline ms-2">All News</span>
+                                class="list-group-item nav-item d-flex flex-column flex-lg-row align-items-center align-items-lg-start px-2 py-1 px-md-3 py-md-2 <?php echo ($page == 'allNews' ? 'active' : ''); ?>">
+                                <i class="bi bi-newspaper fs-6 fs-md-4 icon-center"></i>
+                                <span class="d-none d-lg-inline ms-lg-2">All News</span>
                             </li>
                         </a>
                         <a href="?page=playstation" class="text-decoration-none">
                             <li
-                                class="list-group-item nav-item d-flex align-items-center px-2 py-1 px-md-3 py-md-2 <?php echo ($page == 'playstation' ? 'active' : ''); ?>">
-                                <i class="bi bi-playstation fs-6 fs-md-4"></i>
-                                <span class="d-none d-md-inline ms-2">Playstation</span>
+                                class="list-group-item nav-item d-flex flex-column flex-lg-row align-items-center align-items-lg-start px-2 py-1 px-md-3 py-md-2 <?php echo ($page == 'playstation' ? 'active' : ''); ?>">
+                                <i class="bi bi-playstation fs-6 fs-md-4 icon-center"></i>
+                                <span class="d-none d-lg-inline ms-lg-2">Playstation</span>
                             </li>
                         </a>
                         <a href="?page=xbox" class="text-decoration-none">
                             <li
-                                class="list-group-item nav-item d-flex align-items-center px-2 py-1 px-md-3 py-md-2 <?php echo ($page == 'xbox' ? 'active' : ''); ?>">
-                                <i class="bi bi-xbox fs-6 fs-md-4"></i>
-                                <span class="d-none d-md-inline ms-2">Xbox</span>
+                                class="list-group-item nav-item d-flex flex-column flex-lg-row align-items-center align-items-lg-start px-2 py-1 px-md-3 py-md-2 <?php echo ($page == 'xbox' ? 'active' : ''); ?>">
+                                <i class="bi bi-xbox fs-6 fs-md-4 icon-center"></i>
+                                <span class="d-none d-lg-inline ms-lg-2">Xbox</span>
                             </li>
                         </a>
                         <a href="?page=nintendo" class="text-decoration-none">
                             <li
-                                class="list-group-item nav-item d-flex align-items-center px-2 py-1 px-md-3 py-md-2 <?php echo ($page == 'nintendo' ? 'active' : ''); ?>">
-                                <i class="bi bi-nintendo-switch fs-6 fs-md-4"></i>
-                                <span class="d-none d-md-inline ms-2">Nintendo</span>
+                                class="list-group-item nav-item d-flex flex-column flex-lg-row align-items-center align-items-lg-start px-2 py-1 px-md-3 py-md-2 <?php echo ($page == 'nintendo' ? 'active' : ''); ?>">
+                                <i class="bi bi-nintendo-switch fs-6 fs-md-4 icon-center"></i>
+                                <span class="d-none d-lg-inline ms-lg-2">Nintendo</span>
                             </li>
                         </a>
 
                         <div class="mt-auto">
-                            <li class="list-group-item d-flex align-items-center px-2 py-1 px-md-3 py-md-2">
-                                <i class="bi bi-person-circle fs-6 fs-md-4"></i>
-                                <span class="d-none d-md-inline ms-2">John Doe</span>
+                            <li
+                                class="list-group-item d-flex flex-column flex-lg-row align-items-center align-items-lg-start px-2 py-1 px-md-3 py-md-2">
+                                <i class="bi bi-person-circle fs-6 fs-md-4 icon-center"></i>
+                                <span class="d-none d-lg-inline ms-lg-2">John Doe</span>
                             </li>
                         </div>
                     </ul>
