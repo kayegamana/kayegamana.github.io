@@ -64,17 +64,54 @@
 /* BANNER Images for Pages */
 .banner-carousel {
     margin-bottom: 1.8rem;
-  }
-  
-  .banner-img {
+}
+
+.banner-img {
     width: 100%;
     height: auto;
     object-fit: cover;
     border-radius: 10px;
-  }
-  
-  .card-line {
+}
+
+.card-line {
     height: 1px;
     max-width: 850px;
     margin: 1rem 0;
-  }
+}
+
+/* GAMING NEWS Articles Styles */
+.gaming-article-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+    padding: 2rem 0;
+}
+
+.gaming-article-card {
+    width: 80%;
+    padding: 2rem;
+    border-radius: 1rem;
+    background-color: white;
+}
+
+.gaming-article-title {
+    font-weight: 900;
+}
+
+.gaming-article-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.gaming-article-meta {
+    font-size: 0.9rem;
+}
+
+.gaming-article-paragraph {
+    text-indent: 3em;
+    text-align: justify;
+    margin-bottom: 1.5em;
+}
