@@ -24,10 +24,12 @@
         <a href="?page=gamingNewsArticle2" class="text-decoration-none text-dark">
             <div class="card news-card mt-3 mb-3" style="max-width: 850px;">
                 <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="images/xbox/untitledBoxingGameCodes.jpg" class="img-fluid rounded-start">
+                    <div class="col-12 col-md-4">
+                        <div class="img-card-article-wrapper"> <img src="images/xbox/untitledBoxingGameCodes.jpg"
+                                class="img-fluid rounded-start img-card-article">
+                        </div>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-12 col-md-8">
                         <div class="card-body">
                             <h6 class="card-title mt-3" style="font-weight:600;">Untitled Boxing Game Codes July 2024
                             </h6>
@@ -47,10 +49,12 @@
         <a href="?page=gamingNewsArticle2" class="text-decoration-none text-dark">
             <div class="card news-card mt-3 mb-3" style="max-width: 850px;">
                 <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="images/xbox/cabinCrewSimulatorCodes.jpg" class="img-fluid rounded-start">
+                    <div class="col-12 col-md-4">
+                        <div class="img-card-article-wrapper"> <img src="images/xbox/cabinCrewSimulatorCodes.jpg"
+                                class="img-fluid rounded-start img-card-article">
+                        </div>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-12 col-md-8">
                         <div class="card-body">
                             <h6 class="card-title mt-3" style="font-weight:600;">Cabin Crew Simulator Codes (April 2025)
                             </h6>
@@ -71,10 +75,12 @@
         <a href="?page=gamingNewsArticle2" class="text-decoration-none text-dark">
             <div class="card news-card mt-3 mb-3" style="max-width: 850px;">
                 <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="images/xbox/bloxFruitsCodes.jpg" class="img-fluid rounded-start">
+                    <div class="col-12 col-md-4">
+                        <div class="img-card-article-wrapper"> <img src="images/xbox/bloxFruitsCodes.jpg"
+                                class="img-fluid rounded-start img-card-article">
+                        </div>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-12 col-md-8">
                         <div class="card-body">
                             <h6 class="card-title mt-3" style="font-weight:600;">Blox Fruits Codes (April 2025)</h6>
                             <p class="card-text mt-4 mb-1" style="font-size: 0.8rem;">1d ago - Redeem these Blox Fruits
@@ -92,10 +98,12 @@
         <a href="?page=gamingNewsArticle2" class="text-decoration-none text-dark">
             <div class="card news-card mt-3 mb-3" style="max-width: 850px;">
                 <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="images/xbox/dandysWorldCodes.jpg" class="img-fluid rounded-start">
+                    <div class="col-12 col-md-4">
+                        <div class="img-card-article-wrapper"> <img src="images/xbox/dandysWorldCodes.jpg"
+                                class="img-fluid rounded-start img-card-article">
+                        </div>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-12 col-md-8">
                         <div class="card-body">
                             <h6 class="card-title mt-3" style="font-weight:600;">Dandy's World Codes (April 2025)</h6>
                             <p class="card-text mt-4 mb-1" style="font-size: 0.8rem;">1d ago - Use these redeemable

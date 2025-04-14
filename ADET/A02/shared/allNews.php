@@ -23,12 +23,15 @@
     <!-- Playstation -->
     <!-- CARD 1 -->
     <a href="?page=gamingNewsArticle1" class="text-decoration-none text-dark">
-        <div class="card news-card mt-3-3 mb-3" style="max-width: 850px;">
+        <div class="card news-card mt-3 mb-3" style="max-width: 850px;">
             <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="images/playstation/azureLatchCodes.png" class="img-fluid rounded-start">
+                <div class="col-12 col-md-4">
+                    <div class="img-card-article-wrapper">
+                        <img src="images/playstation/azureLatchCodes.png"
+                            class="img-fluid rounded-start img-card-article">
+                    </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-12 col-md-8">
                     <div class="card-body">
                         <h6 class="card-title mt-3" style="font-weight:600;">Codes for Azure Latch (April 2025)</h6>
                         <p class="card-text mt-4 mb-1" style="font-size: 0.8rem;">18h ago - Looking for cash to unlock
@@ -43,12 +46,14 @@
 
     <!-- CARD 2 -->
     <a href="?page=gamingNewsArticle1" class="text-decoration-none text-dark">
-        <div class="card news-card mt-3-3 mb-3" style="max-width: 850px;">
+        <div class="card news-card mt-3 mb-3" style="max-width: 850px;">
             <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="images/playstation/spongebobTowerDefense.png" class="img-fluid rounded-start">
+                <div class="col-12 col-md-4">
+                    <div class="img-card-article-wrapper"> <img src="images/playstation/spongebobTowerDefense.png"
+                            class="img-fluid rounded-start img-card-article">
+                    </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-12 col-md-8">
                     <div class="card-body">
                         <h6 class="card-title mt-3" style="font-weight:600;">Codes for SpongeBob Tower Defense (April
                             2025)</h6>
@@ -64,12 +69,14 @@
 
     <!-- CARD 3 -->
     <a href="?page=gamingNewsArticle1" class="text-decoration-none text-dark">
-        <div class="card news-card mt-3-3 mb-3" style="max-width: 850px;">
+        <div class="card news-card mt-3 mb-3" style="max-width: 850px;">
             <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="images/playstation/basketballZeroCodes.png" class="img-fluid rounded-start">
+                <div class="col-12 col-md-4">
+                    <div class="img-card-article-wrapper"> <img src="images/playstation/basketballZeroCodes.png"
+                            class="img-fluid rounded-start img-card-article">
+                    </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-12 col-md-8">
                     <div class="card-body">
                         <h6 class="card-title mt-3" style="font-weight:600;">Basketball: Zero Codes (April 2025)</h6>
                         <p class="card-text mt-4 mb-1" style="font-size: 0.8rem;">19h ago - We've got all the codes you
@@ -84,12 +91,14 @@
 
     <!-- CARD 4 -->
     <a href="?page=gamingNewsArticle1" class="text-decoration-none text-dark">
-        <div class="card news-card mt-3-3 mb-3" style="max-width: 850px;">
+        <div class="card news-card mt-3 mb-3" style="max-width: 850px;">
             <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="images/playstation/attackOnTitanRevolution.jpg" class="img-fluid rounded-start">
+                <div class="col-12 col-md-4">
+                    <div class="img-card-article-wrapper"> <img src="images/playstation/attackOnTitanRevolution.jpg"
+                            class="img-fluid rounded-start img-card-article">
+                    </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-12 col-md-8">
                     <div class="card-body">
                         <h6 class="card-title mt-3" style="font-weight:600;">Attack on Titan Revolution Codes (April
                             2025)</h6>
@@ -107,10 +116,12 @@
     <a href="?page=gamingNewsArticle2" class="text-decoration-none text-dark">
         <div class="card news-card mt-3 mb-3" style="max-width: 850px;">
             <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="images/xbox/untitledBoxingGameCodes.jpg" class="img-fluid rounded-start">
+                <div class="col-12 col-md-4">
+                    <div class="img-card-article-wrapper"> <img src="images/xbox/untitledBoxingGameCodes.jpg"
+                            class="img-fluid rounded-start img-card-article">
+                    </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-12 col-md-8">
                     <div class="card-body">
                         <h6 class="card-title mt-3" style="font-weight:600;">Untitled Boxing Game Codes July 2024
                         </h6>
@@ -130,10 +141,12 @@
     <a href="?page=gamingNewsArticle2" class="text-decoration-none text-dark">
         <div class="card news-card mt-3 mb-3" style="max-width: 850px;">
             <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="images/xbox/cabinCrewSimulatorCodes.jpg" class="img-fluid rounded-start">
+                <div class="col-12 col-md-4">
+                    <div class="img-card-article-wrapper"> <img src="images/xbox/cabinCrewSimulatorCodes.jpg"
+                            class="img-fluid rounded-start img-card-article">
+                    </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-12 col-md-8">
                     <div class="card-body">
                         <h6 class="card-title mt-3" style="font-weight:600;">Cabin Crew Simulator Codes (April 2025)
                         </h6>
@@ -154,10 +167,12 @@
     <a href="?page=gamingNewsArticle2" class="text-decoration-none text-dark">
         <div class="card news-card mt-3 mb-3" style="max-width: 850px;">
             <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="images/xbox/bloxFruitsCodes.jpg" class="img-fluid rounded-start">
+                <div class="col-12 col-md-4">
+                    <div class="img-card-article-wrapper"> <img src="images/xbox/bloxFruitsCodes.jpg"
+                            class="img-fluid rounded-start img-card-article">
+                    </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-12 col-md-8">
                     <div class="card-body">
                         <h6 class="card-title mt-3" style="font-weight:600;">Blox Fruits Codes (April 2025)</h6>
                         <p class="card-text mt-4 mb-1" style="font-size: 0.8rem;">1d ago - Redeem these Blox Fruits
@@ -175,10 +190,12 @@
     <a href="?page=gamingNewsArticle2" class="text-decoration-none text-dark">
         <div class="card news-card mt-3 mb-3" style="max-width: 850px;">
             <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="images/xbox/dandysWorldCodes.jpg" class="img-fluid rounded-start">
+                <div class="col-12 col-md-4">
+                    <div class="img-card-article-wrapper"> <img src="images/xbox/dandysWorldCodes.jpg"
+                            class="img-fluid rounded-start img-card-article">
+                    </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-12 col-md-8">
                     <div class="card-body">
                         <h6 class="card-title mt-3" style="font-weight:600;">Dandy's World Codes (April 2025)</h6>
                         <p class="card-text mt-4 mb-1" style="font-size: 0.8rem;">1d ago - Use these redeemable
@@ -198,13 +215,15 @@
     <a href="?page=gamingNewsArticle3" class="text-decoration-none text-dark">
         <div class="card news-card mt-3 mb-3" style="max-width: 850px;">
             <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="images/nintendo/theLegendOfZelda.jpg" class="img-fluid rounded-start">
+                <div class="col-12 col-md-4">
+                    <div class="img-card-article-wrapper"> <img src="images/nintendo/theLegendOfZelda.jpg"
+                            class="img-fluid rounded-start img-card-article">
+                    </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-12 col-md-8">
                     <div class="card-body">
-                        <h6 class="card-title mt-3" style="font-weight:600;">The Legend of Zelda: Breath of the Wild's
-                            Nintendo Switch 2 Edition Won't Include the DLC</h6>
+                        <h6 class="card-title mt-3" style="font-weight:600;">Zelda: Breath of the Wild Switch 2 Edition
+                            Won’t Include DLC</h6>
                         <p class="card-text mt-4 mb-1" style="font-size: 0.8rem;">1d ago - Boost your SkyBux balance and
                             upgrade your airline with these Cabin Crew Simulator codes.</p>
                         <p class="card-text mt-1 text-body-secondary" style="font-size: 0.7rem;">LAUREN HARPER</small>
@@ -220,10 +239,12 @@
     <a href="?page=gamingNewsArticle3" class="text-decoration-none text-dark">
         <div class="card news-card mt-3 mb-3" style="max-width: 850px;">
             <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="images/nintendo/superMarioPartyJamboree.jpg" class="img-fluid rounded-start">
+                <div class="col-12 col-md-4">
+                    <div class="img-card-article-wrapper"> <img src="images/nintendo/superMarioPartyJamboree.jpg"
+                            class="img-fluid rounded-start img-card-article">
+                    </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-12 col-md-8">
                     <div class="card-body">
                         <h6 class="card-title mt-3" style="font-weight:600;">The Best Deals Today: Super Mario Party
                             Jamboree, Middle-Earth 4K Film Collection, and More</h6>
@@ -242,10 +263,12 @@
     <a href="?page=gamingNewsArticle3" class="text-decoration-none text-dark">
         <div class="card news-card mt-3 mb-3" style="max-width: 850px;">
             <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="images/nintendo/fortniteOgSeason1.jpg" class="img-fluid rounded-start">
+                <div class="col-12 col-md-4">
+                    <div class="img-card-article-wrapper"> <img src="images/nintendo/fortniteOgSeason1.jpg"
+                            class="img-fluid rounded-start img-card-article">
+                    </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-12 col-md-8">
                     <div class="card-body">
                         <h6 class="card-title mt-3" style="font-weight:600;">Battle Royale Interest is Declining But
                             Fortnite Continues To Dominate, New Report Says</h6>
@@ -263,10 +286,12 @@
     <a href="?page=gamingNewsArticle3" class="text-decoration-none text-dark">
         <div class="card news-card mt-3 mb-3" style="max-width: 850px;">
             <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="images/nintendo/astroBot.jpg" class="img-fluid rounded-start">
+                <div class="col-12 col-md-4">
+                    <div class="img-card-article-wrapper"> <img src="images/nintendo/astroBot.jpg"
+                            class="img-fluid rounded-start img-card-article">
+                    </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-12 col-md-8">
                     <div class="card-body">
                         <h6 class="card-title mt-3" style="font-weight:600;">BAFTA Games Awards 2025: The Full List of
                             Winners</h6>

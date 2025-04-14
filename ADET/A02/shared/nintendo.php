@@ -23,10 +23,12 @@
     <a href="?page=gamingNewsArticle3" class="text-decoration-none text-dark">
         <div class="card news-card mt-3 mb-3" style="max-width: 850px;">
             <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="images/nintendo/theLegendOfZelda.jpg" class="img-fluid rounded-start">
+                <div class="col-12 col-md-4">
+                    <div class="img-card-article-wrapper"> <img src="images/nintendo/theLegendOfZelda.jpg"
+                            class="img-fluid rounded-start img-card-article">
+                    </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-12 col-md-8">
                     <div class="card-body">
                         <h6 class="card-title mt-3" style="font-weight:600;">Zelda: Breath of the Wild Switch 2 Edition
                             Won’t Include DLC</h6>
@@ -45,10 +47,12 @@
     <a href="?page=gamingNewsArticle3" class="text-decoration-none text-dark">
         <div class="card news-card mt-3 mb-3" style="max-width: 850px;">
             <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="images/nintendo/superMarioPartyJamboree.jpg" class="img-fluid rounded-start">
+                <div class="col-12 col-md-4">
+                    <div class="img-card-article-wrapper"> <img src="images/nintendo/superMarioPartyJamboree.jpg"
+                            class="img-fluid rounded-start img-card-article">
+                    </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-12 col-md-8">
                     <div class="card-body">
                         <h6 class="card-title mt-3" style="font-weight:600;">The Best Deals Today: Super Mario Party
                             Jamboree, Middle-Earth 4K Film Collection, and More</h6>
@@ -67,10 +71,12 @@
     <a href="?page=gamingNewsArticle3" class="text-decoration-none text-dark">
         <div class="card news-card mt-3 mb-3" style="max-width: 850px;">
             <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="images/nintendo/fortniteOgSeason1.jpg" class="img-fluid rounded-start">
+                <div class="col-12 col-md-4">
+                    <div class="img-card-article-wrapper"> <img src="images/nintendo/fortniteOgSeason1.jpg"
+                            class="img-fluid rounded-start img-card-article">
+                    </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-12 col-md-8">
                     <div class="card-body">
                         <h6 class="card-title mt-3" style="font-weight:600;">Battle Royale Interest is Declining But
                             Fortnite Continues To Dominate, New Report Says</h6>
@@ -88,10 +94,12 @@
     <a href="?page=gamingNewsArticle3" class="text-decoration-none text-dark">
         <div class="card news-card mt-3 mb-3" style="max-width: 850px;">
             <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="images/nintendo/astroBot.jpg" class="img-fluid rounded-start">
+                <div class="col-12 col-md-4">
+                    <div class="img-card-article-wrapper"> <img src="images/nintendo/astroBot.jpg"
+                            class="img-fluid rounded-start img-card-article">
+                    </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-12 col-md-8">
                     <div class="card-body">
                         <h6 class="card-title mt-3" style="font-weight:600;">BAFTA Games Awards 2025: The Full List of
                             Winners</h6>
