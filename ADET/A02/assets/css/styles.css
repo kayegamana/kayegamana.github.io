@@ -1,3 +1,4 @@
+/* Styles for Index */
 .nav-item:hover {
     background-color: rgb(54, 54, 54) !important;
     color: white !important;
@@ -59,3 +60,16 @@
         display: block;
     }
 }
+
+/* BANNER Images for Pages */
+.banner-carousel {
+    margin-bottom: 1.8rem;
+  }
+  
+  .banner-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  

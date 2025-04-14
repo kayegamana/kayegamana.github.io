@@ -4,19 +4,16 @@
     <h2 class="mt-4 mb-3" style="font-weight: 900; color:rgb(7, 43, 101);">Trending Gaming News</h2>
 
     <!-- IMAGE BANNER -->
-    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel" style="margin-bottom: 1.8rem;">
+    <div id="carouselExampleSlidesOnly" class="carousel slide banner-carousel" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="images/allNewsBanner1.png" class="d-block"
-                    style="width: 100%; height: auto; object-fit: cover; border-radius: 10px;">
+                <img src="images/allNewsBanner1.png" class="d-block banner-img">
             </div>
             <div class="carousel-item">
-                <img src="images/allNewsBanner2.png" class="d-block"
-                    style="width: 100%; height: auto; object-fit: cover; border-radius: 10px;">
+                <img src="images/allNewsBanner2.png" class="d-block banner-img">
             </div>
             <div class="carousel-item">
-                <img src="images/allNewsBanner3.png" class="d-block"
-                    style="width: 100%; height: auto; object-fit: cover; border-radius: 10px;">
+                <img src="images/allNewsBanner3.png" class="d-block banner-img">
             </div>
         </div>
     </div>
@@ -24,7 +21,6 @@
     <!-- NEWS ARTICLE CARDS -->
 
     <!-- Playstation -->
-    <!-- NEWS ARTICLE CARDS -->
     <!-- CARD 1 -->
     <a href="?page=gamingNewsArticle1" class="text-decoration-none text-dark">
         <div class="card news-card mt-3-3 mb-3" style="max-width: 850px;">
@@ -107,7 +103,6 @@
     </a>
 
     <!-- Xbox -->
-    <!-- NEWS ARTICLE CARDS -->
     <!-- CARD 1 -->
     <a href="?page=gamingNewsArticle2" class="text-decoration-none text-dark">
         <div class="card news-card mt-3 mb-3" style="max-width: 850px;">
@@ -199,7 +194,6 @@
     </a>
 
     <!-- Nintendo -->
-    <!-- NEWS ARTICLE CARDS -->
     <!-- CARD 1 -->
     <a href="?page=gamingNewsArticle3" class="text-decoration-none text-dark">
         <div class="card news-card mt-3 mb-3" style="max-width: 850px;">
