@@ -8,13 +8,13 @@
         style="margin-bottom: 1.8rem;">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="assets/assets/images/playstation/banner1.png" class="d-block banner-img">
+                <img src="assets/images/playstation/banner1.png" class="d-block banner-img">
             </div>
             <div class="carousel-item">
-                <img src="assets/assets/images/playstation/banner2.png" class="d-block banner-img">
+                <img src="assets/images/playstation/banner2.png" class="d-block banner-img">
             </div>
             <div class="carousel-item">
-                <img src="assets/assets/images/playstation/banner3.png" class="d-block banner-img">
+                <img src="assets/images/playstation/banner3.png" class="d-block banner-img">
             </div>
         </div>
     </div>
