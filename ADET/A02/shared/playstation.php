@@ -37,7 +37,7 @@
             </div>
         </div>
     </a>
-    <hr style="height: 1px; max-width: 850px; margin: 1rem 0;">
+    <hr class="card-line">
 
     <!-- CARD 2 -->
     <a href="?page=gamingNewsArticle1" class="text-decoration-none text-dark">
@@ -58,7 +58,7 @@
             </div>
         </div>
     </a>
-    <hr style="height: 1px; max-width: 850px; margin: 1rem 0;">
+    <hr class="card-line">
 
     <!-- CARD 3 -->
     <a href="?page=gamingNewsArticle1" class="text-decoration-none text-dark">
@@ -78,7 +78,7 @@
             </div>
         </div>
     </a>
-    <hr style="height: 1px; max-width: 850px; margin: 1rem 0;">
+    <hr class="card-line">
 
     <!-- CARD 4 -->
     <a href="?page=gamingNewsArticle1" class="text-decoration-none text-dark">

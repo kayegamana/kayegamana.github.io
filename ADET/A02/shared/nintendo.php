@@ -40,7 +40,7 @@
         </div>
     </a>
 
-    <hr style="height: 1px; max-width: 850px; margin: 1rem 0;">
+    <hr class="card-line">
 
     <a href="?page=gamingNewsArticle3" class="text-decoration-none text-dark">
         <div class="card news-card mt-3 mb-3" style="max-width: 850px;">
@@ -62,7 +62,7 @@
         </div>
     </a>
 
-    <hr style="height: 1px; max-width: 850px; margin: 1rem 0;">
+    <hr class="card-line">
 
     <a href="?page=gamingNewsArticle3" class="text-decoration-none text-dark">
         <div class="card news-card mt-3 mb-3" style="max-width: 850px;">
@@ -83,7 +83,7 @@
         </div>
     </a>
 
-    <hr style="height: 1px; max-width: 850px; margin: 1rem 0;">
+    <hr class="card-line">
 
     <a href="?page=gamingNewsArticle3" class="text-decoration-none text-dark">
         <div class="card news-card mt-3 mb-3" style="max-width: 850px;">

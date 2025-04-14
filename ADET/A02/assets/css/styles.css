@@ -73,3 +73,8 @@
     border-radius: 10px;
   }
   
+  .card-line {
+    height: 1px;
+    max-width: 850px;
+    margin: 1rem 0;
+  }
