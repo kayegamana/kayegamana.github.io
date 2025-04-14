@@ -4,20 +4,17 @@
     <h2 class="mt-4 mb-3" style="font-weight: 900; color:rgb(7, 43, 101);">Xbox News</h1>
 
         <!-- IMAGE BANNER -->
-        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel"
+        <div id="carouselExampleSlidesOnly" class="carousel slide banner-carousel" data-bs-ride="carousel"
             style="margin-bottom: 1.8rem;">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="images/xbox/banner1.png" class="d-block"
-                        style="width: 100%; height: auto; object-fit: cover; border-radius: 10px;">
+                    <img src="images/xbox/banner1.png" class="d-block banner-img">
                 </div>
                 <div class="carousel-item">
-                    <img src="images/xbox/banner2.png" class="d-block"
-                        style="width: 100%; height: auto; object-fit: cover; border-radius: 10px;">
+                    <img src="images/xbox/banner2.png" class="d-block banner-img">
                 </div>
                 <div class="carousel-item">
-                    <img src="images/xbox/banner3.png" class="d-block"
-                        style="width: 100%; height: auto; object-fit: cover; border-radius: 10px;">
+                    <img src="images/xbox/banner3.png" class="d-block banner-img">
                 </div>
             </div>
         </div>
