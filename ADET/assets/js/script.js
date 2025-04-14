@@ -26,33 +26,33 @@ var projects = [
         alt: "Project1"
     },
     {
-        // link: "project%202/index.html",
+        link: "project%202/index.html",
         preview: "assets/images/projectPreviewComingSoon.png",
-        // hover: "assets/images/projectPreviewComingSoon.png",
+        hover: "assets/images/projectPreviewComingSoon.png",
         alt: "Project2"
     },
     {
-        // link: "project%203/index.html",
+        link: "project%203/index.html",
         preview: "assets/images/projectPreviewComingSoon.png",
-        // hover: "assets/images/projectPreviewComingSoon.png",
+        hover: "assets/images/projectPreviewComingSoon.png",
         alt: "Project3"
     },
     {
-        // link: "project%204/index.html",
+        link: "project%204/index.html",
         preview: "assets/images/projectPreviewComingSoon.png",
-        // hover: "assets/images/projectPreviewComingSoon.png",
+        hover: "assets/images/projectPreviewComingSoon.png",
         alt: "Project4"
     },
     {
-        // link: "project%205/index.html",
+        link: "project%205/index.html",
         preview: "assets/images/projectPreviewComingSoon.png",
-        // hover: "assets/images/projectPreviewComingSoon.png",
+        hover: "assets/images/projectPreviewComingSoon.png",
         alt: "Project5"
     },
     {
-        // link: "project%206/index.html",
+        link: "project%206/index.html",
         preview: "assets/images/projectPreviewComingSoon.png",
-        // hover: "assets/images/projectPreviewComingSoon.png",
+        hover: "assets/images/projectPreviewComingSoon.png",
         alt: "Project6"
     }
 ];
