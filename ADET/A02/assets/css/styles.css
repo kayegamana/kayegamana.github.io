@@ -1,0 +1,61 @@
+.nav-item:hover {
+    background-color: rgb(54, 54, 54) !important;
+    color: white !important;
+    cursor: pointer;
+}
+
+.nav-item:hover i {
+    color: white !important;
+}
+
+.nav-item.active {
+    background-color: rgba(5, 51, 126, 0.81) !important;
+    color: white !important;
+}
+
+.news-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.news-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.news-card:hover {
+    background-color: rgb(241, 248, 255);
+}
+
+.nav-custom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+}
+
+@media (min-width: 768px) {
+    .nav-custom {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .nav-custom {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .icon-center {
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+}
