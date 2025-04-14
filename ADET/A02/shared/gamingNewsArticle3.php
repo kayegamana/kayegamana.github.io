@@ -12,7 +12,7 @@
 
         <!-- IMAGE BANNER -->
         <div class="text-center mb-4">
-            <img src="images/nintendo/gamingNewsArticlesImages3.png" class="gaming-article-image" alt="Banner">
+            <img src="assets/images/nintendo/gamingNewsArticlesImages3.png" class="gaming-article-image" alt="Banner">
         </div>
 
         <!-- NEWS ARTICLE TEXT -->

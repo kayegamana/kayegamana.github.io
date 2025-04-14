@@ -13,7 +13,7 @@
 
         <!-- IMAGE BANNER -->
         <div class="text-center mb-4">
-            <img src="images/xbox/gamingNewsArticlesImages2.png" class="gaming-article-image" alt="Banner">
+            <img src="assets/images/xbox/gamingNewsArticlesImages2.png" class="gaming-article-image" alt="Banner">
         </div>
 
         <!-- NEWS ARTICLE TEXT -->

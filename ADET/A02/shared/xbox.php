@@ -8,13 +8,13 @@
             style="margin-bottom: 1.8rem;">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="images/xbox/banner1.png" class="d-block banner-img">
+                    <img src="assets/images/xbox/banner1.png" class="d-block banner-img">
                 </div>
                 <div class="carousel-item">
-                    <img src="images/xbox/banner2.png" class="d-block banner-img">
+                    <img src="assets/images/xbox/banner2.png" class="d-block banner-img">
                 </div>
                 <div class="carousel-item">
-                    <img src="images/xbox/banner3.png" class="d-block banner-img">
+                    <img src="assets/images/xbox/banner3.png" class="d-block banner-img">
                 </div>
             </div>
         </div>
@@ -25,7 +25,7 @@
             <div class="card news-card mt-3 mb-3" style="max-width: 850px;">
                 <div class="row g-0">
                     <div class="col-12 col-md-4">
-                        <div class="img-card-article-wrapper"> <img src="images/xbox/untitledBoxingGameCodes.jpg"
+                        <div class="img-card-article-wrapper"> <img src="assets/images/xbox/untitledBoxingGameCodes.jpg"
                                 class="img-fluid rounded-start img-card-article">
                         </div>
                     </div>
@@ -50,7 +50,7 @@
             <div class="card news-card mt-3 mb-3" style="max-width: 850px;">
                 <div class="row g-0">
                     <div class="col-12 col-md-4">
-                        <div class="img-card-article-wrapper"> <img src="images/xbox/cabinCrewSimulatorCodes.jpg"
+                        <div class="img-card-article-wrapper"> <img src="assets/images/xbox/cabinCrewSimulatorCodes.jpg"
                                 class="img-fluid rounded-start img-card-article">
                         </div>
                     </div>
@@ -76,7 +76,7 @@
             <div class="card news-card mt-3 mb-3" style="max-width: 850px;">
                 <div class="row g-0">
                     <div class="col-12 col-md-4">
-                        <div class="img-card-article-wrapper"> <img src="images/xbox/bloxFruitsCodes.jpg"
+                        <div class="img-card-article-wrapper"> <img src="assets/images/xbox/bloxFruitsCodes.jpg"
                                 class="img-fluid rounded-start img-card-article">
                         </div>
                     </div>
@@ -99,7 +99,7 @@
             <div class="card news-card mt-3 mb-3" style="max-width: 850px;">
                 <div class="row g-0">
                     <div class="col-12 col-md-4">
-                        <div class="img-card-article-wrapper"> <img src="images/xbox/dandysWorldCodes.jpg"
+                        <div class="img-card-article-wrapper"> <img src="assets/images/xbox/dandysWorldCodes.jpg"
                                 class="img-fluid rounded-start img-card-article">
                         </div>
                     </div>

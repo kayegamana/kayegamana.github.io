@@ -11,7 +11,7 @@
 
         <!-- IMAGE BANNER -->
         <div class="text-center mb-4">
-            <img src="images/playstation/gamingNewsArticlesImages1.png" class="gaming-article-image" alt="Banner">
+            <img src="assets/images/playstation/gamingNewsArticlesImages1.png" class="gaming-article-image" alt="Banner">
         </div>
 
         <!-- NEWS ARTICLE TEXT -->
