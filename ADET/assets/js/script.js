@@ -22,11 +22,6 @@ var projects = [
     {
         preview: "assets/images/projectPreviewComingSoon.png",
         hover: "assets/images/projectPreviewComingSoon.png",
-        alt: "Project2"
-    },
-    {
-        preview: "assets/images/projectPreviewComingSoon.png",
-        hover: "assets/images/projectPreviewComingSoon.png",
         alt: "Project3"
     },
     {
