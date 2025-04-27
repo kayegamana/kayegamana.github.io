@@ -21,31 +21,6 @@
     white-space: nowrap;
 }
 
-@media (max-width: 1024px) {
-    .navbar-title {
-        font-size: 2rem;
-        top: 0.7rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .navbar-title {
-        font-size: 1.7rem;
-        top: 0.8rem;
-    }
-}
-
-@media (max-width: 576px) {
-    .navbar-title {
-        font-size: 1.5rem;
-        top: 0.9rem;
-    }
-
-    .navbar-logo {
-        height: 3rem;
-    }
-}
-
 .nav-link {
     color: white;
     font-family: 'Montserrat', sans-serif;
@@ -56,24 +31,6 @@
 .nav-link:hover {
     color: rgb(196, 25, 25);
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-}
-
-@media (max-width: 1024px) {
-    .navbar-link {
-        font-size: 1rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .nav-link {
-        font-size: 0.75rem;
-    }
-}
-
-@media (max-width: 576px) {
-    .navbar-link {
-        font-size: 0.5rem;
-    }
 }
 
 .navbar-toggler,
@@ -87,26 +44,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-@media (max-width: 768px) {
-
-    .navbar-toggler,
-    .navbar-toggler-icon {
-        width: 2.2rem;
-        height: 2.2rem;
-        padding: 0.4rem;
-    }
-}
-
-@media (max-width: 576px) {
-
-    .navbar-toggler,
-    .navbar-toggler-icon {
-        width: 2rem;
-        height: 2rem;
-        padding: 0.3rem;
-    }
 }
 
 /* END - Navbar */
@@ -153,7 +90,6 @@
     padding: 1vw;
 }
 
-
 .product-name {
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
@@ -173,44 +109,7 @@
     margin: 0.2vw 0;
 }
 
-@media (max-width: 992px) {
-    .product-title {
-        font-size: 3vw;
-    }
-    .product-name {
-        font-size: 2vw;
-    }
-    .product-price-rating {
-        font-size: 2vw;
-    }
-}
-
-@media (max-width: 768px) {
-    .product-title {
-        font-size: 4vw;
-    }
-    .product-name {
-        font-size: 3vw;
-    }
-    .product-price-rating {
-        font-size: 3vw;
-    }
-}
-
-@media (max-width: 576px) {
-    .product-title {
-        font-size: 5vw;
-    }
-    .product-name {
-        font-size: 2.8vw;
-    }
-    .product-price-rating {
-        font-size: 3.5vw;
-    }
-}
 /* END - Product Page */
-
-
 
 /* START - Footer */
 .footer {
@@ -230,7 +129,58 @@
     color: white;
 }
 
+/* END - Footer */
+
+/* MEDIA QUERIES for RESPONSIVENESS */
+
+@media (max-width: 1024px) {
+    .navbar-title {
+        font-size: 2rem;
+        top: 0.7rem;
+    }
+
+    .nav-link {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .product-title {
+        font-size: 3vw;
+    }
+
+    .product-name {
+        font-size: 2vw;
+    }
+
+    .product-price-rating {
+        font-size: 2vw;
+    }
+}
+
 @media (max-width: 768px) {
+    .navbar-title {
+        font-size: 1.7rem;
+        top: 0.8rem;
+    }
+
+    .nav-link {
+        font-size: 0.75rem;
+    }
+
+    .navbar-toggler,
+    .navbar-toggler-icon {
+        width: 2.2rem;
+        height: 2.2rem;
+        padding: 0.4rem;
+    }
+
+    .product-title {
+        font-size: 4vw;
+    }
+
+    .product-name,
+    .product-price-rating,
     .footer-text {
         font-size: 3vw;
     }
@@ -240,4 +190,36 @@
     }
 }
 
-/* END - Footer */
+@media (max-width: 576px) {
+    .navbar-title {
+        font-size: 1.5rem;
+        top: 0.9rem;
+    }
+
+    .navbar-logo {
+        height: 3rem;
+    }
+
+    .nav-link {
+        font-size: 0.5rem;
+    }
+
+    .navbar-toggler,
+    .navbar-toggler-icon {
+        width: 2rem;
+        height: 2rem;
+        padding: 0.3rem;
+    }
+
+    .product-title {
+        font-size: 5vw;
+    }
+
+    .product-name {
+        font-size: 2.8vw;
+    }
+
+    .product-price-rating {
+        font-size: 3.5vw;
+    }
+}
