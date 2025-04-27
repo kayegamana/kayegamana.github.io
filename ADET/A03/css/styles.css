@@ -94,6 +94,7 @@ body {
 }
 
 .page-one-price,
+.page-one-price-dress,
 .page-two-price,
 .page-three-price {
   font-family: 'Roboto Condensed', sans-serif;
@@ -103,6 +104,7 @@ body {
 }
 
 .page-one-title,
+.page-one-title-dress,
 .page-two-title,
 .page-three-title {
   font-family: 'Montserrat', sans-serif;
@@ -158,11 +160,13 @@ body {
   line-height: 1.05;
 }
 
-.page-one-price {
+.page-one-price,
+.page-one-price-dress {
   font-size: 1.8vw;
 }
 
-.page-one-title {
+.page-one-title,
+.page-one-title-dress {
   font-size: 1vw;
 }
 
@@ -296,14 +300,22 @@ body {
   }
 
   .page-one-price,
-  .page-two-price,
   .page-three-price {
-    font-size: 5vw;
+    font-size: 3.5vw;
   }
 
   .page-one-title,
-  .page-two-title,
   .page-three-title {
+    font-size: 2.4vw;
+  }
+
+  .page-two-price,
+  .page-one-price-dress {
+    font-size: 5vw;
+  }
+
+  .page-two-title,
+  .page-one-title-dress {
     font-size: 3.5vw;
   }
 }
