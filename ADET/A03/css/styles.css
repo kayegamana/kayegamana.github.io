@@ -218,7 +218,7 @@ body {
 /* MEDIA QUERIES for RESPONSIVENESS */
 @media (max-width: 1024px) {
   .navbar-title {
-    font-size: 2rem;
+    font-size: 2.7rem;
     top: 0.7rem;
   }
 
@@ -226,12 +226,40 @@ body {
     font-size: 1rem;
   }
 
-  .page-two-price {
+  .page-one-carousel-text-red {
+    font-size: 1.8vw;
+  }
+
+  .page-one-carousel-text-white {
+    font-size: 3.8vw;
+  }
+
+  .page-one-price,
+  .page-three-price {
+    font-size: 3vw;
+  }
+
+  .page-one-title,
+  .page-three-title {
+    font-size: 2vw;
+  }
+
+  .page-two-price,
+  .page-one-price-dress {
     font-size: 3.5vw;
   }
 
-  .page-two-title {
-    font-size: 1.8vw;
+  .page-two-title,
+  .page-one-title-dress {
+    font-size: 2.5vw;
+  }
+
+  .footer-text {
+    font-size: 2vw;
+  }
+
+  .footer-subtext {
+    font-size: 1vw;
   }
 }
 
