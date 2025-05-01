@@ -168,7 +168,7 @@
 
 @media (max-width: 768px) {
     .navbar-title {
-        font-size: 1.7rem;
+        font-size: 2.5rem;
         top: 0.8rem;
     }
 
@@ -190,11 +190,11 @@
     .product-name,
     .product-price-rating,
     .footer-text {
-        font-size: 3vw;
+        font-size: 2.5vw;
     }
 
     .footer-subtext {
-        font-size: 1.5vw;
+        font-size: 1.2vw;
     }
 }
 
