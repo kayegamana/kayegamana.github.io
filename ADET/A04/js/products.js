@@ -5,7 +5,7 @@ var products = [
     "contents": [
       {
         "name": "Green Apple",
-        "code": "GA",
+        "code": "GRNAPPL",
         "image": "imgs/fruits/fruit1.jpg",
         "available": true,
         "weights": [
@@ -16,7 +16,7 @@ var products = [
       },
       {
         "name": "Red Fuji Apple",
-        "code": "RFA",
+        "code": "RDFJAPPL",
         "image": "imgs/fruits/fruit2.jpg",
         "available": true,
         "weights": [
@@ -38,7 +38,7 @@ var products = [
       },
       {
         "name": "Banana Lacatan",
-        "code": "BL",
+        "code": "BNNLCT",
         "image": "imgs/fruits/fruit4.jpg",
         "available": true,
         "weights": [
@@ -49,7 +49,7 @@ var products = [
       },
       {
         "name": "Banana Latundan",
-        "code": "BLT",
+        "code": "BNNLTND",
         "image": "imgs/fruits/fruit5.jpg",
         "available": true,
         "weights": [
@@ -60,7 +60,7 @@ var products = [
       },
       {
         "name": "Banana Saba",
-        "code": "BS",
+        "code": "BNNSB",
         "image": "imgs/fruits/fruit6.jpg",
         "available": true,
         "weights": [
@@ -71,7 +71,7 @@ var products = [
       },
       {
         "name": "Dragonfruit",
-        "code": "DF",
+        "code": "DRGNFRT",
         "image": "imgs/fruits/fruit7.jpg",
         "available": true,
         "weights": [
@@ -82,7 +82,7 @@ var products = [
       },
       {
         "name": "Durian",
-        "code": "DUR",
+        "code": "DRN",
         "image": "imgs/fruits/fruit8.jpg",
         "available": true,
         "weights": [
@@ -93,7 +93,7 @@ var products = [
       },
       {
         "name": "Green Muscat Grapes",
-        "code": "GMG",
+        "code": "GRNMGPS",
         "image": "imgs/fruits/fruit9.jpg",
         "available": true,
         "weights": [
@@ -104,7 +104,7 @@ var products = [
       },
       {
         "name": "Guyabano",
-        "code": "GBA",
+        "code": "GYBA",
         "image": "imgs/fruits/fruit10.jpg",
         "available": false,
         "weights": [
@@ -126,7 +126,7 @@ var products = [
       },
       {
         "name": "Mango Green Large",
-        "code": "MGL",
+        "code": "MNGGRNL",
         "image": "imgs/fruits/fruit12.jpg",
         "available": true,
         "weights": [
@@ -137,7 +137,7 @@ var products = [
       },
       {
         "name": "Mango Ripe Large",
-        "code": "MRL",
+        "code": "MNGRPL",
         "image": "imgs/fruits/fruit13.jpg",
         "available": true,
         "weights": [
@@ -148,7 +148,7 @@ var products = [
       },
       {
         "name": "Orange Medium-Large",
-        "code": "OML",
+        "code": "ORNGML",
         "image": "imgs/fruits/fruit14.jpg",
         "available": true,
         "weights": [
@@ -159,7 +159,7 @@ var products = [
       },
       {
         "name": "Pineapple Premium",
-        "code": "PP",
+        "code": "PNPLEP",
         "image": "imgs/fruits/fruit15.jpg",
         "available": true,
         "weights": [
@@ -170,7 +170,7 @@ var products = [
       },
       {
         "name": "Watermelon Seedless",
-        "code": "WS",
+        "code": "WTMLNSDL",
         "image": "imgs/fruits/fruit16.jpg",
         "available": true,
         "weights": [
@@ -188,7 +188,7 @@ var products = [
     "contents": [
       {
         "name": "Ampalaya Long",
-        "code": "AL",
+        "code": "AMPLYL",
         "image": "imgs/vegetables/vegetable1.jpg",
         "available": true,
         "weights": [
@@ -199,7 +199,7 @@ var products = [
       },
       {
         "name": "Baguio Beans",
-        "code": "BB",
+        "code": "BGIOBN",
         "image": "imgs/vegetables/vegetable2.jpg",
         "available": true,
         "weights": [
@@ -210,7 +210,7 @@ var products = [
       },
       {
         "name": "Bell Pepper Green",
-        "code": "BPG",
+        "code": "BLLPGRN",
         "image": "imgs/vegetables/vegetable3.jpg",
         "available": true,
         "weights": [
@@ -221,7 +221,7 @@ var products = [
       },
       {
         "name": "Bell Pepper Red",
-        "code": "BPR",
+        "code": "BLLPRD",
         "image": "imgs/vegetables/vegetable4.jpg",
         "available": true,
         "weights": [
@@ -232,7 +232,7 @@ var products = [
       },
       {
         "name": "Calamansi",
-        "code": "C",
+        "code": "CLMS",
         "image": "imgs/vegetables/vegetable5.jpg",
         "available": true,
         "weights": [
@@ -243,7 +243,7 @@ var products = [
       },
       {
         "name": "Camote Violet",
-        "code": "CV",
+        "code": "CMTVLT",
         "image": "imgs/vegetables/vegetable6.jpg",
         "available": true,
         "weights": [
@@ -254,7 +254,7 @@ var products = [
       },
       {
         "name": "Capsicum Yellow",
-        "code": "CY",
+        "code": "CPSMYLLW",
         "image": "imgs/vegetables/vegetable7.jpg",
         "available": false,
         "weights": [
@@ -265,7 +265,7 @@ var products = [
       },
       {
         "name": "Carrot",
-        "code": "Crt",
+        "code": "CRRT",
         "image": "imgs/vegetables/vegetable8.jpg",
         "available": true,
         "weights": [
@@ -276,7 +276,7 @@ var products = [
       },
       {
         "name": "Cucumber Regular",
-        "code": "CRG",
+        "code": "CCMBRR",
         "image": "imgs/vegetables/vegetable9.jpg",
         "available": true,
         "weights": [
@@ -287,7 +287,7 @@ var products = [
       },
       {
         "name": "Eggplant Regular",
-        "code": "ER",
+        "code": "EPLNTR",
         "image": "imgs/vegetables/vegetable10.jpg",
         "available": true,
         "weights": [
@@ -298,7 +298,7 @@ var products = [
       },
       {
         "name": "Gabi Sigang",
-        "code": "GS",
+        "code": "GBSG",
         "image": "imgs/vegetables/vegetable11.jpg",
         "available": true,
         "weights": [
@@ -309,7 +309,7 @@ var products = [
       },
       {
         "name": "Garlic",
-        "code": "G",
+        "code": "GRLC",
         "image": "imgs/vegetables/vegetable12.jpg",
         "available": true,
         "weights": [
@@ -320,7 +320,7 @@ var products = [
       },
       {
         "name": "Ginger",
-        "code": "Gn",
+        "code": "GNGR",
         "image": "imgs/vegetables/vegetable13.jpg",
         "available": true,
         "weights": [
@@ -331,7 +331,7 @@ var products = [
       },
       {
         "name": "Lettuce Green Ice",
-        "code": "LGI",
+        "code": "LTCGRNI",
         "image": "imgs/vegetables/vegetable14.jpg",
         "available": true,
         "weights": [
@@ -342,7 +342,7 @@ var products = [
       },
       {
         "name": "Onion Red",
-        "code": "OR",
+        "code": "ONNRD",
         "image": "imgs/vegetables/vegetable15.jpg",
         "available": true,
         "weights": [
@@ -353,7 +353,7 @@ var products = [
       },
       {
         "name": "Pechay Tagalog",
-        "code": "PT",
+        "code": "PHYTGLG",
         "image": "imgs/vegetables/vegetable16.jpg",
         "available": true,
         "weights": [
@@ -364,7 +364,7 @@ var products = [
       },
       {
         "name": "Sayote",
-        "code": "S",
+        "code": "SYT",
         "image": "imgs/vegetables/vegetable17.jpg",
         "available": true,
         "weights": [
@@ -375,7 +375,7 @@ var products = [
       },
       {
         "name": "Sili Labuyo",
-        "code": "SL",
+        "code": "SLLBY",
         "image": "imgs/vegetables/vegetable18.jpg",
         "available": true,
         "weights": [
@@ -393,7 +393,7 @@ var products = [
     "contents": [
       {
         "name": "Alumahan",
-        "code": "A",
+        "code": "ALMHN",
         "image": "imgs/seafoods/seafood1.jpg",
         "available": true,
         "weights": [
@@ -404,7 +404,7 @@ var products = [
       },
       {
         "name": "Bangus Dagupan",
-        "code": "BD",
+        "code": "BNGDGP",
         "image": "imgs/seafoods/seafood2.jpg",
         "available": true,
         "weights": [
@@ -415,7 +415,7 @@ var products = [
       },
       {
         "name": "Hasa Hasa",
-        "code": "HH",
+        "code": "HSHS",
         "image": "imgs/seafoods/seafood3.jpg",
         "available": true,
         "weights": [
@@ -437,7 +437,7 @@ var products = [
       },
       {
         "name": "Salay Ginto",
-        "code": "SG",
+        "code": "SLYGNT",
         "image": "imgs/seafoods/seafood5.jpg",
         "available": true,
         "weights": [
@@ -448,7 +448,7 @@ var products = [
       },
       {
         "name": "Salmon Belly Strips",
-        "code": "SBS",
+        "code": "SLNBSTRP",
         "image": "imgs/seafoods/seafood6.jpg",
         "available": true,
         "weights": [
@@ -459,7 +459,7 @@ var products = [
       },
       {
         "name": "Samaral",
-        "code": "S",
+        "code": "SMRL",
         "image": "imgs/seafoods/seafood7.jpg",
         "available": true,
         "weights": [
@@ -470,7 +470,7 @@ var products = [
       },
       {
         "name": "Sapsap Premium",
-        "code": "SP",
+        "code": "SPSPP",
         "image": "imgs/seafoods/seafood8.jpg",
         "available": true,
         "weights": [
@@ -481,7 +481,7 @@ var products = [
       },
       {
         "name": "Shrimp Small",
-        "code": "SS",
+        "code": "SHMRPS",
         "image": "imgs/seafoods/seafood9.jpg",
         "available": false,
         "weights": [
@@ -492,7 +492,7 @@ var products = [
       },
       {
         "name": "Tahong Medium",
-        "code": "TM",
+        "code": "THGM",
         "image": "imgs/seafoods/seafood10.jpg",
         "available": true,
         "weights": [
@@ -503,7 +503,7 @@ var products = [
       },
       {
         "name": "Talakitok Oblong",
-        "code": "TO",
+        "code": "TLKTKO",
         "image": "imgs/seafoods/seafood11.jpg",
         "available": true,
         "weights": [
@@ -514,7 +514,7 @@ var products = [
       },
       {
         "name": "Tawilis",
-        "code": "T",
+        "code": "TWLS",
         "image": "imgs/seafoods/seafood12.jpg",
         "available": true,
         "weights": [
@@ -525,7 +525,7 @@ var products = [
       },
       {
         "name": "Tilapia",
-        "code": "TML",
+        "code": "TILP",
         "image": "imgs/seafoods/seafood13.jpg",
         "available": true,
         "weights": [
@@ -536,7 +536,7 @@ var products = [
       },
       {
         "name": "Squid Medium",
-        "code": "SM",
+        "code": "SQDMD",
         "image": "imgs/seafoods/seafood14.jpg",
         "available": true,
         "weights": [
@@ -547,7 +547,7 @@ var products = [
       },
       {
         "name": "Yellow Fin",
-        "code": "YF",
+        "code": "YLLWFN",
         "image": "imgs/seafoods/seafood15.jpg",
         "available": true,
         "weights": [
@@ -564,7 +564,7 @@ var products = [
     "contents": [
       {
         "name": "Beef Brisket Cubes",
-        "code": "BBC",
+        "code": "BFBRTCB",
         "image": "imgs/meats/meat1.jpg",
         "available": true,
         "weights": [
@@ -575,7 +575,7 @@ var products = [
       },
       {
         "name": "Beef Buto Buto",
-        "code": "BBL",
+        "code": "BFBTBT",
         "image": "imgs/meats/meat2.jpg",
         "available": true,
         "weights": [
@@ -586,7 +586,7 @@ var products = [
       },
       {
         "name": "Beef Ribeye",
-        "code": "BR1",
+        "code": "BFRBY",
         "image": "imgs/meats/meat3.jpg",
         "available": true,
         "weights": [
@@ -597,7 +597,7 @@ var products = [
       },
       {
         "name": "Beef Sirloin Strips",
-        "code": "BSS",
+        "code": "BFSRNSTRP",
         "image": "imgs/meats/meat4.jpg",
         "available": true,
         "weights": [
@@ -608,7 +608,7 @@ var products = [
       },
       {
         "name": "Chicken Breast",
-        "code": "CB",
+        "code": "CHCKBRST",
         "image": "imgs/meats/meat5.jpg",
         "available": true,
         "weights": [
@@ -619,7 +619,7 @@ var products = [
       },
       {
         "name": "Chicken Drumstick",
-        "code": "CD",
+        "code": "CHCKDRMST",
         "image": "imgs/meats/meat6.jpg",
         "available": true,
         "weights": [
@@ -630,7 +630,7 @@ var products = [
       },
       {
         "name": "Chicken Quarter Cut",
-        "code": "CQC",
+        "code": "CHCKQTCT",
         "image": "imgs/meats/meat7.jpg",
         "available": true,
         "weights": [
@@ -641,7 +641,7 @@ var products = [
       },
       {
         "name": "Chicken Wings",
-        "code": "CW",
+        "code": "CHCKWNGS",
         "image": "imgs/meats/meat8.jpg",
         "available": false,
         "weights": [
@@ -652,7 +652,7 @@ var products = [
       },
       {
         "name": "Pork Chop",
-        "code": "PC",
+        "code": "PRKCHP",
         "image": "imgs/meats/meat9.jpg",
         "available": true,
         "weights": [
@@ -663,7 +663,7 @@ var products = [
       },
       {
         "name": "Pork Front Pata Sliced",
-        "code": "PFPS",
+        "code": "PRKFPSLC",
         "image": "imgs/meats/meat10.jpg",
         "available": true,
         "weights": [
@@ -674,7 +674,7 @@ var products = [
       },
       {
         "name": "Pork Liempo Slices",
-        "code": "PLIS",
+        "code": "PRKLSLC",
         "image": "imgs/meats/meat11.jpg",
         "available": true,
         "weights": [
@@ -685,7 +685,7 @@ var products = [
       },
       {
         "name": "Pork Tenderloin Cubes",
-        "code": "PTC",
+        "code": "PRKTCBS",
         "image": "imgs/meats/meat12.jpg",
         "available": true,
         "weights": [
