@@ -3,7 +3,7 @@ body {
 }
 
 .custom-button {
-  width: 200px;
+  width: 25vh;
   border-radius: 35px
 }
 
@@ -35,7 +35,7 @@ body {
 .product-category {
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
-  font-size: 2.7vh;
+  font-size: 2.5vh;
 }
 
 .order-summary {
@@ -52,4 +52,13 @@ body {
 .text-total {
   font-size: 2.5vh;
   font-weight: 500;
+}
+
+.product-unavailable{
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%; 
+  background: rgba(128, 128, 128, 0.5);
 }
