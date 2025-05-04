@@ -256,7 +256,7 @@ var products = [
         "name": "Capsicum Yellow",
         "code": "CPSMYLLW",
         "image": "imgs/vegetables/vegetable7.jpg",
-        "available": false,
+        "available": true,
         "weights": [
           { "name": "250G", "code": "W-250G", "price": 265 },
           { "name": "500G", "code": "W-500G", "price": 504 },
@@ -333,7 +333,7 @@ var products = [
         "name": "Lettuce Green Ice",
         "code": "LTCGRNI",
         "image": "imgs/vegetables/vegetable14.jpg",
-        "available": true,
+        "available": false,
         "weights": [
           { "name": "250G", "code": "W-250G", "price": 138 },
           { "name": "500G", "code": "W-500G", "price": 275 },
