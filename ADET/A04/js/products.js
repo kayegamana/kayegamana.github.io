@@ -379,8 +379,8 @@ var products = [
         "image": "imgs/vegetables/vegetable18.jpg",
         "available": true,
         "weights": [
-          { "name": "100G", "code": "W-100G", "price": 238 },
-          { "name": "200G", "code": "W-200G", "price": 451 },
+          { "name": "250G", "code": "W-250G", "price": 238 },
+          { "name": "500G", "code": "W-500G", "price": 451 },
           { "name": "1KG", "code": "W-1KG", "price": 855 }
         ]
       }
