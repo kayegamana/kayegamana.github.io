@@ -87,7 +87,7 @@ body {
 
 .page-two-card,
 .page-two-card-product,
-.page-three-card {
+.page-three-card-product {
   min-height: 15vw;
   display: flex;
   position: relative;
@@ -116,12 +116,16 @@ body {
 /* ROW 1 */
 
 .page-one-carousel-product,
-.page-one-card-product {
+.page-one-card-product,
+.page-two-card-product,
+.page-three-card-product {
   transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
 }
 
 .page-one-carousel-product:hover,
-.page-one-card-product:hover {
+.page-one-card-product:hover,
+.page-two-card-product:hover,
+.page-three-card-product:hover {
   transform: translateY(-5px) scale(1.02);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
   border: 3px solid rgb(97, 97, 97);
