@@ -60,7 +60,8 @@ body {
 .page-one-img,
 .page-two-video,
 .page-two-img,
-.page-three-img {
+.page-three-img,
+.page-four-video {
   flex-grow: 1;
   width: 100%;
   height: 100%;
@@ -349,5 +350,47 @@ body {
   .page-two-title,
   .page-one-title-dress {
     font-size: 3.5vw;
+  }
+}
+
+/* OUTFIT GENERATOR */
+.iframe-card,
+.video-row-four-card {
+  height: 45vw;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.iframe-wrapper {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.iframe-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+@media (max-width: 700px) {
+  .iframe-card {
+    height: 90vh;
+  }
+}
+
+@media (max-height: 670px) {
+
+  .iframe-card,
+  .video-row-four-card {
+    height: 100vh;
+  }
+}
+
+@media (min-width: 760px) and (max-width: 920px) {
+  .iframe-card {
+    height: 65vh;
   }
 }
