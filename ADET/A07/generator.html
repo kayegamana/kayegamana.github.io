@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Uniqlo Kids | Outfit Generator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="icon" href="images/uniqloIcon.png" type="image/png">
+    <link rel="stylesheet" href="css/generator-styles.css">
+</head>
+
+<body>
+
+    <!-- Video Background -->
+    <div class="ideoContainer-generator">
+        <video autoplay loop muted class="videoBackground-generator">
+            <source src="background.mp4" type="video/mp4" />
+        </video>
+
+        <!-- Overlayed Content -->
+        <div
+            style="position: absolute; top: 0; left: 0; z-index: 1; width: 100%; height: 100vh; display: flex; justify-content: center; align-items: center; text-align: center; flex-direction: column;">
+            <div class="container-fluid px-4">
+                <div class="row">
+                    <div class="col">
+                        <h1
+                            style="font-weight: 900; background-color: #ff4133; color: rgb(249, 249, 249); font-family: 'Roboto Condensed', sans-serif; font-size: clamp(2rem, 8vw, 4rem); display: inline-block; padding: 0 0.3em;">
+                            OUTFIT GENERATOR
+                        </h1>
+
+                        <p style="color: white; font-size: clamp(0.75rem, 2vw, 1rem); font-weight: 500;">
+                            Get inspired by these Uniqlo outfits. Click any image to learn more or shop the pieces.
+                        </p>
+
+
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="img-container-generator">
+                            <a id="topLink"
+                                href="https://www.uniqlo.com/ph/en/products/E474603-000?colorCode=COL69&sizeCode=CMC120"
+                                target="_blank">
+                                <img class="topImg" id="topImg" src="tops/1top.jpg" />
+                                <img class="topImgHover" id="topImgHover" src="tops/1top-hover.jpg" />
+                            </a>
+                        </div>
+
+                        <div class="img-container-generator">
+                            <a id="botLink"
+                                href="https://www.uniqlo.com/ph/en/products/E477652-000?colorCode=COL01&sizeCode=CMC110"
+                                target="_blank">
+                                <img class="botImg" id="botImg" src="bottoms/1bot.jpg" />
+                                <img class="botImgHover" id="botImgHover" src="bottoms/1bot-hover.jpg" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col">
+                        <img onclick="pickRandomOutfit()" class = "shuffleButton" src="images/shuffleIcon.png">
+                        <span style="color: rgb(255, 255, 255); font-weight: 900;">SHUFFLE MY STYLE</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        var topLinks = [
+            "https://www.uniqlo.com/ph/en/products/E474603-000?colorCode=COL69&sizeCode=CMC120",
+            "https://www.uniqlo.com/ph/en/products/E474604-000?colorCode=COL15&sizeCode=CMC120",
+            "https://www.uniqlo.com/ph/en/products/E474600-000?colorCode=COL01&sizeCode=CMC120",
+            "https://www.uniqlo.com/ph/en/products/E474599-000?colorCode=COL09&sizeCode=CMC120",
+            "https://www.uniqlo.com/ph/en/products/E474635-000?colorCode=COL01&sizeCode=CMC120",
+            "https://www.uniqlo.com/ph/en/products/E474835-000?colorCode=COL09&sizeCode=CMC120",
+            "https://www.uniqlo.com/ph/en/products/E475439-000?colorCode=COL09&sizeCode=CMC120",
+            "https://www.uniqlo.com/ph/en/products/E474624-000?colorCode=COL00&sizeCode=CMC120"
+        ];
+
+
+        var botLinks = [
+            "https://www.uniqlo.com/ph/en/products/E477652-000?colorCode=COL01&sizeCode=CMC110",
+            "https://www.uniqlo.com/ph/en/products/E478589-000?colorCode=COL63&sizeCode=CMC140",
+            "https://www.uniqlo.com/ph/en/products/E476760-000?colorCode=COL56&sizeCode=CMC120",
+            "https://www.uniqlo.com/ph/en/products/E474928-000?colorCode=COL09&sizeCode=CMC120",
+            "https://www.uniqlo.com/ph/en/products/E465163-000?colorCode=COL09&sizeCode=CMC110",
+            "https://www.uniqlo.com/ph/en/products/E475417-000?colorCode=COL01&sizeCode=CMC120",
+            "https://www.uniqlo.com/ph/en/products/E475770-000?colorCode=COL67&sizeCode=CMC110",
+            "https://www.uniqlo.com/ph/en/products/E454383-000?colorCode=COL09&sizeCode=CMC120"
+        ];
+
+        function getRndInteger(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function pickRandomOutfit() {
+            var randomTop = getRndInteger(1, 8);
+            var randomBot = getRndInteger(1, 8);
+
+            document.getElementById("topImg").src = "tops/" + randomTop + "top.jpg";
+            document.getElementById("topImgHover").src = "tops/" + randomTop + "top-hover.jpg";
+            document.getElementById("topLink").href = topLinks[randomTop - 1];
+
+            document.getElementById("botImg").src = "bottoms/" + randomBot + "bot.jpg";
+            document.getElementById("botImgHover").src = "bottoms/" + randomBot + "bot-hover.jpg";
+            document.getElementById("botLink").href = botLinks[randomBot - 1];
+        }
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous">
+        </script>
+
+</body>
+
+</html>
