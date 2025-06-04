@@ -21,7 +21,7 @@
     <!-- Video Background -->
     <div class="ideoContainer-generator">
         <video autoplay loop muted class="videoBackground-generator">
-            <source src="background.mp4" type="video/mp4" />
+            <source src="videos/background.mp4" type="video/mp4" />
         </video>
 
         <!-- Overlayed Content -->
@@ -50,8 +50,8 @@
                             <a id="topLink"
                                 href="https://www.uniqlo.com/ph/en/products/E474603-000?colorCode=COL69&sizeCode=CMC120"
                                 target="_blank">
-                                <img class="topImg" id="topImg" src="tops/1top.jpg" />
-                                <img class="topImgHover" id="topImgHover" src="tops/1top-hover.jpg" />
+                                <img class="topImg" id="topImg" src="images/tops/1top.jpg" />
+                                <img class="topImgHover" id="topImgHover" src="images/tops/1top-hover.jpg" />
                             </a>
                         </div>
 
@@ -59,8 +59,8 @@
                             <a id="botLink"
                                 href="https://www.uniqlo.com/ph/en/products/E477652-000?colorCode=COL01&sizeCode=CMC110"
                                 target="_blank">
-                                <img class="botImg" id="botImg" src="bottoms/1bot.jpg" />
-                                <img class="botImgHover" id="botImgHover" src="bottoms/1bot-hover.jpg" />
+                                <img class="botImg" id="botImg" src="images/bottoms/1bot.jpg" />
+                                <img class="botImgHover" id="botImgHover" src="images/bottoms/1bot-hover.jpg" />
                             </a>
                         </div>
                     </div>
@@ -110,12 +110,12 @@
             var randomTop = getRndInteger(1, 8);
             var randomBot = getRndInteger(1, 8);
 
-            document.getElementById("topImg").src = "tops/" + randomTop + "top.jpg";
-            document.getElementById("topImgHover").src = "tops/" + randomTop + "top-hover.jpg";
+            document.getElementById("topImg").src = "images/tops/" + randomTop + "top.jpg";
+            document.getElementById("topImgHover").src = "images/tops/" + randomTop + "top-hover.jpg";
             document.getElementById("topLink").href = topLinks[randomTop - 1];
 
-            document.getElementById("botImg").src = "bottoms/" + randomBot + "bot.jpg";
-            document.getElementById("botImgHover").src = "bottoms/" + randomBot + "bot-hover.jpg";
+            document.getElementById("botImg").src = "images/bottoms/" + randomBot + "bot.jpg";
+            document.getElementById("botImgHover").src = "images/bottoms/" + randomBot + "bot-hover.jpg";
             document.getElementById("botLink").href = botLinks[randomBot - 1];
         }
     </script>
