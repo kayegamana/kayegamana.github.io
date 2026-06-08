@@ -514,13 +514,13 @@ html {
 }
 
 .jt-logo-wrap {
-  width: 90px;
-  height: 90px;
+  width: 120px;
+  height: 120px;
 }
 
 .jt-logo {
-  width: 90px;
-  height: 90px;
+  width: 120px;
+  height: 120px;
 }
 
 /* Content below logo */
@@ -2032,7 +2032,7 @@ a.project__shot:hover .project__shot-cta {
   font-weight: 700;
   font-size: 0.9rem;
   letter-spacing: 0.2px;
-  color: var(--ink);
+  color: var(--blue);
   margin-bottom: 0.2rem;
 }
 
@@ -5469,4 +5469,82 @@ body.page-ready {
 .quote-text .short-text {
   font-size: clamp(1.15rem, min(1.6vw, 3.5vh), 1.6rem);
   line-height: 1.45;
+}
+
+
+/* =========================================
+   Mobile Responsiveness for Services Section [ROLAND]
+   ========================================= */
+@media (max-width: 768px) {
+
+  /* 1. Prevent the overall page from scrolling horizontally */
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  /* 2. Fix the layout stacking */
+  .svc-showcase {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* 3. THE FIX: Stop the container from breaking out of the screen.
+          min-width: 0 is required for flex children to shrink below their content size. */
+  .svc-panel-stack {
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* Force text to wrap properly within the new constrained width */
+  .section-title,
+  .section-lede,
+  .svc-desc__body {
+    white-space: normal;
+    word-wrap: break-word;
+    max-width: 100%;
+  }
+
+  /* 4. Scrollable Pill Navigation */
+  .svc-nav {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    width: 100%;
+    /* Explicitly bound to parent */
+    padding-bottom: 0.5rem;
+  }
+
+  .svc-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Prevent pills from shrinking */
+  .svc-nav__btn,
+  .svc-nav__sep {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* 5. Scale down the image aggressively */
+  .svc-stage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .svc-gif {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    object-fit: contain;
+  }
 }

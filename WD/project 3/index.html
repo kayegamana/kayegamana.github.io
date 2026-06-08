@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>KG | Filipino Food Gallery</title>
+	<link rel="icon" href="images/projectIconThree.png" type="image/png">
+</head>
+
+<body data-bs-theme="light" id="body" style="font-family: 'Montserrat', sans-serif;">
+
+    <nav id="nav-bar" class="navbar navbar-expand-lg bg-body-tertiary shadow"
+        style="background-color: #4A90E2 !important;">
+        <div class="container-fluid" style="padding: 10px;">
+            <a class="navbar-brand">
+                <h1 class="header-left" style="font-size: 1.5rem; margin: 0; font-weight: 700; color: white;">Kaye
+                    Gamana</h1>
+            </a>
+            <button id="navbarToggler" class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html"
+                            style="color: white; text-decoration: none; transition: text-shadow 0.3s ease;"
+                            onmouseover="this.style.color='#f1c40f'; this.style.textShadow='2px 2px 5px rgba(0, 0, 0, 0.5)';"
+                            onmouseout="this.style.color='white'; this.style.textShadow='none';">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#titleFilipinoDishes"
+                            style="color: white; text-decoration: none; transition: text-shadow 0.3s ease;"
+                            onmouseover="this.style.color='#f1c40f'; this.style.textShadow='2px 2px 5px rgba(0, 0, 0, 0.5)';"
+                            onmouseout="this.style.color='white'; this.style.textShadow='none';">Dishes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#titleFilipinoDesserts"
+                            style="color: white; text-decoration: none; transition: text-shadow 0.3s ease;"
+                            onmouseover="this.style.color='#f1c40f'; this.style.textShadow='2px 2px 5px rgba(0, 0, 0, 0.5)';"
+                            onmouseout="this.style.color='white'; this.style.textShadow='none';">Desserts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#titleFilipinoStreetFoods"
+                            style="color: white; text-decoration: none; transition: text-shadow 0.3s ease;"
+                            onmouseover="this.style.color='#f1c40f'; this.style.textShadow='2px 2px 5px rgba(0, 0, 0, 0.5)';"
+                            onmouseout="this.style.color='white'; this.style.textShadow='none';">Street Foods</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#titleCookingTutorials"
+                            style="color: white; text-decoration: none; transition: text-shadow 0.3s ease;"
+                            onmouseover="this.style.color='#f1c40f'; this.style.textShadow='2px 2px 5px rgba(0, 0, 0, 0.5)';"
+                            onmouseout="this.style.color='white'; this.style.textShadow='none';">Cooking Tutorials</a>
+                    </li>
+                </ul>
+                <button id="themeToggle" onclick="changeMode()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-moon-stars-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278">
+                        </path>
+                        <path
+                            d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.73 1.73 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.73 1.73 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.73 1.73 0 0 0 1.097-1.097zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z">
+                        </path>
+                    </svg> </button>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col">
+                <h1 class="display-5" style="text-align: center;">FILIPINO FOOD GALLERY</h1>
+            </div>
+        </div>
+
+        <!-- First Gallery -->
+        <div class="row mt-4" id="titleFilipinoDishes">
+            <div class="col">
+                <h5 style="text-align: left;">Filipino Dishes</h5>
+                <hr style="border: 2px solid #0099ff; width: 100%; margin-top: 5px;">
+            </div>
+        </div>
+
+        <div class="row" id="cardContainer1">
+        </div>
+
+        <!-- Second Gallery -->
+        <div class="row mt-5" id="titleFilipinoDesserts">
+            <div class="col">
+                <h5 style="text-align: left;">Filipino Desserts</h5>
+                <hr style="border: 2px solid #0099ff; width: 100%; margin-top: 5px;">
+            </div>
+        </div>
+
+        <div class="row" id="cardContainer2">
+        </div>
+
+        <!-- Third Gallery -->
+        <div class="row mt-5" id="titleFilipinoStreetFoods">
+            <div class="col">
+                <h5 style="text-align: left;">Filipino Street Foods</h5>
+                <hr style="border: 2px solid #0099ff; width: 100%; margin-top: 5px;">
+            </div>
+        </div>
+
+        <div class="row" id="cardContainer3">
+        </div>
+
+
+        <!-- Expand Gallery -->
+        <div class="row mt-5" id="titleCookingTutorials">
+            <div class="col">
+                <h5>
+                    Tutorials: How to Cook Famous Filipino Foods
+                    <button type="button" onclick="expandContent()" class="btn btn-primary" id="btnExpand"
+                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                        Watch Now
+                    </button>
+                </h5>
+                <hr style="border: 2px solid #007ACC; width: 100%; margin-top: 5px;">
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="tutorial" style="display: none;">
+        <div class="row">
+            <div class="col">
+                <div class="row" id="tutorialCardContainer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex flex-wrap justify-content-between align-items-center py-2 mt-4 border-top dark"
+        style="background-color: #2F5C91;">
+        <p class="col-12 mb-0 text-center text-white">© 2024 Kaye Gamana | Filipino Food Gallery
+        </p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+        </script>
+
+    <script>
+
+        // Light Mode or Dark Mode
+        var colorMode = "light";
+
+        function changeMode() {
+            var bodyElement = document.getElementById("body");
+            var themeToggleButton = document.getElementById("themeToggle");
+
+            // Toggle the color mode
+            colorMode = (colorMode == "dark") ? "light" : "dark";
+            bodyElement.setAttribute("data-bs-theme", colorMode);
+
+            // Change the icon based on the color mode
+            if (colorMode === "dark") {
+                themeToggleButton.innerHTML =
+                    `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-brightness-high-fill" viewBox="0 0 16 16">
+                <path d="M12 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"/>
+            </svg>`;
+
+            } else {
+                themeToggleButton.innerHTML =
+                    `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-moon-stars-fill" viewBox="0 0 16 16">
+                <path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278"/>
+                <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.73 1.73 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.73 1.73 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.73 1.73 0 0 0 1.097-1.097zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z"/>
+            </svg>`;
+
+            }
+        }
+
+        // Array of objects for Filipino foods with names and pics
+
+        var filipinoDishes = [
+            { name: "Sinigang", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhk68q258Ni9k35N2hs8hT6p5xshq3_X4SnZ4iHc8l0eDwGAGuAeQ5Ha4XGE9I1YVhxqZusN0YqL4Jy2tGbjS51e4s-W4arT68KBngCy6idAhzwvhvN0WNjPd1CE822_5Nlrh4B9CpXMh9SpDLwy-hxE5JSwJCyXIVkVtELBUSA1tkWQLBYP5H8WXOK2ho1/s16000/442ce059c4c490e1ab61cdaef9c98511.jpg" },
+            { name: "Adobo", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhb1aqf6H5UBvn1MPMgSGGbZ7uHzRqlQxcOCTD-Wa7GljrOjq0l0hvKlIMi31g1iVj-5H8pLkvdtmusNaYHlYhtzZpzXLFS6Pdziw3DZX0purwJE3_XqvKMhJVf7Hj2LzlVyIlQmH2OuN09v3UIU9J2OIhFFN_DslQWNefChJNTc_WsOOqBj7iE9clcZQyx/s16000/41d16b3eb7ce08aba9e9114f304f5d87.jpg" },
+            { name: "Kare-Kare", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjw2ZnIjTwZjirKz1hyDStrnC-LKq6votx2RF0v3uCb6UF15oQbOgFIn84Y-fTgT6BhzW7WdTGYFwDKiE1vqujaHsOyg85zhjMq6AH8lYTIYooYszidrDizo6kwFqYDuto8NiKUsp0x_oEMZ8aZOLo5a-Z89sUTRwQmP8Co4rzhL39R0ej-FUmCsury2tHC/s16000/Kare-KAre.jpg" },
+            { name: "Lechon", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhPC11INvbffGxpTKLv7xbusQkVKF5AJ6oJP51KprOD_usP5AaO7vhe6_NaB_eO-o-kMMRg_hznUxolh8zmHV6gAt7L7726Ql4nFNNC7LjPoNsXV7IbjenxERfqm2cAU3pWShbvCcy_a7y03BFKentqT9Ls10Ifi2XeiVe294x2yIiYjoD7hnEpDvtwu7-u/s16000/5eb9df1828d84079a850ebe462e28121.jpg" },
+            { name: "Lumpiang Shanghai", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhbh3fjzDffWtaWVGO2hqtvAfvD6ekPSQzQQH7EXvyGvg7eOhyphenhyphenVNXzzhW-SjBTbI0CHCiWQLGYlY1iyj7kfqlPhIId9S7IDvBABeXETr2-v73cVH4d5VaztiQbjoEnE6v1Cc21Mq7MqnSCa_tE0rM_kjZG7Ko208Lv9NkmTRM1KKlGnf_HOjwaX2r5MpFaw/s16000/Screenshot%202024-10-13%20231357.png" },
+            { name: "Bicol Express", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhZXVwE12-M026EPXqJ0gh5sNkPE1WKN4lWEppbJ9nUSSnYHJ9RUoRUn08QJqXinwwleD9ZGt_ZE397An-4Kwj8qzIlBr48bL61xU5tKlabVgqryi8cY5fXkA2OrRPJxS-i4xPxYgVdl0ideJBb2cr9Po_x3Hh3LqENo4YA0CQAk0pcdyj2T8eKFoe9P6OO/s16000/bicol-express-recipe-1.jpg" },
+            { name: "Pinakbet", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh7glQthxkoYvZy2BdvmQLvZE6qLoxnCmwaTXpY7UbVhc7RPes1GEgRpe61MuhIauVdDB4f-luHF_0XXDkkBeSTWcUtOF4I6k8nhpgTt92q1pWZCUNs7uwcCfaMeSqkTaxpWBYb3kNeRqc9EZj7xEZOSwQ4C1ypY-LcFbF107e4Ox5ZI-6Xz4Tnn1GbL8zg/s16000/pinakbet-wok.jpg" },
+            { name: "Menudo", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhe_VW4K8z77JvBWNi8TSsCcABBux_z7tuZ5zFsfnZRFxKtFQh-XxlNpEn8J5Ei7AOn3cVdVnvd_W8C57LOF9ZKo8VMxwh09aWomn3hAOeJUKYqdolJTlkTUqMFudzkF9SfOhKT7NGUYGbtl-5Wen32C3T_P8XsluOropY4kDB839tiUIcL0Rt_FtNwoCFa/s16000/Screenshot%202024-10-13%20231707.png" },
+            { name: "Laing", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEidxXU4_lvSPLkCabCNZdM4PI53haoZvffPZeHVdBOTG8Yo8_AqxeZmlugcjH3WYhUY8Q7FrwDews_dJJpvJ_A4IfbVOVjjlHDCDHHGrR4_QGT_50sQSeWD8tvDgw_PMrjZ7x5TE5KqMpAoiwGYmpkolj5ErktPNrcsTCF5srVo6YlmrQ9jwphhmsL3u9V1/s16000/Screenshot%202024-10-13%20231747.png" },
+            { name: "Relyenong Bangus", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgGX3bG8TO3NyaD2lVXW7xCjK3rrAQ0MPWJ-vn2iYSCJHsBOgYacThfNs5gQ-QTm2Tyfq_YNLnO7bwoD3szXJx25ycky2xSM3UtdvVCN8xqUCoEpKqZHhyBStbaFuhIm5YHKpYjms5hYf1Fxph4Vjzt8nE90L6lkSniaSOIydFgKbPP3tZvNIAWUT9n5kQl/s16000/Relyenong_Bangus_Stuffed_Milkfish_.jpg" },
+            { name: "Pochero", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhuYZy9XKVGx2pfNHEsfN5nNHdCR7eTA_DCpJ9Lamp0c-_VzIOO_xGh5gWR6mOE0AV_m5HjDX02Wpn6wSkgkfT7uLWgjLlMxpGvxpJJNQ2Ze73xgYZ7ouPcoy5aF8qdUg8ZyYHvLRjKiFpOs5rHY8znllwCXiAmgkB9AhLZ77QjG3DBUEzg6vXizFz_WMl6/s16000/maxresdefault.jpg" },
+            { name: "Ginisang Munggo", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjdr4e4dzMXhbCbND6toJR_OoXaIHx4nPVnh8AG89-ptkJJxN3GI4c70CymA9Zl29k_SF71bRKiu5HBEIgP9I82OyE6KM2-Hc3Oh75Xp9YzVV877GfY-GVRqQGeCB7nPupRlx86T6LUhQd-rhqZAlMPGW6x6Bov_gQeHQT78IOaHeFjm6fTx0yd6WUydPgM/s16000/ginisang-munggo-yummy-kitchen.jpg" },
+            { name: "Sopas", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg9vyfI7S5cfzi5yAPQoNQR29T2zfXN2FTzzopfk0HDThDm1g8-YhH1LGT1UiMxmLwzS3YL45QUjVQD2Ed6Z36-mJluGgT3xQm5ck_xzem9xhTOv7Qo3ZAhaXeU0QDkq4ByiwlCkcX2ruH5lbqQTlkkJkKPPNJ8KNgGj3FXLZmqQ2JE9unezB-swstc_uUA/s16000/How-To-Cook-Macaroni-Sopas-With-Hotdog.jpg" },
+            { name: "Bulalo", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjDwV0nfllKbEXCiZ39YuPP1VghuOzZc570RtbNWfEMszI6IEsyutVTxKaaAQu5Ejukl7lxJGdiANpw_3m8u-ioWZuGzbSnmIwKuJsL1ywXXPHD1Y_65Sjxw3EhblAsVcxsR1aaBi8c8gcw-DIh4UktQiQ_AkK9Y7HRZZ_jkgGorQwhsglKMS-kjQBNJcrw/s16000/bulalo-recipe-200224-1.jpg" },
+            { name: "Tinola", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjpqEyb4H6EFgyso8aGrbMc6uF1HrU1KeOlQohOA0Vriz70bf9IFAIXfUyEFjW9pmlxxPPCOTAcplEH6qnExdQ19rc0EI3rAjMtNM_LPUX0-SccjlzbmqXvdK9obiUs57ywdMhCLNdE_6z05tp_qW4UC99MKsPm5bivhL__6pVh6bt6mIAwWp6mXLEa58Ij/s16000/Chicken%20Tinola.jpg" },
+            { name: "Sisig", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgKArE431zAuJnKvlvLXj3HwG6xZnMsZipVbaZtCWmWzlSK9iCJ-N9oDdxcV-dOFDr6mfJ4JaMYhXEGUMRt7jR3rGF8fAlp9Kj46LQIvQC43MIOegudlqLl9FaBBG0d0jTQk8Jm6qkJ8Rs1cLlMYBDv_U8Xc3TcuP7Dl-3Kj3ropFvxih7eNaAufJGKqTlV/s16000/Red-Sisig.jpg" }
+        ];
+
+        var filipinoDesserts = [
+            { name: "Halo-Halo", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEivjWQ-iTye3iDefRWu8lS9Cty1K_2THyaWIc9bUUhuXYuX-dTQ50X6Bf3yjp5hG02vjyGsWO8jKP6OTDNc9Kdxb1l27snULcanfH7vO4jmRjaIuW6Spiu-xi0i0VnOMlwzqezR5ihFZsz8r8OGs0Em3k1EPPL9LuwQjygj7cHVReWxhm4KRw2g8Qqt_fKU/s16000/HALO-HALO-SPECIAL.jpg" },
+            { name: "Leche Flan", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQLT0sBYAfLjrBethyphenhyphenM9wqRoWeu3dmbWq6Yz6BCdpAzdwx5py1mJhyk_X5bxYm_eAjvOj-E-_rS1DJ0S3ivKXOrAmtV_YNE15G1s81PqeM55g3zhaYaZ6BUY4Mhd5ws7w_wetVP_MQ1yghR1AwtPADu_TzuW9BBefiC5Kf71sKPPq2cjpsNcGFAL8kxM6k/s16000/Queso%20de%20Bola%20Leche%20Flan.jpg" },
+            { name: "Bibingka", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgT29-Y4ZPrGJbjBvyIqCmSNkCU3jxI78kFgngfU02JtvdSlWBhVPj5_6jD4inrLulsxSCpV5Oiza9yZVVKO3ZTbBjEKlE9cRWfCLxTaVsefd_SyvP2W632boPbj744HUv5MUAZ1u6ioQjpYYldFRjPifuLSKpCdxI5_y8lfAnZBbP1vWHKYigBN_k9u9xn/s16000/Screenshot%202024-10-13%20233652.png" },
+            { name: "Puto", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj3jN43kNTms7HGM1gPiTYNLuuY9QWy6RbXjG5W2gsD99fdhO1UWpTxo0pu3-OLJTMpfaMRX6tdTR57DxEaLRmBaI4maj5fSXgIbApZ4FmEYvOPx72uS_qr9jZPt0ThT9R8Anu-R5i36dXCNSiCCFDWiScpzplVuC9NSnHrHLTDPJQXzF1zgIYk1xe27L2q/s16000/img_6516.jpg" },
+            { name: "Sapin-Sapin", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjGk7Au0eGW9VsJ1w-JvrLGa_AdgMbEQSZzyU_3jKbaV_s6M1LUtTWpMkvWYO_y6VxaXz8G8ADZBCr_BzVLlLdmacH1xCtjcw8ftJd9e_kYSBn7mg_RLEkMBNKhZAf8wjdpZ-AGuJmcVnFaSzgoJABOA9H2zzB5AOrqcncljqdKr41I1R7eg9f_p3QUJg4o/s16000/hq720.jpg" },
+            { name: "Champorado", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhR5Aniqtn8KdPQNAMYykpkCNLroJMv0WEHIv5tYhXvAWSWvAXIRkYAV_lmRWEL5EjWL4zkfC2vrFPW56baKQTF1G4L_bCfX9hnPDpRNCnh8p9bDmbuVDpDM3zzXtYosAcNkhB4q_IB29KwzYwUM8HV3exCRa0PKOz99D_d5sYq3b7iUqflEKWes9_ozcNh/s16000/Champorado.jpg" },
+            { name: "Maja Blanca", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgc5MiJ3SmwpLxHWyH26B4sHzX_Of14u8CKPgF9tkNru87dSxN2OunuIRpI2NQqIkdcoBNFG524qtvbFGThey5s_vMn2BSMe3Ly8m0d0AEZK1uQWt1QPlBRvM7lzmC0i8PUPOUB5fhaVm2Pn30KF_Vc8OMyvHXujhOvjk61JxemNZIAbxpLRA2puErJSAkP/s16000/filipino-maja-blanca-recipe-189403-1.jpg" },
+            { name: "Ube Halaya", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjB2OFFyJfR6Afo5JHWUN4hZ5UaGZyKoH_OtJFtWqv962N9z4G8LW7DZBAK8H9HuSFoy5J0yTWy3uDRcZ4VsABUCwwQx3SO5Hl4hJ5aXqRs8WoQJP1Jssi9Zlmx9tXEpriXX0aWRSeu7KO1Ir85PoD6cuQhltHMr0wwt5yXyEiY_jeZLCb7tVowtoNSsJUk/s16000/Screenshot%202024-10-13%20234126.png" },
+            { name: "Cassava Cake", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgydYVlWNLtN7i6xndwf6jIgDlFZnTudy0y6eSGCAesxvVqnzHgOfIihA9ynxL7VgIIkzQHMhN9el3Bk5egBTeMV53w494Tynhj-kunshOLUXBq5DPgETxOLKyvaE-Wco0UytBDjaptZcPj06SHce8jvHk2yLvx8kEegJh5hyphenhyphenDEKinXRuElfbIGANm9L1cF/s16000/IMG_3500.jpg" },
+            { name: "Pichi-Pichi", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhy2k-TmTZII4gNNDKt8v9cflMuuDjFOJZjKCRd0u39v96rkSHUwGuLlVfwRKX5sGs3CpvI0s6YEwKcPcWrGxwvsNLEHQMp6h6lRTlWlHvxaJUWy88K8cZdW-hknQB4j_1zJzPSlYIRg_4R4A9Sx_kbdCNKd9fFAM09ssaAOrqrMropl3sShR12yl5twJlW/s16000/PICHI-PICHI.jpg" },
+            { name: "Buko Pandan", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj1SsVlFLQL7mi8ApzS1iD2YdpEntiyq_GUxo7pzVTC-ftl_QzTilPFycgq_CmPVwp5zICiddp9yYhJzf_2cBKPzVSYcag9tryfrRI-tqaiFEF8qyLari-fu227OFAq65Xrvw7ZdB7QX2W8ZB5THEE9ibZbPI4XRbgkbaIzz8HAmkx04q8t-4qd8iosGgiE/s16000/1717723507197915.jpg" },
+            { name: "Yema Cake", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEikK_Y4L8RnzLbk9kuTX9vuUNxmAhXqSd1zT0RqlIrh_qJ2s0EkrWI7NQvbpKxyJxFz-zoz3_bMIVLLGky3qbGQITQwJHnqoq54T9seddKSkA5iYr7kMiHvwi4WYqbBWZa7aX5nVIt4o6zNwi9aMzJ44kqqJuN26HRbK81MI4u-CTAPlm5JjXpzDLc61zd2/s16000/Screenshot%202024-10-13%20234501.png" },
+            { name: "Suman", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiLN3J1gp2YPGi9ym_wvaweptdj1i4cXiWx3zvc8vjM1_eQaX2RU9zWdyQ3ZnNIJQs7JwOcSmBaLr3ISxHwAxIajIyOQjTtzii84Mwk6fw1LciYe7DPBtzL6nuxAxvoLFG4xJ2R7JuzoQuIlc-nNMmoHEPd8hwW0CRV0IR-LtkTCtQFMB5R0iey81nsWT19/s16000/Suman-malagkit-1600x1067.jpg.webp" },
+            { name: "Biko", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgTAhhWrCIsTknlkMGRyvxg9VxAB4rin-OTekjLdmA7kGOkFk2-yZxh0H7PwTr0v6ORA6gsUmaoxKXm1dlQQS8bbulwzdNN1V9DTlAWPWqvhDx-zPcTtkWZ1JXhHQxr3eqhJ449c9_UUXhsEse6b55fek2QNKaM1btI2NprxcBGItC9GivkUESZMyJV1W0t/s16000/Screenshot%202024-10-13%20234648.png" },
+            { name: "Pastillas", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjBecwTxaSYdw0CoMiTwf2Ug716SlHd2EmW28RdcxJdZ20bNDc1VlgQEA55GlSeJUkKdgLkBQrTjPskN11uTymgytW9XpkOdnR6OhKRheS3FKY7qiDfAFNue2Qrqwu0yWI1JaA-SHaqH7QHA4OrZkGFTpxuYe7f91IjHiax0W2kWEgISUt5I2oXTSoihCug/s16000/FRUITY-PASTILLAS.jpg" },
+            { name: "Kutsinta", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgjVMvE2m1kahTy8AlG7iFG71maGeUGwh863utZE5WBqh6LOmaD0BkmVLjyyKuNB20tbm_gevwKSX9HM1m_N4c1Y1uuwtn4xc4VUBHksAwwKZEj_jDxDYOqkYj8m9xQ9MkUhyY0y-A6BmI8NjJNkmnBkyK1Zj0grdX-gLm7JLt4OousqJhO6iIC11DydsA-/s16000/kutsinta-recipe.jpg" }
+        ];
+
+        var filipinoStreetFoods = [
+            { name: "Fish Balls", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhrnUrbHsAVb7TJPmCK_D_XCWV6qfIvuqEhQzahmgxgdD68ppAs_ndVo0dXNrum-vEThyphenhyphenG8RioKq_cWC9sHf5-0A3bVbqTZ2lAnLuZP_ggTMsejgv9r6eA1oX-PTwlxf3WGRe26P-WpdKjjQrJx4D5zFC0gVl5qln_wfshVDg0NWg567OD_z4sx-e0upYP1/s1600/fishballs_7_orig.jpg" },
+            { name: "Kikiam", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjFeYA2A_RVOkFg1SgKoLfWph_XguUA_f-4aK7P5VsLkCHuIWpScuPzGj-ZKxy_-FkG3r1rAEK2gMVqVSvxstCmYpm1mSUp5bgE5n_lhRPzmHiSV1q9iTfRIwxRhHfuZWTKGh19eknu-4LwIUureDJBqSacc0AEO9AYWCc-4_g_DGOZvUBWe7eCCPk2d1c8/s1600/48919286647_e26f335407_h.jpg" },
+            { name: "Kwek Kwek", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgwKjploez0zI94IQULVROm7zxs4gR1EKIY6btsAZsl2AALdlldOK9drm9R6doejC9xRSxm2MucsyJ2-xkkGi5mmCX30uDiME9A8Zb1hZgEGAogknS061d9e3dKusuya_1C_32iAUcuNp4S5Tj_AbXzdsx3IUj0dAVKj6hrVk0YlXMpaBPBIorX8jxT0CiM/s1600/Kwek-%E2%80%93-Kwek-7.jpg" },
+            { name: "Isaw", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifAY_0TvI8EMvDbCuvSvo9-L3btWK5K74uVlUL__xvKFHsMIpoOljD-CNKnUThF8rEQ4rm-LrVYIW97Y1dG9htiMMR8UvxJ4bgJ3RIWtgde5xrSHNss7Blj6fs2d5hk7imzZw4DPAek9OxsnSdEoejb45V2W0yWFpX0lh6QEmMOAdZPSTTPlK_JMIjPTo6/s1600/isaw-chicken-intestine.jpg" },
+            { name: "Empanada", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgzXQ3XzMYNHIzRnNmeUbMEAFUajhM_gtjJdXWfePMmF0-HSflFexyr_rFQZ3VnEXeZtAgBZxote5-tOkE7gx637qF4ixgcHJjoO65Q26sa_YsOy8tl_0duFjvaRNX5-RqlM9dZkuQzTydTFE_2EAbuSRPWHstT8KNrYqAC_8uoUnX-39cmEVsSm5yPj8Rd/s1600/BeefEmpanadas_13.jpg" },
+            { name: "Kalamares", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhizxGY32oOxjtfrKlWgAXKYpcKdE8f9gsSn8hS9_F30TYSJyxAcnJ8nccZgkTiI3rNf1pMvt_qLbLiSW96rD3JqLy7DxwNsOl70hRnmiiTzX7f-B0AbLoyhblRqPubop4-aFWXjhmGzzi1H_zvcGQHIbIReerX5gK21ycDX6ffKmKmE3yykjZlxxuKtTe0/s1600/hq720%20%282%29.jpg" },
+            { name: "Siopao", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj14wichqPKgZsATvDIPSrlJsilfWbWMXka_mpJbZmaw6LtUW44_-Ze-Ph6g1dAQOIcSa6DBuZ0PxZ_TIOEjN5NlDR_dojpMSiW4ZQ2pkT5rh1hS5jRiZF6rmRBVCAErZc11ySIoEA3TLRYKHjVvYZ17rKG93NpkSx62fUuZLkm9vB_9ISKNv_i8nNv2KYc/s1600/Sees-Food-Will-Travel-Cross-Section-Closeup-Buns.jpg" },
+            { name: "Siomai", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiooUMEoi_NghV1gqaWVHpFw9E3A_7ILQQ_MkrnVLGkQL65N9d4zNXoPudBTsD-uqc1zcsNTUBMov72L8OAtyZemILHWQkDaJakj0XllRYRyMrX1Il2RF6bu1VRCqAU2rIrqZknR10pMdGo4Rlw7_p_Cz4-ytC_rRikWDkHg8W5BptmxKCgjsXaxn15wSqc/s1600/Siomai_sa_Tisa.jpg" },
+            { name: "Puto Bumbong", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEipMXz57QB3uzcY6p2sNz9vTtjihyTYfCNB4Vd6ntrjtTQNpI-L7zjrHIq9WXY4EdMFNKpiWxvwIbJojnqsUf459j3OzfnX00Dlw_CsqU3XAbGULpDUEY0dvthvYT0eAzpwA_4HBRzg7uDqzPg2cH5awtgy43grfaNHmDs7zPKnDUsFkS3v7iADLSMM44gr/s1600/hq720%20%281%29.jpg" },
+            { name: "Banana Cue", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi-lxOdv93usUOS0JyKW3JcJQUopKKJExJH_usuykbMUR0NSe-IQnYbvwElInK42U9zdyMbvTH4V5z6itS6NXCjmnasFY_bPYCYJ3YnV_LsBSFpuDGM6BiQ6HhpyIXstzVkWbSt07pVpScJg2voU7P5Fo4egY18qXCyGz-KnN12GXlLEq5m8DCTTS5nzFm3/s1600/1130Banana_cue_Street_vendors_02.jpg" },
+            { name: "Barbeque", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhu21-VxuY3TBsjuziKVAVt5dJnbWEjswSMVepYH1i3vd_5rKG5N-sle8gLXiOzr5OuoK_t9gDfdo4cJuFfYDKhVvpYwqAJdo6bzgSSX_RMU-y1PA8HUmHJggHtExZemBrZ-cAweBGzrjrE87XCatBgfdNZYe-pKqepKoqcwyjBXBEV7Njr_EqciUq6XFL-/s1600/hq720.jpg" },
+            { name: "Balut", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEitqK6OB0eu1PItQvurQVZmv14lwuO2JUXViammwQKds3q3oAuWhEoW6Ul7E9dlqQcl9Q2wYqfQZHV8gezk-PHAB0cQpS8YXEoyVqetsrvDM_6sC-dLd4CsLs7dghL6VYtQSUI4C3Lp3olG9ggr6F4n4XAO_fD5xyo1wf7oTlzEfp4Sw06-qyn3XKX58w9z/s1600/vietnamese-balut-1.jpg" },
+            { name: "Adidas", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh-Kfj4c3Ja1GTwtqeL3R2aHUz7O-ZPn6qP57pgzqvB0Xp0F4LR6nOu2HmcAtsXc6Zu-W3Yp-tHSFx-T3yo9FCa7Gm9i1fzNA8FZauxj6Acq5bxBc4cVAxdwClgLVBuRJrLlUSlKzph_xHKJ6MmdlI7w7Cmrk4WxyHRZppOaX8fW2wfsW2F9vnq_CJ2-XV9/s1600/Screenshot%202024-10-14%20012744.png" },
+            { name: "Taho", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgjSiq-uPJN6T_vk01Yg1ZUm3LR_Yv-T49mMwJHYyXSyRSIoQAojL6tipgMJTeK9wYeSK7ZtNHJrFkvXRNdqtOh9wkp3sYMnCVSsKnlADP9RlDt9WelyOPMaFj9ogteS28XnAI9dKDeGCOuvVpvrtJNn8Ds0uXwE6NRRLO9fCiW1VI9CPMP5iGvPxqFdhHP/s1600/taho-soy-bueno.jpg" },
+            { name: "Sorbetes", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhNrPZSgqwv4iDA6SGJXR9BQLb83l5uO0dIDHa_jMz8jLMQLp1NHMkgpzUNjkoBcRA1uIc-zGS3jwMeLI5GEskXmm9mWHlgi07lru93yT8p2BJjsc7sDsFrEN0VzUa9YSO8R4n5zy63YBoJpmNu_rjXEvGil-3PjawI4xKog7zlKoWT5qA12A9tsdgqpg68/s1600/c42fc353043b663300d1d637598faea8.jpg" },
+            { name: "Turon", pic: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhJVfHYOi6HYOSBf-yt56d9pYlRzcL95Gom-jQHNzODwvkZ0G1EbPDXGy6vn6uI94R8wVDgYhtaTZS0EKcxU_CdQ-dImIUqJipLtVsuWezvB_1oDZktc9hnGacxq6bl9hPWp3jckIrq-kg_UrpNimyXF6IQ-lE7WnUo9KpG5bfwdMEd0qoIJCBME4gEkm3i/s1600/IMG_4942.jpg" }
+        ];
+
+        function createGallery(containerId, foods) {
+            var myContainer = document.getElementById(containerId);
+            for (var i = 0; i < foods.length; i++) {
+                var uniqueId = containerId + "_c" + i;  // Add container name as a prefix to ensure unique ID
+                myContainer.innerHTML +=
+                    "<div class=\"col-xl-3 col-md-4 col-sm-6 col-12\">" +
+                    "<div class=\"card my-3 position-relative\" id=\"" + uniqueId + "\" onmouseenter=\"addShadow('" + uniqueId + "')\" onmouseleave=\"removeShadow('" + uniqueId + "')\">" +
+                    "<img src=\"" + foods[i].pic + "\" class=\"card-img-top\" style=\"object-fit: cover; height: 300px;\">" +
+                    "<h4 class=\"card-title position-absolute w-100 text-center\" id=\"" + uniqueId + "-title\" style=\"display: none; color: white; top: 50%; transform: translateY(-50%); background-color: rgba(0, 0, 0, 0.5);\">" +
+                    foods[i].name + "</h4>" +
+                    "</div>" + "</div>";
+            }
+        }
+
+        // Create three galleries
+        createGallery("cardContainer1", filipinoDishes);
+        createGallery("cardContainer2", filipinoDesserts);
+        createGallery("cardContainer3", filipinoStreetFoods);
+
+        // This function will handle the expanding/collapsing of the Tutorials section
+        var display = "none";
+        function expandContent() {
+            var tutorial = document.getElementById("tutorial");
+            var btnExpand = document.getElementById("btnExpand");
+
+            if (display == "none") {
+                tutorial.style.display = "block";
+                display = "block";
+                btnExpand.innerHTML = "Hide";
+
+                // Arrays for tutorial food names, pics, links, and texts
+
+                var tutorialFoods = [
+                    {
+                        tutorialFoodName: "Sinigang",
+                        tutorialFoodLink: "https://www.youtube.com/watch?v=Vuk3wly8mxQ",
+                        tutorialFoodPic: "images/how-to-cook-1.png",
+                        tutorialFoodText: "Watch Friend-Cheap Menu's YouTube Channel: Paano Magluto ng SINIGANG NA BABOY | Pinaka Masarap na Sinigang."
+                    },
+                    {
+                        tutorialFoodName: "Adobo",
+                        tutorialFoodLink: "https://www.youtube.com/watch?v=OTGASYe7hQk",
+                        tutorialFoodPic: "images/how-to-cook-2.png",
+                        tutorialFoodText: "Watch Mae’s Kitchen and Living (Mom of Dinosaurs)'s YouTube Channel: MELT IN YOUR MOUTH PORK ADOBO||MAE’S KITCHEN."
+                    },
+                    {
+                        tutorialFoodName: "Bicol Express",
+                        tutorialFoodLink: "https://www.youtube.com/watch?v=EglwOEDdsHU",
+                        tutorialFoodPic: "images/how-to-cook-3.png",
+                        tutorialFoodText: "Watch Friend-Cheap Menu's YouTube Channel: How To Cook Pork Bicol Express - Pinoy Recipe."
+                    },
+                    {
+                        tutorialFoodName: "Tinola",
+                        tutorialFoodLink: "https://www.youtube.com/watch?v=RwVCI1SP5A4",
+                        tutorialFoodPic: "images/how-to-cook-4.png",
+                        tutorialFoodText: "Watch FoodNatics' YouTube Channel: TURUAN KO KAYO KUNG PAANO ANG TAMANG PAGLUTO NG CLASSIC TINOLA!!!"
+                    },
+                    {
+                        tutorialFoodName: "Sapin-Sapin",
+                        tutorialFoodLink: "https://www.youtube.com/watch?v=-vQYB-uJ5zI",
+                        tutorialFoodPic: "images/how-to-cook-5.png",
+                        tutorialFoodText: "Watch Panlasang Pinoy's YouTube Channel: Sapin Sapin Recipe."
+                    },
+                    {
+                        tutorialFoodName: "Cassava Cake",
+                        tutorialFoodLink: "https://www.youtube.com/watch?v=NAfV9ww1AKI",
+                        tutorialFoodPic: "images/how-to-cook-6.png",
+                        tutorialFoodText: "Watch Yummy Kitchen's YouTube Channel: Cassava Cake Recipe."
+                    },
+                    {
+                        tutorialFoodName: "Biko",
+                        tutorialFoodLink: "https://www.youtube.com/watch?v=eRngjbA-xGE",
+                        tutorialFoodPic: "images/how-to-cook-7.png",
+                        tutorialFoodText: "Watch Yummy Kitchen's YouTube Channel: Biko Recipe with Latik Sauce - Simply Delicious But Not too sweet."
+                    },
+                    {
+                        tutorialFoodName: "Puto",
+                        tutorialFoodLink: "https://www.youtube.com/watch?v=dBEnJXg6yzQ",
+                        tutorialFoodPic: "images/how-to-cook-8.png",
+                        tutorialFoodText: "Watch SarapChannel's YouTube Channel: How to Make Puto Recipe I Puto Cheese Recipe I Filipino Steam Cake."
+                    },
+                    {
+                        tutorialFoodName: "Kwek-Kwek",
+                        tutorialFoodLink: "https://www.youtube.com/watch?v=jxU-KFfN_bw",
+                        tutorialFoodPic: "images/how-to-cook-9.png",
+                        tutorialFoodText: "Watch Yummy Kitchen's YouTube Channel: Kwek kwek (Filipino Street Food)."
+                    },
+                    {
+                        tutorialFoodName: "Empanada",
+                        tutorialFoodLink: "https://www.youtube.com/watch?v=6MPTJYr35FI",
+                        tutorialFoodPic: "images/how-to-cook-10.png",
+                        tutorialFoodText: "Watch Lutong Tinapay's YouTube Channel: INEGOSYO AT KUMITA GAMIT ANG EMPANADA! MALIIT NA PUHUNAN MALAKI ANG KITA!"
+                    },
+                    {
+                        tutorialFoodName: "Taho",
+                        tutorialFoodLink: "https://www.youtube.com/watch?v=5uBNeh0y8Ww",
+                        tutorialFoodPic: "images/how-to-cook-11.png",
+                        tutorialFoodText: "Watch PagkaingPinoyTV's YouTube Channel: Homemade Taho."
+                    },
+                    {
+                        tutorialFoodName: "Puto Bumbong",
+                        tutorialFoodLink: "https://www.youtube.com/watch?v=V6j9rvYhFpw",
+                        tutorialFoodPic: "images/how-to-cook-12.png",
+                        tutorialFoodText: "Watch Food Craft Beauty by: Ms. Anne's YouTube Channel: PUTO BUMBONG WITHOUT BAMBOO STEAMER."
+                    }
+                ];
+
+                var htmlContent = ""; // Create an empty string to hold the HTML
+
+                // Loop to create tutorial cards
+                for (var j = 0; j < tutorialFoods.length; j++) {
+                    var cardId = "card_" + j;
+                    htmlContent += "<div class=\"col-xl-4 col-md-4 col-sm-6 col-12\">" +
+                        "<a href=\"" + tutorialFoods[j].tutorialFoodLink + "\" class=\"text-decoration-none\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"display: flex; flex-direction: column; height: 100%;\">" +
+                        "<div class=\"card my-3\" id=\"" + cardId + "\" onmouseenter=\"addShadow('" + cardId + "')\" onmouseleave=\"removeShadow('" + cardId + "')\" style=\"height: 100%;\">" +
+                        "<img src=\"" + tutorialFoods[j].tutorialFoodPic + "\" class=\"card-img-top\" style=\"object-fit: cover; height: 100%;\">" +
+                        "<div class=\"card-body\">" +
+                        "<h5 class=\"card-title\">" + tutorialFoods[j].tutorialFoodName + "</h5>" +
+                        "<p class=\"card-text\"><i style=\"font-size: 12px;\">" + tutorialFoods[j].tutorialFoodText + "</i></p>" +
+                        "</div></div></a></div>";
+                }
+
+                // Append the constructed HTML to the container
+                document.getElementById("tutorialCardContainer").innerHTML = htmlContent;
+
+            } else {
+                tutorial.style.display = "none";
+                display = "none";
+                btnExpand.innerHTML = "Watch Now";
+            }
+        }
+
+        // Adds a shadow Bootstrap class and zoom effect to the element with the given id
+        function addShadow(id) {
+            var cardElement = document.getElementById(id);
+            var titleElement = document.getElementById(id + "-title");
+            cardElement.classList.add("shadow");
+            cardElement.style.boxShadow = "0 20px 100px rgba(0, 0, 0, 1)";
+            cardElement.style.transform = "scale(1.05)"; // Zoom in
+            cardElement.style.transition = "transform 0.3s"; // Smooth transition
+            titleElement.style.display = "block"; // Show the title when mouse enters
+        }
+
+        // Removes the shadow Bootstrap class and zoom effect from the element with the given id
+        function removeShadow(id) {
+            var cardElement = document.getElementById(id);
+            var titleElement = document.getElementById(id + "-title");
+            cardElement.classList.remove("shadow");
+            cardElement.style.boxShadow = "none";
+            cardElement.style.transform = "scale(1)"; // Zoom out
+            titleElement.style.display = "none"; // Hide the title when mouse leaves
+        }
+    </script>
+</body>
+
+</html>
