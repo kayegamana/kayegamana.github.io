@@ -27,13 +27,19 @@
 =========================================================== */
 html {
   scroll-behavior: smooth;
+  /* Add a solid fallback color to cover the bottom mobile bounce */
+  background-color: var(--bg-mid);
+  background-image: radial-gradient(circle at 50% 40%, #040740 0%, #010226 70%);
 }
 
 body {
+  background-color: var(--bg-mid);
   background: radial-gradient(circle at 50% 40%, #040740 0%, #010226 70%);
   background-attachment: fixed;
   color: var(--ink);
   overflow-x: hidden;
+  overscroll-behavior-y: none;
+  /* Stops the rubber-band bounce effect on supported browsers */
 }
 
 h1,
@@ -1102,6 +1108,10 @@ html {
 }
 
 @media (max-width: 991px) {
+  body {
+    background-attachment: scroll;
+  }
+
   .svc-showcase {
     grid-template-columns: 1fr;
     gap: 2rem;
@@ -1130,6 +1140,24 @@ html {
     font-size: 0.65rem;
     letter-spacing: 0.8px;
   }
+}
+
+/* ===========================================================
+   PROJECT IMAGE MODIFIER
+=========================================================== */
+.project__shot--has-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: background-size 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Subtle zoom effect on hover */
+.project__shot--has-image:hover {
+  background-size: 105%;
 }
 
 /* ===========================================================
@@ -5045,9 +5073,18 @@ a.project__shot:hover .project__shot-cta {
   }
 
   .contact-btn-highlight {
-    width: 100%;
+    width: 75% !important;
     justify-content: center;
-    padding: 1rem 1.5rem;
+    margin: auto;
+    padding: .8rem .8rem !important;
+  }
+
+  .contact-btn-highlight i {
+    font-size: 0.7rem !important;
+  }
+
+  .cform__btn-label {
+    font-size: 0.7rem !important;
   }
 
   .footer {
@@ -5458,7 +5495,7 @@ body.page-ready {
   font-family: "Caveat", cursive;
   font-weight: 500;
   /* Default scales responsively for longer text */
-  font-size: clamp(0.9rem, min(1.2vw, 2.5vh), 1.25rem);
+  font-size: clamp(1.1rem, min(1.2vw, 2.5vh), 1.25rem);
   color: var(--ink);
   line-height: 1.35;
   margin-bottom: clamp(10px, 2vh, 16px);
@@ -5477,13 +5514,7 @@ body.page-ready {
    ========================================= */
 @media (max-width: 768px) {
 
-  /* 1. Prevent the overall page from scrolling horizontally */
-  html,
-  body {
-    overflow-x: hidden;
-  }
-
-  /* 2. Fix the layout stacking */
+  /* 1. Fix the layout stacking */
   .svc-showcase {
     display: flex;
     flex-direction: column;
@@ -5492,7 +5523,7 @@ body.page-ready {
     box-sizing: border-box;
   }
 
-  /* 3. THE FIX: Stop the container from breaking out of the screen.
+  /* 2. THE FIX: Stop the container from breaking out of the screen.
           min-width: 0 is required for flex children to shrink below their content size. */
   .svc-panel-stack {
     width: 100%;
@@ -5508,7 +5539,7 @@ body.page-ready {
     max-width: 100%;
   }
 
-  /* 4. Scrollable Pill Navigation */
+  /* 3. Scrollable Pill Navigation */
   .svc-nav {
     display: flex;
     flex-wrap: nowrap;
