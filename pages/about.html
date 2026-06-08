@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>About — Kaye Gamana</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html#home">
+                <img src="../assets/img/logo.png" alt="logo" height="40">
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+                <i class="bi bi-list"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="nav">
+                <div class="navbar-nav mx-auto">
+                    <a class="nav-link" href="../index.html#home">HOME</a>
+                    <a class="nav-link active" href="about.html">ABOUT</a>
+                    <a class="nav-link" href="projects.html">PROJECTS</a>
+                    <a class="nav-link" href="credentials.html">CREDENTIALS</a>
+                </div>
+
+                <div class="d-flex">
+                    <button type="button" class="btn contact-btn" data-bs-toggle="modal" data-bs-target="#contactModal"
+                        data-contact-intent="hero" aria-label="Open contact form">
+                        CONTACT
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ============================================================
+         ABOUT — Three-Act Narrative
+         Long-form story page absorbing Journey + About + Services
+         into one read with visual rhythm. Acts: Origin / Discipline /
+         Practice. Closing block restates "what I offer" in a fresh
+         layout (services rewritten into prose-led panels).
+    ============================================================ -->
+
+    <!-- Page hero -->
+    <section class="abt-hero">
+        <div class="container">
+            <nav class="archive-hero__breadcrumb" aria-label="Breadcrumb">
+                <a href="../index.html#home">Portfolio</a>
+                <span class="archive-hero__sep">/</span>
+                <span class="archive-hero__here">About</span>
+            </nav>
+
+            <div class="abt-hero__grid">
+                <div class="abt-hero__copy">
+                    <h1 class="abt-hero__title">
+                        The story <em>behind the work</em> —<br>
+                        in three acts.
+                    </h1>
+                    <p class="abt-hero__lede">A longer read than the home page allows. Where the curiosity started, how
+                        it sharpened into discipline, and what I do with both halves of the brain now that I get to do
+                        this for a living. A scroll, not a brochure.</p>
+
+                    <div class="abt-hero__meta">
+                        <div class="abt-hero__meta-row">
+                            <span class="abt-hero__meta-k">NAME</span>
+                            <span class="abt-hero__meta-v">Kaye Christine P. Gamana</span>
+                        </div>
+                        <div class="abt-hero__meta-row">
+                            <span class="abt-hero__meta-k">ROLE</span>
+                            <span class="abt-hero__meta-v">Full-Stack Developer · BSIT, Class of 2026</span>
+                        </div>
+                        <div class="abt-hero__meta-row">
+                            <span class="abt-hero__meta-k">BASED</span>
+                            <span class="abt-hero__meta-v">Philippines · Open to remote</span>
+                        </div>
+                        <div class="abt-hero__meta-row">
+                            <span class="abt-hero__meta-k">STATUS</span>
+                            <span class="abt-hero__meta-v profile-v--live">
+                                <span class="status-dot"></span> Available for new work
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <aside class="abt-hero__chapters" aria-label="Chapter index">
+                    <div class="abt-hero__chapters-head">In this read</div>
+                    <a href="#act-1" class="abt-hero__chapter">
+                        <span class="abt-hero__chapter-num">I</span>
+                        <span class="abt-hero__chapter-meta">
+                            <span class="abt-hero__chapter-name">Origin</span>
+                            <span class="abt-hero__chapter-yr">2018 – 2022 · CCSIS</span>
+                        </span>
+                    </a>
+                    <a href="#act-2" class="abt-hero__chapter">
+                        <span class="abt-hero__chapter-num">II</span>
+                        <span class="abt-hero__chapter-meta">
+                            <span class="abt-hero__chapter-name">Discipline</span>
+                            <span class="abt-hero__chapter-yr">2022 – 2026 · PUP BSIT</span>
+                        </span>
+                    </a>
+                    <a href="#act-3" class="abt-hero__chapter">
+                        <span class="abt-hero__chapter-num">III</span>
+                        <span class="abt-hero__chapter-meta">
+                            <span class="abt-hero__chapter-name">Practice</span>
+                            <span class="abt-hero__chapter-yr">2026 → · ArkTech &amp; beyond</span>
+                        </span>
+                    </a>
+                    <a href="#offer" class="abt-hero__chapter abt-hero__chapter--coda">
+                        <span class="abt-hero__chapter-num">·</span>
+                        <span class="abt-hero__chapter-meta">
+                            <span class="abt-hero__chapter-name">What I offer</span>
+                            <span class="abt-hero__chapter-yr">Five disciplines, one posture</span>
+                        </span>
+                    </a>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- ACT I — ORIGIN -->
+    <section class="abt-act abt-act--i" id="act-1">
+        <div class="container">
+            <header class="abt-act__head" data-reveal>
+                <div class="abt-act__no">ACT I</div>
+                <h2 class="abt-act__title">Origin.</h2>
+                <p class="abt-act__sub">The curiosity arrives before the discipline does.</p>
+                <div class="abt-act__years">2018 – 2022 · Calamba City Science Integrated School</div>
+            </header>
+
+            <div class="abt-act__body" data-reveal>
+                <div class="abt-act__prose">
+                    <p class="abt-act__lede">I grew up in Calamba, in a household where you finished what you started
+                        and you finished it cleanly. Curiosity wasn't a personality trait there — it was the cost of
+                        admission. STEM at <span class="inline-logo" aria-hidden="true"><img
+                                src="../assets/img/ccsis-logo.png" alt=""></span><span class="hl">CCSIS</span> was where
+                        I first met the kind of problems where the answer isn't googleable, just smaller problems all
+                        the way down.</p>
+
+                    <p>I graduated with <span class="hl">Highest Honors</span> — 18th out of 376 — and the rank meant
+                        less to me than the habit it built. The habit was: read it twice, draw it once, then write it.
+                        Same habit I still use when a schema gives me trouble.</p>
+
+                    <p class="muted">Research papers were where I figured out that I liked the part nobody else liked.
+                        Not the conclusion — the part where you sit with a half-broken hypothesis for two weeks and wait
+                        for it to either survive or fall over.</p>
+                </div>
+
+                <aside class="abt-act__sidebar">
+                    <div class="abt-act__quote">
+                        <span class="abt-act__quote-mark">&ldquo;</span>
+                        <p class="abt-act__quote-body">Curiosity is the only thing in this house you don't have to ask
+                            permission for.</p>
+                        <p class="abt-act__quote-attr">— something my parents basically said with their actions, on
+                            repeat</p>
+                    </div>
+
+                    <div class="abt-act__keystone">
+                        <span class="abt-act__keystone-k">KEYSTONE</span>
+                        <span class="abt-act__keystone-v">18 / 376</span>
+                        <span class="abt-act__keystone-sub">Highest Honors · STEM Strand</span>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- ACT II — DISCIPLINE -->
+    <section class="abt-act abt-act--ii" id="act-2">
+        <div class="container">
+            <header class="abt-act__head" data-reveal>
+                <div class="abt-act__no">ACT II</div>
+                <h2 class="abt-act__title">Discipline.</h2>
+                <p class="abt-act__sub">Curiosity, but trained — and given a stack to work with.</p>
+                <div class="abt-act__years">2022 – 2026 · Polytechnic University of the Philippines, BSIT</div>
+            </header>
+
+            <div class="abt-act__body abt-act__body--flip" data-reveal>
+                <aside class="abt-act__sidebar">
+                    <div class="abt-act__keystone">
+                        <span class="abt-act__keystone-k">RECORD</span>
+                        <span class="abt-act__keystone-v">4 / 4</span>
+                        <span class="abt-act__keystone-sub">Years on the President's List · PUP Sta. Mesa</span>
+                    </div>
+
+                    <div class="abt-act__keystone">
+                        <span class="abt-act__keystone-k">SCHOLARSHIP</span>
+                        <span class="abt-act__keystone-v">RA 7687</span>
+                        <span class="abt-act__keystone-sub">Department of Science and Technology - SEI · National
+                            science scholarship</span>
+                    </div>
+
+                    <div class="abt-act__stack">
+                        <span class="abt-act__stack-k">STACK GAINED</span>
+                        <span class="abt-act__stack-list">PHP · MySQL · JavaScript · Bootstrap · Figma · UML · Git · OOP
+                            · SDLC · DBA basics · QA fundamentals</span>
+                    </div>
+                </aside>
+
+                <div class="abt-act__prose">
+                    <p class="abt-act__lede">PUP <span class="inline-logo" aria-hidden="true"><img
+                                src="../assets/img/pupstb-logo.png" alt=""></span>is where the curiosity got walls. I
+                        learned that <span class="hl">a system isn't done when it works once</span> — it's done when it
+                        survives a second person opening the codebase. Capstone projects, group leads, schemas drawn
+                        three times before they got committed.</p>
+
+                    <p>I ran the spine of more group projects than I can count, partly because I liked making things
+                        readable for the next teammate, and partly because the alternative was watching the build fall
+                        over at 3 a.m. before defense. I also got picky about details — about contrasts, vertical
+                        rhythm, why a button should never argue with its label.</p>
+
+                    <p class="muted">Got the <span class="inline-logo" aria-hidden="true"><img
+                                src="../assets/img/dostsei-logo.png" alt=""></span><span class="hl">Department of
+                            Science and Technology - SEI RA 7687 scholarship</span> along the way, which meant the
+                        science stayed in front of the engineering. I still think of it as a quiet contract: do work
+                        that's worth the country having paid for it.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ACT III — PRACTICE -->
+    <section class="abt-act abt-act--iii" id="act-3">
+        <div class="container">
+            <header class="abt-act__head" data-reveal>
+                <div class="abt-act__no">ACT III</div>
+                <h2 class="abt-act__title">Practice.</h2>
+                <p class="abt-act__sub">Where the code meets a calendar, a user, and a deadline.</p>
+                <div class="abt-act__years">Feb – May 2026 · ArkTech Philippines · Full-Stack Intern</div>
+            </header>
+
+            <div class="abt-act__body" data-reveal>
+                <div class="abt-act__prose">
+                    <p class="abt-act__lede">I just wrapped four months at <span class="inline-logo"
+                            aria-hidden="true"><img src="../assets/img/arktechphilippines-logo.png" alt=""></span><span
+                            class="hl">ArkTech Philippines</span> as a full-stack developer intern. <span
+                            class="hl">Three internal systems shipped</span> — all of them now sitting inside the
+                        company's day-to-day operations. Real users hit my forms; real bugs hit my inbox.</p>
+
+                    <p>That's the part school doesn't quite teach you — that production is a different animal than
+                        presentation. It doesn't care about the demo flow. It cares about that one user who pastes an
+                        emoji into a phone-number field on a Tuesday afternoon, and the schema you had better have
+                        hardened against it. I am — happily — the kind of engineer who finds that funny.</p>
+
+                    <p class="muted">Graduating in a few weeks. Open to <span class="hl">full-time roles</span>,
+                        freelance, and any project where craft actually matters. I read every message. I reply to most
+                        within a day.</p>
+                </div>
+
+                <aside class="abt-act__sidebar">
+                    <div class="abt-act__keystone abt-act__keystone--accent">
+                        <span class="abt-act__keystone-k">IN PRODUCTION</span>
+                        <span class="abt-act__keystone-v">3 systems</span>
+                        <span class="abt-act__keystone-sub">Built · shipped · used daily</span>
+                    </div>
+
+                    <div class="abt-act__keystone">
+                        <span class="abt-act__keystone-k">PHILOSOPHY</span>
+                        <span class="abt-act__keystone-v">Clarity first.</span>
+                        <span class="abt-act__keystone-sub">Then ship it. Then sharpen it.</span>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- CODA — What I Offer (Services, rewritten) -->
+    <section class="abt-offer" id="offer">
+        <div class="container">
+            <div class="abt-offer__head" data-reveal>
+                <span class="abt-offer__eyebrow">// WHAT I CAN ACTUALLY DO FOR YOU</span>
+                <h2 class="abt-offer__title">Five disciplines, one posture.</h2>
+                <p class="abt-offer__lede">I don't believe in shipping a thing without testing it, or designing a thing
+                    without securing it. These five overlap on purpose — each is part of the same way of working.</p>
+            </div>
+
+            <div class="abt-offer__rail" data-reveal>
+                <article class="abt-offer__card">
+                    <header class="abt-offer__card-head">
+                        <span class="abt-offer__card-no">01</span>
+                        <h3 class="abt-offer__card-title">Web Development</h3>
+                    </header>
+                    <p class="abt-offer__card-body">Full-stack applications — front to back, planned and pieced together
+                        with intention. I prefer the boring parts of a codebase to be readable; the interesting parts
+                        get to stay interesting.</p>
+                    <div class="abt-offer__card-tags">
+                        <span>HTML</span><span>CSS</span><span>JavaScript</span><span>React</span><span>PHP</span><span>Node</span>
+                    </div>
+                </article>
+
+                <article class="abt-offer__card">
+                    <header class="abt-offer__card-head">
+                        <span class="abt-offer__card-no">02</span>
+                        <h3 class="abt-offer__card-title">UI / UX Design</h3>
+                    </header>
+                    <p class="abt-offer__card-body">Interfaces that get out of the user's way. Layout, hierarchy, and
+                        the intentional details — the ones a user feels even when they can't name them.</p>
+                    <div class="abt-offer__card-tags">
+                        <span>Figma</span><span>Wireframes</span><span>Prototyping</span><span>Type</span>
+                    </div>
+                </article>
+
+                <article class="abt-offer__card">
+                    <header class="abt-offer__card-head">
+                        <span class="abt-offer__card-no">03</span>
+                        <h3 class="abt-offer__card-title">QA Testing</h3>
+                    </header>
+                    <p class="abt-offer__card-body">Methodical checks and the edge cases everyone else skipped.
+                        Production data does weird things; QA is where I catch them before a user does.</p>
+                    <div class="abt-offer__card-tags">
+                        <span>Test Cases</span><span>Manual QA</span><span>Bug Reports</span>
+                    </div>
+                </article>
+
+                <article class="abt-offer__card">
+                    <header class="abt-offer__card-head">
+                        <span class="abt-offer__card-no">04</span>
+                        <h3 class="abt-offer__card-title">Data Management</h3>
+                    </header>
+                    <p class="abt-offer__card-body">Schemas that make sense. Data you can trust to be accurate,
+                        complete, and indexed against the queries you'll actually run.</p>
+                    <div class="abt-offer__card-tags">
+                        <span>MySQL</span><span>SQL</span><span>Schema</span><span>Backups</span>
+                    </div>
+                </article>
+
+                <article class="abt-offer__card abt-offer__card--wide">
+                    <header class="abt-offer__card-head">
+                        <span class="abt-offer__card-no">05</span>
+                        <h3 class="abt-offer__card-title">Security</h3>
+                    </header>
+                    <p class="abt-offer__card-body">Sensible defaults and hardened auth flows. Security isn't a feature
+                        — it's a posture. The kind of thing you build into the foundation and then never have to talk
+                        about again.</p>
+                    <div class="abt-offer__card-tags">
+                        <span>Auth</span><span>OWASP</span><span>Sanitization</span><span>Hashing</span><span>RBAC</span>
+                    </div>
+                </article>
+            </div>
+
+            <div class="abt-offer__close" data-reveal>
+                <div class="abt-offer__close-copy">
+                    <p class="contact-greeting">Still here?</p>
+                    <h3 class="abt-offer__close-title">Let's actually build something.</h3>
+                    <p class="abt-offer__close-body">I'm easiest to reach by email, but the form opens a longer
+                        conversation. Tell me what you're working on, what 'done' looks like, and what you've already
+                        tried.</p>
+                </div>
+                <div class="abt-offer__close-ctas">
+                    <button type="button" class="contact-btn-highlight" data-bs-toggle="modal"
+                        data-bs-target="#contactModal" data-contact-intent="hero">
+                        <span class="cform__btn-label">Start a conversation</span>
+                        <i class="bi bi-send-fill"></i>
+                    </button>
+                    <a href="projects.html" class="cidx-entry__cta">
+                        <span>See the projects</span>
+                        <span class="cidx-entry__arrow">→</span>
+                    </a>
+                </div>
+            </div>
+
+            <footer class="footer">
+                <span>© 2026 Kaye Christine P. Gamana</span>
+                <span class="footer-rule"></span>
+                <span>Designed &amp; built from scratch.</span>
+                <span class="footer-socials">
+                    <a href="mailto:kayecgamana@gmail.com" aria-label="Email"><i class="bi bi-envelope-fill"></i></a>
+                    <a href="https://www.linkedin.com/in/kaye-gamana" target="_blank" rel="noopener"
+                        aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                    <a href="https://github.com/kayegamana" target="_blank" rel="noopener" aria-label="GitHub"><i
+                            class="bi bi-github"></i></a>
+                </span>
+            </footer>
+        </div>
+    </section>
+
+    <button id="back-to-top" aria-label="Back to top" title="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15" />
+        </svg>
+    </button>
+
+    <!-- Contact Modal — intent-driven copy -->
+    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content cmodal__content">
+                <div class="modal-header cmodal__header">
+                    <div class="cmodal__header-text">
+                        <p class="cmodal__eyebrow">// GET IN TOUCH</p>
+                        <h2 class="cmodal__title" id="contactModalLabel">Got something in mind?</h2>
+                    </div>
+                    <button type="button" class="cmodal__close" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+                <div class="modal-body cmodal__body">
+                    <div class="cmodal__robot-row">
+                        <p class="contact-greeting">Hello, future collaborator!</p>
+                    </div>
+                    <div class="cmodal__socials" aria-label="Or reach me on">
+                        <span class="cmodal__socials-label">Or find me on</span>
+                        <a class="cmodal__social" href="mailto:kayecgamana@gmail.com" aria-label="Email">
+                            <i class="bi bi-envelope-fill"></i><span>Email</span>
+                        </a>
+                        <a class="cmodal__social" href="https://www.linkedin.com/in/kaye-gamana" target="_blank"
+                            rel="noopener" aria-label="LinkedIn">
+                            <i class="bi bi-linkedin"></i><span>LinkedIn</span>
+                        </a>
+                        <a class="cmodal__social" href="https://github.com/kayegamana" target="_blank" rel="noopener"
+                            aria-label="GitHub">
+                            <i class="bi bi-github"></i><span>GitHub</span>
+                        </a>
+                    </div>
+                    <form id="contactModalForm" class="cform" data-form-key="hero" novalidate>
+                        <input type="hidden" name="access_key" value="">
+                        <input type="hidden" name="subject" value="New message from your portfolio">
+                        <input type="hidden" name="from_name" value="Kaye's Portfolio">
+                        <input type="hidden" name="form_origin" value="hero-modal">
+                        <input type="checkbox" name="botcheck" class="cform__honeypot" tabindex="-1" autocomplete="off">
+
+                        <div class="cform__row">
+                            <label class="cform__field">
+                                <span class="cform__label">NAME</span>
+                                <input type="text" name="name" required autocomplete="name"
+                                    placeholder="Your full name">
+                            </label>
+                            <label class="cform__field">
+                                <span class="cform__label">EMAIL</span>
+                                <input type="email" name="email" required autocomplete="email"
+                                    placeholder="you@example.com">
+                            </label>
+                        </div>
+
+                        <label class="cform__field">
+                            <span class="cform__label">SUBJECT</span>
+                            <input type="text" name="topic" required placeholder="Role, project, or just a hello">
+                        </label>
+
+                        <label class="cform__field">
+                            <span class="cform__label">MESSAGE</span>
+                            <textarea name="message" rows="4" required
+                                placeholder="Tell me a little about what you're working on."></textarea>
+                        </label>
+
+                        <label class="cform__resume">
+                            <input type="checkbox" name="request_resume" value="yes">
+                            <span class="cform__resume-box" aria-hidden="true"></span>
+                            <span class="cform__resume-text">
+                                <span class="cform__resume-title">Also request my résumé</span>
+                                <span class="cform__resume-sub">Tick this box and I'll send the latest PDF straight to
+                                    your email.</span>
+                            </span>
+                        </label>
+
+                        <div class="cform__foot">
+                            <p class="cform__status" id="cModalFormStatus" role="status" aria-live="polite"></p>
+                            <button type="submit" class="contact-btn-highlight" id="cModalFormSubmit">
+                                <span class="cform__btn-label">Send Message</span>
+                                <i class="bi bi-send-fill"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script src="../config.example.js"></script>
+    <script src="../config.local.js"></script>
+    <script src="../script.js"></script>
+</body>
+
+</html>

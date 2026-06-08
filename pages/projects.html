@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Projects — Kaye Gamana</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html#home">
+                <img src="../assets/img/logo.png" alt="logo" height="40">
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+                <i class="bi bi-list"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="nav">
+                <div class="navbar-nav mx-auto">
+                    <a class="nav-link" href="../index.html#home">HOME</a>
+                    <a class="nav-link" href="about.html">ABOUT</a>
+                    <a class="nav-link active" href="projects.html">PROJECTS</a>
+                    <a class="nav-link" href="credentials.html">CREDENTIALS</a>
+                </div>
+
+                <div class="d-flex">
+                    <button type="button" class="btn contact-btn" data-bs-toggle="modal" data-bs-target="#contactModal"
+                        data-contact-intent="hero" aria-label="Open contact form">
+                        CONTACT
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ============================================================
+         EDITORIAL INDEX — main projects page
+         A different spine from the chapter pages on purpose: this
+         page is the "table of contents" with chapter summaries and
+         tech profile; chapter pages keep the card-grid layout.
+    ============================================================ -->
+    <section class="archive-hero">
+        <div class="container">
+            <nav class="archive-hero__breadcrumb" aria-label="Breadcrumb">
+                <a href="../index.html#home">Portfolio</a>
+                <span class="archive-hero__sep">/</span>
+                <span class="archive-hero__here">Projects</span>
+            </nav>
+
+            <div class="archive-hero__row">
+                <div>
+                    <div class="archive-hero__index">EVERY CHAPTER · ONE INDEX</div>
+                    <h1 class="archive-hero__title">Four chapters. <em>One running thread.</em></h1>
+                    <p class="archive-hero__lede">Eight years of work, grouped by where it was made — from production
+                        systems shipped on the clock at ArkTech, to capstone-grade BSIT builds, to STEM research, to the
+                        side-quests I built because no one asked. Graphic design runs alongside it all, woven into each
+                        chapter where it lived.</p>
+                </div>
+                <div class="archive-hero__chips">
+                    <span class="archive-chip">4 chapters</span>
+                    <span class="archive-chip">16+ projects</span>
+                    <span class="archive-chip">2018 – 2026</span>
+                </div>
+            </div>
+
+            <a href="../index.html#home" class="archive-back">
+                <i class="bi bi-arrow-left"></i>
+                <span>Back to home</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Chapter quick-index strip — sticky-feel anchor row -->
+    <section class="cidx-strip-section">
+        <div class="container">
+            <div class="cidx-strip" role="tablist" aria-label="Chapter quick index">
+                <a class="cidx-strip__item" href="#chapter-01"><span class="cidx-strip__num">01</span><span
+                        class="cidx-strip__label">Internship</span></a>
+                <a class="cidx-strip__item" href="#chapter-02"><span class="cidx-strip__num">02</span><span
+                        class="cidx-strip__label">College</span></a>
+                <a class="cidx-strip__item" href="#chapter-03"><span class="cidx-strip__num">03</span><span
+                        class="cidx-strip__label">High School</span></a>
+                <a class="cidx-strip__item" href="#chapter-04"><span class="cidx-strip__num">04</span><span
+                        class="cidx-strip__label">Personal</span></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Editorial entries -->
+    <section class="cidx-section">
+        <div class="container">
+
+            <!-- 01 — Internship -->
+            <article class="cidx-entry" id="chapter-01" data-reveal>
+                <div class="cidx-entry__rail">
+                    <div class="cidx-entry__num">01</div>
+                    <div class="cidx-entry__yr">2026</div>
+                    <div class="cidx-entry__line" aria-hidden="true"></div>
+                </div>
+                <div class="cidx-entry__body">
+                    <div class="cidx-entry__kicker">
+                        <span class="cidx-entry__org">ArkTech Philippines</span>
+                        <span class="cidx-entry__dot">·</span>
+                        <span class="cidx-entry__when">Feb – May 2026</span>
+                    </div>
+                    <h2 class="cidx-entry__title">Internship</h2>
+                    <p class="cidx-entry__sub">Production systems, shipped on the clock.</p>
+                    <p class="cidx-entry__desc">Three internal systems built end-to-end during my four-month full-stack
+                        internship. Actively used in company operations — real users, real data, real deadlines, real
+                        merge conflicts.</p>
+                    <ul class="cidx-entry__highlights">
+                        <li><span class="cidx-entry__hk">Stack</span><span class="cidx-entry__hv">PHP · MySQL ·
+                                JavaScript · Bootstrap</span></li>
+                        <li><span class="cidx-entry__hk">Shipped</span><span class="cidx-entry__hv">3 systems · auth ·
+                                RBAC · schemas</span></li>
+                        <li><span class="cidx-entry__hk">Role</span><span class="cidx-entry__hv">Full-stack developer
+                                intern</span></li>
+                    </ul>
+                    <div class="cidx-entry__foot">
+                        <a href="projects/internship.html" class="cidx-entry__cta">
+                            <span>Open the chapter</span>
+                            <span class="cidx-entry__arrow">→</span>
+                        </a>
+                        <span class="cidx-entry__count">3 projects</span>
+                    </div>
+                </div>
+                <a href="projects/internship.html" class="cidx-entry__shot cidx-entry__shot--placeholder"
+                    aria-label="Open the Internship chapter">
+                    <span class="cidx-entry__shot-tag">CHAPTER · 01</span>
+                    <span class="cidx-entry__shot-ph">[ Internship · ArkTech ]</span>
+                </a>
+            </article>
+
+            <!-- 02 — College -->
+            <article class="cidx-entry cidx-entry--flip" id="chapter-02" data-reveal>
+                <a href="projects/college.html" class="cidx-entry__shot cidx-entry__shot--placeholder"
+                    aria-label="Open the College chapter">
+                    <span class="cidx-entry__shot-tag">CHAPTER · 02</span>
+                    <span class="cidx-entry__shot-ph">[ College · PUP BSIT ]</span>
+                </a>
+                <div class="cidx-entry__body">
+                    <div class="cidx-entry__kicker">
+                        <span class="cidx-entry__org">PUP Sta. Mesa</span>
+                        <span class="cidx-entry__dot">·</span>
+                        <span class="cidx-entry__when">2022 – 2026</span>
+                    </div>
+                    <h2 class="cidx-entry__title">College</h2>
+                    <p class="cidx-entry__sub">Coursework that left the classroom.</p>
+                    <p class="cidx-entry__desc">Capstone-grade builds from four years of BSIT — Gymboost, TasteBuds, and
+                        the rest. Where I learned to architect schemas, lead small teams, and write code other people
+                        could actually read.</p>
+                    <ul class="cidx-entry__highlights">
+                        <li><span class="cidx-entry__hk">Stack</span><span class="cidx-entry__hv">PHP · MySQL ·
+                                Bootstrap · RFID</span></li>
+                        <li><span class="cidx-entry__hk">Built</span><span class="cidx-entry__hv">Capstone systems ·
+                                group leads</span></li>
+                        <li><span class="cidx-entry__hk">Cohort</span><span class="cidx-entry__hv">Consistent
+                                President's Lister</span></li>
+                    </ul>
+                    <div class="cidx-entry__foot">
+                        <a href="projects/college.html" class="cidx-entry__cta">
+                            <span>Open the chapter</span>
+                            <span class="cidx-entry__arrow">→</span>
+                        </a>
+                        <span class="cidx-entry__count">4 projects</span>
+                    </div>
+                </div>
+                <div class="cidx-entry__rail">
+                    <div class="cidx-entry__num">02</div>
+                    <div class="cidx-entry__yr">2022—26</div>
+                    <div class="cidx-entry__line" aria-hidden="true"></div>
+                </div>
+            </article>
+
+            <!-- 03 — High School -->
+            <article class="cidx-entry" id="chapter-03" data-reveal>
+                <div class="cidx-entry__rail">
+                    <div class="cidx-entry__num">03</div>
+                    <div class="cidx-entry__yr">2018—22</div>
+                    <div class="cidx-entry__line" aria-hidden="true"></div>
+                </div>
+                <div class="cidx-entry__body">
+                    <div class="cidx-entry__kicker">
+                        <span class="cidx-entry__org">Calamba City Science IS</span>
+                        <span class="cidx-entry__dot">·</span>
+                        <span class="cidx-entry__when">STEM · Highest Honors</span>
+                    </div>
+                    <h2 class="cidx-entry__title">High School</h2>
+                    <p class="cidx-entry__sub">Where the curiosity started.</p>
+                    <p class="cidx-entry__desc">Early research and STEM coursework from CCSIS — the projects that first
+                        made me ask why a system was held together with duct tape, and what it would take to do better.
+                    </p>
+                    <ul class="cidx-entry__highlights">
+                        <li><span class="cidx-entry__hk">Focus</span><span class="cidx-entry__hv">Research · STEM ·
+                                Data</span></li>
+                        <li><span class="cidx-entry__hk">Class</span><span class="cidx-entry__hv">Graduated 18th of
+                                376</span></li>
+                        <li><span class="cidx-entry__hk">Origin</span><span class="cidx-entry__hv">Where the engineering
+                                instinct started</span></li>
+                    </ul>
+                    <div class="cidx-entry__foot">
+                        <a href="projects/highschool.html" class="cidx-entry__cta">
+                            <span>Open the chapter</span>
+                            <span class="cidx-entry__arrow">→</span>
+                        </a>
+                        <span class="cidx-entry__count">3 projects</span>
+                    </div>
+                </div>
+                <a href="projects/highschool.html" class="cidx-entry__shot cidx-entry__shot--placeholder"
+                    aria-label="Open the High School chapter">
+                    <span class="cidx-entry__shot-tag">CHAPTER · 03</span>
+                    <span class="cidx-entry__shot-ph">[ High School · STEM ]</span>
+                </a>
+            </article>
+
+            <!-- 04 — Personal -->
+            <article class="cidx-entry cidx-entry--flip" id="chapter-04" data-reveal>
+                <a href="projects/personal.html" class="cidx-entry__shot cidx-entry__shot--placeholder"
+                    aria-label="Open the Personal chapter">
+                    <span class="cidx-entry__shot-tag">CHAPTER · 04</span>
+                    <span class="cidx-entry__shot-ph">[ Personal · Side-Quests ]</span>
+                </a>
+                <div class="cidx-entry__body">
+                    <div class="cidx-entry__kicker">
+                        <span class="cidx-entry__org">Built on my own time</span>
+                        <span class="cidx-entry__dot">·</span>
+                        <span class="cidx-entry__when">Ongoing</span>
+                    </div>
+                    <h2 class="cidx-entry__title">Personal</h2>
+                    <p class="cidx-entry__sub">Side-quests on my own time.</p>
+                    <p class="cidx-entry__desc">Experiments, tools I wanted to exist, and the things I built because no
+                        one asked me to. Where I get to choose the stack, the scope, and what 'done' looks like.</p>
+                    <ul class="cidx-entry__highlights">
+                        <li><span class="cidx-entry__hk">Spirit</span><span class="cidx-entry__hv">Curiosity-driven ·
+                                open-ended</span></li>
+                        <li><span class="cidx-entry__hk">Stack</span><span class="cidx-entry__hv">Whatever fits the
+                                question</span></li>
+                        <li><span class="cidx-entry__hk">Rule</span><span class="cidx-entry__hv">No client briefs — only
+                                questions</span></li>
+                    </ul>
+                    <div class="cidx-entry__foot">
+                        <a href="projects/personal.html" class="cidx-entry__cta">
+                            <span>Open the chapter</span>
+                            <span class="cidx-entry__arrow">→</span>
+                        </a>
+                        <span class="cidx-entry__count">3 projects</span>
+                    </div>
+                </div>
+                <div class="cidx-entry__rail">
+                    <div class="cidx-entry__num">04</div>
+                    <div class="cidx-entry__yr">∞</div>
+                    <div class="cidx-entry__line" aria-hidden="true"></div>
+                </div>
+            </article>
+
+            <!-- Graphic Design is now integrated into each era page below
+                 (High School is pure GD; College & Personal include mixed pieces). -->
+
+            <div class="archive-foot">
+                <p class="archive-foot__note">
+                    Want context on any of these? <button type="button" class="proj-link" data-bs-toggle="modal"
+                        data-bs-target="#contactModal" data-contact-intent="hero"
+                        style="background:none;border:0;padding:0;cursor:pointer;">Send a quick message</button> and
+                    I'll walk you through it.
+                </p>
+                <a href="credentials.html" class="archive-foot__cta">See the Credentials →</a>
+            </div>
+
+            <footer class="footer">
+                <span>© 2026 Kaye Christine P. Gamana</span>
+                <span class="footer-rule"></span>
+                <span>Designed &amp; built from scratch.</span>
+                <span class="footer-socials">
+                    <a href="mailto:kayecgamana@gmail.com" aria-label="Email"><i class="bi bi-envelope-fill"></i></a>
+                    <a href="https://www.linkedin.com/in/kaye-gamana" target="_blank" rel="noopener"
+                        aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                    <a href="https://github.com/kayegamana" target="_blank" rel="noopener" aria-label="GitHub"><i
+                            class="bi bi-github"></i></a>
+                </span>
+            </footer>
+        </div>
+    </section>
+
+    <button id="back-to-top" aria-label="Back to top" title="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15" />
+        </svg>
+    </button>
+
+    <!-- Contact Modal — intent-driven copy. Trigger sets data-contact-intent. -->
+    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content cmodal__content">
+                <div class="modal-header cmodal__header">
+                    <div class="cmodal__header-text">
+                        <p class="cmodal__eyebrow">// GET IN TOUCH</p>
+                        <h2 class="cmodal__title" id="contactModalLabel">Got something in mind?</h2>
+                    </div>
+                    <button type="button" class="cmodal__close" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+                <div class="modal-body cmodal__body">
+                    <div class="cmodal__robot-row">
+                        <p class="contact-greeting">Hello, future collaborator!</p>
+                    </div>
+                    <div class="cmodal__socials" aria-label="Or reach me on">
+                        <span class="cmodal__socials-label">Or find me on</span>
+                        <a class="cmodal__social" href="mailto:kayecgamana@gmail.com" aria-label="Email">
+                            <i class="bi bi-envelope-fill"></i><span>Email</span>
+                        </a>
+                        <a class="cmodal__social" href="https://www.linkedin.com/in/kaye-gamana" target="_blank"
+                            rel="noopener" aria-label="LinkedIn">
+                            <i class="bi bi-linkedin"></i><span>LinkedIn</span>
+                        </a>
+                        <a class="cmodal__social" href="https://github.com/kayegamana" target="_blank" rel="noopener"
+                            aria-label="GitHub">
+                            <i class="bi bi-github"></i><span>GitHub</span>
+                        </a>
+                    </div>
+                    <form id="contactModalForm" class="cform" data-form-key="hero" novalidate>
+                        <input type="hidden" name="access_key" value="">
+                        <input type="hidden" name="subject" value="New message from your portfolio">
+                        <input type="hidden" name="from_name" value="Kaye's Portfolio">
+                        <input type="hidden" name="form_origin" value="hero-modal">
+                        <input type="checkbox" name="botcheck" class="cform__honeypot" tabindex="-1" autocomplete="off">
+
+                        <div class="cform__row">
+                            <label class="cform__field">
+                                <span class="cform__label">NAME</span>
+                                <input type="text" name="name" required autocomplete="name"
+                                    placeholder="Your full name">
+                            </label>
+                            <label class="cform__field">
+                                <span class="cform__label">EMAIL</span>
+                                <input type="email" name="email" required autocomplete="email"
+                                    placeholder="you@example.com">
+                            </label>
+                        </div>
+
+                        <label class="cform__field">
+                            <span class="cform__label">SUBJECT</span>
+                            <input type="text" name="topic" required placeholder="Role, project, or just a hello">
+                        </label>
+
+                        <label class="cform__field">
+                            <span class="cform__label">MESSAGE</span>
+                            <textarea name="message" rows="4" required
+                                placeholder="Tell me a little about what you're working on."></textarea>
+                        </label>
+
+                        <label class="cform__resume">
+                            <input type="checkbox" name="request_resume" value="yes">
+                            <span class="cform__resume-box" aria-hidden="true"></span>
+                            <span class="cform__resume-text">
+                                <span class="cform__resume-title">Also request my résumé</span>
+                                <span class="cform__resume-sub">Tick this box and I'll send the latest PDF straight to
+                                    your email.</span>
+                            </span>
+                        </label>
+
+                        <div class="cform__foot">
+                            <p class="cform__status" id="cModalFormStatus" role="status" aria-live="polite"></p>
+                            <button type="submit" class="contact-btn-highlight" id="cModalFormSubmit">
+                                <span class="cform__btn-label">Send Message</span>
+                                <i class="bi bi-send-fill"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script src="../config.example.js"></script>
+    <script src="../config.local.js"></script>
+    <script src="../script.js"></script>
+</body>
+
+</html>
