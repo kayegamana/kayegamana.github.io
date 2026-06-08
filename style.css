@@ -1049,7 +1049,7 @@ html {
 }
 
 .svc-nav__btn.active .svc-nav__progress {
-  animation: svc-progress 15s linear forwards;
+  animation: svc-progress 10s linear forwards;
 }
 
 @keyframes svc-progress {
@@ -5495,7 +5495,7 @@ body.page-ready {
   font-family: "Caveat", cursive;
   font-weight: 500;
   /* Default scales responsively for longer text */
-  font-size: clamp(1.1rem, min(1.2vw, 2.5vh), 1.25rem);
+  font-size: clamp(1.35rem, min(1.2vw, 2.5vh), 1.6rem);
   color: var(--ink);
   line-height: 1.35;
   margin-bottom: clamp(10px, 2vh, 16px);
@@ -5504,7 +5504,7 @@ body.page-ready {
 }
 
 .quote-text .short-text {
-  font-size: clamp(1.15rem, min(1.6vw, 3.5vh), 1.6rem);
+  font-size: clamp(1.35rem, min(1.6vw, 3.5vh), 1.6rem);
   line-height: 1.45;
 }
 

@@ -37,7 +37,7 @@
       greeting: "Hello, past collaborator!",
       subjectPlaceholder: "Your role and how we worked together",
       messagePlaceholder: "A few honest sentences about working with me — what stood out, what could've been better. I'll ask before publishing anything.",
-      defaultSubject: "[TESTIMONIAL] " ,
+      defaultSubject: "[TESTIMONIAL] ",
       formKey: "testimonial"
     },
     hello: {
@@ -203,7 +203,7 @@
         ta.style.opacity = '0';
         document.body.appendChild(ta);
         ta.select();
-        try { document.execCommand('copy'); } catch (_) {}
+        try { document.execCommand('copy'); } catch (_) { }
         document.body.removeChild(ta);
         flash();
       }
@@ -248,22 +248,22 @@
   /* ---------- Contact Modal: intent-driven copy + key swap ---------- */
   const contactModalElem = document.getElementById('contactModal');
   if (contactModalElem) {
-    const eyebrowEl  = contactModalElem.querySelector('.cmodal__eyebrow');
-    const titleEl    = contactModalElem.querySelector('.cmodal__title');
+    const eyebrowEl = contactModalElem.querySelector('.cmodal__eyebrow');
+    const titleEl = contactModalElem.querySelector('.cmodal__title');
     const greetingEl = contactModalElem.querySelector('.contact-greeting');
-    const subjectEl  = contactModalElem.querySelector('input[name="topic"]');
-    const messageEl  = contactModalElem.querySelector('textarea[name="message"]');
+    const subjectEl = contactModalElem.querySelector('input[name="topic"]');
+    const messageEl = contactModalElem.querySelector('textarea[name="message"]');
     const subjectHid = contactModalElem.querySelector('input[name="subject"]');
-    const modalForm  = document.getElementById('contactModalForm');
+    const modalForm = document.getElementById('contactModalForm');
 
     function applyIntent(intent) {
       const copy = INTENT_COPY[intent] || INTENT_COPY.hero;
-      if (eyebrowEl)  eyebrowEl.textContent  = copy.eyebrow;
-      if (titleEl)    titleEl.textContent    = copy.title;
+      if (eyebrowEl) eyebrowEl.textContent = copy.eyebrow;
+      if (titleEl) titleEl.textContent = copy.title;
       if (greetingEl) greetingEl.textContent = copy.greeting;
-      if (subjectEl)  subjectEl.placeholder  = copy.subjectPlaceholder;
-      if (messageEl)  messageEl.placeholder  = copy.messagePlaceholder;
-      if (subjectHid) subjectHid.value       = copy.defaultSubject;
+      if (subjectEl) subjectEl.placeholder = copy.subjectPlaceholder;
+      if (messageEl) messageEl.placeholder = copy.messagePlaceholder;
+      if (subjectHid) subjectHid.value = copy.defaultSubject;
       if (modalForm) {
         modalForm.dataset.formKey = copy.formKey;
         applyKeyToForm(modalForm);
@@ -289,8 +289,8 @@
 
   /* ---------- Contact Forms (Web3Forms submit) ---------- */
   const contactForms = [
-    { form: document.getElementById('contactForm'),       status: document.getElementById('cformStatus'),       submitBtn: document.getElementById('cformSubmit') },
-    { form: document.getElementById('contactModalForm'),  status: document.getElementById('cModalFormStatus'),  submitBtn: document.getElementById('cModalFormSubmit') }
+    { form: document.getElementById('contactForm'), status: document.getElementById('cformStatus'), submitBtn: document.getElementById('cformSubmit') },
+    { form: document.getElementById('contactModalForm'), status: document.getElementById('cModalFormStatus'), submitBtn: document.getElementById('cModalFormSubmit') }
   ];
 
   contactForms.forEach(({ form, status, submitBtn }) => {
@@ -413,8 +413,8 @@
 
   /* ---------- Services tab switcher + auto-rotate (15s loop) + per-service GIF ---------- */
   const svcBtns = document.querySelectorAll('.svc-nav__btn');
-  const svcGif  = document.getElementById('svcGif');
-  const SVC_DURATION = 15000;
+  const svcGif = document.getElementById('svcGif');
+  const SVC_DURATION = 10000;
 
   if (svcBtns.length) {
     const svcKeys = Array.from(svcBtns).map(b => b.dataset.svc);
@@ -444,7 +444,7 @@
         setTimeout(() => {
           svcGif.src = `assets/img/services-section/${gifNum}.gif`;
           svcGif.classList.remove('is-swapping');
-        }, 150);
+        }, 100);
       }
 
       if (manual) startSvcTimer();
