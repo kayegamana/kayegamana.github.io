@@ -940,6 +940,8 @@
       flex: 1;
       display: flex;
       align-items: center;
+      container-type: size;
+      /* Enables sizing based purely on the card's alloted space */
     }
 
     .certs-quote {
@@ -947,6 +949,7 @@
       flex-direction: column;
       justify-content: center;
       height: 100%;
+      width: 100%;
       position: absolute;
       inset: 0;
       z-index: 1;
@@ -978,30 +981,56 @@
     }
 
     .quote-text {
-      font-family: "Caveat", cursive;
-      font-weight: 500;
-      /* Default scales responsively for longer text */
-      font-size: clamp(0.9rem, min(1.2vw, 2.5vh), 1.25rem);
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-weight: 400;
       color: var(--ink);
-      line-height: 1.35;
-      margin-bottom: clamp(10px, 2vh, 16px);
-      max-width: 98%;
+      margin-bottom: auto;
+      margin-top: auto;
+      width: 100%;
+      max-width: 100%;
+      text-align: left;
+      text-wrap: balance;
+      /* Replaced justification with balance for a premium, natural block shape */
       position: relative;
+      /* The exact font-size and line-height are now handled dynamically by Javascript based on text length to perfectly fit the space */
     }
 
-    /* Dynamic modifier for shorter quotes to maximize readability and whitespace */
-    .quote-text.short-text {
-      font-size: clamp(1.15rem, min(1.6vw, 3.5vh), 1.6rem);
-      line-height: 1.45;
+    .quote-highlight {
+      font-family: "Caveat", cursive;
+      font-size: 1.6em;
+      color: var(--blue);
+      font-weight: 600;
+      line-height: 0.8;
     }
 
     .quote-attr {
       font-family: "Montserrat", sans-serif;
       font-weight: 700;
-      font-size: 0.52rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
+      font-size: clamp(0.6rem, 3.5cqi, 0.75rem);
+      /* Slightly larger base size since we dropped uppercase */
+      letter-spacing: 0.5px;
+      text-transform: capitalize;
+      /* Title case: First letter of each word */
+      flex-shrink: 0;
+      margin-top: 12px;
+      align-self: flex-end;
+      /* Pushes the attribution to the right side for editorial balance */
+    }
+
+    .author-name {
       color: var(--ink-soft);
+      /* Soft blue tone */
+    }
+
+    .author-role {
+      color: var(--ink-mute);
+      /* Muted gray tone to distinguish from the name */
+      font-weight: 600;
+    }
+
+    .author-divider {
+      color: rgba(114, 188, 255, 0.2);
+      margin: 0 6px;
     }
 
     /* ═══════════════════════════════════════════
@@ -1806,26 +1835,41 @@
             </div>
           </div>
 
+
+
+
           <div class="testimonial-slider">
             <div class="certs-quote t-slide active">
               <div class="quote-mark" aria-hidden="true">"</div>
               <p class="quote-text">She really is the kind of person who's
-                always curious to build something with quality, who has an eye for what's better, and a teammate you can
+                always curious to <span class="quote-highlight">build something with quality</span>, who has an eye for
+                what's better, and a teammate you can
                 trust and work with on meaningful projects.
               </p>
-              <span class="quote-attr">— Junior Web Developer - Roland Regio</span>
+              <span class="quote-attr">
+                <span class="author-name">Roland Regio</span> <span class="author-divider">|</span> <span
+                  class="author-role">Junior Web Developer</span>
+              </span>
             </div>
             <div class="certs-quote t-slide">
               <div class="quote-mark" aria-hidden="true">"</div>
-              <p class="quote-text">A phenomenal problem solver. She streamlined our database queries and reduced
+              <p class="quote-text">A <span class="quote-highlight">phenomenal problem solver</span>. She streamlined
+                our database queries and reduced
                 loading times remarkably.</p>
-              <span class="quote-attr">— John Doe</span>
+              <span class="quote-attr">
+                <span class="author-name">John Doe</span> <span class="author-divider">|</span> <span
+                  class="author-role">Senior Developer</span>
+              </span>
             </div>
             <div class="certs-quote t-slide">
               <div class="quote-mark" aria-hidden="true">"</div>
-              <p class="quote-text">Her ability to balance aesthetic design with robust backend architecture is
+              <p class="quote-text">Her ability to balance aesthetic design with <span class="quote-highlight">robust
+                  backend architecture</span> is
                 exceptionally rare for a student.</p>
-              <span class="quote-attr">— Jane Doe</span>
+              <span class="quote-attr">
+                <span class="author-name">Jane Doe</span> <span class="author-divider">|</span> <span
+                  class="author-role">Project Manager</span>
+              </span>
             </div>
           </div>
         </article>
@@ -2070,11 +2114,24 @@
 
       if (!slides.length) return;
 
-      // Automatically size up short quotes (under 130 characters)
+      // Dynamically calculate font-size based on the exact character count
+      // This ensures short quotes enlarge to fill the space, and long quotes shrink to fit without getting cut off.
       slides.forEach(function (slide) {
         var textEl = slide.querySelector('.quote-text');
-        if (textEl && textEl.textContent.trim().length < 130) {
-          textEl.classList.add('short-text');
+        if (textEl) {
+          var charCount = textEl.textContent.trim().length;
+
+          // Dialed back bounds to find the sweet spot between filling space and retaining elegant padding
+          if (charCount < 100) {
+            textEl.style.fontSize = "clamp(1rem, 5.5cqi, 1.4rem)";
+            textEl.style.lineHeight = "1.55";
+          } else if (charCount <= 160) {
+            textEl.style.fontSize = "clamp(0.9rem, 4.8cqi, 1.25rem)";
+            textEl.style.lineHeight = "1.5";
+          } else {
+            textEl.style.fontSize = "clamp(0.75rem, 4.2cqi, 1rem)";
+            textEl.style.lineHeight = "1.45";
+          }
         }
       });
 
