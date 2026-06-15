@@ -920,10 +920,12 @@
     .t-dot {
       width: 6px;
       height: 6px;
-      border-radius: 50%;
+      border-radius: 6px;
+      /* Changed to fixed pixels to maintain rounded edges when stretched */
       background: rgba(90, 157, 217, 0.2);
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      /* Smoother expansion animation */
     }
 
     .t-dot:hover {
@@ -931,6 +933,8 @@
     }
 
     .t-dot.active {
+      width: 18px;
+      /* Expands into a dash to emphasize the active state */
       background: var(--blue);
       box-shadow: 0 0 5px var(--blue);
     }
