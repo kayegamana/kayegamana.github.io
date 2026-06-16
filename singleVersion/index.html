@@ -1246,28 +1246,37 @@
 
     .modal-head {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       justify-content: space-between;
       gap: 16px;
-      margin-bottom: 24px;
+      margin-bottom: 16px;
     }
 
     .modal-eyebrow {
       font-family: "Montserrat", sans-serif;
       font-weight: 700;
-      font-size: 0.55rem;
+      font-size: 0.65rem;
       letter-spacing: 3px;
       text-transform: uppercase;
       color: var(--blue);
-      margin-bottom: 6px;
+      margin-bottom: 0;
     }
 
     .modal-title {
       font-family: "Montserrat", sans-serif;
       font-weight: 800;
-      font-size: clamp(1rem, 1.5vw, 1.2rem);
+      font-size: clamp(0.95rem, 1.2vw, 1.15rem);
       color: var(--ink);
       line-height: 1.2;
+      margin-bottom: 0;
+    }
+
+    .modal-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 16px;
+      gap: 16px;
     }
 
     .modal-close {
@@ -1298,26 +1307,30 @@
       display: grid;
       grid-template-columns: 1fr 80px;
       gap: 12px;
-      height: min(600px, 65vh);
-      /* Locks height to prevent long thumbnails from stretching the container */
+      align-items: stretch;
+      /* Both columns stretch to perfectly match */
     }
 
     .modal-main-image-container {
       position: relative;
-      background: rgba(0, 1, 30, 0.4);
-      border: 1px solid rgba(114, 188, 255, 0.1);
-      border-radius: 10px;
+      background: transparent;
+      border-radius: 8px;
+      /* Subtle rounded edges */
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
-      height: 100%;
     }
 
     .modal-main-image-container img {
       width: 100%;
-      height: 100%;
+      height: auto;
+      /* Image drives the container height naturally */
+      max-height: 70vh;
+      /* Safeguard for unusually tall screenshots */
       object-fit: contain;
+      border-radius: 8px;
+      /* Applies the subtle rounding directly to the image */
+      display: block;
       cursor: zoom-in;
       transition: transform 0.3s ease;
     }
@@ -1416,9 +1429,6 @@
     }
 
     .gallery-controls {
-      position: absolute;
-      bottom: 12px;
-      right: 12px;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -1430,6 +1440,7 @@
       border: 1px solid rgba(114, 188, 255, 0.15);
       z-index: 10;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      flex-shrink: 0;
     }
 
     .gallery-nav-btn {
@@ -1471,21 +1482,21 @@
       flex-direction: column;
       gap: 8px;
       padding-right: 0;
-      height: auto;
-      /* Removed overflow to eliminate scrollbar */
+      height: 100%;
+      /* Takes full height defined by main image */
     }
 
     .thumb-wrapper {
       position: relative;
       width: 100%;
-      aspect-ratio: 1 / 1;
+      flex: 1;
+      /* Dynamically stretches to perfectly match the main image height */
       border-radius: 6px;
       cursor: pointer;
       overflow: hidden;
       border: 2px solid transparent;
       transition: border-color 0.2s ease;
       background: rgba(90, 157, 217, 0.05);
-      flex-shrink: 0;
     }
 
     .thumb-wrapper.active {
@@ -1515,8 +1526,12 @@
 
     .thumb-overlay {
       position: absolute;
-      inset: 0;
-      background: rgba(0, 1, 30, 0.7);
+      inset: -2px;
+      /* Expands to cover the wrapper's transparent border, fixing the white sliver */
+      border-radius: 6px;
+      /* Matches wrapper radius exactly */
+      background: rgba(0, 1, 30, 0.75);
+      /* Slightly darker for better contrast */
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1729,21 +1744,56 @@
         grid-template-rows: auto auto;
         max-height: none;
         height: auto;
+        gap: 16px;
+      }
+
+      .modal-main-image-container {
+        height: auto;
+        /* Restores organic height, eliminates massive whitespace */
       }
 
       .modal-main-image-container img {
         max-height: 40vh;
+        /* Safe max height for mobile screens */
+        width: 100%;
+        object-fit: contain;
       }
 
       .modal-thumbnails {
         flex-direction: row;
-        justify-content: center;
-        flex-wrap: wrap;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        overflow: hidden;
+        /* No scrolling needed, all 5 fit perfectly */
         padding-bottom: 0;
+        height: auto;
+        gap: 8px;
+      }
+
+      .modal-thumbnails::-webkit-scrollbar {
+        display: none;
       }
 
       .thumb-wrapper {
-        width: 60px;
+        width: 100%;
+        flex: 1;
+        /* Stretches equally to completely fill the row */
+        height: auto;
+        aspect-ratio: 1 / 1;
+        /* Mathematically enforces a perfect square based on fluid width */
+      }
+
+      .modal-footer {
+        flex-direction: column;
+        align-items: center;
+        /* Beautifully centers both title and controls */
+        gap: 16px;
+        text-align: center;
+      }
+
+      .gallery-controls {
+        align-self: center;
+        width: max-content;
       }
 
       .cform-row {
@@ -2133,25 +2183,13 @@
     <div class="modal-backdrop" data-close="photoModal"></div>
     <div class="modal-box">
       <div class="modal-head">
-        <div>
-          <div class="modal-eyebrow">Project Gallery</div>
-          <div class="modal-title" id="modalProjectName"></div>
-        </div>
+        <div class="modal-eyebrow">Project Gallery</div>
         <button class="modal-close" data-close="photoModal" aria-label="Close gallery">×</button>
       </div>
 
       <div class="modal-gallery-wrapper">
         <div class="modal-main-image-container">
           <img src="assets/img/projects-documentation/1ST/1.png" alt="Project zoomable image" id="mainGalleryImage">
-          <div class="gallery-controls">
-            <button class="gallery-nav-btn" id="galleryPrev" aria-label="Previous image">
-              <i class="bi bi-chevron-left"></i>
-            </button>
-            <div class="image-counter" id="galleryCounter">1 / 8</div>
-            <button class="gallery-nav-btn" id="galleryNext" aria-label="Next image">
-              <i class="bi bi-chevron-right"></i>
-            </button>
-          </div>
         </div>
         <div class="modal-thumbnails" id="galleryThumbnails">
           <img src="assets/img/projects-documentation/1ST/1.png" class="gallery-thumb active" alt="Thumbnail 1">
@@ -2163,6 +2201,19 @@
           <img src="assets/img/projects-documentation/1ST/7.png" class="gallery-thumb" alt="Thumbnail 7">
           <img src="assets/img/projects-documentation/1ST/8.png" class="gallery-thumb" alt="Thumbnail 8">
 
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <div class="modal-title" id="modalProjectName"></div>
+        <div class="gallery-controls">
+          <button class="gallery-nav-btn" id="galleryPrev" aria-label="Previous image">
+            <i class="bi bi-chevron-left"></i>
+          </button>
+          <div class="image-counter" id="galleryCounter">1 / 8</div>
+          <button class="gallery-nav-btn" id="galleryNext" aria-label="Next image">
+            <i class="bi bi-chevron-right"></i>
+          </button>
         </div>
       </div>
     </div>
