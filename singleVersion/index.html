@@ -1497,6 +1497,10 @@
       border: 2px solid transparent;
       transition: border-color 0.2s ease;
       background: rgba(90, 157, 217, 0.05);
+      background-clip: padding-box;
+      /* Eliminates background bleed at the rounded corners */
+      transform: translateZ(0);
+      /* Hardware acceleration fix for strict corner clipping */
     }
 
     .thumb-wrapper.active {
@@ -1526,12 +1530,10 @@
 
     .thumb-overlay {
       position: absolute;
-      inset: -2px;
-      /* Expands to cover the wrapper's transparent border, fixing the white sliver */
-      border-radius: 6px;
-      /* Matches wrapper radius exactly */
-      background: rgba(0, 1, 30, 0.75);
-      /* Slightly darker for better contrast */
+      inset: 0;
+      border-radius: 4px;
+      /* Perfectly matches the inner curve (6px wrapper radius - 2px border) */
+      background: rgba(0, 1, 30, 0.85);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1543,7 +1545,6 @@
       -webkit-backdrop-filter: blur(2px);
       z-index: 2;
       pointer-events: none;
-      /* Allows clicks to pass through to the wrapper */
     }
 
     /* Contact Form (Modal) */
