@@ -1298,7 +1298,8 @@
       display: grid;
       grid-template-columns: 1fr 80px;
       gap: 12px;
-      max-height: 65vh;
+      height: min(600px, 65vh);
+      /* Locks height to prevent long thumbnails from stretching the container */
     }
 
     .modal-main-image-container {
@@ -1310,12 +1311,12 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
+      height: 100%;
     }
 
     .modal-main-image-container img {
       width: 100%;
       height: 100%;
-      max-height: 65vh;
       object-fit: contain;
       cursor: zoom-in;
       transition: transform 0.3s ease;
@@ -1414,22 +1415,55 @@
       color: var(--blue);
     }
 
-    .image-counter {
+    .gallery-controls {
       position: absolute;
       bottom: 12px;
       right: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
       background: rgba(0, 1, 30, 0.75);
+      padding: 6px;
+      border-radius: 30px;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: 1px solid rgba(114, 188, 255, 0.15);
+      z-index: 10;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .gallery-nav-btn {
+      background: rgba(90, 157, 217, 0.1);
+      border: 1px solid transparent;
       color: var(--ink);
-      padding: 4px 10px;
-      border-radius: 20px;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: all 0.2s;
+    }
+
+    .gallery-nav-btn:hover {
+      background: rgba(114, 188, 255, 0.25);
+      border-color: rgba(114, 188, 255, 0.4);
+      color: var(--blue);
+      transform: scale(1.05);
+    }
+
+    .image-counter {
+      color: var(--ink);
       font-family: "Montserrat", sans-serif;
       font-size: 0.65rem;
       font-weight: 700;
       letter-spacing: 1.5px;
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      border: 1px solid rgba(114, 188, 255, 0.15);
       pointer-events: none;
+      user-select: none;
+      padding: 0 2px;
+      white-space: nowrap;
     }
 
     .modal-thumbnails {
@@ -1438,6 +1472,9 @@
       gap: 8px;
       overflow-y: auto;
       padding-right: 4px;
+      height: 100%;
+      min-height: 0;
+      /* Important: Allows thumbnails to scroll instead of stretching the grid height */
     }
 
     /* Custom Scrollbar for Thumbnails */
@@ -1675,6 +1712,7 @@
         grid-template-columns: 1fr;
         grid-template-rows: auto auto;
         max-height: none;
+        height: auto;
       }
 
       .modal-main-image-container img {
@@ -2091,7 +2129,15 @@
       <div class="modal-gallery-wrapper">
         <div class="modal-main-image-container">
           <img src="assets/img/projects-documentation/1ST/1.png" alt="Project zoomable image" id="mainGalleryImage">
-          <div class="image-counter" id="galleryCounter">1 / 1</div>
+          <div class="gallery-controls">
+            <button class="gallery-nav-btn" id="galleryPrev" aria-label="Previous image">
+              <i class="bi bi-chevron-left"></i>
+            </button>
+            <div class="image-counter" id="galleryCounter">1 / 8</div>
+            <button class="gallery-nav-btn" id="galleryNext" aria-label="Next image">
+              <i class="bi bi-chevron-right"></i>
+            </button>
+          </div>
         </div>
         <div class="modal-thumbnails" id="galleryThumbnails">
           <img src="assets/img/projects-documentation/1ST/1.png" class="gallery-thumb active" alt="Thumbnail 1">
@@ -2100,6 +2146,9 @@
           <img src="assets/img/projects-documentation/1ST/4.png" class="gallery-thumb" alt="Thumbnail 4">
           <img src="assets/img/projects-documentation/1ST/5.png" class="gallery-thumb" alt="Thumbnail 5">
           <img src="assets/img/projects-documentation/1ST/6.png" class="gallery-thumb" alt="Thumbnail 6">
+          <img src="assets/img/projects-documentation/1ST/7.png" class="gallery-thumb" alt="Thumbnail 7">
+          <img src="assets/img/projects-documentation/1ST/8.png" class="gallery-thumb" alt="Thumbnail 8">
+
         </div>
       </div>
     </div>
@@ -2332,6 +2381,8 @@
       var thumbs = document.querySelectorAll('.gallery-thumb');
       var mainImage = document.getElementById('mainGalleryImage');
       var counter = document.getElementById('galleryCounter');
+      var prevBtn = document.getElementById('galleryPrev');
+      var nextBtn = document.getElementById('galleryNext');
 
       if (!mainImage || thumbs.length === 0) return;
 
@@ -2342,6 +2393,26 @@
 
       // Initialize state
       updateCounter(1);
+
+      // Function to navigate images
+      function navigateGallery(direction) {
+        var activeIndex = Array.from(thumbs).findIndex(t => t.classList.contains('active'));
+        var newIndex = activeIndex;
+
+        if (direction === 'next') {
+          newIndex = (activeIndex + 1) % thumbs.length;
+        } else if (direction === 'prev') {
+          newIndex = (activeIndex - 1 + thumbs.length) % thumbs.length;
+        }
+
+        if (newIndex !== activeIndex) {
+          thumbs[newIndex].click();
+          thumbs[newIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+        }
+      }
+
+      if (prevBtn) prevBtn.addEventListener('click', function (e) { e.stopPropagation(); navigateGallery('prev'); });
+      if (nextBtn) nextBtn.addEventListener('click', function (e) { e.stopPropagation(); navigateGallery('next'); });
 
       // Thumbnail clicks
       thumbs.forEach(function (thumb, index) {
