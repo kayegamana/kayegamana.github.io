@@ -1470,49 +1470,65 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
-      overflow-y: auto;
-      padding-right: 4px;
-      height: 100%;
-      min-height: 0;
-      /* Important: Allows thumbnails to scroll instead of stretching the grid height */
+      padding-right: 0;
+      height: auto;
+      /* Removed overflow to eliminate scrollbar */
     }
 
-    /* Custom Scrollbar for Thumbnails */
-    .modal-thumbnails::-webkit-scrollbar {
-      width: 4px;
-      height: 4px;
-    }
-
-    .modal-thumbnails::-webkit-scrollbar-track {
+    .thumb-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 6px;
+      cursor: pointer;
+      overflow: hidden;
+      border: 2px solid transparent;
+      transition: border-color 0.2s ease;
       background: rgba(90, 157, 217, 0.05);
-      border-radius: 4px;
+      flex-shrink: 0;
     }
 
-    .modal-thumbnails::-webkit-scrollbar-thumb {
-      background: rgba(114, 188, 255, 0.4);
-      border-radius: 4px;
+    .thumb-wrapper.active {
+      border-color: var(--blue);
+    }
+
+    .thumb-wrapper:hover {
+      border-color: rgba(114, 188, 255, 0.4);
     }
 
     .gallery-thumb {
       width: 100%;
-      aspect-ratio: 1 / 1;
-      border-radius: 6px;
+      height: 100%;
       object-fit: cover;
-      cursor: pointer;
       opacity: 0.4;
-      border: 2px solid transparent;
-      transition: all 0.2s ease;
-      background: rgba(90, 157, 217, 0.05);
+      transition: opacity 0.2s ease;
+      display: block;
     }
 
-    .gallery-thumb:hover {
+    .thumb-wrapper:hover .gallery-thumb {
       opacity: 0.8;
-      border-color: rgba(114, 188, 255, 0.4);
     }
 
-    .gallery-thumb.active {
+    .thumb-wrapper.active .gallery-thumb {
       opacity: 1;
-      border-color: var(--blue);
+    }
+
+    .thumb-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 1, 30, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink);
+      font-family: "Montserrat", sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      z-index: 2;
+      pointer-events: none;
+      /* Allows clicks to pass through to the wrapper */
     }
 
     /* Contact Form (Modal) */
@@ -1721,15 +1737,13 @@
 
       .modal-thumbnails {
         flex-direction: row;
-        overflow-y: hidden;
-        overflow-x: auto;
-        padding-right: 0;
-        padding-bottom: 6px;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding-bottom: 0;
       }
 
-      .gallery-thumb {
+      .thumb-wrapper {
         width: 60px;
-        flex-shrink: 0;
       }
 
       .cform-row {
@@ -2375,61 +2389,98 @@
     }());
 
     /* ─────────────────────────────────────
-       GALLERY & ZOOM LOGIC
-    ──────────────────────────────────────── */
+           GALLERY & ZOOM LOGIC
+        ──────────────────────────────────────── */
     (function () {
       var thumbs = document.querySelectorAll('.gallery-thumb');
       var mainImage = document.getElementById('mainGalleryImage');
       var counter = document.getElementById('galleryCounter');
       var prevBtn = document.getElementById('galleryPrev');
       var nextBtn = document.getElementById('galleryNext');
+      var maxVisibleThumbs = 5; // Caps visible thumbnails for a cleaner UI
 
       if (!mainImage || thumbs.length === 0) return;
 
-      // Update counter text function
-      function updateCounter(index) {
-        counter.textContent = index + ' / ' + thumbs.length;
+      var wrappers = [];
+
+      // 1. Wrap thumbs dynamically to handle visibility and the +X overlay
+      thumbs.forEach(function (thumb, index) {
+        var wrapper = document.createElement('div');
+        wrapper.className = 'thumb-wrapper';
+        thumb.parentNode.insertBefore(wrapper, thumb);
+        wrapper.appendChild(thumb);
+        wrappers.push(wrapper);
+
+        // Hide any thumbnails past the professional limit
+        if (index >= maxVisibleThumbs) {
+          wrapper.style.display = 'none';
+        }
+
+        // Apply +X overlay to the last visible thumbnail if more exist
+        if (index === maxVisibleThumbs - 1 && thumbs.length > maxVisibleThumbs) {
+          var remaining = thumbs.length - maxVisibleThumbs;
+          var overlay = document.createElement('div');
+          overlay.className = 'thumb-overlay';
+          overlay.textContent = '+' + remaining;
+          wrapper.appendChild(overlay);
+        }
+
+        wrapper.addEventListener('click', function () {
+          navigateGallery('exact', index);
+        });
+      });
+
+      // 2. Centralized Gallery State Manager
+      function updateGalleryState(index) {
+        mainImage.src = thumbs[index].src;
+        counter.textContent = (index + 1) + ' / ' + thumbs.length;
+
+        // Reset all active classes
+        thumbs.forEach(function (t) { t.classList.remove('active'); });
+        wrappers.forEach(function (w) { w.classList.remove('active'); });
+
+        thumbs[index].classList.add('active');
+
+        // Ensure active visual styling remains either on the exact thumbnail, or the +X thumbnail if deep inside
+        if (index < maxVisibleThumbs) {
+          wrappers[index].classList.add('active');
+        } else {
+          wrappers[maxVisibleThumbs - 1].classList.add('active');
+        }
       }
 
-      // Initialize state
-      updateCounter(1);
-
-      // Function to navigate images
-      function navigateGallery(direction) {
+      // 3. Navigation Controller
+      function navigateGallery(direction, exactIndex) {
         var activeIndex = Array.from(thumbs).findIndex(t => t.classList.contains('active'));
+        if (activeIndex === -1) activeIndex = 0;
         var newIndex = activeIndex;
 
-        if (direction === 'next') {
+        if (direction === 'exact') {
+          newIndex = exactIndex;
+        } else if (direction === 'next') {
           newIndex = (activeIndex + 1) % thumbs.length;
         } else if (direction === 'prev') {
           newIndex = (activeIndex - 1 + thumbs.length) % thumbs.length;
         }
 
-        if (newIndex !== activeIndex) {
-          thumbs[newIndex].click();
-          thumbs[newIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+        if (newIndex !== activeIndex || direction === 'exact') {
+          updateGalleryState(newIndex);
+          // Sync lightbox if it's currently open
+          if (document.getElementById('imageLightbox').classList.contains('active')) {
+            document.getElementById('lightboxImage').src = thumbs[newIndex].src;
+            document.getElementById('lightboxImage').classList.remove('deep-zoom'); // Reset drag zoom on nav
+          }
         }
       }
 
+      // Initialize
+      updateGalleryState(0);
+
+      // Arrow Button Triggers
       if (prevBtn) prevBtn.addEventListener('click', function (e) { e.stopPropagation(); navigateGallery('prev'); });
       if (nextBtn) nextBtn.addEventListener('click', function (e) { e.stopPropagation(); navigateGallery('next'); });
 
-      // Thumbnail clicks
-      thumbs.forEach(function (thumb, index) {
-        thumb.addEventListener('click', function () {
-          // Change main image source
-          mainImage.src = this.src;
-
-          // Switch active state
-          thumbs.forEach(function (t) { t.classList.remove('active'); });
-          this.classList.add('active');
-
-          // Update tracker
-          updateCounter(index + 1);
-        });
-      });
-
-      // TWO-STEP ZOOM & DRAG LOGIC
+      // 4. TWO-STEP ZOOM & DRAG LOGIC
       var lightbox = document.getElementById('imageLightbox');
       var lightboxImg = document.getElementById('lightboxImage');
       var lightboxCloseBtn = document.getElementById('lightboxCloseBtn');
@@ -2438,20 +2489,18 @@
       function closeLightbox() {
         lightbox.classList.remove('active');
         lightbox.setAttribute('aria-hidden', 'true');
-        lightboxImg.classList.remove('deep-zoom'); // Reset zoom state
+        lightboxImg.classList.remove('deep-zoom');
       }
 
-      // Step 1: Open Fullscreen Lightbox
       mainImage.addEventListener('click', function () {
         lightboxImg.src = this.src;
         lightbox.classList.add('active');
         lightbox.setAttribute('aria-hidden', 'false');
       });
 
-      // Drag to Pan Variables
       let isDragging = false;
       let startX, startY, scrollLeft, scrollTop;
-      let wasDragged = false; // To differentiate between a click and a drag
+      let wasDragged = false;
 
       lightboxImg.addEventListener('mousedown', function (e) {
         if (!this.classList.contains('deep-zoom')) return;
@@ -2471,23 +2520,21 @@
         e.preventDefault();
         const x = e.pageX - lightboxScrollArea.offsetLeft;
         const y = e.pageY - lightboxScrollArea.offsetTop;
-        const walkX = (x - startX) * 1.5; // Pan speed multiplier
+        const walkX = (x - startX) * 1.5;
         const walkY = (y - startY) * 1.5;
 
         lightboxScrollArea.scrollLeft = scrollLeft - walkX;
         lightboxScrollArea.scrollTop = scrollTop - walkY;
 
-        // If the mouse moves more than 5 pixels, count it as a drag, not a click
         if (Math.abs(walkX) > 5 || Math.abs(walkY) > 5) {
           wasDragged = true;
         }
       });
 
-      // Step 2: Toggle Deep Zoom inside Lightbox (respecting drag)
       lightboxImg.addEventListener('click', function (e) {
         e.stopPropagation();
         if (wasDragged) {
-          wasDragged = false; // Don't zoom out if the user was just panning
+          wasDragged = false;
           return;
         }
 
@@ -2507,7 +2554,6 @@
         }
       });
 
-      // Close Lightbox triggers
       lightboxCloseBtn.addEventListener('click', closeLightbox);
 
       lightboxScrollArea.addEventListener('click', function (e) {
@@ -2516,20 +2562,18 @@
         }
       });
 
-      // Master Escape Key Logic & Arrow Controls
+      // Master Escape Key Logic & Keyboard Arrow Controls
       document.addEventListener('keydown', function (e) {
         var lightboxActive = lightbox.classList.contains('active');
         var photoModalActive = document.getElementById('photoModal').classList.contains('open');
         var isDeepZoom = lightboxImg.classList.contains('deep-zoom');
 
         if (e.key === 'Escape') {
-          // 1. If lightbox is open, close it (this returns you to the gallery modal)
           if (lightboxActive) {
-            document.getElementById('lightboxCloseBtn').click();
+            closeLightbox();
             return;
           }
 
-          // 2. If lightbox is not open, close any open standard modals
           var openModals = document.querySelectorAll('.modal-overlay.open');
           if (openModals.length > 0) {
             openModals.forEach(function (modal) {
@@ -2540,21 +2584,11 @@
           }
         }
 
-        // Arrow Key Navigation (Disabled if deeply zoomed to allow native panning)
         if ((photoModalActive || lightboxActive) && !isDeepZoom) {
-          var activeIndex = Array.from(thumbs).findIndex(t => t.classList.contains('active'));
-          var newIndex = activeIndex;
-
           if (e.key === 'ArrowRight') {
-            newIndex = (activeIndex + 1) % thumbs.length;
+            navigateGallery('next');
           } else if (e.key === 'ArrowLeft') {
-            newIndex = (activeIndex - 1 + thumbs.length) % thumbs.length;
-          }
-
-          if (newIndex !== activeIndex) {
-            thumbs[newIndex].click();
-            if (lightboxActive) lightboxImg.src = thumbs[newIndex].src;
-            thumbs[newIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+            navigateGallery('prev');
           }
         }
       });
@@ -2565,27 +2599,13 @@
         var photoModalActive = document.getElementById('photoModal').classList.contains('open');
         var isDeepZoom = lightboxImg.classList.contains('deep-zoom');
 
-        // Only trigger if gallery/lightbox is open and NOT deeply zoomed
         if ((photoModalActive || lightboxActive) && !isDeepZoom) {
-          // Allow normal scrolling inside the thumbnail container
-          if (e.target.closest('#galleryThumbnails')) return;
+          e.preventDefault();
 
-          e.preventDefault(); // Stop main page from scrolling
-
-          var activeIndex = Array.from(thumbs).findIndex(t => t.classList.contains('active'));
-          var newIndex = activeIndex;
-
-          // Detect scroll direction
           if (e.deltaY > 0) {
-            newIndex = (activeIndex + 1) % thumbs.length; // Scroll down = Next
+            navigateGallery('next');
           } else if (e.deltaY < 0) {
-            newIndex = (activeIndex - 1 + thumbs.length) % thumbs.length; // Scroll up = Prev
-          }
-
-          if (newIndex !== activeIndex) {
-            thumbs[newIndex].click();
-            if (lightboxActive) lightboxImg.src = thumbs[newIndex].src;
-            thumbs[newIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+            navigateGallery('prev');
           }
         }
       }, { passive: false });
