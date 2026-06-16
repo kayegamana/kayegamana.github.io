@@ -2098,6 +2098,8 @@
           <img src="assets/img/projects-documentation/1ST/2.png" class="gallery-thumb" alt="Thumbnail 2">
           <img src="assets/img/projects-documentation/1ST/3.png" class="gallery-thumb" alt="Thumbnail 3">
           <img src="assets/img/projects-documentation/1ST/4.png" class="gallery-thumb" alt="Thumbnail 4">
+          <img src="assets/img/projects-documentation/1ST/5.png" class="gallery-thumb" alt="Thumbnail 5">
+          <img src="assets/img/projects-documentation/1ST/6.png" class="gallery-thumb" alt="Thumbnail 6">
         </div>
       </div>
     </div>
@@ -2447,6 +2449,7 @@
       document.addEventListener('keydown', function (e) {
         var lightboxActive = lightbox.classList.contains('active');
         var photoModalActive = document.getElementById('photoModal').classList.contains('open');
+        var isDeepZoom = lightboxImg.classList.contains('deep-zoom');
 
         if (e.key === 'Escape') {
           // 1. If lightbox is open, close it (this returns you to the gallery modal)
@@ -2466,8 +2469,8 @@
           }
         }
 
-        // Arrow Key Navigation
-        if (photoModalActive || lightboxActive) {
+        // Arrow Key Navigation (Disabled if deeply zoomed to allow native panning)
+        if ((photoModalActive || lightboxActive) && !isDeepZoom) {
           var activeIndex = Array.from(thumbs).findIndex(t => t.classList.contains('active'));
           var newIndex = activeIndex;
 
@@ -2484,6 +2487,38 @@
           }
         }
       });
+
+      // Mouse Wheel Scroll Navigation
+      window.addEventListener('wheel', function (e) {
+        var lightboxActive = lightbox.classList.contains('active');
+        var photoModalActive = document.getElementById('photoModal').classList.contains('open');
+        var isDeepZoom = lightboxImg.classList.contains('deep-zoom');
+
+        // Only trigger if gallery/lightbox is open and NOT deeply zoomed
+        if ((photoModalActive || lightboxActive) && !isDeepZoom) {
+          // Allow normal scrolling inside the thumbnail container
+          if (e.target.closest('#galleryThumbnails')) return;
+
+          e.preventDefault(); // Stop main page from scrolling
+
+          var activeIndex = Array.from(thumbs).findIndex(t => t.classList.contains('active'));
+          var newIndex = activeIndex;
+
+          // Detect scroll direction
+          if (e.deltaY > 0) {
+            newIndex = (activeIndex + 1) % thumbs.length; // Scroll down = Next
+          } else if (e.deltaY < 0) {
+            newIndex = (activeIndex - 1 + thumbs.length) % thumbs.length; // Scroll up = Prev
+          }
+
+          if (newIndex !== activeIndex) {
+            thumbs[newIndex].click();
+            if (lightboxActive) lightboxImg.src = thumbs[newIndex].src;
+            thumbs[newIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+          }
+        }
+      }, { passive: false });
+
     }());
   </script>
 
