@@ -688,7 +688,8 @@
     .tech-page {
       display: none;
       flex-wrap: wrap;
-      gap: 5px;
+      gap: 5px; /* Tight gap to maximize horizontal space */
+      align-content: flex-start;
       animation: fadeIn 0.3s ease;
     }
 
@@ -711,38 +712,39 @@
     .tech-pill {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 6px 10px;
+      gap: 5px; /* Closer proximity between icon and text */
+      padding: 5px 9px; /* Slimmer padding to fit all items */
       background:
         var(--noise),
         linear-gradient(148deg, rgba(1, 10, 84, 0.50) 0%, rgba(2, 7, 62, 0.50) 100%);
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
-      border: 1px solid rgba(114, 188, 255, 0.08);
+      border: 1px solid rgba(114, 188, 255, 0.12);
       border-radius: 6px;
       cursor: default;
-      box-shadow: 0 2px 6px -1px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      box-shadow: 0 2px 6px -1px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
 
     .tech-pill i {
-      font-size: 1rem;
-      color: var(--blue-soft);
+      font-size: 1.3rem;
       line-height: 1;
+      flex-shrink: 0;
     }
 
     .tech-pill img.custom-tech-icon {
-      width: 1rem;
-      height: 1rem;
+      width: 1.3rem;
+      height: 1.3rem;
       object-fit: contain;
       flex-shrink: 0;
+      filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.4));
     }
 
     .tech-pill span {
       font-family: "Montserrat", sans-serif;
       font-weight: 700;
-      font-size: 0.6rem;
-      letter-spacing: 0.3px;
-      color: var(--ink-mute);
+      font-size: 0.58rem; /* Scaled down slightly to save horizontal width */
+      letter-spacing: 0.2px;
+      color: var(--ink);
       white-space: nowrap;
     }
 
@@ -1878,42 +1880,36 @@
             <div class="card-label-line"></div>
           </div>
 
-          <div class="tech-page active" id="tech-core" role="group" aria-label="Development languages and frameworks">
-            <div class="tech-pill"><i class="devicon-html5-plain"></i><span>HTML</span></div>
-            <div class="tech-pill"><i class="devicon-css3-plain"></i><span>CSS</span></div>
-            <div class="tech-pill"><i class="devicon-javascript-plain"></i><span>JavaScript</span></div>
-            <div class="tech-pill"><i class="devicon-php-plain"></i><span>PHP</span></div>
-            <div class="tech-pill"><i class="devicon-mysql-plain"></i><span>MySQL</span></div>
-            <div class="tech-pill"><i class="devicon-bootstrap-plain"></i><span>Bootstrap</span></div>
-            <div class="tech-pill"><i class="devicon-vscode-plain"></i><span>VS Code</span></div>
-            <div class="tech-pill"><i class="devicon-github-plain"></i><span>GitHub</span></div>
-            <div class="tech-pill"><i class="devicon-git-plain"></i><span>Git</span></div>
-            <div class="tech-pill"><i class="devicon-figma-plain"></i><span>Figma</span></div>
-            <div class="tech-pill"><i class="devicon-cplusplus-plain"></i><span>C++</span></div>
-            <div class="tech-pill"><i class="devicon-java-plain"></i><span>Java</span></div>
-            <div class="tech-pill"><i class="devicon-c-plain"></i><span>C</span></div>
-            <div class="tech-pill"><i class="devicon-python-plain"></i><span>Python</span></div>
+<div class="tech-page active" id="tech-core" role="group" aria-label="Development languages and frameworks">
+            <div class="tech-pill"><img src="assets/img/core/1.png" alt="HTML" class="custom-tech-icon"><span>HTML</span></div>
+            <div class="tech-pill"><img src="assets/img/core/2.png" alt="CSS" class="custom-tech-icon"><span>CSS</span></div>
+            <div class="tech-pill"><img src="assets/img/core/3.png" alt="JavaScript" class="custom-tech-icon"><span>JavaScript</span></div>
+            <div class="tech-pill"><img src="assets/img/core/4.png" alt="PHP" class="custom-tech-icon"><span>PHP</span></div>
+            <div class="tech-pill"><img src="assets/img/core/5.png" alt="MySQL" class="custom-tech-icon"><span>MySQL</span></div>
+            <div class="tech-pill"><img src="assets/img/core/6.png" alt="Bootstrap" class="custom-tech-icon"><span>Bootstrap</span></div>
+            <div class="tech-pill"><img src="assets/img/core/7.png" alt="VS Code" class="custom-tech-icon"><span>VS Code</span></div>
+            <div class="tech-pill"><img src="assets/img/core/8.png" alt="GitHub" class="custom-tech-icon"><span>GitHub</span></div>
+            <div class="tech-pill"><img src="assets/img/core/9.png" alt="Git" class="custom-tech-icon"><span>Git</span></div>
+            <div class="tech-pill"><img src="assets/img/core/10.png" alt="Figma" class="custom-tech-icon"><span>Figma</span></div>
+            <div class="tech-pill"><img src="assets/img/core/11.png" alt="C++" class="custom-tech-icon"><span>C++</span></div>
+            <div class="tech-pill"><img src="assets/img/core/12.png" alt="Java" class="custom-tech-icon"><span>Java</span></div>
+            <div class="tech-pill"><img src="assets/img/core/13.png" alt="C" class="custom-tech-icon"><span>C</span></div>
+            <div class="tech-pill"><img src="assets/img/core/14.png" alt="Python" class="custom-tech-icon"><span>Python</span></div>
           </div>
 
           <div class="tech-page" id="tech-tools" role="group" aria-label="Platforms and productivity tools">
-            <div class="tech-pill"><i class="bi bi-google"></i><span>Google WS</span></div>
-            <div class="tech-pill"><img src="assets/img/core-tools/microsoft-365.png" alt="Microsoft 365"
-                class="custom-tech-icon"><span>Microsoft 365</span></div>
-            <div class="tech-pill"><img src="assets/img/core-tools/canva.png" alt="Canva"
-                class="custom-tech-icon"><span>Canva</span></div>
-            <div class="tech-pill"><img src="assets/img/core-tools/capcut.png" alt="CapCut"
-                class="custom-tech-icon"><span>CapCut</span></div>
-            <div class="tech-pill"><img src="assets/img/core-tools/eclipse.png" alt="Eclipse"
-                class="custom-tech-icon"><span>Eclipse</span></div>
-            <div class="tech-pill"><i class="devicon-wordpress-plain"></i><span>WordPress</span></div>
-            <div class="tech-pill"><img src="assets/img/core-tools/cisco-packet-tracer.png" alt="Packet Tracer"
-                class="custom-tech-icon"><span>Packet Tracer</span></div>
-            <div class="tech-pill"><i class="devicon-visualstudio-plain"></i><span>Visual Studio</span></div>
-            <div class="tech-pill"><i class="devicon-jupyter-plain"></i><span>Jupyter</span></div>
-            <div class="tech-pill"><i class="devicon-salesforce-plain"></i><span>Salesforce</span></div>
-            <div class="tech-pill"><i class="devicon-photoshop-plain"></i><span>Photoshop</span></div>
-            <div class="tech-pill"><img src="assets/img/core-tools/lightroom.png" alt="Lightroom"
-                class="custom-tech-icon"><span>Lightroom</span></div>
+            <div class="tech-pill"><img src="assets/img/tools/1.png" alt="Google WS" class="custom-tech-icon"><span>Google WS</span></div>
+            <div class="tech-pill"><img src="assets/img/tools/2.png" alt="Microsoft 365" class="custom-tech-icon"><span>MS 365</span></div>
+            <div class="tech-pill"><img src="assets/img/tools/3.png" alt="Canva" class="custom-tech-icon"><span>Canva</span></div>
+            <div class="tech-pill"><img src="assets/img/tools/4.png" alt="CapCut" class="custom-tech-icon"><span>CapCut</span></div>
+            <div class="tech-pill"><img src="assets/img/tools/5.png" alt="Eclipse" class="custom-tech-icon"><span>Eclipse</span></div>
+            <div class="tech-pill"><img src="assets/img/tools/6.png" alt="WordPress" class="custom-tech-icon"><span>WordPress</span></div>
+            <div class="tech-pill"><img src="assets/img/tools/7.png" alt="Packet Tracer" class="custom-tech-icon"><span>Packet Tracer</span></div>
+            <div class="tech-pill"><img src="assets/img/tools/8.png" alt="Visual Studio" class="custom-tech-icon"><span>Visual Studio</span></div>
+            <div class="tech-pill"><img src="assets/img/tools/9.png" alt="Jupyter" class="custom-tech-icon"><span>Jupyter</span></div>
+            <div class="tech-pill"><img src="assets/img/tools/10.png" alt="Salesforce" class="custom-tech-icon"><span>Salesforce</span></div>
+            <div class="tech-pill"><img src="assets/img/tools/11.png" alt="Photoshop" class="custom-tech-icon"><span>Photoshop</span></div>
+            <div class="tech-pill"><img src="assets/img/tools/12.png" alt="Lightroom" class="custom-tech-icon"><span>Lightroom</span></div>
           </div>
         </article>
 
