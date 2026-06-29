@@ -1382,7 +1382,7 @@
       border-radius: 8px;
       box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
       cursor: zoom-in;
-      transition: width 0.3s, height 0.3s, max-width 0.3s, max-height 0.3s;
+      transition: width 0.3s, height 0.3s, max-width 0.3s, max-height 0.3s, opacity 0.25s ease;
     }
 
     /* Step 2: The Deep Zoom */
@@ -1918,7 +1918,7 @@
 
           <div class="title-row">
             <h2 class="card-title flagship-title">IT Project & Office Task Visualization Suite</h2>
-            <button class="photo-trigger" data-project="IT Project & Office Task Visualization Suite"
+            <button class="photo-trigger" data-project="IT Project & Office Task Visualization Suite" data-folder="1ST" data-count="10"
               aria-label="View project photos"><i class="bi bi-images"></i></button>
           </div>
 
@@ -1952,7 +1952,7 @@
 
           <div class="title-row">
             <h3 class="card-title">Machine Maintenance Checksheet</h3>
-            <button class="photo-trigger" data-project="Machine Maintenance Checksheet"
+            <button class="photo-trigger" data-project="Machine Maintenance Checksheet" data-folder="2ND" data-count="10"
               aria-label="View project photos"><i class="bi bi-images"></i></button>
           </div>
 
@@ -1983,7 +1983,7 @@
 
           <div class="title-row">
             <h3 class="card-title">GymBoost</h3>
-            <button class="photo-trigger" data-project="GymBoost" aria-label="View project photos"><i
+            <button class="photo-trigger" data-project="GymBoost" data-folder="3RD" data-count="10" aria-label="View project photos"><i
                 class="bi bi-images"></i></button>
           </div>
 
@@ -2190,20 +2190,10 @@
 
       <div class="modal-gallery-wrapper">
         <div class="modal-main-image-container">
-          <img src="assets/img/projects-documentation/1ST/1.png" alt="Project zoomable image" id="mainGalleryImage">
+          <img src="" alt="Project zoomable image" id="mainGalleryImage" style="opacity:0;">
         </div>
         <div class="modal-thumbnails" id="galleryThumbnails">
-          <img src="assets/img/projects-documentation/1ST/1.png" class="gallery-thumb active" alt="Thumbnail 1">
-          <img src="assets/img/projects-documentation/1ST/2.png" class="gallery-thumb" alt="Thumbnail 2">
-          <img src="assets/img/projects-documentation/1ST/3.png" class="gallery-thumb" alt="Thumbnail 3">
-          <img src="assets/img/projects-documentation/1ST/4.png" class="gallery-thumb" alt="Thumbnail 4">
-          <img src="assets/img/projects-documentation/1ST/5.png" class="gallery-thumb" alt="Thumbnail 5">
-          <img src="assets/img/projects-documentation/1ST/6.png" class="gallery-thumb" alt="Thumbnail 6">
-          <img src="assets/img/projects-documentation/1ST/7.png" class="gallery-thumb" alt="Thumbnail 7">
-          <img src="assets/img/projects-documentation/1ST/8.png" class="gallery-thumb" alt="Thumbnail 8">
-          <img src="assets/img/projects-documentation/1ST/9.png" class="gallery-thumb" alt="Thumbnail 9">
-          <img src="assets/img/projects-documentation/1ST/10.png" class="gallery-thumb" alt="Thumbnail 10">
-
+          <!-- populated dynamically on open -->
         </div>
       </div>
 
@@ -2294,11 +2284,24 @@
         document.documentElement.style.overflow = '';
       }
 
-      // Photo Modal Triggers
+      // Photo Modal Triggers — dynamically populate gallery per project
       document.querySelectorAll('.photo-trigger').forEach(function (btn) {
         btn.addEventListener('click', function (e) {
           e.stopPropagation();
+          var folder = btn.dataset.folder;
+          var count = parseInt(btn.dataset.count) || 10;
+          var basePath = 'assets/img/projects-documentation/' + folder + '/';
+
+          // Build image src list
+          var srcs = [];
+          for (var i = 1; i <= count; i++) {
+            srcs.push(basePath + i + '.png');
+          }
+
           document.getElementById('modalProjectName').textContent = btn.dataset.project;
+
+          // Init gallery with src list, then open modal
+          initGallery(srcs);
           openModal('photoModal');
         });
       });
@@ -2443,224 +2446,249 @@
     }());
 
     /* ─────────────────────────────────────
-           GALLERY & ZOOM LOGIC
-        ──────────────────────────────────────── */
+       GALLERY & ZOOM LOGIC
+    ──────────────────────────────────────── */
     (function () {
-      var thumbs = document.querySelectorAll('.gallery-thumb');
-      var mainImage = document.getElementById('mainGalleryImage');
-      var counter = document.getElementById('galleryCounter');
-      var prevBtn = document.getElementById('galleryPrev');
-      var nextBtn = document.getElementById('galleryNext');
-      var maxVisibleThumbs = 5; // Caps visible thumbnails for a cleaner UI
 
-      if (!mainImage || thumbs.length === 0) return;
+      var mainImage   = document.getElementById('mainGalleryImage');
+      var thumbContainer = document.getElementById('galleryThumbnails');
+      var counter     = document.getElementById('galleryCounter');
+      var prevBtn     = document.getElementById('galleryPrev');
+      var nextBtn     = document.getElementById('galleryNext');
+      var lightbox    = document.getElementById('imageLightbox');
+      var lightboxImg = document.getElementById('lightboxImage');
+      var lightboxCloseBtn  = document.getElementById('lightboxCloseBtn');
+      var lightboxScrollArea = document.getElementById('lightboxScrollArea');
+      var maxVisible  = 5;
 
-      var wrappers = [];
+      // ── Gallery state ──
+      var srcs        = [];   // current project's image paths
+      var activeIndex = 0;
+      var wrappers    = [];
+      var navigating  = false; // debounce rapid fire
 
-      // 1. Wrap thumbs dynamically to handle visibility and the +X overlay
-      thumbs.forEach(function (thumb, index) {
-        var wrapper = document.createElement('div');
-        wrapper.className = 'thumb-wrapper';
-        thumb.parentNode.insertBefore(wrapper, thumb);
-        wrapper.appendChild(thumb);
-        wrappers.push(wrapper);
-
-        // Hide any thumbnails past the professional limit
-        if (index >= maxVisibleThumbs) {
-          wrapper.style.display = 'none';
+      // ── Cache-safe image swap via opacity crossfade ──
+      function setMainImage(src, instant) {
+        if (instant) {
+          mainImage.src = src;
+          mainImage.style.opacity = '1';
+          return;
         }
+        mainImage.style.opacity = '0';
+        // Use a hidden loader — works even when the image is already cached
+        var loader = new Image();
+        loader.onload = loader.onerror = function () {
+          mainImage.src = src;
+          // rAF ensures the browser has painted the opacity:0 frame first
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+              mainImage.style.opacity = '1';
+              navigating = false;
+            });
+          });
+        };
+        loader.src = src;
+      }
 
-        // Apply +X overlay to the last visible thumbnail if more exist
-        if (index === maxVisibleThumbs - 1 && thumbs.length > maxVisibleThumbs) {
-          var remaining = thumbs.length - maxVisibleThumbs;
-          var overlay = document.createElement('div');
-          overlay.className = 'thumb-overlay';
-          overlay.textContent = '+' + remaining;
-          wrapper.appendChild(overlay);
+      // ── Update thumbnail active state & counter ──
+      function updateThumbs(index) {
+        wrappers.forEach(function (w) { w.classList.remove('active'); });
+        if (index < maxVisible) {
+          wrappers[index] && wrappers[index].classList.add('active');
+        } else {
+          wrappers[maxVisible - 1] && wrappers[maxVisible - 1].classList.add('active');
         }
+        counter.textContent = (index + 1) + ' / ' + srcs.length;
+        activeIndex = index;
+      }
 
-        wrapper.addEventListener('click', function () {
-          navigateGallery('exact', index);
+      // ── Navigate ──
+      function navigate(direction, exact) {
+        if (navigating) return;
+        navigating = true;
+
+        var next = activeIndex;
+        if (direction === 'exact') next = exact;
+        else if (direction === 'next') next = (activeIndex + 1) % srcs.length;
+        else if (direction === 'prev') next = (activeIndex - 1 + srcs.length) % srcs.length;
+
+        if (next === activeIndex && direction !== 'exact') { navigating = false; return; }
+
+        updateThumbs(next);
+        setMainImage(srcs[next], false);
+
+        // Sync lightbox if open
+        if (lightbox.classList.contains('active')) {
+          lightboxImg.style.opacity = '0';
+          var lbLoader = new Image();
+          lbLoader.onload = lbLoader.onerror = function () {
+            lightboxImg.src = srcs[next];
+            lightboxImg.classList.remove('deep-zoom');
+            requestAnimationFrame(function () {
+              requestAnimationFrame(function () {
+                lightboxImg.style.opacity = '1';
+              });
+            });
+          };
+          lbLoader.src = srcs[next];
+        }
+      }
+
+      // ── Build thumbnail strip ──
+      function buildThumbs() {
+        thumbContainer.innerHTML = '';
+        wrappers = [];
+
+        srcs.forEach(function (src, index) {
+          var wrapper = document.createElement('div');
+          wrapper.className = 'thumb-wrapper';
+
+          var img = document.createElement('img');
+          img.src = src;
+          img.className = 'gallery-thumb';
+          img.alt = 'Thumbnail ' + (index + 1);
+          wrapper.appendChild(img);
+
+          // +N overlay on last visible slot when there are more
+          if (index === maxVisible - 1 && srcs.length > maxVisible) {
+            var overlay = document.createElement('div');
+            overlay.className = 'thumb-overlay';
+            overlay.textContent = '+' + (srcs.length - maxVisible);
+            wrapper.appendChild(overlay);
+          }
+
+          if (index >= maxVisible) wrapper.style.display = 'none';
+
+          wrapper.addEventListener('click', function () { navigate('exact', index); });
+          thumbContainer.appendChild(wrapper);
+          wrappers.push(wrapper);
         });
+      }
+
+      // ── Public init — called by photo trigger with a fresh src array ──
+      window.initGallery = function (newSrcs) {
+        srcs = newSrcs;
+        activeIndex = 0;
+        navigating = false;
+
+        buildThumbs();
+
+        // Load first image: instant on first paint (modal not yet visible)
+        mainImage.style.transition = 'none';
+        mainImage.style.opacity = '0';
+        mainImage.src = '';
+
+        var loader = new Image();
+        loader.onload = loader.onerror = function () {
+          mainImage.src = srcs[0];
+          // Restore transition after first paint
+          requestAnimationFrame(function () {
+            mainImage.style.transition = 'opacity 0.25s ease';
+            requestAnimationFrame(function () {
+              mainImage.style.opacity = '1';
+            });
+          });
+        };
+        loader.src = srcs[0];
+
+        updateThumbs(0);
+      };
+
+      // ── Arrow buttons ──
+      prevBtn.addEventListener('click', function (e) { e.stopPropagation(); navigate('prev'); });
+      nextBtn.addEventListener('click', function (e) { e.stopPropagation(); navigate('next'); });
+
+      // ── Lightbox open on main image click ──
+      mainImage.addEventListener('click', function () {
+        if (!this.src || this.style.opacity === '0') return;
+        lightboxImg.src = this.src;
+        lightboxImg.style.opacity = '1';
+        lightbox.classList.add('active');
+        lightbox.setAttribute('aria-hidden', 'false');
       });
 
-      // 2. Centralized Gallery State Manager
-      function updateGalleryState(index) {
-        mainImage.src = thumbs[index].src;
-        counter.textContent = (index + 1) + ' / ' + thumbs.length;
-
-        // Reset all active classes
-        thumbs.forEach(function (t) { t.classList.remove('active'); });
-        wrappers.forEach(function (w) { w.classList.remove('active'); });
-
-        thumbs[index].classList.add('active');
-
-        // Ensure active visual styling remains either on the exact thumbnail, or the +X thumbnail if deep inside
-        if (index < maxVisibleThumbs) {
-          wrappers[index].classList.add('active');
-        } else {
-          wrappers[maxVisibleThumbs - 1].classList.add('active');
-        }
-      }
-
-      // 3. Navigation Controller
-      function navigateGallery(direction, exactIndex) {
-        var activeIndex = Array.from(thumbs).findIndex(t => t.classList.contains('active'));
-        if (activeIndex === -1) activeIndex = 0;
-        var newIndex = activeIndex;
-
-        if (direction === 'exact') {
-          newIndex = exactIndex;
-        } else if (direction === 'next') {
-          newIndex = (activeIndex + 1) % thumbs.length;
-        } else if (direction === 'prev') {
-          newIndex = (activeIndex - 1 + thumbs.length) % thumbs.length;
-        }
-
-        if (newIndex !== activeIndex || direction === 'exact') {
-          updateGalleryState(newIndex);
-          // Sync lightbox if it's currently open
-          if (document.getElementById('imageLightbox').classList.contains('active')) {
-            document.getElementById('lightboxImage').src = thumbs[newIndex].src;
-            document.getElementById('lightboxImage').classList.remove('deep-zoom'); // Reset drag zoom on nav
-          }
-        }
-      }
-
-      // Initialize
-      updateGalleryState(0);
-
-      // Arrow Button Triggers
-      if (prevBtn) prevBtn.addEventListener('click', function (e) { e.stopPropagation(); navigateGallery('prev'); });
-      if (nextBtn) nextBtn.addEventListener('click', function (e) { e.stopPropagation(); navigateGallery('next'); });
-
-      // 4. TWO-STEP ZOOM & DRAG LOGIC
-      var lightbox = document.getElementById('imageLightbox');
-      var lightboxImg = document.getElementById('lightboxImage');
-      var lightboxCloseBtn = document.getElementById('lightboxCloseBtn');
-      var lightboxScrollArea = document.getElementById('lightboxScrollArea');
-
+      // ── Lightbox close ──
       function closeLightbox() {
         lightbox.classList.remove('active');
         lightbox.setAttribute('aria-hidden', 'true');
         lightboxImg.classList.remove('deep-zoom');
       }
 
-      mainImage.addEventListener('click', function () {
-        lightboxImg.src = this.src;
-        lightbox.classList.add('active');
-        lightbox.setAttribute('aria-hidden', 'false');
+      lightboxCloseBtn.addEventListener('click', closeLightbox);
+      lightboxScrollArea.addEventListener('click', function (e) {
+        if (e.target === lightboxScrollArea) closeLightbox();
       });
 
-      let isDragging = false;
-      let startX, startY, scrollLeft, scrollTop;
-      let wasDragged = false;
+      // ── Lightbox drag-to-pan (deep zoom) ──
+      var isDragging = false, wasDragged = false;
+      var startX, startY, scrollLeft, scrollTop;
 
       lightboxImg.addEventListener('mousedown', function (e) {
         if (!this.classList.contains('deep-zoom')) return;
-        isDragging = true;
-        wasDragged = false;
+        isDragging = true; wasDragged = false;
         startX = e.pageX - lightboxScrollArea.offsetLeft;
         startY = e.pageY - lightboxScrollArea.offsetTop;
         scrollLeft = lightboxScrollArea.scrollLeft;
-        scrollTop = lightboxScrollArea.scrollTop;
+        scrollTop  = lightboxScrollArea.scrollTop;
       });
-
-      lightboxImg.addEventListener('mouseleave', () => { isDragging = false; });
-      lightboxImg.addEventListener('mouseup', () => { isDragging = false; });
-
+      lightboxImg.addEventListener('mouseleave', function () { isDragging = false; });
+      lightboxImg.addEventListener('mouseup',    function () { isDragging = false; });
       lightboxImg.addEventListener('mousemove', function (e) {
         if (!isDragging) return;
         e.preventDefault();
-        const x = e.pageX - lightboxScrollArea.offsetLeft;
-        const y = e.pageY - lightboxScrollArea.offsetTop;
-        const walkX = (x - startX) * 1.5;
-        const walkY = (y - startY) * 1.5;
-
+        var walkX = (e.pageX - lightboxScrollArea.offsetLeft - startX) * 1.5;
+        var walkY = (e.pageY - lightboxScrollArea.offsetTop  - startY) * 1.5;
         lightboxScrollArea.scrollLeft = scrollLeft - walkX;
-        lightboxScrollArea.scrollTop = scrollTop - walkY;
-
-        if (Math.abs(walkX) > 5 || Math.abs(walkY) > 5) {
-          wasDragged = true;
-        }
+        lightboxScrollArea.scrollTop  = scrollTop  - walkY;
+        if (Math.abs(walkX) > 5 || Math.abs(walkY) > 5) wasDragged = true;
       });
 
       lightboxImg.addEventListener('click', function (e) {
         e.stopPropagation();
-        if (wasDragged) {
-          wasDragged = false;
-          return;
-        }
-
-        const isZoomingIn = !this.classList.contains('deep-zoom');
+        if (wasDragged) { wasDragged = false; return; }
+        var zoomingIn = !this.classList.contains('deep-zoom');
         this.classList.toggle('deep-zoom');
-
-        if (isZoomingIn) {
-          const rect = this.getBoundingClientRect();
-          const clickXRatio = (e.clientX - rect.left) / rect.width;
-          const clickYRatio = (e.clientY - rect.top) / rect.height;
-
-          setTimeout(() => {
-            const newRect = this.getBoundingClientRect();
-            lightboxScrollArea.scrollLeft = (newRect.width * clickXRatio) - (window.innerWidth / 2);
-            lightboxScrollArea.scrollTop = (newRect.height * clickYRatio) - (window.innerHeight / 2);
+        if (zoomingIn) {
+          var rect = this.getBoundingClientRect();
+          var rx = (e.clientX - rect.left) / rect.width;
+          var ry = (e.clientY - rect.top)  / rect.height;
+          setTimeout(function () {
+            var nr = lightboxImg.getBoundingClientRect();
+            lightboxScrollArea.scrollLeft = nr.width  * rx - window.innerWidth  / 2;
+            lightboxScrollArea.scrollTop  = nr.height * ry - window.innerHeight / 2;
           }, 10);
         }
       });
 
-      lightboxCloseBtn.addEventListener('click', closeLightbox);
-
-      lightboxScrollArea.addEventListener('click', function (e) {
-        if (e.target === lightboxScrollArea) {
-          closeLightbox();
-        }
-      });
-
-      // Master Escape Key Logic & Keyboard Arrow Controls
+      // ── Keyboard: Esc / arrows ──
       document.addEventListener('keydown', function (e) {
-        var lightboxActive = lightbox.classList.contains('active');
-        var photoModalActive = document.getElementById('photoModal').classList.contains('open');
-        var isDeepZoom = lightboxImg.classList.contains('deep-zoom');
+        var lbActive    = lightbox.classList.contains('active');
+        var modalActive = document.getElementById('photoModal').classList.contains('open');
+        var deepZoom    = lightboxImg.classList.contains('deep-zoom');
 
         if (e.key === 'Escape') {
-          if (lightboxActive) {
-            closeLightbox();
-            return;
-          }
-
-          var openModals = document.querySelectorAll('.modal-overlay.open');
-          if (openModals.length > 0) {
-            openModals.forEach(function (modal) {
-              modal.classList.remove('open');
-              modal.setAttribute('aria-hidden', 'true');
-              document.documentElement.style.overflow = '';
-            });
-          }
+          if (lbActive) { closeLightbox(); return; }
+          document.querySelectorAll('.modal-overlay.open').forEach(function (m) {
+            m.classList.remove('open');
+            m.setAttribute('aria-hidden', 'true');
+            document.documentElement.style.overflow = '';
+          });
         }
-
-        if ((photoModalActive || lightboxActive) && !isDeepZoom) {
-          if (e.key === 'ArrowRight') {
-            navigateGallery('next');
-          } else if (e.key === 'ArrowLeft') {
-            navigateGallery('prev');
-          }
+        if ((modalActive || lbActive) && !deepZoom) {
+          if (e.key === 'ArrowRight') navigate('next');
+          if (e.key === 'ArrowLeft')  navigate('prev');
         }
       });
 
-      // Mouse Wheel Scroll Navigation
+      // ── Mouse wheel navigation ──
       window.addEventListener('wheel', function (e) {
-        var lightboxActive = lightbox.classList.contains('active');
-        var photoModalActive = document.getElementById('photoModal').classList.contains('open');
-        var isDeepZoom = lightboxImg.classList.contains('deep-zoom');
-
-        if ((photoModalActive || lightboxActive) && !isDeepZoom) {
+        var lbActive    = lightbox.classList.contains('active');
+        var modalActive = document.getElementById('photoModal').classList.contains('open');
+        var deepZoom    = lightboxImg.classList.contains('deep-zoom');
+        if ((modalActive || lbActive) && !deepZoom) {
           e.preventDefault();
-
-          if (e.deltaY > 0) {
-            navigateGallery('next');
-          } else if (e.deltaY < 0) {
-            navigateGallery('prev');
-          }
+          if (e.deltaY > 0) navigate('next');
+          else              navigate('prev');
         }
       }, { passive: false });
 
