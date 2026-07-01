@@ -1374,12 +1374,11 @@ MODALS
     0 28px 80px rgba(0, 0, 0, 0.8),
     0 0 60px -20px rgba(114, 188, 255, 0.12),
     inset 0 1px 1px rgba(255, 255, 255, 0.08);
-  transform: scale(0.96) translateY(8px);
+  transform: scale(0.96) translateY(8px) translateZ(0);
   transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
 
   /* Hardware Acceleration & Containment */
   contain: layout style paint;
-  transform: translateZ(0);
   will-change: transform;
 }
 
@@ -1388,7 +1387,7 @@ MODALS
 }
 
 .modal-overlay.open .modal-box {
-  transform: scale(1) translateY(0);
+  transform: scale(1) translateY(0) translateZ(0);
 }
 
 .modal-head {
@@ -1528,12 +1527,7 @@ MODALS
   border-radius: 8px;
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
   cursor: zoom-in;
-  transition:
-    width 0.3s,
-    height 0.3s,
-    max-width 0.3s,
-    max-height 0.3s,
-    opacity 0.25s ease;
+  transition: opacity 0.25s ease;
 }
 
 /* Step 2: The Deep Zoom */
