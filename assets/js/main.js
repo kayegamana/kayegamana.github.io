@@ -296,12 +296,8 @@ GALLERY & ZOOM LOGIC
       var lbLoader = new Image();
       lbLoader.onload = lbLoader.onerror = function () {
         lightboxImg.src = displaySrcs[next];
-        lightboxImg.classList.remove("deep-zoom");
-        lightboxImg.style.transform = "";
-        panX = 0;
-        panY = 0;
-        maxPanX = 0;
-        maxPanY = 0;
+        computeBaseSize(lbLoader.naturalWidth, lbLoader.naturalHeight);
+        resetZoom();
         requestAnimationFrame(function () {
           requestAnimationFrame(function () {
             lightboxImg.style.opacity = "1";
@@ -393,6 +389,8 @@ GALLERY & ZOOM LOGIC
     if (!this.src || this.style.opacity === "0") return;
     lightboxImg.src = this.src;
     lightboxImg.style.opacity = "1";
+    computeBaseSize(this.naturalWidth, this.naturalHeight);
+    resetZoom();
     lightbox.classList.add("active");
     lightbox.setAttribute("aria-hidden", "false");
     document.dispatchEvent(new CustomEvent("overlay:change"));
@@ -402,13 +400,9 @@ GALLERY & ZOOM LOGIC
   function closeLightbox() {
     lightbox.classList.remove("active");
     lightbox.setAttribute("aria-hidden", "true");
-    lightboxImg.classList.remove("deep-zoom");
-    lightboxImg.style.transform = "";
+    resetZoom();
+    activePointers = {};
     lightboxImg.src = displaySrcs[activeIndex] || lightboxImg.src;
-    panX = 0;
-    panY = 0;
-    maxPanX = 0;
-    maxPanY = 0;
     document.dispatchEvent(new CustomEvent("overlay:change"));
   }
 
@@ -417,102 +411,214 @@ GALLERY & ZOOM LOGIC
     if (e.target === lightboxScrollArea) closeLightbox();
   });
 
-  // ── Lightbox drag-to-pan (deep zoom) ──
-  // Panning moves the image with transform: translate3d(), which the browser
-  // can composite on the GPU. No scrollLeft/scrollTop writes, no layout, no
-  // main-thread bottleneck, this is what makes the drag feel smooth.
+  // ── Continuous zoom + pan (deep zoom) ──
+  // The image never changes its CSS layout box, everything from a tiny
+  // wheel nudge to a full pinch is a translate3d + scale transform, so
+  // there is zero layout work at any point during a zoom or a pan.
   function clamp(val, min, max) {
     return Math.min(max, Math.max(min, val));
   }
 
-  var isDragging = false,
-    wasDragged = false;
-  var startX, startY, baseX, baseY;
+  var MIN_SCALE = 1;
+  var MAX_SCALE = 3.5;
+  var ZOOM_TIER_THRESHOLD = 1.15; // scale at which we upgrade to the full-res zoom tier
+
+  var scale = 1;
   var panX = 0,
     panY = 0;
-  var maxPanX = 0,
-    maxPanY = 0;
-  var pendingPanFrame = null,
-    pendingX = 0,
-    pendingY = 0;
+  var baseWidth = 0,
+    baseHeight = 0; // the image's "fit to screen" size at scale 1
+  var usingZoomTier = false;
 
-  function applyPan() {
-    panX = pendingX;
-    panY = pendingY;
-    lightboxImg.style.transform = "translate3d(" + panX + "px, " + panY + "px, 0)";
-    pendingPanFrame = null;
+  var isDragging = false,
+    wasDragged = false;
+  var dragStartX, dragStartY, dragBaseX, dragBaseY;
+
+  var activePointers = {};
+  var pinchStartDist = 0,
+    pinchStartScale = 1;
+
+  var pendingFrame = null,
+    pendingScale = 1,
+    pendingPanX = 0,
+    pendingPanY = 0;
+
+  // Figures out the image's rendered "fit" box from its natural pixel size,
+  // without touching the DOM, so it stays correct no matter what transform
+  // is currently applied.
+  function computeBaseSize(naturalW, naturalH) {
+    naturalW = naturalW || 1;
+    naturalH = naturalH || 1;
+    var maxW = window.innerWidth * 0.9;
+    var maxH = window.innerHeight * 0.9;
+    if (naturalW / naturalH > maxW / maxH) {
+      baseWidth = maxW;
+      baseHeight = maxW * (naturalH / naturalW);
+    } else {
+      baseHeight = maxH;
+      baseWidth = maxH * (naturalW / naturalH);
+    }
   }
 
+  function clampPan(px, py, s) {
+    var vw = window.innerWidth,
+      vh = window.innerHeight;
+    var rw = baseWidth * s,
+      rh = baseHeight * s;
+    var maxX = Math.max(0, (rw - vw) / 2);
+    var maxY = Math.max(0, (rh - vh) / 2);
+    return { x: clamp(px, -maxX, maxX), y: clamp(py, -maxY, maxY) };
+  }
+
+  function applyTransform() {
+    var c = clampPan(pendingPanX, pendingPanY, pendingScale);
+    scale = pendingScale;
+    panX = c.x;
+    panY = c.y;
+    lightboxImg.style.transform =
+      "translate3d(" + panX + "px, " + panY + "px, 0) scale(" + scale + ")";
+    lightboxImg.classList.toggle("is-zoomed", scale > 1.01);
+    pendingFrame = null;
+
+    // Upgrade to the full-res zoom tier once meaningfully zoomed in, and
+    // just keep it loaded rather than swapping back and forth as scale wobbles.
+    if (!usingZoomTier && scale >= ZOOM_TIER_THRESHOLD) {
+      usingZoomTier = true;
+      var hiRes = new Image();
+      hiRes.onload = hiRes.onerror = function () {
+        lightboxImg.src = zoomSrcs[activeIndex];
+      };
+      hiRes.src = zoomSrcs[activeIndex];
+    }
+  }
+
+  function scheduleTransform(newScale, newPanX, newPanY) {
+    pendingScale = newScale;
+    pendingPanX = newPanX;
+    pendingPanY = newPanY;
+    if (pendingFrame === null) pendingFrame = requestAnimationFrame(applyTransform);
+  }
+
+  function resetZoom() {
+    scale = 1;
+    panX = 0;
+    panY = 0;
+    pendingScale = 1;
+    pendingPanX = 0;
+    pendingPanY = 0;
+    usingZoomTier = false;
+    lightboxImg.style.transform = "";
+    lightboxImg.classList.remove("is-zoomed");
+  }
+
+  // Zooms to newScale while keeping the point under (cx, cy) fixed on screen
+  function zoomAt(cx, cy, newScale) {
+    newScale = clamp(newScale, MIN_SCALE, MAX_SCALE);
+    var cx0 = window.innerWidth / 2,
+      cy0 = window.innerHeight / 2;
+    var ox = (cx - cx0 - panX) / scale;
+    var oy = (cy - cy0 - panY) / scale;
+    scheduleTransform(newScale, cx - cx0 - ox * newScale, cy - cy0 - oy * newScale);
+  }
+
+  function pointerList() {
+    return Object.keys(activePointers).map(function (id) {
+      return activePointers[id];
+    });
+  }
+  function pointDistance(a, b) {
+    var dx = a.x - b.x,
+      dy = a.y - b.y;
+    return Math.sqrt(dx * dx + dy * dy);
+  }
+  function pointMidpoint(a, b) {
+    return { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 };
+  }
+
+  // ── Wheel: zoom in/out anchored on the cursor ──
+  lightboxImg.addEventListener(
+    "wheel",
+    function (e) {
+      if (!lightbox.classList.contains("active")) return;
+      e.preventDefault();
+      e.stopPropagation();
+      var factor = Math.exp(-e.deltaY * 0.0018);
+      zoomAt(e.clientX, e.clientY, scale * factor);
+    },
+    { passive: false },
+  );
+
+  // ── Pointer: single finger/mouse pans, two fingers pinch-zoom ──
   lightboxImg.addEventListener("pointerdown", function (e) {
-    if (!this.classList.contains("deep-zoom")) return;
-    isDragging = true;
-    wasDragged = false;
-    startX = e.clientX;
-    startY = e.clientY;
-    baseX = panX;
-    baseY = panY;
     this.setPointerCapture(e.pointerId);
-  });
-  lightboxImg.addEventListener("pointerup", function () {
-    isDragging = false;
-  });
-  lightboxImg.addEventListener("pointercancel", function () {
-    isDragging = false;
-  });
-  lightboxImg.addEventListener("pointermove", function (e) {
-    if (!isDragging) return;
-    e.preventDefault();
-    var dx = e.clientX - startX;
-    var dy = e.clientY - startY;
-    if (Math.abs(dx) > 5 || Math.abs(dy) > 5) wasDragged = true;
+    activePointers[e.pointerId] = { x: e.clientX, y: e.clientY };
+    var pts = pointerList();
 
-    pendingX = clamp(baseX + dx, -maxPanX, maxPanX);
-    pendingY = clamp(baseY + dy, -maxPanY, maxPanY);
-
-    // Batch the transform write to once per frame instead of once per pointermove
-    if (pendingPanFrame === null) {
-      pendingPanFrame = requestAnimationFrame(applyPan);
+    if (pts.length === 1) {
+      isDragging = true;
+      wasDragged = false;
+      dragStartX = e.clientX;
+      dragStartY = e.clientY;
+      dragBaseX = panX;
+      dragBaseY = panY;
+    } else if (pts.length === 2) {
+      isDragging = false;
+      pinchStartDist = pointDistance(pts[0], pts[1]);
+      pinchStartScale = scale;
     }
   });
 
+  function endPointer(e) {
+    delete activePointers[e.pointerId];
+    var pts = pointerList();
+    if (pts.length === 1) {
+      // Dropped from two fingers to one mid-gesture, resume panning cleanly
+      isDragging = true;
+      wasDragged = true;
+      dragStartX = pts[0].x;
+      dragStartY = pts[0].y;
+      dragBaseX = panX;
+      dragBaseY = panY;
+    } else {
+      isDragging = false;
+    }
+  }
+  lightboxImg.addEventListener("pointerup", endPointer);
+  lightboxImg.addEventListener("pointercancel", endPointer);
+
+  lightboxImg.addEventListener("pointermove", function (e) {
+    if (!activePointers[e.pointerId]) return;
+    activePointers[e.pointerId] = { x: e.clientX, y: e.clientY };
+    var pts = pointerList();
+
+    if (pts.length === 2) {
+      e.preventDefault();
+      var dist = pointDistance(pts[0], pts[1]);
+      var mid = pointMidpoint(pts[0], pts[1]);
+      wasDragged = true;
+      zoomAt(mid.x, mid.y, pinchStartScale * (dist / pinchStartDist));
+      return;
+    }
+
+    if (!isDragging) return;
+    e.preventDefault();
+    var dx = e.clientX - dragStartX;
+    var dy = e.clientY - dragStartY;
+    if (Math.abs(dx) > 5 || Math.abs(dy) > 5) wasDragged = true;
+    scheduleTransform(scale, dragBaseX + dx, dragBaseY + dy);
+  });
+
+  // ── Click: quick toggle between fit and a preset zoom level ──
   lightboxImg.addEventListener("click", function (e) {
     e.stopPropagation();
     if (wasDragged) {
       wasDragged = false;
       return;
     }
-    var img = this;
-    var zoomingIn = !img.classList.contains("deep-zoom");
-
-    if (zoomingIn) {
-      var rect = img.getBoundingClientRect();
-      var rx = (e.clientX - rect.left) / rect.width;
-      var ry = (e.clientY - rect.top) / rect.height;
-
-      // Preload the full-res zoom tier before swapping, so there's no blank flash
-      var zoomLoader = new Image();
-      zoomLoader.onload = zoomLoader.onerror = function () {
-        img.src = zoomSrcs[activeIndex];
-        img.classList.add("deep-zoom");
-        requestAnimationFrame(function () {
-          var nr = lightboxImg.getBoundingClientRect();
-          maxPanX = Math.max(0, (nr.width - window.innerWidth) / 2);
-          maxPanY = Math.max(0, (nr.height - window.innerHeight) / 2);
-          // Center the exact point that was clicked
-          pendingX = clamp(nr.width * (0.5 - rx), -maxPanX, maxPanX);
-          pendingY = clamp(nr.height * (0.5 - ry), -maxPanY, maxPanY);
-          applyPan();
-        });
-      };
-      zoomLoader.src = zoomSrcs[activeIndex];
+    if (scale > 1.05) {
+      resetZoom();
     } else {
-      img.classList.remove("deep-zoom");
-      img.style.transform = "";
-      img.src = displaySrcs[activeIndex];
-      panX = 0;
-      panY = 0;
-      maxPanX = 0;
-      maxPanY = 0;
+      zoomAt(e.clientX, e.clientY, 2.5);
     }
   });
 
@@ -522,7 +628,7 @@ GALLERY & ZOOM LOGIC
     var modalActive = document
       .getElementById("photoModal")
       .classList.contains("open");
-    var deepZoom = lightboxImg.classList.contains("deep-zoom");
+    var deepZoom = scale > 1.01;
 
     if (e.key === "Escape") {
       if (lbActive) {
@@ -542,7 +648,7 @@ GALLERY & ZOOM LOGIC
     }
   });
 
-  // ── Mouse wheel navigation ──
+  // ── Mouse wheel navigation (only outside the image itself, see above) ──
   // Only attached while a modal or the lightbox is actually open, so the rest
   // of the page never pays the cost of a non-passive wheel listener on window.
   var wheelAttached = false;
@@ -552,7 +658,7 @@ GALLERY & ZOOM LOGIC
     var modalActive = document
       .getElementById("photoModal")
       .classList.contains("open");
-    var deepZoom = lightboxImg.classList.contains("deep-zoom");
+    var deepZoom = scale > 1.01;
     if ((modalActive || lbActive) && !deepZoom) {
       e.preventDefault();
       if (e.deltaY > 0) navigate("next");

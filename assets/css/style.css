@@ -1522,31 +1522,21 @@ MODALS
   border-radius: 8px;
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
   cursor: zoom-in;
+  touch-action: none;
+  transform-origin: center center;
   transition: opacity 0.25s ease;
 }
 
-/* Step 2: The Deep Zoom */
-.lightbox-img.deep-zoom {
-  max-width: none;
-  max-height: none;
-  height: 180vh;
-  width: auto;
+/* Step 2: The Deep Zoom, purely a transform now, the layout box never changes */
+.lightbox-img.is-zoomed {
   cursor: grab;
   user-select: none;
   -webkit-user-drag: none;
-  touch-action: none;
   will-change: transform;
 }
 
-.lightbox-img.deep-zoom:active {
+.lightbox-img.is-zoomed:active {
   cursor: grabbing;
-}
-
-@media (max-width: 768px) {
-  .lightbox-img.deep-zoom {
-    height: auto;
-    width: 250vw;
-  }
 }
 
 .lightbox-close {
