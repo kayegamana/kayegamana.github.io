@@ -14,6 +14,8 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css" />
 
+  <link rel="preload" as="image" href="assets/img/hero-my-card.webp" />
+
   <style>
     /* ═══════════════════════════════════════════
        TOKENS
@@ -50,7 +52,8 @@
       --py: 20px;
 
       /* Premium Surface Tokens */
-      --noise: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.04"/%3E%3C/svg%3E');
+      /* Procedural SVG replaced with static compressed Base64 PNG for massive performance gain */
+      --noise: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAGFBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/c7atAAAABnRSTlMAERERERHjBAM0AAAAU0lEQVQ4y2NgQAX8DIxgwgSjwAgmjEIgjEIgjEIgjEIgjEIgjEIgjEIgjEIgjEIgjEIgjEIgjEIgjEIgjEIgjEIgjEIgjEIgjEIgjEIgjEIgjEIADF8D/03v2tAAAAAASUVORK5CYII=');
       --shadow-base: 0 8px 24px -8px rgba(0, 1, 30, 0.6), 0 3px 10px -3px rgba(0, 1, 30, 0.5);
       --shadow-elevated: 0 12px 32px -8px rgba(0, 1, 30, 0.7), 0 4px 14px -3px rgba(0, 1, 30, 0.5);
       --inner-glow: inset 0 1px 1px rgba(255, 255, 255, 0.05), inset 1px 0 0 rgba(255, 255, 255, 0.02);
@@ -96,6 +99,11 @@
       font-family: "Bricolage Grotesque", sans-serif;
       min-height: 100vh;
       overflow-x: hidden;
+      
+      /* Forces crisp text rendering on lower-density screens */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
     }
 
     ::selection {
@@ -197,6 +205,11 @@
       display: flex;
       flex-direction: column;
       transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+      
+      /* Hardware Acceleration & Containment */
+      contain: layout style paint;
+      transform: translateZ(0);
+      will-change: transform, box-shadow;
     }
 
     /* Specular highlight streak across top edge */
@@ -776,8 +789,11 @@
           var(--blue) 90%,
           var(--snake-base) 100%);
       animation: snake-spin 7s linear infinite;
+      animation-play-state: var(--play-state, running);
       z-index: -2;
       pointer-events: none;
+      will-change: transform;
+      transform: translateZ(0);
     }
 
     /* Masking the inner background beautifully to perfectly match highlight theme */
@@ -1238,6 +1254,11 @@
       box-shadow: 0 28px 80px rgba(0, 0, 0, 0.8), 0 0 60px -20px rgba(114, 188, 255, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.08);
       transform: scale(0.96) translateY(8px);
       transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+      /* Hardware Acceleration & Containment */
+      contain: layout style paint;
+      transform: translateZ(0);
+      will-change: transform;
     }
 
     .modal-box.contact-box {
@@ -1619,6 +1640,20 @@
     }
 
     /* ═══════════════════════════════════════════
+       PERFORMANCE OVERRIDES (TOUCH DEVICES)
+    ═══════════════════════════════════════════ */
+    @media (hover: none) and (pointer: coarse) {
+      .card:hover {
+        box-shadow: var(--shadow-base), var(--inner-glow) !important;
+        transform: none !important;
+      }
+      .card.card-highlight:hover {
+        box-shadow: var(--shadow-elevated), var(--inner-glow-strong) !important;
+        transform: none !important;
+      }
+    }
+
+    /* ═══════════════════════════════════════════
        NO-SCROLL DESKTOP  ≥ 901px
     ═══════════════════════════════════════════ */
     @media (min-width: 901px) {
@@ -1704,6 +1739,13 @@
        MOBILE  ≤ 580px
     ═══════════════════════════════════════════ */
     @media (max-width: 580px) {
+      /* Emergency Performance Fix: Drop expensive blurs on small devices */
+      .tech-pill, .tag {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: rgba(1, 10, 84, 0.85) !important;
+      }
+
       .page {
         padding: 16px 12px;
       }
@@ -1816,7 +1858,7 @@
       <div class="bento-grid">
 
         <article class="card card-profile card-highlight">
-          <img src="assets/img/hero-my-card.png" alt="Kaye Christine P. Gamana — ID card" class="profile-id-img" />
+          <img src="assets/img/hero-my-card.webp" alt="Kaye Christine P. Gamana — ID card" class="profile-id-img" />
 
           <div class="profile-text">
             <h1 class="profile-name">Kaye Christine P. <span style="color: var(--blue);">Gamana</span></h1>
@@ -1881,35 +1923,35 @@
           </div>
 
 <div class="tech-page active" id="tech-core" role="group" aria-label="Development languages and frameworks">
-            <div class="tech-pill"><img src="assets/img/core/1.png" alt="HTML" class="custom-tech-icon"><span>HTML</span></div>
-            <div class="tech-pill"><img src="assets/img/core/2.png" alt="CSS" class="custom-tech-icon"><span>CSS</span></div>
-            <div class="tech-pill"><img src="assets/img/core/3.png" alt="JavaScript" class="custom-tech-icon"><span>JavaScript</span></div>
-            <div class="tech-pill"><img src="assets/img/core/4.png" alt="PHP" class="custom-tech-icon"><span>PHP</span></div>
-            <div class="tech-pill"><img src="assets/img/core/5.png" alt="MySQL" class="custom-tech-icon"><span>MySQL</span></div>
-            <div class="tech-pill"><img src="assets/img/core/6.png" alt="Bootstrap" class="custom-tech-icon"><span>Bootstrap</span></div>
-            <div class="tech-pill"><img src="assets/img/core/7.png" alt="VS Code" class="custom-tech-icon"><span>VS Code</span></div>
-            <div class="tech-pill"><img src="assets/img/core/8.png" alt="GitHub" class="custom-tech-icon"><span>GitHub</span></div>
-            <div class="tech-pill"><img src="assets/img/core/9.png" alt="Git" class="custom-tech-icon"><span>Git</span></div>
-            <div class="tech-pill"><img src="assets/img/core/10.png" alt="Figma" class="custom-tech-icon"><span>Figma</span></div>
-            <div class="tech-pill"><img src="assets/img/core/11.png" alt="C++" class="custom-tech-icon"><span>C++</span></div>
-            <div class="tech-pill"><img src="assets/img/core/12.png" alt="Java" class="custom-tech-icon"><span>Java</span></div>
-            <div class="tech-pill"><img src="assets/img/core/13.png" alt="C" class="custom-tech-icon"><span>C</span></div>
-            <div class="tech-pill"><img src="assets/img/core/14.png" alt="Python" class="custom-tech-icon"><span>Python</span></div>
+            <div class="tech-pill"><img src="assets/img/core/1.webp" alt="HTML" class="custom-tech-icon"><span>HTML</span></div>
+            <div class="tech-pill"><img src="assets/img/core/2.webp" alt="CSS" class="custom-tech-icon"><span>CSS</span></div>
+            <div class="tech-pill"><img src="assets/img/core/3.webp" alt="JavaScript" class="custom-tech-icon"><span>JavaScript</span></div>
+            <div class="tech-pill"><img src="assets/img/core/4.webp" alt="PHP" class="custom-tech-icon"><span>PHP</span></div>
+            <div class="tech-pill"><img src="assets/img/core/5.webp" alt="MySQL" class="custom-tech-icon"><span>MySQL</span></div>
+            <div class="tech-pill"><img src="assets/img/core/6.webp" alt="Bootstrap" class="custom-tech-icon"><span>Bootstrap</span></div>
+            <div class="tech-pill"><img src="assets/img/core/7.webp" alt="VS Code" class="custom-tech-icon"><span>VS Code</span></div>
+            <div class="tech-pill"><img src="assets/img/core/8.webp" alt="GitHub" class="custom-tech-icon"><span>GitHub</span></div>
+            <div class="tech-pill"><img src="assets/img/core/9.webp" alt="Git" class="custom-tech-icon"><span>Git</span></div>
+            <div class="tech-pill"><img src="assets/img/core/10.webp" alt="Figma" class="custom-tech-icon"><span>Figma</span></div>
+            <div class="tech-pill"><img src="assets/img/core/11.webp" alt="C++" class="custom-tech-icon"><span>C++</span></div>
+            <div class="tech-pill"><img src="assets/img/core/12.webp" alt="Java" class="custom-tech-icon"><span>Java</span></div>
+            <div class="tech-pill"><img src="assets/img/core/13.webp" alt="C" class="custom-tech-icon"><span>C</span></div>
+            <div class="tech-pill"><img src="assets/img/core/14.webp" alt="Python" class="custom-tech-icon"><span>Python</span></div>
           </div>
 
           <div class="tech-page" id="tech-tools" role="group" aria-label="Platforms and productivity tools">
-            <div class="tech-pill"><img src="assets/img/tools/1.png" alt="Google WS" class="custom-tech-icon"><span>Google WS</span></div>
-            <div class="tech-pill"><img src="assets/img/tools/2.png" alt="Microsoft 365" class="custom-tech-icon"><span>MS 365</span></div>
-            <div class="tech-pill"><img src="assets/img/tools/3.png" alt="Canva" class="custom-tech-icon"><span>Canva</span></div>
-            <div class="tech-pill"><img src="assets/img/tools/4.png" alt="CapCut" class="custom-tech-icon"><span>CapCut</span></div>
-            <div class="tech-pill"><img src="assets/img/tools/5.png" alt="Eclipse" class="custom-tech-icon"><span>Eclipse</span></div>
-            <div class="tech-pill"><img src="assets/img/tools/6.png" alt="WordPress" class="custom-tech-icon"><span>WordPress</span></div>
-            <div class="tech-pill"><img src="assets/img/tools/7.png" alt="Packet Tracer" class="custom-tech-icon"><span>Packet Tracer</span></div>
-            <div class="tech-pill"><img src="assets/img/tools/8.png" alt="Visual Studio" class="custom-tech-icon"><span>Visual Studio</span></div>
-            <div class="tech-pill"><img src="assets/img/tools/9.png" alt="Jupyter" class="custom-tech-icon"><span>Jupyter</span></div>
-            <div class="tech-pill"><img src="assets/img/tools/10.png" alt="Salesforce" class="custom-tech-icon"><span>Salesforce</span></div>
-            <div class="tech-pill"><img src="assets/img/tools/11.png" alt="Photoshop" class="custom-tech-icon"><span>Photoshop</span></div>
-            <div class="tech-pill"><img src="assets/img/tools/12.png" alt="Lightroom" class="custom-tech-icon"><span>Lightroom</span></div>
+            <div class="tech-pill"><img src="assets/img/tools/1.webp" alt="Google WS" class="custom-tech-icon" loading="lazy"><span>Google WS</span></div>
+            <div class="tech-pill"><img src="assets/img/tools/2.webp" alt="Microsoft 365" class="custom-tech-icon" loading="lazy"><span>MS 365</span></div>
+            <div class="tech-pill"><img src="assets/img/tools/3.webp" alt="Canva" class="custom-tech-icon" loading="lazy"><span>Canva</span></div>
+            <div class="tech-pill"><img src="assets/img/tools/4.webp" alt="CapCut" class="custom-tech-icon" loading="lazy"><span>CapCut</span></div>
+            <div class="tech-pill"><img src="assets/img/tools/5.webp" alt="Eclipse" class="custom-tech-icon" loading="lazy"><span>Eclipse</span></div>
+            <div class="tech-pill"><img src="assets/img/tools/6.webp" alt="WordPress" class="custom-tech-icon" loading="lazy"><span>WordPress</span></div>
+            <div class="tech-pill"><img src="assets/img/tools/7.webp" alt="Packet Tracer" class="custom-tech-icon" loading="lazy"><span>Packet Tracer</span></div>
+            <div class="tech-pill"><img src="assets/img/tools/8.webp" alt="Visual Studio" class="custom-tech-icon" loading="lazy"><span>Visual Studio</span></div>
+            <div class="tech-pill"><img src="assets/img/tools/9.webp" alt="Jupyter" class="custom-tech-icon" loading="lazy"><span>Jupyter</span></div>
+            <div class="tech-pill"><img src="assets/img/tools/10.webp" alt="Salesforce" class="custom-tech-icon" loading="lazy"><span>Salesforce</span></div>
+            <div class="tech-pill"><img src="assets/img/tools/11.webp" alt="Photoshop" class="custom-tech-icon" loading="lazy"><span>Photoshop</span></div>
+            <div class="tech-pill"><img src="assets/img/tools/12.webp" alt="Lightroom" class="custom-tech-icon" loading="lazy"><span>Lightroom</span></div>
           </div>
         </article>
 
@@ -2294,16 +2336,25 @@
 
       // Photo Modal Triggers — dynamically populate gallery per project
       document.querySelectorAll('.photo-trigger').forEach(function (btn) {
+        
+        // --- PREFETCH LOGIC: Download first image instantly on hover ---
+        btn.addEventListener('mouseenter', function() {
+          var folder = this.dataset.folder;
+          var preloadImg = new Image();
+          preloadImg.src = 'assets/img/projects-documentation/' + folder + '/1.webp'; 
+        }, { once: true });
+        // ---------------------------------------------------------------
+
         btn.addEventListener('click', function (e) {
           e.stopPropagation();
           var folder = btn.dataset.folder;
           var count = parseInt(btn.dataset.count) || 10;
           var basePath = 'assets/img/projects-documentation/' + folder + '/';
 
-          // Build image src list
+          // Build image src list (Updated to pull .webp files)
           var srcs = [];
           for (var i = 1; i <= count; i++) {
-            srcs.push(basePath + i + '.png');
+            srcs.push(basePath + i + '.webp');
           }
 
           document.getElementById('modalProjectName').textContent = btn.dataset.project;
@@ -2700,6 +2751,26 @@
         }
       }, { passive: false });
 
+    }());
+
+    /* ─────────────────────────────────────
+       PERFORMANCE LOGIC: PAUSE OFF-SCREEN ANIMATIONS
+    ──────────────────────────────────────── */
+    (function () {
+      var flagshipCard = document.querySelector('.card-flagship');
+      if (!flagshipCard || !window.IntersectionObserver) return;
+
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            flagshipCard.style.setProperty('--play-state', 'running');
+          } else {
+            flagshipCard.style.setProperty('--play-state', 'paused');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      observer.observe(flagshipCard);
     }());
   </script>
 
