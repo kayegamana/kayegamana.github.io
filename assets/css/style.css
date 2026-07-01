@@ -1891,6 +1891,11 @@ MOBILE  ≤ 580px
     font-size: 1.25rem;
   }
 
+  .profile-intro {
+    max-width: 100%;
+    text-align: left;
+  }
+
   .card {
     padding: 20px 18px;
   }
