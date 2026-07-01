@@ -278,7 +278,8 @@ GALLERY & ZOOM LOGIC
 
     var next = activeIndex;
     if (direction === "exact") next = exact;
-    else if (direction === "next") next = (activeIndex + 1) % displaySrcs.length;
+    else if (direction === "next")
+      next = (activeIndex + 1) % displaySrcs.length;
     else if (direction === "prev")
       next = (activeIndex - 1 + displaySrcs.length) % displaySrcs.length;
 
@@ -476,7 +477,7 @@ GALLERY & ZOOM LOGIC
     panX = c.x;
     panY = c.y;
     lightboxImg.style.transform =
-      "translate3d(" + panX + "px, " + panY + "px, 0) scale(" + scale + ")";
+      "translate(" + panX + "px, " + panY + "px) scale(" + scale + ")";
     lightboxImg.classList.toggle("is-zoomed", scale > 1.01);
     pendingFrame = null;
 
@@ -496,7 +497,8 @@ GALLERY & ZOOM LOGIC
     pendingScale = newScale;
     pendingPanX = newPanX;
     pendingPanY = newPanY;
-    if (pendingFrame === null) pendingFrame = requestAnimationFrame(applyTransform);
+    if (pendingFrame === null)
+      pendingFrame = requestAnimationFrame(applyTransform);
   }
 
   function resetZoom() {
@@ -508,6 +510,7 @@ GALLERY & ZOOM LOGIC
     pendingPanY = 0;
     usingZoomTier = false;
     lightboxImg.style.transform = "";
+    lightboxImg.style.willChange = "auto";
     lightboxImg.classList.remove("is-zoomed");
   }
 
@@ -518,7 +521,11 @@ GALLERY & ZOOM LOGIC
       cy0 = window.innerHeight / 2;
     var ox = (cx - cx0 - panX) / scale;
     var oy = (cy - cy0 - panY) / scale;
-    scheduleTransform(newScale, cx - cx0 - ox * newScale, cy - cy0 - oy * newScale);
+    scheduleTransform(
+      newScale,
+      cx - cx0 - ox * newScale,
+      cy - cy0 - oy * newScale,
+    );
   }
 
   function pointerList() {
@@ -542,6 +549,13 @@ GALLERY & ZOOM LOGIC
       if (!lightbox.classList.contains("active")) return;
       e.preventDefault();
       e.stopPropagation();
+
+      lightboxImg.style.willChange = "transform";
+      clearTimeout(lightboxImg.wheelTimeout);
+      lightboxImg.wheelTimeout = setTimeout(function () {
+        lightboxImg.style.willChange = "auto";
+      }, 150);
+
       var factor = Math.exp(-e.deltaY * 0.0018);
       zoomAt(e.clientX, e.clientY, scale * factor);
     },
@@ -550,6 +564,7 @@ GALLERY & ZOOM LOGIC
 
   // ── Pointer: single finger/mouse pans, two fingers pinch-zoom ──
   lightboxImg.addEventListener("pointerdown", function (e) {
+    this.style.willChange = "transform";
     this.setPointerCapture(e.pointerId);
     activePointers[e.pointerId] = { x: e.clientX, y: e.clientY };
     var pts = pointerList();
@@ -581,6 +596,10 @@ GALLERY & ZOOM LOGIC
       dragBaseY = panY;
     } else {
       isDragging = false;
+    }
+
+    if (pts.length === 0) {
+      lightboxImg.style.willChange = "auto";
     }
   }
   lightboxImg.addEventListener("pointerup", endPointer);
