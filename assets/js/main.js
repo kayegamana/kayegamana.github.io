@@ -297,6 +297,11 @@ GALLERY & ZOOM LOGIC
       lbLoader.onload = lbLoader.onerror = function () {
         lightboxImg.src = displaySrcs[next];
         lightboxImg.classList.remove("deep-zoom");
+        lightboxImg.style.transform = "";
+        panX = 0;
+        panY = 0;
+        maxPanX = 0;
+        maxPanY = 0;
         requestAnimationFrame(function () {
           requestAnimationFrame(function () {
             lightboxImg.style.opacity = "1";
@@ -398,7 +403,12 @@ GALLERY & ZOOM LOGIC
     lightbox.classList.remove("active");
     lightbox.setAttribute("aria-hidden", "true");
     lightboxImg.classList.remove("deep-zoom");
+    lightboxImg.style.transform = "";
     lightboxImg.src = displaySrcs[activeIndex] || lightboxImg.src;
+    panX = 0;
+    panY = 0;
+    maxPanX = 0;
+    maxPanY = 0;
     document.dispatchEvent(new CustomEvent("overlay:change"));
   }
 
@@ -408,43 +418,60 @@ GALLERY & ZOOM LOGIC
   });
 
   // ── Lightbox drag-to-pan (deep zoom) ──
+  // Panning moves the image with transform: translate3d(), which the browser
+  // can composite on the GPU. No scrollLeft/scrollTop writes, no layout, no
+  // main-thread bottleneck, this is what makes the drag feel smooth.
+  function clamp(val, min, max) {
+    return Math.min(max, Math.max(min, val));
+  }
+
   var isDragging = false,
     wasDragged = false;
-  var startX, startY, scrollLeft, scrollTop;
-  var pendingPanFrame = null;
-  var pendingWalkX = 0,
-    pendingWalkY = 0;
+  var startX, startY, baseX, baseY;
+  var panX = 0,
+    panY = 0;
+  var maxPanX = 0,
+    maxPanY = 0;
+  var pendingPanFrame = null,
+    pendingX = 0,
+    pendingY = 0;
 
-  lightboxImg.addEventListener("mousedown", function (e) {
+  function applyPan() {
+    panX = pendingX;
+    panY = pendingY;
+    lightboxImg.style.transform = "translate3d(" + panX + "px, " + panY + "px, 0)";
+    pendingPanFrame = null;
+  }
+
+  lightboxImg.addEventListener("pointerdown", function (e) {
     if (!this.classList.contains("deep-zoom")) return;
     isDragging = true;
     wasDragged = false;
-    startX = e.pageX - lightboxScrollArea.offsetLeft;
-    startY = e.pageY - lightboxScrollArea.offsetTop;
-    scrollLeft = lightboxScrollArea.scrollLeft;
-    scrollTop = lightboxScrollArea.scrollTop;
+    startX = e.clientX;
+    startY = e.clientY;
+    baseX = panX;
+    baseY = panY;
+    this.setPointerCapture(e.pointerId);
   });
-  lightboxImg.addEventListener("mouseleave", function () {
+  lightboxImg.addEventListener("pointerup", function () {
     isDragging = false;
   });
-  lightboxImg.addEventListener("mouseup", function () {
+  lightboxImg.addEventListener("pointercancel", function () {
     isDragging = false;
   });
-  lightboxImg.addEventListener("mousemove", function (e) {
+  lightboxImg.addEventListener("pointermove", function (e) {
     if (!isDragging) return;
     e.preventDefault();
-    pendingWalkX = (e.pageX - lightboxScrollArea.offsetLeft - startX) * 1.5;
-    pendingWalkY = (e.pageY - lightboxScrollArea.offsetTop - startY) * 1.5;
-    if (Math.abs(pendingWalkX) > 5 || Math.abs(pendingWalkY) > 5)
-      wasDragged = true;
+    var dx = e.clientX - startX;
+    var dy = e.clientY - startY;
+    if (Math.abs(dx) > 5 || Math.abs(dy) > 5) wasDragged = true;
 
-    // Batch the actual scroll write to once per frame instead of once per mousemove
+    pendingX = clamp(baseX + dx, -maxPanX, maxPanX);
+    pendingY = clamp(baseY + dy, -maxPanY, maxPanY);
+
+    // Batch the transform write to once per frame instead of once per pointermove
     if (pendingPanFrame === null) {
-      pendingPanFrame = requestAnimationFrame(function () {
-        lightboxScrollArea.scrollLeft = scrollLeft - pendingWalkX;
-        lightboxScrollArea.scrollTop = scrollTop - pendingWalkY;
-        pendingPanFrame = null;
-      });
+      pendingPanFrame = requestAnimationFrame(applyPan);
     }
   });
 
@@ -467,16 +494,25 @@ GALLERY & ZOOM LOGIC
       zoomLoader.onload = zoomLoader.onerror = function () {
         img.src = zoomSrcs[activeIndex];
         img.classList.add("deep-zoom");
-        setTimeout(function () {
+        requestAnimationFrame(function () {
           var nr = lightboxImg.getBoundingClientRect();
-          lightboxScrollArea.scrollLeft = nr.width * rx - window.innerWidth / 2;
-          lightboxScrollArea.scrollTop = nr.height * ry - window.innerHeight / 2;
-        }, 10);
+          maxPanX = Math.max(0, (nr.width - window.innerWidth) / 2);
+          maxPanY = Math.max(0, (nr.height - window.innerHeight) / 2);
+          // Center the exact point that was clicked
+          pendingX = clamp(nr.width * (0.5 - rx), -maxPanX, maxPanX);
+          pendingY = clamp(nr.height * (0.5 - ry), -maxPanY, maxPanY);
+          applyPan();
+        });
       };
       zoomLoader.src = zoomSrcs[activeIndex];
     } else {
       img.classList.remove("deep-zoom");
+      img.style.transform = "";
       img.src = displaySrcs[activeIndex];
+      panX = 0;
+      panY = 0;
+      maxPanX = 0;
+      maxPanY = 0;
     }
   });
 

@@ -1508,15 +1508,10 @@ MODALS
 .lightbox-scroll-area {
   width: 100%;
   height: 100%;
-  overflow: auto;
+  overflow: hidden;
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  scrollbar-width: none;
-}
-
-.lightbox-scroll-area::-webkit-scrollbar {
-  display: none;
+  align-items: center;
+  justify-content: center;
 }
 
 .lightbox-img {
@@ -1539,6 +1534,8 @@ MODALS
   cursor: grab;
   user-select: none;
   -webkit-user-drag: none;
+  touch-action: none;
+  will-change: transform;
 }
 
 .lightbox-img.deep-zoom:active {
