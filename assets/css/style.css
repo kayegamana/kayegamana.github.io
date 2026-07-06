@@ -656,6 +656,12 @@ CARD 1 — PROFILE (HIGHLIGHTED)
   }
 }
 
+/* Performance Override: Kill the looping animation globally whenever a modal is open */
+html:has(.modal-overlay.open) .btn-talk::after {
+  animation: none !important;
+  display: none !important;
+}
+
 .profile-actions .btn-talk {
   align-self: flex-end;
 }
