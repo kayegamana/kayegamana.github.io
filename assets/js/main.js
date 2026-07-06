@@ -442,8 +442,11 @@ GALLERY & ZOOM LOGIC
     activeIndex = 0;
     navigating = false;
 
-    // Instantly update text, but avoid building DOM thumbnails yet
+    // Instantly update text and blank out old thumbnails to prevent ghosting
     counter.textContent = "1 / " + displaySrcs.length;
+    wrappers.forEach(function (w) {
+      w.style.display = "none";
+    });
 
     // Load first image: instant on first paint (modal not yet visible)
     mainImage.style.transition = "none";
@@ -473,14 +476,12 @@ GALLERY & ZOOM LOGIC
     };
     mainLoader.src = displaySrcs[0];
 
-    // Defer thumbnail DOM writes & network fetching until AFTER the 150ms
-    // modal opening transition. Firing multiple network requests on the same
-    // frame as a CSS transform will drop frames on entry-level Androids.
+    // Defer thumbnail DOM writes just enough to clear the 80ms opacity fade.
     clearTimeout(window._thumbRenderTimeout);
     window._thumbRenderTimeout = setTimeout(function () {
       buildThumbs();
       updateThumbs(0);
-    }, 160);
+    }, 80);
   };
 
   // ── Arrow buttons ──
