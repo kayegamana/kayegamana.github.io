@@ -606,6 +606,7 @@ CARD 1 — PROFILE (HIGHLIGHTED)
   position: absolute;
   top: 0;
   left: -150%;
+  /* Static now, was previously the animation's starting keyframe value */
   width: 120%;
   height: 100%;
   background: linear-gradient(
@@ -614,19 +615,26 @@ CARD 1 — PROFILE (HIGHLIGHTED)
     rgba(255, 255, 255, 0.35) 50%,
     transparent 100%
   );
-  transform: skewX(-20deg);
+  transform: skewX(-20deg) translateX(0%);
   animation: futuristicSweep 3s ease-in-out infinite;
   pointer-events: none;
+  will-change: transform;
 }
 
+/* Previously animated `left`, which forces layout on every single frame,
+   forever, for the life of the page. `left`/`right` percentages are
+   relative to the containing block, but `translateX()` percentages are
+   relative to this element's own box (120% of the button), so the two
+   aren't directly interchangeable, 291.7% here covers the same absolute
+   travel distance the old -150% -> 200% left animation covered. */
 @keyframes futuristicSweep {
   0% {
-    left: -150%;
+    transform: skewX(-20deg) translateX(0%);
   }
 
   85%,
   100% {
-    left: 200%;
+    transform: skewX(-20deg) translateX(291.7%);
   }
 }
 
@@ -1321,7 +1329,10 @@ MODALS
   position: fixed;
   inset: 0;
   z-index: 1000;
-  display: flex;
+  /* Fully out of the render tree while closed: zero layout, paint, or
+     backdrop-filter/GPU-layer cost. JS flips this to flex right before
+     the open transition and back to none after the close transition. */
+  display: none;
   align-items: center;
   justify-content: center;
   opacity: 0;
@@ -1492,7 +1503,10 @@ MODALS
   background: rgba(0, 1, 30, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  display: flex;
+  /* Same reasoning as .modal-overlay: this is the heaviest blur on the
+     page (12px, full screen), so keeping it out of the render tree while
+     closed matters most here. */
+  display: none;
   align-items: center;
   justify-content: center;
   opacity: 0;
@@ -1763,6 +1777,16 @@ PERFORMANCE OVERRIDES (TOUCH DEVICES)
   .card.card-highlight:hover {
     box-shadow: var(--shadow-elevated), var(--inner-glow-strong) !important;
     transform: none !important;
+  }
+
+  /* Touch devices never fire :hover, so there is no transform animation
+     for the permanent will-change/translateZ layer promotion on .card to
+     serve. It just sits in GPU memory the whole time instead, competing
+     with the modal's own backdrop-filter layer for the same budget.
+     Same pixels either way, since nothing on .card actually animates here. */
+  .card {
+    will-change: auto;
+    transform: none;
   }
 }
 

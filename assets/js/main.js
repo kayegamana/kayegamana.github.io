@@ -5,9 +5,21 @@ MODALS LOGIC
   function openModal(id) {
     var modal = document.getElementById(id);
     if (!modal) return;
-    modal.classList.add("open");
+    clearTimeout(modal._hideTimeout);
+    // The modal is display:none while closed (see CSS), so bring it back
+    // into the render tree first, before animating anything.
+    modal.style.display = "flex";
     modal.setAttribute("aria-hidden", "false");
     document.documentElement.style.overflow = "hidden";
+    // Double rAF: let the browser paint the display:flex frame first, then
+    // add .open on the following frame so opacity/transform have a real
+    // "from" state to transition out of (same pattern already used for the
+    // gallery image crossfades further down this file).
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        modal.classList.add("open");
+      });
+    });
     document.dispatchEvent(new CustomEvent("overlay:change"));
   }
 
@@ -18,21 +30,37 @@ MODALS LOGIC
     modal.setAttribute("aria-hidden", "true");
     document.documentElement.style.overflow = "";
     document.dispatchEvent(new CustomEvent("overlay:change"));
+
+    // Let the fade/scale-out transition finish, then fully remove the modal
+    // from the render tree so its backdrop-filter blur and compositor layer
+    // stop costing anything for the ~99% of the time it's closed.
+    clearTimeout(modal._hideTimeout);
+    modal._hideTimeout = setTimeout(function () {
+      modal.style.display = "none";
+    }, 340);
   }
+
+  window.openModal = openModal;
+  window.closeModal = closeModal;
 
   // Photo Modal Triggers — dynamically populate gallery per project
   document.querySelectorAll(".photo-trigger").forEach(function (btn) {
-    // --- PREFETCH LOGIC: Download first image instantly on hover ---
-    btn.addEventListener(
-      "mouseenter",
-      function () {
-        var folder = this.dataset.folder;
-        var preloadImg = new Image();
-        preloadImg.src =
-          "assets/img/projects-documentation/" + folder + "/display/1.webp";
-      },
-      { once: true },
-    );
+    // --- PREFETCH LOGIC: Download first image instantly on hover/touch ---
+    function prefetchFirstImage() {
+      var folder = this.dataset.folder;
+      var preloadImg = new Image();
+      preloadImg.src =
+        "assets/img/projects-documentation/" + folder + "/display/1.webp";
+    }
+    // Desktop gets a head start on hover. Phones have no hover event at all,
+    // so without this they got zero benefit from the trick above; touchstart
+    // fires ~100-300ms before "click", which is enough to give Android the
+    // same instant-first-image feel that desktop already had.
+    btn.addEventListener("mouseenter", prefetchFirstImage, { once: true });
+    btn.addEventListener("touchstart", prefetchFirstImage, {
+      once: true,
+      passive: true,
+    });
     // ---------------------------------------------------------------
 
     btn.addEventListener("click", function (e) {
@@ -314,6 +342,13 @@ GALLERY & ZOOM LOGIC
     thumbContainer.innerHTML = "";
     wrappers = [];
 
+    // Build every thumbnail off-DOM first, then insert them all in a single
+    // operation. Appending one at a time to an already-rendered container
+    // costs a style/layout invalidation per image (up to 16 of them) at the
+    // exact moment the modal is trying to open; a fragment collapses that
+    // to one insertion.
+    var fragment = document.createDocumentFragment();
+
     thumbSrcs.forEach(function (src, index) {
       var wrapper = document.createElement("div");
       wrapper.className = "thumb-wrapper";
@@ -339,9 +374,11 @@ GALLERY & ZOOM LOGIC
       wrapper.addEventListener("click", function () {
         navigate("exact", index);
       });
-      thumbContainer.appendChild(wrapper);
+      fragment.appendChild(wrapper);
       wrappers.push(wrapper);
     });
+
+    thumbContainer.appendChild(fragment);
   }
 
   // ── Public init — called by photo trigger with fresh thumb/display/zoom src arrays ──
@@ -388,12 +425,18 @@ GALLERY & ZOOM LOGIC
   // ── Lightbox open on main image click ──
   mainImage.addEventListener("click", function () {
     if (!this.src || this.style.opacity === "0") return;
+    clearTimeout(lightbox._hideTimeout);
     lightboxImg.src = this.src;
     lightboxImg.style.opacity = "1";
     computeBaseSize(this.naturalWidth, this.naturalHeight);
     resetZoom();
-    lightbox.classList.add("active");
+    lightbox.style.display = "flex";
     lightbox.setAttribute("aria-hidden", "false");
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        lightbox.classList.add("active");
+      });
+    });
     document.dispatchEvent(new CustomEvent("overlay:change"));
   });
 
@@ -405,6 +448,11 @@ GALLERY & ZOOM LOGIC
     activePointers = {};
     lightboxImg.src = displaySrcs[activeIndex] || lightboxImg.src;
     document.dispatchEvent(new CustomEvent("overlay:change"));
+
+    clearTimeout(lightbox._hideTimeout);
+    lightbox._hideTimeout = setTimeout(function () {
+      lightbox.style.display = "none";
+    }, 320);
   }
 
   lightboxCloseBtn.addEventListener("click", closeLightbox);
@@ -655,11 +703,8 @@ GALLERY & ZOOM LOGIC
         return;
       }
       document.querySelectorAll(".modal-overlay.open").forEach(function (m) {
-        m.classList.remove("open");
-        m.setAttribute("aria-hidden", "true");
-        document.documentElement.style.overflow = "";
+        window.closeModal(m.id);
       });
-      document.dispatchEvent(new CustomEvent("overlay:change"));
     }
     if ((modalActive || lbActive) && !deepZoom) {
       if (e.key === "ArrowRight") navigate("next");
@@ -776,12 +821,7 @@ CONTACT FORM AJAX SUBMISSION
             submitBtn.disabled = false;
             submitBtn.classList.remove("btn-success-state");
 
-            var modal = document.getElementById("contactModal");
-            if (modal) {
-              modal.classList.remove("open");
-              modal.setAttribute("aria-hidden", "true");
-              document.documentElement.style.overflow = "";
-            }
+            if (window.closeModal) window.closeModal("contactModal");
           }, 2500);
         } else {
           console.error("Web3Forms Response Error: ", jsonResponse);
