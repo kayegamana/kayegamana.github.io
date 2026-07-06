@@ -2,6 +2,10 @@
 MODALS LOGIC
 ──────────────────────────────────────── */
 (function () {
+  function anyModalOpen() {
+    return !!document.querySelector(".modal-overlay.open");
+  }
+
   function openModal(id) {
     var modal = document.getElementById(id);
     if (!modal) return;
@@ -26,17 +30,34 @@ MODALS LOGIC
   function closeModal(id) {
     var modal = document.getElementById(id);
     if (!modal) return;
+
+    // Chrome forces a synchronous blur + accessibility-tree recalc the
+    // instant aria-hidden="true" lands on a container that still holds the
+    // focused element (e.g. the close button you just clicked). Moving
+    // focus out first keeps that work from landing in the same tick as
+    // the close transition's first frame.
+    if (modal.contains(document.activeElement)) {
+      document.activeElement.blur();
+    }
+
     modal.classList.remove("open");
     modal.setAttribute("aria-hidden", "true");
-    document.documentElement.style.overflow = "";
     document.dispatchEvent(new CustomEvent("overlay:change"));
 
-    // Let the fade/scale-out transition finish, then fully remove the modal
-    // from the render tree so its backdrop-filter blur and compositor layer
-    // stop costing anything for the ~99% of the time it's closed.
+    // Restoring overflow is a root-level layout write. Doing it in the same
+    // tick as removing .open meant it competed with the close transition's
+    // first frames for main-thread time, that's what was reading as "slow
+    // motion". Deferring it until the transition has actually finished
+    // mirrors what open already does (lock happens, THEN two rAFs pass
+    // before the transition starts), just in reverse. The "is anything
+    // still open" check protects against unlocking scroll if a different
+    // modal got opened in the meantime.
     clearTimeout(modal._hideTimeout);
     modal._hideTimeout = setTimeout(function () {
       modal.style.display = "none";
+      if (!anyModalOpen()) {
+        document.documentElement.style.overflow = "";
+      }
     }, 340);
   }
 
@@ -251,6 +272,7 @@ GALLERY & ZOOM LOGIC
   var lightboxImg = document.getElementById("lightboxImage");
   var lightboxCloseBtn = document.getElementById("lightboxCloseBtn");
   var lightboxScrollArea = document.getElementById("lightboxScrollArea");
+  var photoModal = document.getElementById("photoModal");
   var maxVisible = 5;
 
   // ── Gallery state ──
@@ -261,6 +283,13 @@ GALLERY & ZOOM LOGIC
   var wrappers = [];
   var navigating = false; // debounce rapid fire
 
+  // Reused across every navigation instead of allocating a fresh Image()
+  // object (and closure) per call. Rapid tapping through the gallery was
+  // creating and discarding a new Image() on every single step, churn that
+  // lines up with occasional GC pauses right during interaction.
+  var mainLoader = new Image();
+  var lightboxLoader = new Image();
+
   // ── Cache-safe image swap via opacity crossfade ──
   function setMainImage(src, instant) {
     if (instant) {
@@ -269,9 +298,9 @@ GALLERY & ZOOM LOGIC
       return;
     }
     mainImage.style.opacity = "0";
-    // Use a hidden loader — works even when the image is already cached
-    var loader = new Image();
-    loader.onload = loader.onerror = function () {
+    // Reuse the shared off-screen loader (works even when the image is
+    // already cached).
+    mainLoader.onload = mainLoader.onerror = function () {
       mainImage.src = src;
       // rAF ensures the browser has painted the opacity:0 frame first
       requestAnimationFrame(function () {
@@ -281,7 +310,7 @@ GALLERY & ZOOM LOGIC
         });
       });
     };
-    loader.src = src;
+    mainLoader.src = src;
   }
 
   // ── Update thumbnail active state & counter ──
@@ -322,10 +351,12 @@ GALLERY & ZOOM LOGIC
     // Sync lightbox if open (always resets to display tier; deep zoom re-fetches zoom tier on next click)
     if (lightbox.classList.contains("active")) {
       lightboxImg.style.opacity = "0";
-      var lbLoader = new Image();
-      lbLoader.onload = lbLoader.onerror = function () {
+      lightboxLoader.onload = lightboxLoader.onerror = function () {
         lightboxImg.src = displaySrcs[next];
-        computeBaseSize(lbLoader.naturalWidth, lbLoader.naturalHeight);
+        computeBaseSize(
+          lightboxLoader.naturalWidth,
+          lightboxLoader.naturalHeight,
+        );
         resetZoom();
         requestAnimationFrame(function () {
           requestAnimationFrame(function () {
@@ -333,7 +364,7 @@ GALLERY & ZOOM LOGIC
           });
         });
       };
-      lbLoader.src = displaySrcs[next];
+      lightboxLoader.src = displaySrcs[next];
     }
   }
 
@@ -396,8 +427,7 @@ GALLERY & ZOOM LOGIC
     mainImage.style.opacity = "0";
     mainImage.src = "";
 
-    var loader = new Image();
-    loader.onload = loader.onerror = function () {
+    mainLoader.onload = mainLoader.onerror = function () {
       mainImage.src = displaySrcs[0];
       // Restore transition after first paint
       requestAnimationFrame(function () {
@@ -407,7 +437,7 @@ GALLERY & ZOOM LOGIC
         });
       });
     };
-    loader.src = displaySrcs[0];
+    mainLoader.src = displaySrcs[0];
 
     updateThumbs(0);
   };
@@ -442,6 +472,9 @@ GALLERY & ZOOM LOGIC
 
   // ── Lightbox close ──
   function closeLightbox() {
+    if (lightbox.contains(document.activeElement)) {
+      document.activeElement.blur();
+    }
     lightbox.classList.remove("active");
     lightbox.setAttribute("aria-hidden", "true");
     resetZoom();
@@ -692,9 +725,7 @@ GALLERY & ZOOM LOGIC
   // ── Keyboard: Esc / arrows ──
   document.addEventListener("keydown", function (e) {
     var lbActive = lightbox.classList.contains("active");
-    var modalActive = document
-      .getElementById("photoModal")
-      .classList.contains("open");
+    var modalActive = photoModal.classList.contains("open");
     var deepZoom = scale > 1.01;
 
     if (e.key === "Escape") {
@@ -719,9 +750,7 @@ GALLERY & ZOOM LOGIC
 
   function handleWheel(e) {
     var lbActive = lightbox.classList.contains("active");
-    var modalActive = document
-      .getElementById("photoModal")
-      .classList.contains("open");
+    var modalActive = photoModal.classList.contains("open");
     var deepZoom = scale > 1.01;
     if ((modalActive || lbActive) && !deepZoom) {
       e.preventDefault();
@@ -732,9 +761,7 @@ GALLERY & ZOOM LOGIC
 
   function syncWheelListener() {
     var lbActive = lightbox.classList.contains("active");
-    var modalActive = document
-      .getElementById("photoModal")
-      .classList.contains("open");
+    var modalActive = photoModal.classList.contains("open");
     var shouldAttach = modalActive || lbActive;
 
     if (shouldAttach && !wheelAttached) {

@@ -1401,6 +1401,16 @@ MODALS
   transform: scale(1) translateY(0) translateZ(0);
 }
 
+/* Closing gets its own shorter, non-overshoot ease. The entrance curve
+   above is a deliberate bounce/pop (cubic-bezier with y > 1), which looks
+   great arriving but reads as a lazy wobble in reverse on the way out.
+   This targets only the moment .open is removed, purely a feel change
+   (still the same GPU-only transform property), revert by deleting this
+   block if you'd rather keep the bounce symmetric on both ends. */
+.modal-overlay:not(.open) .modal-box {
+  transition: transform 0.22s cubic-bezier(0.4, 0, 1, 1);
+}
+
 .modal-head {
   display: flex;
   align-items: center;
