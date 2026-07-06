@@ -1330,14 +1330,14 @@ MODALS
   inset: 0;
   z-index: 1000;
   /* Fully out of the render tree while closed: zero layout, paint, or
-     backdrop-filter/GPU-layer cost. JS flips this to flex right before
-     the open transition and back to none after the close transition. */
+     GPU-layer cost. JS flips this to flex right before the open
+     transition and back to none after the close transition. */
   display: none;
   align-items: center;
   justify-content: center;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.26s ease;
+  transition: opacity 0.15s ease-out;
 }
 
 .modal-overlay.open {
@@ -1348,9 +1348,7 @@ MODALS
 .modal-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(0, 1, 30, 0.85);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(0, 1, 30, 0.92);
 }
 
 .modal-box {
@@ -1360,17 +1358,7 @@ MODALS
     var(--noise),
     radial-gradient(
       circle at 14% 0%,
-      rgba(255, 255, 255, 0.06) 0%,
-      transparent 40%
-    ),
-    radial-gradient(
-      circle at 0% 0%,
-      rgba(114, 188, 255, 0.06) 0%,
-      transparent 55%
-    ),
-    radial-gradient(
-      circle at 100% 100%,
-      rgba(0, 1, 30, 0.5) 0%,
+      rgba(114, 188, 255, 0.08) 0%,
       transparent 50%
     ),
     var(--bg-mid);
@@ -1381,12 +1369,11 @@ MODALS
   /* Widened the preview container */
   max-height: 88vh;
   overflow-y: auto;
-  box-shadow:
-    0 28px 80px rgba(0, 0, 0, 0.8),
-    0 0 60px -20px rgba(114, 188, 255, 0.12),
-    inset 0 1px 1px rgba(255, 255, 255, 0.08);
-  transform: scale(0.96) translateY(8px) translateZ(0);
-  transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* One shadow pass instead of three. Same elevated card look, far
+     cheaper to rasterize into the layer texture on the first open frame. */
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55);
+  transform: scale(0.98) translateY(4px) translateZ(0);
+  transition: transform 0.16s ease-out;
 
   /* Hardware Acceleration & Containment */
   contain: layout style paint;
@@ -1408,7 +1395,7 @@ MODALS
    (still the same GPU-only transform property), revert by deleting this
    block if you'd rather keep the bounce symmetric on both ends. */
 .modal-overlay:not(.open) .modal-box {
-  transition: transform 0.22s cubic-bezier(0.4, 0, 1, 1);
+  transition: transform 0.12s ease-in;
 }
 
 .modal-head {
@@ -1510,18 +1497,18 @@ MODALS
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: rgba(0, 1, 30, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  /* Same reasoning as .modal-overlay: this is the heaviest blur on the
-     page (12px, full screen), so keeping it out of the render tree while
-     closed matters most here. */
+  background: rgba(0, 1, 30, 0.94);
+  /* Blur removed. On low end Android GPUs, a full screen backdrop-filter
+     blur has to resample and reconvolve the framebuffer on nearly every
+     composited frame during the opacity transition, which is the main
+     driver of the "slow motion" feel. A flat rgba background gives the
+     same dimmed, blocked out look for close to zero compositing cost. */
   display: none;
   align-items: center;
   justify-content: center;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.18s ease;
 }
 
 .lightbox-overlay.active {
@@ -1591,11 +1578,9 @@ MODALS
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(0, 1, 30, 0.75);
+  background: rgba(6, 10, 42, 0.92);
   padding: 6px;
   border-radius: 30px;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
   border: 1px solid rgba(114, 188, 255, 0.15);
   z-index: 10;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);

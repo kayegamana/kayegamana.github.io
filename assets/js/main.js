@@ -58,7 +58,7 @@ MODALS LOGIC
       if (!anyModalOpen()) {
         document.documentElement.style.overflow = "";
       }
-    }, 340);
+    }, 200);
   }
 
   window.openModal = openModal;
@@ -485,7 +485,7 @@ GALLERY & ZOOM LOGIC
     clearTimeout(lightbox._hideTimeout);
     lightbox._hideTimeout = setTimeout(function () {
       lightbox.style.display = "none";
-    }, 320);
+    }, 220);
   }
 
   lightboxCloseBtn.addEventListener("click", closeLightbox);
