@@ -10,19 +10,14 @@ MODALS LOGIC
     var modal = document.getElementById(id);
     if (!modal) return;
     clearTimeout(modal._hideTimeout);
-    // The modal is display:none while closed (see CSS), so bring it back
-    // into the render tree first, before animating anything.
-    modal.style.display = "flex";
+
     modal.setAttribute("aria-hidden", "false");
     document.documentElement.style.overflow = "hidden";
-    // Double rAF: let the browser paint the display:flex frame first, then
-    // add .open on the following frame so opacity/transform have a real
-    // "from" state to transition out of (same pattern already used for the
-    // gallery image crossfades further down this file).
+
+    // With visibility:hidden, the DOM node maintains its layout box.
+    // Opening it requires no recalculation, allowing an instant 60fps start.
     requestAnimationFrame(function () {
-      requestAnimationFrame(function () {
-        modal.classList.add("open");
-      });
+      modal.classList.add("open");
     });
     document.dispatchEvent(new CustomEvent("overlay:change"));
   }
@@ -56,7 +51,7 @@ MODALS LOGIC
         document.activeElement.blur();
       }
       modal.setAttribute("aria-hidden", "true");
-      modal.style.display = "none";
+      // Element hides automatically via CSS visibility transition delay
       if (!anyModalOpen()) {
         document.documentElement.style.overflow = "";
       }
@@ -300,17 +295,23 @@ GALLERY & ZOOM LOGIC
       return;
     }
     mainImage.style.opacity = "0";
-    // Reuse the shared off-screen loader (works even when the image is
-    // already cached).
     mainLoader.onload = mainLoader.onerror = function () {
       mainImage.src = src;
-      // rAF ensures the browser has painted the opacity:0 frame first
-      requestAnimationFrame(function () {
-        requestAnimationFrame(function () {
-          mainImage.style.opacity = "1";
-          navigating = false;
+      // Decode the image asynchronously off the main thread before animating
+      mainImage
+        .decode()
+        .then(function () {
+          requestAnimationFrame(function () {
+            mainImage.style.opacity = "1";
+            navigating = false;
+          });
+        })
+        .catch(function () {
+          requestAnimationFrame(function () {
+            mainImage.style.opacity = "1";
+            navigating = false;
+          });
         });
-      });
     };
     mainLoader.src = src;
   }
@@ -360,11 +361,18 @@ GALLERY & ZOOM LOGIC
           lightboxLoader.naturalHeight,
         );
         resetZoom();
-        requestAnimationFrame(function () {
-          requestAnimationFrame(function () {
-            lightboxImg.style.opacity = "1";
+        lightboxImg
+          .decode()
+          .then(function () {
+            requestAnimationFrame(function () {
+              lightboxImg.style.opacity = "1";
+            });
+          })
+          .catch(function () {
+            requestAnimationFrame(function () {
+              lightboxImg.style.opacity = "1";
+            });
           });
-        });
       };
       lightboxLoader.src = displaySrcs[next];
     }
@@ -431,13 +439,25 @@ GALLERY & ZOOM LOGIC
 
     mainLoader.onload = mainLoader.onerror = function () {
       mainImage.src = displaySrcs[0];
-      // Restore transition after first paint
-      requestAnimationFrame(function () {
-        mainImage.style.transition = "opacity 0.25s ease";
-        requestAnimationFrame(function () {
-          mainImage.style.opacity = "1";
+      // Restore transition after async decode prevents main-thread jank
+      mainImage
+        .decode()
+        .then(function () {
+          requestAnimationFrame(function () {
+            mainImage.style.transition = "opacity 0.25s ease";
+            requestAnimationFrame(function () {
+              mainImage.style.opacity = "1";
+            });
+          });
+        })
+        .catch(function () {
+          requestAnimationFrame(function () {
+            mainImage.style.transition = "opacity 0.25s ease";
+            requestAnimationFrame(function () {
+              mainImage.style.opacity = "1";
+            });
+          });
         });
-      });
     };
     mainLoader.src = displaySrcs[0];
 
@@ -485,9 +505,7 @@ GALLERY & ZOOM LOGIC
     document.dispatchEvent(new CustomEvent("overlay:change"));
 
     clearTimeout(lightbox._hideTimeout);
-    lightbox._hideTimeout = setTimeout(function () {
-      lightbox.style.display = "none";
-    }, 220);
+    // Element hides automatically via CSS visibility transition delay
   }
 
   lightboxCloseBtn.addEventListener("click", closeLightbox);

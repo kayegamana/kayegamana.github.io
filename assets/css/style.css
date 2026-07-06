@@ -1329,21 +1329,27 @@ MODALS
   position: fixed;
   inset: 0;
   z-index: 1000;
-  /* Fully out of the render tree while closed: zero layout, paint, or
-     GPU-layer cost. JS flips this to flex right before the open
-     transition and back to none after the close transition. */
-  display: none;
+  display: flex;
+  visibility: hidden;
   align-items: center;
   justify-content: center;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.15s ease-out;
+  /* visibility delays hiding until the opacity transition finishes */
+  transition:
+    opacity 0.15s ease-out,
+    visibility 0s linear 0.15s;
   contain: layout style paint;
+  overscroll-behavior: none;
 }
 
 .modal-overlay.open {
   opacity: 1;
+  visibility: visible;
   pointer-events: all;
+  transition:
+    opacity 0.15s ease-out,
+    visibility 0s linear 0s;
 }
 
 .modal-backdrop {
@@ -1370,6 +1376,7 @@ MODALS
   /* Widened the preview container */
   max-height: 88vh;
   overflow-y: auto;
+  overscroll-behavior: contain;
   /* One shadow pass instead of three. Same elevated card look, far
      cheaper to rasterize into the layer texture on the first open frame. */
   box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55);
@@ -1499,22 +1506,25 @@ MODALS
   inset: 0;
   z-index: 9999;
   background: rgba(0, 1, 30, 0.94);
-  /* Blur removed. On low end Android GPUs, a full screen backdrop-filter
-     blur has to resample and reconvolve the framebuffer on nearly every
-     composited frame during the opacity transition, which is the main
-     driver of the "slow motion" feel. A flat rgba background gives the
-     same dimmed, blocked out look for close to zero compositing cost. */
-  display: none;
+  display: flex;
+  visibility: hidden;
   align-items: center;
   justify-content: center;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.18s ease;
+  transition:
+    opacity 0.18s ease,
+    visibility 0s linear 0.18s;
+  overscroll-behavior: none;
 }
 
 .lightbox-overlay.active {
   opacity: 1;
+  visibility: visible;
   pointer-events: all;
+  transition:
+    opacity 0.18s ease,
+    visibility 0s linear 0s;
 }
 
 .lightbox-scroll-area {
@@ -1678,7 +1688,12 @@ MODALS
   inset: 0;
   border-radius: 4px;
   /* Perfectly matches the inner curve (6px wrapper radius - 2px border) */
-  background: rgba(0, 1, 30, 0.85);
+  background: rgba(
+    0,
+    1,
+    30,
+    0.92
+  ); /* Darkened slightly to compensate for blur removal */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1686,8 +1701,6 @@ MODALS
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 1.1rem;
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
   z-index: 2;
   pointer-events: none;
 }
@@ -2039,8 +2052,11 @@ MOBILE  ≤ 580px
 FORM SUBMISSION UTILITIES
 ═══════════════════════════════════════════ */
 @keyframes formControlSpin {
+  0% {
+    transform: rotate(0deg) translateZ(0);
+  }
   100% {
-    transform: rotate(360deg);
+    transform: rotate(360deg) translateZ(0);
   }
 }
 
