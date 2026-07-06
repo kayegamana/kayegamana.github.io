@@ -1353,8 +1353,8 @@ MODALS
   opacity: 0;
   pointer-events: none;
   transition:
-    opacity 0.15s ease-out,
-    visibility 0s linear 0.15s;
+    opacity 0.08s ease-out,
+    visibility 0s linear 0.08s;
   contain: layout style paint;
   overscroll-behavior: none;
   /* Forces GPU layer allocation BEFORE the modal opens */
@@ -1366,7 +1366,7 @@ MODALS
   visibility: visible;
   pointer-events: all;
   transition:
-    opacity 0.15s ease-out,
+    opacity 0.08s ease-out,
     visibility 0s linear 0s;
 }
 
@@ -1391,7 +1391,7 @@ MODALS
   /* Replaced 45px blur radius. Gaussian blurs natively throttle weak mobile GPUs */
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.8);
   transform: scale(0.98) translateY(4px) translateZ(0);
-  transition: transform 0.16s ease-out;
+  transition: transform 0.1s cubic-bezier(0.2, 0.9, 0.3, 1);
 
   /* Hardware Acceleration & Containment */
   contain: layout style paint;
@@ -1413,7 +1413,7 @@ MODALS
    (still the same GPU-only transform property), revert by deleting this
    block if you'd rather keep the bounce symmetric on both ends. */
 .modal-overlay:not(.open) .modal-box {
-  transition: transform 0.12s ease-in;
+  transition: transform 0.08s ease-in;
 }
 
 .modal-head {

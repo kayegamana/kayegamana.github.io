@@ -19,11 +19,11 @@ MODALS LOGIC
     });
 
     // DEFER layout thrashing and a11y tree rebuilds
-    // until AFTER the 150ms CSS animation completes to guarantee 60fps start
+    // until AFTER the 80ms CSS animation completes to guarantee 60fps start
     setTimeout(function () {
       modal.setAttribute("aria-hidden", "false");
       document.documentElement.style.overflow = "hidden";
-    }, 160);
+    }, 90);
   }
 
   function closeModal(id) {
@@ -50,7 +50,7 @@ MODALS LOGIC
         // DISPATCH HERE: Resume background animations only AFTER the modal has fully closed
         document.dispatchEvent(new CustomEvent("overlay:change"));
       }
-    }, 200);
+    }, 100);
   }
 
   window.openModal = openModal;
