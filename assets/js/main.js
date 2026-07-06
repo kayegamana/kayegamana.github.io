@@ -14,14 +14,15 @@ MODALS LOGIC
     // Instantly trigger the animation on the GPU without blocking the main thread
     requestAnimationFrame(function () {
       modal.classList.add("open");
+      // DISPATCH HERE: Pause background animations BEFORE the modal transition starts
+      document.dispatchEvent(new CustomEvent("overlay:change"));
     });
 
-    // DEFER layout thrashing, a11y tree rebuilds, and event emissions
+    // DEFER layout thrashing and a11y tree rebuilds
     // until AFTER the 150ms CSS animation completes to guarantee 60fps start
     setTimeout(function () {
       modal.setAttribute("aria-hidden", "false");
       document.documentElement.style.overflow = "hidden";
-      document.dispatchEvent(new CustomEvent("overlay:change"));
     }, 160);
   }
 
@@ -29,25 +30,14 @@ MODALS LOGIC
     var modal = document.getElementById(id);
     if (!modal) return;
 
-    // Only the class removal happens synchronously here. That's a single
-    // compositor-only style change (opacity/transform are already handled
-    // by CSS transitions), so the browser can go straight into the close
-    // animation on the very next frame with nothing else competing for
-    // that frame's main-thread time.
+    // Only the class removal happens synchronously here.
     modal.classList.remove("open");
-    document.dispatchEvent(new CustomEvent("overlay:change"));
+    // REMOVED synchronous dispatch. Resuming background animations here
+    // instantly ruins the closing framerate on low-end devices.
 
     // Blurring focus, flipping aria-hidden, hiding the element, and
     // restoring page scroll are all deferred until after the close
-    // transition has actually finished. Previously aria-hidden was set in
-    // the same tick as the class removal, and reordering the blur call
-    // ahead of it didn't change that, JS in one function is synchronous,
-    // so the browser's forced accessibility-tree recalculation still
-    // landed in the same tick, right before the transition's first frame.
-    // That recalculation, over a subtree with several images or form
-    // fields, is what was reading as a freeze. Running it inside a real
-    // setTimeout callback is what actually pushes it to a separate task
-    // after the animation is already visually done.
+    // transition has actually finished.
     clearTimeout(modal._hideTimeout);
     modal._hideTimeout = setTimeout(function () {
       if (modal.contains(document.activeElement)) {
@@ -57,6 +47,8 @@ MODALS LOGIC
       // Element hides automatically via CSS visibility transition delay
       if (!anyModalOpen()) {
         document.documentElement.style.overflow = "";
+        // DISPATCH HERE: Resume background animations only AFTER the modal has fully closed
+        document.dispatchEvent(new CustomEvent("overlay:change"));
       }
     }, 200);
   }
