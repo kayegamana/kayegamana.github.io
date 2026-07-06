@@ -11,15 +11,18 @@ MODALS LOGIC
     if (!modal) return;
     clearTimeout(modal._hideTimeout);
 
-    modal.setAttribute("aria-hidden", "false");
-    document.documentElement.style.overflow = "hidden";
-
-    // With visibility:hidden, the DOM node maintains its layout box.
-    // Opening it requires no recalculation, allowing an instant 60fps start.
+    // Instantly trigger the animation on the GPU without blocking the main thread
     requestAnimationFrame(function () {
       modal.classList.add("open");
     });
-    document.dispatchEvent(new CustomEvent("overlay:change"));
+
+    // DEFER layout thrashing, a11y tree rebuilds, and event emissions
+    // until AFTER the 150ms CSS animation completes to guarantee 60fps start
+    setTimeout(function () {
+      modal.setAttribute("aria-hidden", "false");
+      document.documentElement.style.overflow = "hidden";
+      document.dispatchEvent(new CustomEvent("overlay:change"));
+    }, 160);
   }
 
   function closeModal(id) {
@@ -378,48 +381,65 @@ GALLERY & ZOOM LOGIC
     }
   }
 
-  // ── Build thumbnail strip ──
+  // ── Event Delegation for Thumbnails ──
+  thumbContainer.addEventListener("click", function (e) {
+    var wrapper = e.target.closest(".thumb-wrapper");
+    if (!wrapper) return;
+    var index = parseInt(wrapper.getAttribute("data-index"), 10);
+    if (!isNaN(index)) navigate("exact", index);
+  });
+
+  // ── Build thumbnail strip (Recycling Nodes) ──
   function buildThumbs() {
-    thumbContainer.innerHTML = "";
-    wrappers = [];
+    var existingWrappers = thumbContainer.children;
+    var numNeeded = thumbSrcs.length;
 
-    // Build every thumbnail off-DOM first, then insert them all in a single
-    // operation. Appending one at a time to an already-rendered container
-    // costs a style/layout invalidation per image (up to 16 of them) at the
-    // exact moment the modal is trying to open; a fragment collapses that
-    // to one insertion.
-    var fragment = document.createDocumentFragment();
-
-    thumbSrcs.forEach(function (src, index) {
+    // 1. Inflate pool if missing nodes
+    while (existingWrappers.length < numNeeded) {
       var wrapper = document.createElement("div");
       wrapper.className = "thumb-wrapper";
-
       var img = document.createElement("img");
-      img.src = src;
-      img.decoding = "async";
-      if (index >= maxVisible) img.loading = "lazy";
       img.className = "gallery-thumb";
-      img.alt = "Thumbnail " + (index + 1);
+      img.decoding = "async";
       wrapper.appendChild(img);
+      thumbContainer.appendChild(wrapper);
+    }
 
-      // +N overlay on last visible slot when there are more
-      if (index === maxVisible - 1 && thumbSrcs.length > maxVisible) {
-        var overlay = document.createElement("div");
-        overlay.className = "thumb-overlay";
-        overlay.textContent = "+" + (thumbSrcs.length - maxVisible);
-        wrapper.appendChild(overlay);
+    wrappers = Array.from(existingWrappers);
+
+    // 2. Recycle existing DOM nodes (Zero allocations, zero GC pauses)
+    for (var i = 0; i < wrappers.length; i++) {
+      var wrapper = wrappers[i];
+      if (i < numNeeded) {
+        wrapper.setAttribute("data-index", i);
+        var img = wrapper.querySelector("img");
+
+        // Only touch DOM property if changed to avoid invalidation
+        if (img.src.indexOf(thumbSrcs[i]) === -1) img.src = thumbSrcs[i];
+
+        img.alt = "Thumbnail " + (i + 1);
+        if (i >= maxVisible) img.setAttribute("loading", "lazy");
+        else img.removeAttribute("loading");
+
+        var overlay = wrapper.querySelector(".thumb-overlay");
+        if (i === maxVisible - 1 && numNeeded > maxVisible) {
+          if (!overlay) {
+            overlay = document.createElement("div");
+            overlay.className = "thumb-overlay";
+            wrapper.appendChild(overlay);
+          }
+          overlay.textContent = "+" + (numNeeded - maxVisible);
+          overlay.style.display = "flex";
+        } else if (overlay) {
+          overlay.style.display = "none";
+        }
+
+        wrapper.style.display = i >= maxVisible ? "none" : "";
+      } else {
+        wrapper.style.display = "none";
+        wrapper.removeAttribute("data-index");
       }
-
-      if (index >= maxVisible) wrapper.style.display = "none";
-
-      wrapper.addEventListener("click", function () {
-        navigate("exact", index);
-      });
-      fragment.appendChild(wrapper);
-      wrappers.push(wrapper);
-    });
-
-    thumbContainer.appendChild(fragment);
+    }
   }
 
   // ── Public init — called by photo trigger with fresh thumb/display/zoom src arrays ──
@@ -430,7 +450,8 @@ GALLERY & ZOOM LOGIC
     activeIndex = 0;
     navigating = false;
 
-    buildThumbs();
+    // Instantly update text, but avoid building DOM thumbnails yet
+    counter.textContent = "1 / " + displaySrcs.length;
 
     // Load first image: instant on first paint (modal not yet visible)
     mainImage.style.transition = "none";
@@ -439,7 +460,6 @@ GALLERY & ZOOM LOGIC
 
     mainLoader.onload = mainLoader.onerror = function () {
       mainImage.src = displaySrcs[0];
-      // Restore transition after async decode prevents main-thread jank
       mainImage
         .decode()
         .then(function () {
@@ -461,7 +481,14 @@ GALLERY & ZOOM LOGIC
     };
     mainLoader.src = displaySrcs[0];
 
-    updateThumbs(0);
+    // Defer thumbnail DOM writes & network fetching until AFTER the 150ms
+    // modal opening transition. Firing multiple network requests on the same
+    // frame as a CSS transform will drop frames on entry-level Androids.
+    clearTimeout(window._thumbRenderTimeout);
+    window._thumbRenderTimeout = setTimeout(function () {
+      buildThumbs();
+      updateThumbs(0);
+    }, 160);
   };
 
   // ── Arrow buttons ──

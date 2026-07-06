@@ -1335,12 +1335,13 @@ MODALS
   justify-content: center;
   opacity: 0;
   pointer-events: none;
-  /* visibility delays hiding until the opacity transition finishes */
   transition:
     opacity 0.15s ease-out,
     visibility 0s linear 0.15s;
   contain: layout style paint;
   overscroll-behavior: none;
+  /* Forces GPU layer allocation BEFORE the modal opens */
+  will-change: opacity, visibility;
 }
 
 .modal-overlay.open {
@@ -1361,25 +1362,17 @@ MODALS
 .modal-box {
   position: relative;
   z-index: 1;
-  background:
-    var(--noise),
-    radial-gradient(
-      circle at 14% 0%,
-      rgba(114, 188, 255, 0.08) 0%,
-      transparent 50%
-    ),
-    var(--bg-mid);
+  /* Removed expensive base64 noise and complex gradients to skip texture decoding */
+  background: var(--bg-mid);
   border: 1px solid rgba(90, 157, 217, 0.15);
   border-radius: 20px;
   padding: 32px 36px 30px;
   width: min(1000px, 95vw);
-  /* Widened the preview container */
   max-height: 88vh;
   overflow-y: auto;
   overscroll-behavior: contain;
-  /* One shadow pass instead of three. Same elevated card look, far
-     cheaper to rasterize into the layer texture on the first open frame. */
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55);
+  /* Replaced 45px blur radius. Gaussian blurs natively throttle weak mobile GPUs */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.8);
   transform: scale(0.98) translateY(4px) translateZ(0);
   transition: transform 0.16s ease-out;
 
