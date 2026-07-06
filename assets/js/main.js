@@ -31,29 +31,31 @@ MODALS LOGIC
     var modal = document.getElementById(id);
     if (!modal) return;
 
-    // Chrome forces a synchronous blur + accessibility-tree recalc the
-    // instant aria-hidden="true" lands on a container that still holds the
-    // focused element (e.g. the close button you just clicked). Moving
-    // focus out first keeps that work from landing in the same tick as
-    // the close transition's first frame.
-    if (modal.contains(document.activeElement)) {
-      document.activeElement.blur();
-    }
-
+    // Only the class removal happens synchronously here. That's a single
+    // compositor-only style change (opacity/transform are already handled
+    // by CSS transitions), so the browser can go straight into the close
+    // animation on the very next frame with nothing else competing for
+    // that frame's main-thread time.
     modal.classList.remove("open");
-    modal.setAttribute("aria-hidden", "true");
     document.dispatchEvent(new CustomEvent("overlay:change"));
 
-    // Restoring overflow is a root-level layout write. Doing it in the same
-    // tick as removing .open meant it competed with the close transition's
-    // first frames for main-thread time, that's what was reading as "slow
-    // motion". Deferring it until the transition has actually finished
-    // mirrors what open already does (lock happens, THEN two rAFs pass
-    // before the transition starts), just in reverse. The "is anything
-    // still open" check protects against unlocking scroll if a different
-    // modal got opened in the meantime.
+    // Blurring focus, flipping aria-hidden, hiding the element, and
+    // restoring page scroll are all deferred until after the close
+    // transition has actually finished. Previously aria-hidden was set in
+    // the same tick as the class removal, and reordering the blur call
+    // ahead of it didn't change that, JS in one function is synchronous,
+    // so the browser's forced accessibility-tree recalculation still
+    // landed in the same tick, right before the transition's first frame.
+    // That recalculation, over a subtree with several images or form
+    // fields, is what was reading as a freeze. Running it inside a real
+    // setTimeout callback is what actually pushes it to a separate task
+    // after the animation is already visually done.
     clearTimeout(modal._hideTimeout);
     modal._hideTimeout = setTimeout(function () {
+      if (modal.contains(document.activeElement)) {
+        document.activeElement.blur();
+      }
+      modal.setAttribute("aria-hidden", "true");
       modal.style.display = "none";
       if (!anyModalOpen()) {
         document.documentElement.style.overflow = "";
@@ -783,20 +785,35 @@ PERFORMANCE LOGIC: PAUSE OFF-SCREEN ANIMATIONS
   var flagshipCard = document.querySelector(".card-flagship");
   if (!flagshipCard || !window.IntersectionObserver) return;
 
+  var isIntersecting = false;
+
+  // Runs whenever visibility OR overlay state changes, so the animation
+  // is only ever running when it's actually visible: in view AND not
+  // covered by a modal or the lightbox. This frees up a full compositor
+  // layer's worth of budget during every modal open and close, which is
+  // exactly when that budget matters most on weaker GPUs.
+  function syncPlayState() {
+    var overlayOpen = !!document.querySelector(
+      ".modal-overlay.open, .lightbox-overlay.active",
+    );
+    flagshipCard.style.setProperty(
+      "--play-state",
+      isIntersecting && !overlayOpen ? "running" : "paused",
+    );
+  }
+
   var observer = new IntersectionObserver(
     function (entries) {
       entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          flagshipCard.style.setProperty("--play-state", "running");
-        } else {
-          flagshipCard.style.setProperty("--play-state", "paused");
-        }
+        isIntersecting = entry.isIntersecting;
+        syncPlayState();
       });
     },
     { threshold: 0.1 },
   );
 
   observer.observe(flagshipCard);
+  document.addEventListener("overlay:change", syncPlayState);
 })();
 
 /* ─────────────────────────────────────

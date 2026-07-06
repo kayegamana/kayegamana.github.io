@@ -1338,6 +1338,7 @@ MODALS
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.15s ease-out;
+  contain: layout style paint;
 }
 
 .modal-overlay.open {
