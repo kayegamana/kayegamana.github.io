@@ -639,6 +639,14 @@ CARD 1 — PROFILE (HIGHLIGHTED)
   will-change: transform;
 }
 
+/* Accessibility: Kill sweep animation if user prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .btn-talk::after {
+    animation: none !important;
+    display: none !important;
+  }
+}
+
 /* Previously animated `left`, which forces layout on every single frame,
    forever, for the life of the page. `left`/`right` percentages are
    relative to the containing block, but `translateX()` percentages are
@@ -1949,6 +1957,12 @@ IPAD PORTRAIT ONLY (581px - 900px)
 MOBILE  ≤ 580px
 ═══════════════════════════════════════════ */
 @media (max-width: 580px) {
+  /* Hardware Optimization: Kill heavy sweep animation on phone GPUs */
+  .btn-talk::after {
+    animation: none !important;
+    display: none !important;
+  }
+
   .page {
     padding: 16px 12px;
   }
