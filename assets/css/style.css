@@ -619,12 +619,11 @@ CARD 1 — PROFILE (HIGHLIGHTED)
   overflow: hidden;
 }
 
-.btn-talk::after {
+/* .btn-talk::after {
   content: "";
   position: absolute;
   top: 0;
   left: -150%;
-  /* Static now, was previously the animation's starting keyframe value */
   width: 120%;
   height: 100%;
   background: linear-gradient(
@@ -633,19 +632,19 @@ CARD 1 — PROFILE (HIGHLIGHTED)
     rgba(255, 255, 255, 0.35) 50%,
     transparent 100%
   );
-  transform: skewX(-20deg) translateX(0%);
+transform: skewX(-20deg) translateX(0%);
   animation: futuristicSweep 3s ease-in-out infinite;
   pointer-events: none;
   will-change: transform;
-}
+} */
 
-/* Accessibility: Kill sweep animation if user prefers reduced motion */
+/* Accessibility: Kill sweep animation if user prefers reduced motion
 @media (prefers-reduced-motion: reduce) {
   .btn-talk::after {
     animation: none !important;
     display: none !important;
   }
-}
+} */
 
 /* Previously animated `left`, which forces layout on every single frame,
    forever, for the life of the page. `left`/`right` percentages are
@@ -653,7 +652,7 @@ CARD 1 — PROFILE (HIGHLIGHTED)
    relative to this element's own box (120% of the button), so the two
    aren't directly interchangeable, 291.7% here covers the same absolute
    travel distance the old -150% -> 200% left animation covered. */
-@keyframes futuristicSweep {
+/* @keyframes futuristicSweep {
   0% {
     transform: skewX(-20deg) translateX(0%);
   }
@@ -662,7 +661,7 @@ CARD 1 — PROFILE (HIGHLIGHTED)
   100% {
     transform: skewX(-20deg) translateX(291.7%);
   }
-}
+} */
 
 /* Performance Override: Kill the looping animation globally whenever a modal is open */
 html:has(.modal-overlay.open) .btn-talk::after {
@@ -893,7 +892,7 @@ CARD 4 — FLAGSHIP (HIGHLIGHTED & ANIMATED)
   --snake-base: rgba(6, 26, 128, 0.4);
 }
 
-.card.card-flagship::before {
+/* .card.card-flagship::before {
   content: "";
   position: absolute;
   top: -100%;
@@ -912,7 +911,7 @@ CARD 4 — FLAGSHIP (HIGHLIGHTED & ANIMATED)
   pointer-events: none;
   will-change: transform;
   transform: translateZ(0);
-}
+} */
 
 /* Masking the inner background beautifully to perfectly match highlight theme */
 .card.card-flagship::after {
