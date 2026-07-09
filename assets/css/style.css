@@ -1370,8 +1370,10 @@ MODALS
     visibility 0s linear 0.1s;
   contain: layout style paint;
   overscroll-behavior: none;
-  /* Forces GPU layer allocation BEFORE the modal opens */
-  will-change: opacity, visibility;
+
+  /* FIXED: Use hardware acceleration properly and remove 'visibility' */
+  transform: translateZ(0);
+  will-change: opacity, transform;
 }
 
 .modal-overlay.open {
@@ -2099,4 +2101,21 @@ FORM SUBMISSION UTILITIES
 
 .btn-success-state::after {
   display: none !important; /* Temporarily suspends the top sweeping shimmer effect on success */
+}
+
+/* ═══════════════════════════════════════════
+SECTION FADE-IN ANIMATION
+═══════════════════════════════════════════ */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.8s cubic-bezier(0.25, 0.8, 0.25, 1),
+    transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+  will-change: opacity, transform;
+}
+
+.fade-in-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }

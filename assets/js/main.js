@@ -11,46 +11,30 @@ MODALS LOGIC
     if (!modal) return;
     clearTimeout(modal._hideTimeout);
 
-    // Instantly trigger the animation on the GPU without blocking the main thread
-    requestAnimationFrame(function () {
-      modal.classList.add("open");
-      // DISPATCH HERE: Pause background animations BEFORE the modal transition starts
-      document.dispatchEvent(new CustomEvent("overlay:change"));
-    });
-
-    // DEFER layout thrashing and a11y tree rebuilds
-    // until AFTER the 80ms CSS animation completes to guarantee 60fps start
-    setTimeout(function () {
-      modal.setAttribute("aria-hidden", "false");
-      document.documentElement.style.overflow = "hidden";
-    }, 90);
+    // Simplified synchronous trigger avoids CPU thrashing on weak devices
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+    document.documentElement.style.overflow = "hidden";
+    document.dispatchEvent(new CustomEvent("overlay:change"));
   }
 
   function closeModal(id) {
     var modal = document.getElementById(id);
     if (!modal) return;
 
-    // Only the class removal happens synchronously here.
     modal.classList.remove("open");
-    // REMOVED synchronous dispatch. Resuming background animations here
-    // instantly ruins the closing framerate on low-end devices.
+    modal.setAttribute("aria-hidden", "true");
 
-    // Blurring focus, flipping aria-hidden, hiding the element, and
-    // restoring page scroll are all deferred until after the close
-    // transition has actually finished.
     clearTimeout(modal._hideTimeout);
     modal._hideTimeout = setTimeout(function () {
       if (modal.contains(document.activeElement)) {
         document.activeElement.blur();
       }
-      modal.setAttribute("aria-hidden", "true");
-      // Element hides automatically via CSS visibility transition delay
       if (!anyModalOpen()) {
         document.documentElement.style.overflow = "";
-        // DISPATCH HERE: Resume background animations only AFTER the modal has fully closed
         document.dispatchEvent(new CustomEvent("overlay:change"));
       }
-    }, 100);
+    }, 100); // Wait for CSS transition to finish natively
   }
 
   window.openModal = openModal;
@@ -917,5 +901,37 @@ CONTACT FORM AJAX SUBMISSION
           '<i class="bi bi-exclamation-triangle-fill"></i> Network Error.';
         submitBtn.disabled = false;
       });
+  });
+})();
+
+/* ─────────────────────────────────────
+SMOOTH SCROLL FADE-IN LOGIC
+──────────────────────────────────────── */
+(function () {
+  var cards = document.querySelectorAll(".card");
+
+  // Inject CSS class dynamically
+  cards.forEach(function (card) {
+    card.classList.add("fade-in-section");
+  });
+
+  // Watch elements and trigger animation when visible
+  var observer = new IntersectionObserver(
+    function (entries, obs) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          obs.unobserve(entry.target); // Only animate once
+        }
+      });
+    },
+    {
+      threshold: 0.05,
+      rootMargin: "0px 0px -40px 0px",
+    },
+  );
+
+  cards.forEach(function (card) {
+    observer.observe(card);
   });
 })();
