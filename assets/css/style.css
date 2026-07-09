@@ -1851,48 +1851,6 @@ NO-SCROLL DESKTOP  ≥ 901px
   .card {
     overflow: hidden;
   }
-
-  /* 1. Add Let's Talk Button Sweep */
-  .btn-talk::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -150%;
-    width: 120%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(255, 255, 255, 0.35) 50%,
-      transparent 100%
-    );
-    transform: skewX(-20deg) translateX(0%);
-    animation: futuristicSweep 3s ease-in-out infinite;
-    pointer-events: none;
-    will-change: transform;
-  }
-
-  /* 2. Add Flagship Snake Border */
-  .card.card-flagship::before {
-    content: "";
-    position: absolute;
-    top: -100%;
-    left: -100%;
-    width: 300%;
-    height: 300%;
-    background: conic-gradient(
-      var(--snake-base) 0%,
-      var(--snake-base) 75%,
-      var(--blue) 90%,
-      var(--snake-base) 100%
-    );
-    animation: snake-spin 7s linear infinite;
-    animation-play-state: var(--play-state, running);
-    z-index: -2;
-    pointer-events: none;
-    will-change: transform;
-    transform: translateZ(0);
-  }
 }
 
 /* ═══════════════════════════════════════════
@@ -1992,6 +1950,53 @@ IPAD PORTRAIT ONLY (581px - 900px)
     margin-left: auto; /* Pushes the button to the far right edge below intro */
     align-self: center;
     margin-top: 4px;
+  }
+}
+
+/* ═══════════════════════════════════════════
+DESKTOP AND IPAD ONLY ANIMATION
+═══════════════════════════════════════════ */
+@media (min-width: 720px) {
+  /* 1. Add Let's Talk Button Sweep */
+  .btn-talk::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 120%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.35) 50%,
+      transparent 100%
+    );
+    transform: skewX(-20deg) translateX(0%);
+    animation: futuristicSweep 3s ease-in-out infinite;
+    pointer-events: none;
+    will-change: transform;
+  }
+
+  /* 2. Add Flagship Snake Border */
+  .card.card-flagship::before {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 300%;
+    height: 300%;
+    background: conic-gradient(
+      var(--snake-base) 0%,
+      var(--snake-base) 75%,
+      var(--blue) 90%,
+      var(--snake-base) 100%
+    );
+    animation: snake-spin 7s linear infinite;
+    animation-play-state: var(--play-state, running);
+    z-index: -2;
+    pointer-events: none;
+    will-change: transform;
+    transform: translateZ(0);
   }
 }
 

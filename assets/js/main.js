@@ -218,7 +218,7 @@ TESTIMONIAL CAROUSEL LOGIC
   function startAutoplay() {
     interval = setInterval(function () {
       // Hardware check: Only slide automatically if on desktop
-      if (window.innerWidth >= 901) {
+      if (window.innerWidth >= 720) {
         nextSlide();
       }
     }, 6000);
