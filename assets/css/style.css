@@ -1253,22 +1253,23 @@ CARD 9 — CONTACT (HIGHLIGHTED)
   transition: color 0.2s;
 }
 
-.contact-line:hover span {
-  color: var(--blue-soft);
-}
+/* Removed .contact-line:hover to prevent false clickability perception */
 
 .copy-btn {
-  background: rgba(90, 157, 217, 0.05);
-  border: 1px solid rgba(114, 188, 255, 0.1);
+  background: rgba(90, 157, 217, 0.08);
+  border: 1px solid rgba(114, 188, 255, 0.15);
   color: var(--ink-soft);
-  width: 24px;
-  height: 24px;
-  border-radius: 4px;
+  padding: 5px 14px; /* Slightly increased side padding for the pill shape */
+  border-radius: 50px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 6px;
   cursor: pointer;
-  font-size: 0.75rem;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 0.55rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
   transition: all 0.2s;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
@@ -1335,7 +1336,7 @@ CARD 9 — CONTACT (HIGHLIGHTED)
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 4px;
+  gap: 8px;
 }
 
 .portfolio-redirect-stacked p {

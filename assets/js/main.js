@@ -134,11 +134,15 @@ COPY EMAIL LOGIC
       navigator.clipboard.writeText(email).then(function () {
         copyBtn.classList.add("copied");
         var icon = copyBtn.querySelector("i");
+        var textSpan = copyBtn.querySelector("span");
+
         icon.classList.replace("bi-copy", "bi-check2");
+        if (textSpan) textSpan.textContent = "Copied";
 
         setTimeout(function () {
           copyBtn.classList.remove("copied");
           icon.classList.replace("bi-check2", "bi-copy");
+          if (textSpan) textSpan.textContent = "Copy";
         }, 2000);
       });
     });
