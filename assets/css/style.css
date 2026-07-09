@@ -652,16 +652,15 @@ transform: skewX(-20deg) translateX(0%);
    relative to this element's own box (120% of the button), so the two
    aren't directly interchangeable, 291.7% here covers the same absolute
    travel distance the old -150% -> 200% left animation covered. */
-/* @keyframes futuristicSweep {
+@keyframes futuristicSweep {
   0% {
     transform: skewX(-20deg) translateX(0%);
   }
-
   85%,
   100% {
     transform: skewX(-20deg) translateX(291.7%);
   }
-} */
+}
 
 /* Performance Override: Kill the looping animation globally whenever a modal is open */
 html:has(.modal-overlay.open) .btn-talk::after {
@@ -1851,6 +1850,48 @@ NO-SCROLL DESKTOP  ≥ 901px
 
   .card {
     overflow: hidden;
+  }
+
+  /* 1. Add Let's Talk Button Sweep */
+  .btn-talk::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 120%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.35) 50%,
+      transparent 100%
+    );
+    transform: skewX(-20deg) translateX(0%);
+    animation: futuristicSweep 3s ease-in-out infinite;
+    pointer-events: none;
+    will-change: transform;
+  }
+
+  /* 2. Add Flagship Snake Border */
+  .card.card-flagship::before {
+    content: "";
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    width: 300%;
+    height: 300%;
+    background: conic-gradient(
+      var(--snake-base) 0%,
+      var(--snake-base) 75%,
+      var(--blue) 90%,
+      var(--snake-base) 100%
+    );
+    animation: snake-spin 7s linear infinite;
+    animation-play-state: var(--play-state, running);
+    z-index: -2;
+    pointer-events: none;
+    will-change: transform;
+    transform: translateZ(0);
   }
 }
 

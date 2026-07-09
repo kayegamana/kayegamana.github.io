@@ -215,14 +215,29 @@ TESTIMONIAL CAROUSEL LOGIC
     showSlide(nextIndex);
   }
 
-  // function startAutoplay() {
-  //   interval = setInterval(nextSlide, 6000); // Transitions every 6 seconds
-  // }
+  function startAutoplay() {
+    interval = setInterval(function () {
+      // Hardware check: Only slide automatically if on desktop
+      if (window.innerWidth >= 901) {
+        nextSlide();
+      }
+    }, 6000);
+  }
 
-  // function resetAutoplay() {
-  //   clearInterval(interval);
-  //   startAutoplay();
-  // }
+  function resetAutoplay() {
+    clearInterval(interval);
+    startAutoplay();
+  }
+
+  dots.forEach(function (dot) {
+    dot.addEventListener("click", function () {
+      var index = parseInt(this.getAttribute("data-index"));
+      showSlide(index);
+      resetAutoplay(); // Reset the timer so it doesn't instantly jump after clicking
+    });
+  });
+
+  startAutoplay();
 
   dots.forEach(function (dot) {
     dot.addEventListener("click", function () {
@@ -802,40 +817,38 @@ GALLERY & ZOOM LOGIC
 /* ─────────────────────────────────────
 PERFORMANCE LOGIC: PAUSE OFF-SCREEN ANIMATIONS
 ──────────────────────────────────────── */
-// (function () {
-//   var flagshipCard = document.querySelector(".card-flagship");
-//   if (!flagshipCard || !window.IntersectionObserver) return;
+(function () {
+  var flagshipCard = document.querySelector(".card-flagship");
+  if (!flagshipCard || !window.IntersectionObserver) return;
 
-//   var isIntersecting = false;
+  var isIntersecting = false;
 
-//   // Runs whenever visibility OR overlay state changes, so the animation
-//   // is only ever running when it's actually visible: in view AND not
-//   // covered by a modal or the lightbox. This frees up a full compositor
-//   // layer's worth of budget during every modal open and close, which is
-//   // exactly when that budget matters most on weaker GPUs.
-//   function syncPlayState() {
-//     var overlayOpen = !!document.querySelector(
-//       ".modal-overlay.open, .lightbox-overlay.active",
-//     );
-//     flagshipCard.style.setProperty(
-//       "--play-state",
-//       isIntersecting && !overlayOpen ? "running" : "paused",
-//     );
-//   }
+  // Runs whenever visibility OR overlay state changes, so the animation
+  // is only ever running when it's actually visible: in view AND not
+  // covered by a modal or the lightbox.
+  function syncPlayState() {
+    var overlayOpen = !!document.querySelector(
+      ".modal-overlay.open, .lightbox-overlay.active",
+    );
+    flagshipCard.style.setProperty(
+      "--play-state",
+      isIntersecting && !overlayOpen ? "running" : "paused",
+    );
+  }
 
-//   var observer = new IntersectionObserver(
-//     function (entries) {
-//       entries.forEach(function (entry) {
-//         isIntersecting = entry.isIntersecting;
-//         syncPlayState();
-//       });
-//     },
-//     { threshold: 0.1 },
-//   );
+  var observer = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        isIntersecting = entry.isIntersecting;
+        syncPlayState();
+      });
+    },
+    { threshold: 0.1 },
+  );
 
-//   observer.observe(flagshipCard);
-//   document.addEventListener("overlay:change", syncPlayState);
-// })();
+  observer.observe(flagshipCard);
+  document.addEventListener("overlay:change", syncPlayState);
+})();
 
 /* ─────────────────────────────────────
 CONTACT FORM AJAX SUBMISSION
