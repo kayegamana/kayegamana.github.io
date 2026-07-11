@@ -97,6 +97,7 @@ body {
   color: var(--ink);
   font-family: "Bricolage Grotesque", sans-serif;
   min-height: 100vh;
+  min-height: 100svh;
   overflow-x: hidden;
 
   /* Forces crisp text rendering on lower-density screens */
@@ -119,6 +120,7 @@ PAGE SHELL
 ═══════════════════════════════════════════ */
 .page {
   min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1841,11 +1843,13 @@ NO-SCROLL DESKTOP  ≥ 901px
 @media (min-width: 901px) {
   body {
     height: 100vh;
+    height: 100svh;
     overflow: hidden;
   }
 
   .page {
     height: 100vh;
+    height: 100svh;
     min-height: unset;
     align-items: stretch;
   }
@@ -1856,11 +1860,50 @@ NO-SCROLL DESKTOP  ≥ 901px
 
   .bento-grid {
     height: 100%;
-    grid-template-rows: 1fr 1fr 0.75fr;
+    /* Content-aware rows: each row happily grows to fill the available
+       height like the old 1fr/0.75fr split did, but never shrinks past
+       what its tallest card actually needs. This is what stops the
+       tech-stack pills and card text from getting squeezed off-screen
+       on shorter laptop panels or zoomed-in windows. */
+    grid-template-rows:
+      minmax(min-content, 1fr)
+      minmax(min-content, 1fr)
+      minmax(min-content, 0.75fr);
   }
 
   .card {
     overflow: hidden;
+  }
+
+  /* Escape hatch: if the grid's natural content height still exceeds
+     the viewport (e.g. a very short/zoomed browser window), let the
+     page scroll instead of clipping or crushing card content. This
+     only engages when min-content truly can't fit; otherwise the grid
+     above fills the viewport exactly as before. */
+  @media (max-height: 700px) {
+    body {
+      height: auto;
+      min-height: 100vh;
+      min-height: 100svh;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    .page {
+      height: auto;
+      min-height: 100vh;
+      min-height: 100svh;
+      align-items: flex-start;
+      padding: 20px 16px;
+    }
+
+    .bento-grid {
+      height: auto;
+      grid-template-rows:
+        minmax(min-content, auto)
+        minmax(min-content, auto)
+        minmax(min-content, auto);
+    }
   }
 }
 
@@ -1913,6 +1956,37 @@ TABLET  ≤ 900px
   .card-testimonial,
   .card-contact {
     grid-column: 1 / 3;
+  }
+
+  /* Height-constrained iPads (mainly landscape, where the browser chrome
+     eats a big chunk of a ~800px tall viewport). Scale spacing tokens
+     down so the tech-stack card's pills and every card's padding shrink
+     together instead of one card overflowing while others sit unused. */
+  @media (max-height: 820px) {
+    :root {
+      --gap: 14px;
+      --px: 18px;
+      --py: 16px;
+    }
+
+    .profile-id-img {
+      width: 130px;
+    }
+
+    .tech-pill {
+      padding: 4px 7px;
+    }
+
+    .tech-pill img.custom-tech-icon,
+    .tech-pill i {
+      width: 1.1rem;
+      height: 1.1rem;
+      font-size: 1.1rem;
+    }
+
+    .tech-pill span {
+      font-size: 0.52rem;
+    }
   }
 }
 
@@ -2126,6 +2200,38 @@ MOBILE  ≤ 580px
 
   .cform-row {
     grid-template-columns: 1fr;
+  }
+
+  /* Short phone viewports, most commonly a phone rotated to landscape.
+     The grid is already single-column and scrolls, so nothing breaks;
+     this just tightens spacing and the profile image so the fold looks
+     intentional rather than sparse. */
+  @media (max-height: 480px) {
+    :root {
+      --gap: 12px;
+      --px: 16px;
+      --py: 14px;
+    }
+
+    .profile-id-img {
+      width: 140px;
+      margin-bottom: 12px;
+    }
+
+    .tech-pill {
+      padding: 4px 7px;
+    }
+
+    .tech-pill img.custom-tech-icon,
+    .tech-pill i {
+      width: 1.05rem;
+      height: 1.05rem;
+      font-size: 1.05rem;
+    }
+
+    .tech-pill span {
+      font-size: 0.5rem;
+    }
   }
 }
 
