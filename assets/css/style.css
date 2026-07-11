@@ -1838,9 +1838,31 @@ PERFORMANCE OVERRIDES (TOUCH DEVICES)
 }
 
 /* ═══════════════════════════════════════════
-NO-SCROLL DESKTOP  ≥ 901px
+SCROLLING DESKTOP  901px and up (baseline)
+Ordinary laptops and any desktop window. Grid rows
+size to content and the page scrolls like a normal
+document. The locked-viewport block below overrides
+this once both width AND height are generous enough.
 ═══════════════════════════════════════════ */
 @media (min-width: 901px) {
+  .bento-grid {
+    grid-template-rows: repeat(3, auto);
+  }
+}
+
+/* ═══════════════════════════════════════════
+LOCKED-VIEWPORT BENTO  (large + tall screens only)
+Requires BOTH enough width (24-col grid needs room
+before cards get narrow) AND enough height (9 cards
+stacked in 3 rows needs real vertical space before
+content starts squeezing). Below this, the page is
+simply a normal scrolling document, which is also
+the baseline applied above.
+This two-dimension gate is what keeps 13" laptops and
+Safari's variable chrome height out of the fragile
+"must fit exactly" mode that used to crush content.
+═══════════════════════════════════════════ */
+@media (min-width: 1200px) and (min-height: 800px) {
   body {
     height: 100vh;
     height: 100svh;
@@ -1860,11 +1882,11 @@ NO-SCROLL DESKTOP  ≥ 901px
 
   .bento-grid {
     height: 100%;
-    /* Content-aware rows: each row happily grows to fill the available
-       height like the old 1fr/0.75fr split did, but never shrinks past
-       what its tallest card actually needs. This is what stops the
-       tech-stack pills and card text from getting squeezed off-screen
-       on shorter laptop panels or zoomed-in windows. */
+    /* Content-aware rows: each row grows to fill available height like
+       a plain 1fr/0.75fr split would, but never shrinks past what its
+       tallest card actually needs. Because this whole block only runs
+       once there's confirmed vertical headroom, min-content and 1fr
+       are no longer fighting each other the way they were before. */
     grid-template-rows:
       minmax(min-content, 1fr)
       minmax(min-content, 1fr)
@@ -1873,37 +1895,6 @@ NO-SCROLL DESKTOP  ≥ 901px
 
   .card {
     overflow: hidden;
-  }
-
-  /* Escape hatch: if the grid's natural content height still exceeds
-     the viewport (e.g. a very short/zoomed browser window), let the
-     page scroll instead of clipping or crushing card content. This
-     only engages when min-content truly can't fit; otherwise the grid
-     above fills the viewport exactly as before. */
-  @media (max-height: 700px) {
-    body {
-      height: auto;
-      min-height: 100vh;
-      min-height: 100svh;
-      overflow-y: auto;
-      overflow-x: hidden;
-    }
-
-    .page {
-      height: auto;
-      min-height: 100vh;
-      min-height: 100svh;
-      align-items: flex-start;
-      padding: 20px 16px;
-    }
-
-    .bento-grid {
-      height: auto;
-      grid-template-rows:
-        minmax(min-content, auto)
-        minmax(min-content, auto)
-        minmax(min-content, auto);
-    }
   }
 }
 
@@ -1956,37 +1947,6 @@ TABLET  ≤ 900px
   .card-testimonial,
   .card-contact {
     grid-column: 1 / 3;
-  }
-
-  /* Height-constrained iPads (mainly landscape, where the browser chrome
-     eats a big chunk of a ~800px tall viewport). Scale spacing tokens
-     down so the tech-stack card's pills and every card's padding shrink
-     together instead of one card overflowing while others sit unused. */
-  @media (max-height: 820px) {
-    :root {
-      --gap: 14px;
-      --px: 18px;
-      --py: 16px;
-    }
-
-    .profile-id-img {
-      width: 130px;
-    }
-
-    .tech-pill {
-      padding: 4px 7px;
-    }
-
-    .tech-pill img.custom-tech-icon,
-    .tech-pill i {
-      width: 1.1rem;
-      height: 1.1rem;
-      font-size: 1.1rem;
-    }
-
-    .tech-pill span {
-      font-size: 0.52rem;
-    }
   }
 }
 
@@ -2202,24 +2162,14 @@ MOBILE  ≤ 580px
     grid-template-columns: 1fr;
   }
 
-  /* Short phone viewports, most commonly a phone rotated to landscape.
-     The grid is already single-column and scrolls, so nothing breaks;
-     this just tightens spacing and the profile image so the fold looks
-     intentional rather than sparse. */
+  /* Phone rotated to landscape. The page already scrolls comfortably
+     here, so this is purely a visual refinement (a huge profile photo
+     looks disproportionate in a wide, short viewport) rather than
+     anything load-bearing for fitting content. */
   @media (max-height: 480px) {
-    :root {
-      --gap: 12px;
-      --px: 16px;
-      --py: 14px;
-    }
-
     .profile-id-img {
       width: 140px;
       margin-bottom: 12px;
-    }
-
-    .tech-pill {
-      padding: 4px 7px;
     }
 
     .tech-pill img.custom-tech-icon,
@@ -2227,10 +2177,6 @@ MOBILE  ≤ 580px
       width: 1.05rem;
       height: 1.05rem;
       font-size: 1.05rem;
-    }
-
-    .tech-pill span {
-      font-size: 0.5rem;
     }
   }
 }
