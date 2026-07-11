@@ -1996,6 +1996,15 @@ IPAD PORTRAIT ONLY (581px - 900px)
     align-self: center;
     margin-top: 4px;
   }
+
+  /* Pulls Testimonial and Contact out of the full-width stack (set by the
+     900px tablet breakpoint above) so they share one row as two 1-column
+     cards, but only in this wide-portrait range. Below 581px, the mobile
+     breakpoint's 1fr grid takes over and stacks them again automatically. */
+  .card-testimonial,
+  .card-contact {
+    grid-column: auto;
+  }
 }
 
 /* ═══════════════════════════════════════════
