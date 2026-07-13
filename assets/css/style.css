@@ -701,26 +701,26 @@ html:has(.modal-overlay.open) .btn-talk::after {
   font-size: 0.55rem;
   letter-spacing: 1.4px;
   text-transform: uppercase;
-  color: var(--blue);
-  background: rgba(90, 157, 217, 0.05);
-  border: 1px solid rgba(90, 157, 217, 0.25);
+  color: var(--ink);
+  background: rgba(114, 188, 255, 0.15);
+  border: 1px solid rgba(114, 188, 255, 0.3);
   border-radius: 50px;
   padding: 7px 14px;
   cursor: pointer;
   text-decoration: none;
   white-space: nowrap;
   transition: all 0.28s;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .btn-alt:hover {
-  background: rgba(90, 157, 217, 0.12);
-  color: var(--ink);
-  border-color: rgba(90, 157, 217, 0.4);
+  background: rgba(114, 188, 255, 0.25);
+  color: #ffffff;
+  border-color: rgba(114, 188, 255, 0.5);
   transform: translateY(-2px);
   box-shadow:
-    0 6px 20px rgba(0, 1, 30, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    0 6px 20px rgba(0, 1, 30, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 /* ═══════════════════════════════════════════
@@ -1354,6 +1354,23 @@ CARD 9 — CONTACT (HIGHLIGHTED)
   font-size: 0.55rem;
 }
 
+/* Stack contact bottom area on extremely narrow devices */
+@media (max-width: 374px) {
+  .contact-bottom-grid {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .portfolio-redirect-stacked {
+    align-items: center;
+  }
+
+  .portfolio-redirect-stacked p {
+    text-align: center;
+  }
+}
+
 .copyright-notice {
   font-family: "Bricolage Grotesque", sans-serif;
   font-size: 0.55rem;
@@ -1838,13 +1855,13 @@ PERFORMANCE OVERRIDES (TOUCH DEVICES)
 }
 
 /* ═══════════════════════════════════════════
-SCROLLING DESKTOP  901px and up (baseline)
+SCROLLING DESKTOP  1271px and up (baseline)
 Ordinary laptops and any desktop window. Grid rows
 size to content and the page scrolls like a normal
 document. The locked-viewport block below overrides
 this once both width AND height are generous enough.
 ═══════════════════════════════════════════ */
-@media (min-width: 901px) {
+@media (min-width: 1271px) {
   .bento-grid {
     grid-template-rows: repeat(3, auto);
   }
@@ -1862,7 +1879,7 @@ This two-dimension gate is what keeps 13" laptops and
 Safari's variable chrome height out of the fragile
 "must fit exactly" mode that used to crush content.
 ═══════════════════════════════════════════ */
-@media (min-width: 1200px) and (min-height: 800px) {
+@media (min-width: 1271px) and (min-height: 800px) {
   body {
     height: 100vh;
     height: 100svh;
@@ -1899,9 +1916,72 @@ Safari's variable chrome height out of the fragile
 }
 
 /* ═══════════════════════════════════════════
-TABLET  ≤ 900px
+MID & NARROW DESKTOP (900px - 1270px)
+Custom 2-Column Split Layout
 ═══════════════════════════════════════════ */
-@media (max-width: 900px) {
+@media (min-width: 900px) and (max-width: 1270px) {
+  /* Left column: Profile card spans vertically */
+  .card-profile {
+    grid-column: 1 / 9; /* 8 columns wide (perfect 1/3 of the layout) */
+    grid-row: 1 / 3;
+  }
+
+  /* Allow intro text to span the full widened card */
+  .profile-intro {
+    max-width: 100%;
+  }
+
+  /* Right column (Row 1): Fast Facts & Tech Stack (Equal width: 8 cols each) */
+  .card-facts {
+    grid-column: 9 / 17; /* 8 columns wide */
+    grid-row: 1;
+  }
+
+  .card-techstack {
+    grid-column: 17 / 25; /* 8 columns wide */
+    grid-row: 1;
+  }
+
+  /* Right column (Row 2): Flagship spanning below the previous two */
+  .card-flagship {
+    grid-column: 9 / 25; /* 16 columns wide */
+    grid-row: 2;
+  }
+
+  /* Push secondary projects to Row 3 */
+  .card-proj2 {
+    grid-column: 1 / 13;
+    grid-row: 3;
+  }
+
+  .card-proj3 {
+    grid-column: 13 / 25;
+    grid-row: 3;
+  }
+
+  /* Occupies its own full row above the bottom cards */
+  .card-certs {
+    grid-column: 1 / 25;
+    grid-row: 4;
+  }
+
+  /* Shares the bottom row (50% width) */
+  .card-testimonial {
+    grid-column: 1 / 13;
+    grid-row: 5;
+  }
+
+  /* Shares the bottom row (50% width) */
+  .card-contact {
+    grid-column: 13 / 25;
+    grid-row: 5;
+  }
+}
+
+/* ═══════════════════════════════════════════
+TABLET & IPAD (≤ 899px)
+═══════════════════════════════════════════ */
+@media (max-width: 899px) {
   .page {
     align-items: flex-start;
   }
@@ -1951,9 +2031,9 @@ TABLET  ≤ 900px
 }
 
 /* ═══════════════════════════════════════════
-IPAD PORTRAIT ONLY (581px - 900px)
+IPAD PORTRAIT ONLY (581px - 899px)
 ═══════════════════════════════════════════ */
-@media (min-width: 581px) and (max-width: 900px) {
+@media (min-width: 581px) and (max-width: 899px) {
   .profile-text {
     display: flex;
     flex-direction: row;
@@ -1997,10 +2077,7 @@ IPAD PORTRAIT ONLY (581px - 900px)
     margin-top: 4px;
   }
 
-  /* Pulls Testimonial and Contact out of the full-width stack (set by the
-     900px tablet breakpoint above) so they share one row as two 1-column
-     cards, but only in this wide-portrait range. Below 581px, the mobile
-     breakpoint's 1fr grid takes over and stacks them again automatically. */
+  /* Pulls Testimonial and Contact out of the full-width stack so they share one row */
   .card-testimonial,
   .card-contact {
     grid-column: auto;
@@ -2236,4 +2313,31 @@ SECTION FADE-IN ANIMATION
 .fade-in-section.is-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ═══════════════════════════════════════════
+RESPONSIVE CTA OVERRIDE (< 1270px)
+Morphs the secondary footer button into a primary 
+CTA when the layout becomes a scrollable stack.
+═══════════════════════════════════════════ */
+@media (max-width: 1270px) {
+  .card-contact .btn-alt {
+    color: var(--bg-deep);
+    background: var(--blue);
+    border: none;
+    padding: 8px 16px;
+    box-shadow:
+      0 4px 14px rgba(90, 157, 217, 0.28),
+      inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  }
+
+  .card-contact .btn-alt:hover {
+    background: var(--blue-soft);
+    color: var(--bg-deep);
+    border: none;
+    transform: translateY(-2px);
+    box-shadow:
+      0 6px 20px rgba(90, 157, 217, 0.4),
+      inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  }
 }
