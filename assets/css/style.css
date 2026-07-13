@@ -1890,11 +1890,14 @@ Safari's variable chrome height out of the fragile
     height: 100vh;
     height: 100svh;
     min-height: unset;
-    align-items: stretch;
+    /* Reverts to the center alignment from your base mobile styles instead of stretching */
+    align-items: center;
   }
 
   .bento-master {
     height: 100%;
+    /* Locks the grid to your perfectly balanced Surface Pro height */
+    max-height: 864px;
   }
 
   .bento-grid {
