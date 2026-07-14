@@ -1879,7 +1879,7 @@ This two-dimension gate is what keeps 13" laptops and
 Safari's variable chrome height out of the fragile
 "must fit exactly" mode that used to crush content.
 ═══════════════════════════════════════════ */
-@media (min-width: 1271px) and (min-height: 800px) {
+@media (min-width: 1271px) and (min-height: 750px) {
   body {
     height: 100vh;
     height: 100svh;

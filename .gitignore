@@ -1,0 +1,16 @@
+# ===========================================================
+# Environment Config
+# ===========================================================
+configLocal.js[cite: 1]
+
+# System / editor noise
+.DS_Store[cite: 1]
+Thumbs.db[cite: 1]
+.vscode/[cite: 1]
+.idea/[cite: 1]
+*.log[cite: 1]
+node_modules/[cite: 1]
+
+# Google Drive Sync
+.tmp.driveupload/
+.tmp.drivedownload/
