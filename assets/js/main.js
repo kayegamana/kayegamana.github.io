@@ -952,3 +952,63 @@ SMOOTH SCROLL FADE-IN LOGIC
     observer.observe(card);
   });
 })();
+
+/* ─────────────────────────────────────
+FLUID DESKTOP SCALE (≥1271px)
+Continuously scales the bento canvas instead of snapping to a fixed
+133% zoom. The canvas is measured at its true, unscaled size on every
+recalculation, then:
+
+  scale = min(viewportWidth / naturalWidth,
+              viewportHeight / naturalHeight,
+              maxScale)
+
+Both axes are checked, not just width - so on a screen that's wide
+but short (e.g. 2560x1024, 1440x1024) the canvas scales down just
+enough to fit the available height too, instead of overflowing and
+triggering a scrollbar. It only reaches the full 1.33x "wide monitor"
+look once both width AND height comfortably allow it, which is
+exactly what happens on a tall-enough ultrawide monitor.
+──────────────────────────────────────── */
+(function () {
+  var root = document.documentElement;
+  var BREAKPOINT = 1271; // matches the CSS media query
+  var MAX_SCALE = 1.33; // the approved "wide monitor" magnification
+  var frame = null;
+
+  function updateBentoScale() {
+    var el = document.querySelector(".bento-master");
+    var w = window.innerWidth;
+    var h = window.innerHeight;
+
+    if (!el || w < BREAKPOINT) {
+      root.style.setProperty("--bento-scale", "1");
+      return;
+    }
+
+    // Reset to unscaled before measuring, so the ratio below is always
+    // computed fresh rather than compounding on the previous scale.
+    root.style.setProperty("--bento-scale", "1");
+    var rect = el.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+
+    var scale = Math.min(w / rect.width, h / rect.height, MAX_SCALE);
+    root.style.setProperty("--bento-scale", scale.toFixed(4));
+  }
+
+  function scheduleUpdate() {
+    if (frame) return;
+    frame = requestAnimationFrame(function () {
+      frame = null;
+      updateBentoScale();
+    });
+  }
+
+  updateBentoScale();
+  window.addEventListener("resize", scheduleUpdate);
+  window.addEventListener("orientationchange", scheduleUpdate);
+  window.addEventListener("load", scheduleUpdate);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(scheduleUpdate);
+  }
+})();
