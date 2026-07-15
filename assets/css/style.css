@@ -1860,9 +1860,9 @@ PERFORMANCE OVERRIDES (TOUCH DEVICES)
 }
 
 /* ═══════════════════════════════════════════
-DESKTOP SCALING & LOCKED VIEWPORT (1271px+)
+DESKTOP SCALING & LOCKED VIEWPORT (1440px+)
 ═══════════════════════════════════════════ */
-@media (min-width: 1271px) {
+@media (min-width: 1440px) {
   body {
     height: 100vh;
     height: 100svh;
@@ -1881,7 +1881,12 @@ DESKTOP SCALING & LOCKED VIEWPORT (1271px+)
     min-height: unset;
     align-items: center;
     justify-content: center;
-    padding: 0;
+    /* Horizontal only. Real, guaranteed breathing room on the x-axis -
+       main.js reads this exact value (via getComputedStyle) to size
+       the canvas, so the two can never drift apart. Vertical stays at
+       0 here; that axis is handled purely in JS (see main.js), left
+       untouched from the version already confirmed to look right. */
+    padding: 0 32px;
   }
 
   .bento-master {
@@ -1907,32 +1912,38 @@ DESKTOP SCALING & LOCKED VIEWPORT (1271px+)
 }
 
 /*
-  FLUID DESKTOP MAGNIFICATION (1271px+)
+  FLUID DESKTOP MAGNIFICATION (1440px+)
   Instead of snapping straight to a fixed 133% zoom (which overflowed
-  and got clipped on any viewport narrower than ~1808px), the zoom
+  and got clipped on any viewport narrower than ~1873px), the zoom
   level is a continuous ratio computed in main.js:
 
     scale = min(viewportWidth / 1360, 1.33)
 
   Because the canvas's own natural width (1360px) is part of the
   formula, the zoomed canvas can mathematically never exceed the
-  viewport width, whatever it is. It grows smoothly from ~0.93x at
-  1271px up to the approved 1.33x "wide monitor" look once the
-  viewport comfortably fits it (~1808px+), then holds steady at 1.33x
-  for anything wider (2560px, 3440px ultrawide, etc). No breakpoint
-  cliff, no clipped content, no manual per-monitor tuning.
+  viewport width, whatever it is. 1424px (1360px canvas + the page's
+  64px of horizontal padding) is the exact width at which the dense
+  grid first fits at its own native, unscaled size; the breakpoint is
+  set a little past that, at 1440px, as a safety margin so a vertical
+  scrollbar (which shaves some width off the usable viewport) can
+  never drag the starting scale just under 1x - so this tier
+  reliably starts at a true 1.00x and grows smoothly up from there to the
+  approved 1.33x "wide monitor" look once the viewport comfortably
+  fits it (~1873px+), then holds steady at 1.33x for anything wider
+  (2560px, 3440px ultrawide, etc). No shrink phase below 1x, no
+  clipped content, no manual per-monitor tuning.
 */
-@media (min-width: 1271px) {
+@media (min-width: 1440px) {
   .bento-master {
     zoom: var(--bento-scale);
   }
 }
 
 /* ═══════════════════════════════════════════
-MID & NARROW DESKTOP (900px - 1270px)
+MID & NARROW DESKTOP (900px - 1439px)
 Custom 2-Column Split Layout
 ═══════════════════════════════════════════ */
-@media (min-width: 900px) and (max-width: 1270px) {
+@media (min-width: 900px) and (max-width: 1439px) {
   /* Left column: Profile card spans vertically */
   .card-profile {
     grid-column: 1 / 9; /* 8 columns wide (perfect 1/3 of the layout) */
@@ -2329,11 +2340,11 @@ SECTION FADE-IN ANIMATION
 }
 
 /* ═══════════════════════════════════════════
-RESPONSIVE CTA OVERRIDE (< 1270px)
+RESPONSIVE CTA OVERRIDE (< 1440px)
 Morphs the secondary footer button into a primary 
 CTA when the layout becomes a scrollable stack.
 ═══════════════════════════════════════════ */
-@media (max-width: 1270px) {
+@media (max-width: 1439px) {
   .card-contact .btn-alt {
     color: var(--bg-deep);
     background: var(--blue);

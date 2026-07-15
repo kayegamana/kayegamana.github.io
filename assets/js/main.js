@@ -954,45 +954,80 @@ SMOOTH SCROLL FADE-IN LOGIC
 })();
 
 /* ─────────────────────────────────────
-FLUID DESKTOP SCALE (≥1271px)
+FLUID DESKTOP SCALE (≥1440px)
 Continuously scales the bento canvas instead of snapping to a fixed
 133% zoom. The canvas is measured at its true, unscaled size on every
 recalculation, then:
 
-  scale = min(viewportWidth / naturalWidth,
-              viewportHeight / naturalHeight,
+  scale = min(pageContentWidth / naturalWidth,
+              availableHeight  / naturalHeight,
               maxScale)
 
 Both axes are checked, not just width - so on a screen that's wide
-but short (e.g. 2560x1024, 1440x1024) the canvas scales down just
-enough to fit the available height too, instead of overflowing and
-triggering a scrollbar. It only reaches the full 1.33x "wide monitor"
-look once both width AND height comfortably allow it, which is
-exactly what happens on a tall-enough ultrawide monitor.
+but short (e.g. 2560x1024), or narrow but tall for its width
+(e.g. 1440x1024), the canvas scales down just enough to fit the
+tighter axis, instead of overflowing it.
+
+1424px (1360px canvas + the page's 64px of horizontal padding) is
+the exact width where the dense grid first fits at its own native,
+unscaled size. The breakpoint here is set a little past that, at
+1440px, as a safety margin so a vertical scrollbar can never drag
+the starting scale just under 1x. Below 1440px there's no
+guaranteed room to show the dense grid at 1x, so the "Mid & Narrow
+Desktop" 2-column layout (900-1439px, in style.css) is used instead
+- it's a genuinely fluid CSS Grid, not this fixed-canvas-plus-zoom
+system, so it never needs to shrink below its own natural
+proportions. The zoom system only takes over once the canvas can be
+shown at ≥1x, which is what keeps this tier feeling like a smooth
+"zoom in as you widen the window" rather than a shrink-then-grow.
+
+X and Y are deliberately handled two different ways:
+
+- X: "pageContentWidth" is .page's own content box - its real,
+  rendered width minus its own CSS padding (set in style.css), read
+  via getComputedStyle. That real, guaranteed padding is what fixes
+  the gutter reliably at every width, including the narrow band right
+  above the 1440px breakpoint where an inferred (not CSS-guaranteed)
+  margin was proving unreliable.
+
+- Y: kept as a plain computed value (viewport height minus a fixed
+  gutter), matching the vertical behavior already confirmed to look
+  right. This is intentional - only the horizontal gutter needed the
+  more robust treatment above, and it stays scoped to X only.
 ──────────────────────────────────────── */
 (function () {
   var root = document.documentElement;
-  var BREAKPOINT = 1271; // matches the CSS media query
+  var BREAKPOINT = 1440; // matches the CSS media query
   var MAX_SCALE = 1.33; // the approved "wide monitor" magnification
+  var GUTTER_Y = 32; // minimum top/bottom breathing room, in px, per side
   var frame = null;
 
   function updateBentoScale() {
+    var pageEl = document.querySelector(".page");
     var el = document.querySelector(".bento-master");
-    var w = window.innerWidth;
     var h = window.innerHeight;
+    if (!pageEl || !el) return;
 
-    if (!el || w < BREAKPOINT) {
+    if (document.documentElement.clientWidth < BREAKPOINT) {
       root.style.setProperty("--bento-scale", "1");
       return;
     }
 
-    // Reset to unscaled before measuring, so the ratio below is always
-    // computed fresh rather than compounding on the previous scale.
+    // Reset to unscaled before measuring anything, so every reading
+    // below reflects the same, unscaled layout pass.
     root.style.setProperty("--bento-scale", "1");
+
     var rect = el.getBoundingClientRect();
     if (!rect.width || !rect.height) return;
 
-    var scale = Math.min(w / rect.width, h / rect.height, MAX_SCALE);
+    var cs = getComputedStyle(pageEl);
+    var padX = (parseFloat(cs.paddingLeft) || 0) + (parseFloat(cs.paddingRight) || 0);
+    var availW = pageEl.clientWidth - padX;
+    var availH = Math.max(h - GUTTER_Y * 2, rect.height * 0.5);
+    if (availW <= 0 || availH <= 0) return;
+
+    var scale = Math.min(availW / rect.width, availH / rect.height, MAX_SCALE);
+    if (!isFinite(scale) || scale <= 0) scale = 1;
     root.style.setProperty("--bento-scale", scale.toFixed(4));
   }
 
