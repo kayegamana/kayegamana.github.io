@@ -1860,9 +1860,19 @@ PERFORMANCE OVERRIDES (TOUCH DEVICES)
 }
 
 /* ═══════════════════════════════════════════
-DESKTOP SCALING & LOCKED VIEWPORT (1440px+)
+DESKTOP SCALING & LOCKED VIEWPORT
+(1440px+, OR a wide-landscape laptop window between
+900-1439px - e.g. a 16" display at 125% Windows scaling,
+~1379x656. The extra clause is deliberately narrow: it only
+fires for windows that are both landscape-ish (aspect ratio
+1.6+, comfortably past any iPad's ~1.33-1.44 landscape ratio)
+and tall enough (600px+) that scaling the real desktop canvas
+down still stays legible - short/near-square windows in this
+width band fall through to the Mid & Narrow Desktop reflow
+layout below instead, which is the better fit for those.)
 ═══════════════════════════════════════════ */
-@media (min-width: 1440px) {
+@media (min-width: 1440px),
+  (min-width: 900px) and (max-width: 1439px) and (min-aspect-ratio: 8/5) and (min-height: 600px) {
   body {
     height: 100vh;
     height: 100svh;
@@ -1881,12 +1891,14 @@ DESKTOP SCALING & LOCKED VIEWPORT (1440px+)
     min-height: unset;
     align-items: center;
     justify-content: center;
-    /* Horizontal only. Real, guaranteed breathing room on the x-axis -
-       main.js reads this exact value (via getComputedStyle) to size
-       the canvas, so the two can never drift apart. Vertical stays at
-       0 here; that axis is handled purely in JS (see main.js), left
-       untouched from the version already confirmed to look right. */
-    padding: 0 32px;
+    /* Horizontal only. Matches var(--gap) - the same 18px breathing
+       room cards get from each other inside the grid - so the outside
+       edge of the bento never reads as more "boxed in" than the cards
+       are from one another. main.js reads this exact value (via
+       getComputedStyle) to size the canvas, so the two can never
+       drift apart. Vertical stays at 0 here; that axis is handled
+       purely in JS (see main.js). */
+    padding: 0 var(--gap);
   }
 
   .bento-master {
@@ -1896,6 +1908,19 @@ DESKTOP SCALING & LOCKED VIEWPORT (1440px+)
     max-width: none;
     /* Clean slate to avoid sizing conflicts */
     transform: none;
+    /* .bento-master is a flex item of .page (display:flex), and flex
+       items shrink by default once their content is wider than the
+       container. Below ~1424px viewport width that's exactly what
+       happens: the browser silently squeezes this to whatever width
+       is available *before* main.js ever gets to measure or scale it,
+       which both throws off the "natural size" measurement main.js
+       relies on (rectHeight comes back taller than it really is,
+       since the content had to rewrap into a narrower box) and skips
+       the deliberate zoom-based shrink entirely. Locking flex-shrink
+       to 0 keeps this element's true 1360px natural size intact for
+       main.js to measure correctly, so it's always the zoom transform
+       - not flexbox - doing the shrinking. */
+    flex-shrink: 0;
   }
 
   .bento-grid {
@@ -1932,8 +1957,14 @@ DESKTOP SCALING & LOCKED VIEWPORT (1440px+)
   fits it (~1873px+), then holds steady at 1.33x for anything wider
   (2560px, 3440px ultrawide, etc). No shrink phase below 1x, no
   clipped content, no manual per-monitor tuning.
+
+  Below 1440px, the same var(--bento-scale) is reused by the
+  wide-landscape-laptop clause above - main.js computes it the same
+  way there too, so scale just becomes <1 (shrinking to fit) instead
+  of growing, per the min()/availH/availW logic in main.js.
 */
-@media (min-width: 1440px) {
+@media (min-width: 1440px),
+  (min-width: 900px) and (max-width: 1439px) and (min-aspect-ratio: 8/5) and (min-height: 600px) {
   .bento-master {
     zoom: var(--bento-scale);
   }
@@ -1999,6 +2030,67 @@ Custom 2-Column Split Layout
   .card-contact {
     grid-column: 13 / 25;
     grid-row: 5;
+  }
+}
+
+/* ═══════════════════════════════════════════
+WIDE-LANDSCAPE LAPTOP OVERRIDE (900px - 1439px,
+landscape 1.6+ aspect, 600px+ tall)
+Re-applies the original desktop bento placements on top of the
+2-column split above, for laptop windows that are wide-and-short
+rather than tablet-squarish (e.g. a 13"-16" laptop at various OS
+scaling levels). Paired with the fluid scale system above it, so
+this renders as the exact same layout as the 1440px+ tier, just
+proportionally smaller - never the tablet reflow.
+═══════════════════════════════════════════ */
+@media (min-width: 900px) and (max-width: 1439px) and (min-aspect-ratio: 8/5) and (min-height: 600px) {
+  .card-profile {
+    grid-column: 1 / 7;
+    grid-row: 1 / 3;
+  }
+
+  .card-facts {
+    grid-column: 7 / 13;
+    grid-row: 1;
+  }
+
+  .card-techstack {
+    grid-column: 7 / 13;
+    grid-row: 2;
+  }
+
+  .card-flagship {
+    grid-column: 13 / 25;
+    grid-row: 1;
+  }
+
+  .card-proj2 {
+    grid-column: 13 / 19;
+    grid-row: 2;
+  }
+
+  .card-proj3 {
+    grid-column: 19 / 25;
+    grid-row: 2;
+  }
+
+  .card-certs {
+    grid-column: 1 / 10;
+    grid-row: 3;
+  }
+
+  .card-testimonial {
+    grid-column: 10 / 18;
+    grid-row: 3;
+  }
+
+  .card-contact {
+    grid-column: 18 / 25;
+    grid-row: 3;
+  }
+
+  .profile-intro {
+    max-width: 32ch;
   }
 }
 
@@ -2363,5 +2455,38 @@ CTA when the layout becomes a scrollable stack.
     box-shadow:
       0 6px 20px rgba(90, 157, 217, 0.4),
       inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  }
+}
+
+/* ═══════════════════════════════════════════
+WIDE-LANDSCAPE LAPTOP CTA CONSISTENCY (900px - 1439px,
+landscape 1.6+ aspect, 600px+ tall)
+This tier shows the exact same bento arrangement as the ≥1440px
+desktop tier (see "WIDE-LANDSCAPE LAPTOP OVERRIDE" above), so the
+"Drop a Message" button needs to match that tier's rule too: kept in
+its quiet, secondary ghost style rather than the solid-blue treatment
+the override above promotes it to for the mobile/stacked layouts.
+Two solid-blue buttons in the same view pull attention in two
+directions - that's only acceptable in the stacked layout, where
+they're never both on-screen looking like peers the way they are
+here.
+═══════════════════════════════════════════ */
+@media (min-width: 900px) and (max-width: 1439px) and (min-aspect-ratio: 8/5) and (min-height: 600px) {
+  .card-contact .btn-alt {
+    color: var(--ink);
+    background: rgba(114, 188, 255, 0.15);
+    border: 1px solid rgba(114, 188, 255, 0.3);
+    padding: 7px 14px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .card-contact .btn-alt:hover {
+    background: rgba(114, 188, 255, 0.25);
+    color: #ffffff;
+    border-color: rgba(114, 188, 255, 0.5);
+    transform: translateY(-2px);
+    box-shadow:
+      0 6px 20px rgba(0, 1, 30, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
   }
 }

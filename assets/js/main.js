@@ -954,7 +954,8 @@ SMOOTH SCROLL FADE-IN LOGIC
 })();
 
 /* ─────────────────────────────────────
-FLUID DESKTOP SCALE (≥1440px)
+FLUID DESKTOP SCALE (≥1440px, or a wide-landscape laptop
+window between 900-1439px)
 Continuously scales the bento canvas instead of snapping to a fixed
 133% zoom. The canvas is measured at its true, unscaled size on every
 recalculation, then:
@@ -966,20 +967,24 @@ recalculation, then:
 Both axes are checked, not just width - so on a screen that's wide
 but short (e.g. 2560x1024), or narrow but tall for its width
 (e.g. 1440x1024), the canvas scales down just enough to fit the
-tighter axis, instead of overflowing it.
+tighter axis, instead of overflowing it. That same both-axes check is
+what makes it safe to also run this below 1440px: on a wide-but-short
+laptop window (e.g. a 16" display at 125% Windows scaling, ~1379x656)
+scale comes out under 1x and the canvas shrinks to fit, rather than
+requiring the viewport to already be big enough for a full-size,
+unscaled canvas.
 
 1424px (1360px canvas + the page's 64px of horizontal padding) is
 the exact width where the dense grid first fits at its own native,
-unscaled size. The breakpoint here is set a little past that, at
-1440px, as a safety margin so a vertical scrollbar can never drag
-the starting scale just under 1x. Below 1440px there's no
-guaranteed room to show the dense grid at 1x, so the "Mid & Narrow
-Desktop" 2-column layout (900-1439px, in style.css) is used instead
-- it's a genuinely fluid CSS Grid, not this fixed-canvas-plus-zoom
-system, so it never needs to shrink below its own natural
-proportions. The zoom system only takes over once the canvas can be
-shown at ≥1x, which is what keeps this tier feeling like a smooth
-"zoom in as you widen the window" rather than a shrink-then-grow.
+unscaled size at 1440px+. Below that, SCALE_QUERY (mirroring the CSS
+media query in style.css) only opts a viewport into this
+fixed-canvas-plus-zoom system when it's landscape enough (1.6+
+aspect ratio) and tall enough (600px+) for a shrunk canvas to stay
+legible; anything squarer or shorter than that in the 900-1439px
+band - an iPad in landscape, say - gets the "Mid & Narrow Desktop"
+2-column reflow layout in style.css instead, which is a genuinely
+fluid CSS Grid rather than a shrinking fixed canvas, so it never
+needs to scale below its own natural proportions.
 
 X and Y are deliberately handled two different ways:
 
@@ -997,18 +1002,23 @@ X and Y are deliberately handled two different ways:
 ──────────────────────────────────────── */
 (function () {
   var root = document.documentElement;
-  var BREAKPOINT = 1440; // matches the CSS media query
+  // Mirrors the combined media query in style.css exactly (both the
+  // "DESKTOP SCALING & LOCKED VIEWPORT" and "FLUID DESKTOP
+  // MAGNIFICATION" blocks) so JS and CSS can never drift apart.
+  var SCALE_QUERY =
+    "(min-width: 1440px), (min-width: 900px) and (max-width: 1439px) and (min-aspect-ratio: 8/5) and (min-height: 600px)";
   var MAX_SCALE = 1.33; // the approved "wide monitor" magnification
-  var GUTTER_Y = 32; // minimum top/bottom breathing room, in px, per side
+  var FALLBACK_GUTTER_Y = 18; // used only if --gap can't be read for some reason
   var frame = null;
 
   function updateBentoScale() {
     var pageEl = document.querySelector(".page");
     var el = document.querySelector(".bento-master");
+    var gridEl = document.querySelector(".bento-grid");
     var h = window.innerHeight;
     if (!pageEl || !el) return;
 
-    if (document.documentElement.clientWidth < BREAKPOINT) {
+    if (!window.matchMedia(SCALE_QUERY).matches) {
       root.style.setProperty("--bento-scale", "1");
       return;
     }
@@ -1023,6 +1033,12 @@ X and Y are deliberately handled two different ways:
     var cs = getComputedStyle(pageEl);
     var padX = (parseFloat(cs.paddingLeft) || 0) + (parseFloat(cs.paddingRight) || 0);
     var availW = pageEl.clientWidth - padX;
+    // GUTTER_Y is read straight from the grid's own row-gap
+    // (var(--gap) in style.css) rather than hardcoded, so the minimum
+    // outside-the-bento breathing room always matches the spacing
+    // between cards inside it - never thicker, never out of sync if
+    // --gap ever changes.
+    var GUTTER_Y = gridEl ? parseFloat(getComputedStyle(gridEl).rowGap) || FALLBACK_GUTTER_Y : FALLBACK_GUTTER_Y;
     var availH = Math.max(h - GUTTER_Y * 2, rect.height * 0.5);
     if (availW <= 0 || availH <= 0) return;
 
