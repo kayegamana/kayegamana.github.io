@@ -189,12 +189,15 @@ TESTIMONIAL CAROUSEL LOGIC
 
       // Dialed back bounds to find the sweet spot between filling space and retaining elegant padding
       if (charCount < 100) {
+        slide.setAttribute("data-len", "short");
         textEl.style.fontSize = "clamp(1rem, 5.5cqi, 1.4rem)";
         textEl.style.lineHeight = "1.55";
       } else if (charCount <= 160) {
+        slide.setAttribute("data-len", "medium");
         textEl.style.fontSize = "clamp(0.9rem, 4.8cqi, 1.25rem)";
         textEl.style.lineHeight = "1.5";
       } else {
+        slide.setAttribute("data-len", "long");
         textEl.style.fontSize = "clamp(0.75rem, 4.2cqi, 1rem)";
         textEl.style.lineHeight = "1.45";
       }
@@ -1031,14 +1034,17 @@ X and Y are deliberately handled two different ways:
     if (!rect.width || !rect.height) return;
 
     var cs = getComputedStyle(pageEl);
-    var padX = (parseFloat(cs.paddingLeft) || 0) + (parseFloat(cs.paddingRight) || 0);
+    var padX =
+      (parseFloat(cs.paddingLeft) || 0) + (parseFloat(cs.paddingRight) || 0);
     var availW = pageEl.clientWidth - padX;
     // GUTTER_Y is read straight from the grid's own row-gap
     // (var(--gap) in style.css) rather than hardcoded, so the minimum
     // outside-the-bento breathing room always matches the spacing
     // between cards inside it - never thicker, never out of sync if
     // --gap ever changes.
-    var GUTTER_Y = gridEl ? parseFloat(getComputedStyle(gridEl).rowGap) || FALLBACK_GUTTER_Y : FALLBACK_GUTTER_Y;
+    var GUTTER_Y = gridEl
+      ? parseFloat(getComputedStyle(gridEl).rowGap) || FALLBACK_GUTTER_Y
+      : FALLBACK_GUTTER_Y;
     var availH = Math.max(h - GUTTER_Y * 2, rect.height * 0.5);
     if (availW <= 0 || availH <= 0) return;
 

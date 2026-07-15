@@ -66,6 +66,7 @@ RESET
 html {
   scrollbar-width: thin;
   scrollbar-color: var(--blue-soft) var(--bg-deep);
+  overscroll-behavior-y: none;
 }
 
 ::-webkit-scrollbar {
@@ -1207,7 +1208,7 @@ CARD 8 — TESTIMONIAL (SECONDARY)
 .author-role {
   color: var(--ink-mute);
   /* Muted gray tone to distinguish from the name */
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .author-divider {
@@ -1228,6 +1229,7 @@ CARD 9 — CONTACT (HIGHLIGHTED)
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 10px;
   border-bottom: 1px solid var(--hairline-soft);
   padding-bottom: 8px;
 }
@@ -1243,6 +1245,7 @@ CARD 9 — CONTACT (HIGHLIGHTED)
   gap: 12px;
   text-decoration: none;
   color: inherit;
+  min-width: 0; /* Lets this flex child shrink below its text's natural width */
 }
 
 .contact-line i {
@@ -1258,6 +1261,10 @@ CARD 9 — CONTACT (HIGHLIGHTED)
   font-size: clamp(0.75rem, 0.85vw, 0.85rem);
   color: var(--ink-mute);
   transition: color 0.2s;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
 }
 
 /* Removed .contact-line:hover to prevent false clickability perception */
@@ -1279,6 +1286,7 @@ CARD 9 — CONTACT (HIGHLIGHTED)
   text-transform: uppercase;
   transition: all 0.2s;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  flex-shrink: 0; /* Keeps the button fully legible; the email truncates instead */
 }
 
 .copy-btn:hover {
@@ -1373,6 +1381,109 @@ CARD 9 — CONTACT (HIGHLIGHTED)
 
   .portfolio-redirect-stacked p {
     text-align: center;
+  }
+}
+
+/* Convert copy button to a circular icon to save space in the narrower tablet/split-column range,
+   where the card is squeezed too tight for the side-by-side layout */
+@media (min-width: 581px) and (max-width: 683px) {
+  .copy-btn {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
+    position: relative; /* Added to anchor the tooltip */
+  }
+
+  .copy-btn span {
+    display: none;
+  }
+
+  .copy-btn i {
+    font-size: 0.85rem; /* Slightly smaller than the social buttons to reflect visual hierarchy */
+  }
+
+  /* GPU-Accelerated Lightweight Tooltip */
+  .copy-btn::after {
+    content: "COPIED";
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    background: var(--green);
+    color: var(--bg-deep);
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    font-size: 0.5rem;
+    letter-spacing: 1px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    opacity: 0;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0, 1, 30, 0.4);
+    transition:
+      transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+      opacity 0.2s ease;
+    will-change: transform, opacity;
+  }
+
+  /* Triggers perfectly via your existing JS */
+  .copy-btn.copied::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@media (min-width: 581px) and (max-width: 788px) {
+  .contact-bottom-grid {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .portfolio-redirect-stacked {
+    align-items: center;
+  }
+
+  .portfolio-redirect-stacked p {
+    text-align: center;
+  }
+
+  /* Scale up testimonial text based on character length to prevent card stretching */
+  .t-slide[data-len="short"] .quote-text {
+    font-size: clamp(1rem, 6.5cqi, 1.35rem) !important;
+    line-height: 1.6 !important;
+  }
+
+  .t-slide[data-len="medium"] .quote-text {
+    font-size: clamp(0.95rem, 5.5cqi, 1.25rem) !important;
+    line-height: 1.55 !important;
+  }
+
+  .t-slide[data-len="long"] .quote-text {
+    font-size: clamp(0.85rem, 4.8cqi, 1.1rem) !important;
+    line-height: 1.5 !important;
+  }
+
+  .card-testimonial .quote-text {
+    margin-bottom: 1.5rem !important;
+  }
+
+  .card-testimonial .quote-attr {
+    font-size: clamp(0.7rem, 4.5cqi, 0.9rem) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end !important;
+    gap: 4px !important;
+  }
+
+  .card-testimonial .author-divider {
+    display: none !important;
+  }
+
+  .card-testimonial .quote-mark {
+    font-size: clamp(6rem, 26cqi, 8.5rem) !important;
   }
 }
 
@@ -2034,6 +2145,74 @@ Custom 2-Column Split Layout
 }
 
 /* ═══════════════════════════════════════════
+CARD 7 SPLIT (≤ 1439px, portrait-style bento)
+Turns the single merged "Key Achievements /
+Technical Certifications" card into two
+standalone cards so it pairs up like the
+Project row and the Testimonial/Contact row.
+Reset back to the merged look below for the
+wide-landscape laptop override, which mirrors
+the original desktop bento exactly.
+═══════════════════════════════════════════ */
+@media (max-width: 1439px) {
+  .card-certs {
+    background: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    overflow: visible;
+  }
+
+  .card.card-certs::after {
+    display: none;
+  }
+
+  .card.card-certs::before {
+    display: none;
+  }
+
+  .certs-grid {
+    gap: var(--gap);
+  }
+
+  .certs-grid > div {
+    background:
+      var(--noise),
+      radial-gradient(
+        circle at 14% 0%,
+        rgba(255, 255, 255, 0.04) 0%,
+        transparent 28%
+      ),
+      radial-gradient(
+        circle at 0% 0%,
+        rgba(114, 188, 255, 0.07) 0%,
+        transparent 55%
+      ),
+      radial-gradient(
+        circle at 100% 100%,
+        rgba(0, 1, 30, 0.55) 0%,
+        transparent 55%
+      ),
+      radial-gradient(
+        circle at 82% 18%,
+        rgba(2, 9, 78, 0.45) 0%,
+        transparent 38%
+      ),
+      linear-gradient(
+        148deg,
+        #010a54 0%,
+        #010950 42%,
+        #020840 72%,
+        #030a4e 100%
+      );
+    border: 1px solid rgba(114, 188, 255, 0.06);
+    box-shadow: var(--shadow-base), var(--inner-glow);
+    border-radius: var(--r);
+    padding: var(--py) var(--px);
+  }
+}
+
+/* ═══════════════════════════════════════════
 WIDE-LANDSCAPE LAPTOP OVERRIDE (900px - 1439px,
 landscape 1.6+ aspect, 600px+ tall)
 Re-applies the original desktop bento placements on top of the
@@ -2091,6 +2270,59 @@ proportionally smaller - never the tablet reflow.
 
   .profile-intro {
     max-width: 32ch;
+  }
+
+  /* Undo the ≤1439px split so this matches the original desktop card */
+  .card-certs {
+    background:
+      var(--noise),
+      radial-gradient(
+        circle at 14% 0%,
+        rgba(255, 255, 255, 0.04) 0%,
+        transparent 28%
+      ),
+      radial-gradient(
+        circle at 0% 0%,
+        rgba(114, 188, 255, 0.07) 0%,
+        transparent 55%
+      ),
+      radial-gradient(
+        circle at 100% 100%,
+        rgba(0, 1, 30, 0.55) 0%,
+        transparent 55%
+      ),
+      radial-gradient(
+        circle at 82% 18%,
+        rgba(2, 9, 78, 0.45) 0%,
+        transparent 38%
+      ),
+      linear-gradient(
+        148deg,
+        #010a54 0%,
+        #010950 42%,
+        #020840 72%,
+        #030a4e 100%
+      );
+    border: 1px solid rgba(114, 188, 255, 0.06);
+    box-shadow: var(--shadow-base), var(--inner-glow);
+    padding: var(--py) var(--px);
+    overflow: hidden;
+  }
+
+  .card.card-certs::after {
+    display: block;
+  }
+
+  .certs-grid {
+    gap: 16px;
+  }
+
+  .certs-grid > div {
+    background: none;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
   }
 }
 
@@ -2296,6 +2528,10 @@ MOBILE  ≤ 580px
 
   .card {
     padding: 20px 18px;
+  }
+
+  .card-certs {
+    padding: 0;
   }
 
   .certs-grid {
