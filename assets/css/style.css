@@ -1555,22 +1555,26 @@ MODALS
   contain: layout style paint;
 }
 
-.modal-box.contact-box {
-  width: min(500px, 92vw);
-}
-
 .modal-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
   margin-bottom: 16px;
+  /* Reserves room for the now-absolutely-positioned .modal-close so
+     text never runs under it, and guarantees the header is always at
+     least as tall as that button, so a short single-line header (the
+     gallery modal's eyebrow, with no title) never lets the button
+     hang past the bottom of modal-head into the content below. Both
+     values track modal-close's own size formula further down. */
+  padding-right: clamp(48px, 4vw, 72px);
+  min-height: clamp(32px, 2.2vw, 46px);
 }
 
 .modal-eyebrow {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
-  font-size: 0.65rem;
+  font-size: clamp(0.65rem, 0.5vw, 0.8rem);
   letter-spacing: 3px;
   text-transform: uppercase;
   color: var(--blue);
@@ -1580,7 +1584,7 @@ MODALS
 .modal-title {
   font-family: "Montserrat", sans-serif;
   font-weight: 800;
-  font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+  font-size: clamp(0.95rem, 1.2vw, 1.5rem);
   color: var(--ink);
   line-height: 1.2;
   margin-bottom: 0;
@@ -1598,20 +1602,39 @@ MODALS
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
-  flex-shrink: 0;
+  /* Pulled out of modal-head's flex flow (same pattern as
+     .lightbox-close elsewhere in this file) so it can never compete
+     with the title/eyebrow text for width - that competition was
+     what forced "Let's build something cool." onto two lines even
+     when the modal had plenty of room. Each modal sets its own
+     top/right below to sit flush with that modal's own padding. */
+  position: absolute;
+  z-index: 2;
+  top: 24px;
+  right: 24px;
+  width: clamp(32px, 2.2vw, 46px);
+  height: clamp(32px, 2.2vw, 46px);
   border-radius: 50%;
   border: 1px solid rgba(114, 188, 255, 0.15);
   background: transparent;
   color: var(--ink-mute);
-  font-size: 1.2rem;
+  font-size: clamp(1.2rem, 0.95vw, 1.6rem);
   line-height: 1;
   cursor: pointer;
   transition:
     background 0.2s,
     border-color 0.2s,
     color 0.2s;
+}
+
+#photoModal .modal-close {
+  top: clamp(32px, 2.1vw, 46px);
+  right: clamp(36px, 2.4vw, 50px);
+}
+
+.contact-box .modal-close {
+  top: clamp(32px, 1.6vw, 42px);
+  right: clamp(36px, 1.8vw, 46px);
 }
 
 .modal-close:hover {
@@ -1858,22 +1881,124 @@ MODALS
   pointer-events: none;
 }
 
+/* ═══════════════════════════════════════════
+ALL MODALS — PROPORTIONAL AT EVERY SCREEN SIZE
+Unlike the bento canvas (which only scales past the 1440px "wide
+monitor" tier), these rules deliberately apply everywhere, all the
+time - a phone, a laptop, and an ultrawide monitor all get the same
+formula, just evaluated at a different width. Each one is built as
+either max(ORIGINAL, calc(kvw + b)) or clamp(ORIGINAL, kvw, CEILING),
+tuned so it resolves to exactly the original flat value below the
+point where extra room actually starts appearing, then grows
+continuously and tops out at a deliberate ceiling instead of scaling
+forever. Nothing here overrides the phone-portrait layout further
+down this file (max-width: 580px) - those values are already smaller
+than anything these formulas produce.
+═══════════════════════════════════════════ */
+
+/* ── Project Gallery modal ── */
+#photoModal .modal-box {
+  width: min(95vw, 1700px, max(1000px, calc(35vw + 496px)));
+  padding: clamp(32px, 2.1vw, 46px) clamp(36px, 2.4vw, 50px) clamp(30px, 2vw, 42px);
+}
+
+/* Thumbnail column scales alongside the main image instead of
+   staying pinned at a fixed 80px next to an ever-larger picture.
+   Gated to 581px+ only because below that, the separate mobile rule
+   further down collapses this same grid to a single column entirely
+   - and, as an ID-scoped selector, this rule would otherwise always
+   win that fight regardless of source order. */
+@media (min-width: 581px) {
+  #photoModal .modal-gallery-wrapper {
+    grid-template-columns: 1fr clamp(80px, 6vw, 108px);
+    gap: clamp(12px, 0.9vw, 18px);
+  }
+}
+
+#photoModal .modal-thumbnails {
+  gap: clamp(8px, 0.6vw, 14px);
+}
+
+/* Prev/next arrows + the counter pill between them - previously a
+   fixed 26px no matter the modal size, easy to lose track of next to
+   a much bigger image above them. */
+.gallery-nav-btn {
+  width: clamp(26px, 1.6vw, 36px);
+  height: clamp(26px, 1.6vw, 36px);
+  font-size: clamp(0.8rem, 0.65vw, 1rem);
+}
+
+.gallery-controls {
+  padding: clamp(6px, 0.4vw, 9px);
+  gap: clamp(8px, 0.5vw, 11px);
+}
+
+.image-counter {
+  font-size: clamp(0.65rem, 0.5vw, 0.8rem);
+}
+
+/* ── Contact form modal ──
+   A form doesn't want the same dramatic growth as an image gallery -
+   wide input fields get harder to read, not easier - so this grows
+   on a much gentler curve, from the original flat 500px up to a
+   680px ceiling instead of the gallery's 1700px. */
+.contact-box {
+  /* Width still answers mainly to viewport width, with a small vh
+     floor added so a tall/narrow window isn't left with a needlessly
+     cramped box just because it isn't wide. */
+  width: min(94vw, 680px, max(500px, calc(9vw + 370px), calc(420px + 10vh)));
+  /* Left/right padding still tracks width like before, but top/bottom
+     now tracks viewport height instead of width - so a short landscape
+     window (e.g. 2560x600) compresses the box, and a tall one (e.g.
+     2560x1200) gives it real vertical breathing room. Width and height
+     now scale the box independently instead of both riding on vw. */
+  padding: clamp(24px, 5vh, 56px) clamp(36px, 1.8vw, 46px) clamp(24px, 4.5vh, 52px);
+}
+
+.contact-box .modal-head {
+  margin-bottom: clamp(10px, 2vh, 22px);
+}
+
+/* Inputs, textarea, and their labels scale together so the whole
+   form reads as one proportional piece, not a bigger box around the
+   same small type. */
+.cform-group label {
+  font-size: clamp(0.55rem, 0.4vw, 0.7rem);
+}
+
+.cform input,
+.cform textarea {
+  padding: clamp(10px, 1.8vh, 18px) clamp(16px, 0.9vw, 19px);
+  font-size: clamp(0.85rem, 0.55vw, 0.98rem);
+}
+
+/* Send Message button - the primary action of the whole modal - gets
+   bigger and easier to hit, without touching the shared .btn-talk
+   pill used elsewhere on the page. Padding tracks vh, same reasoning
+   as the inputs above. */
+.cform-submit {
+  padding: clamp(11px, 1.8vh, 19px);
+  font-size: clamp(0.55rem, 0.55vw, 0.7rem);
+  gap: clamp(8px, 0.6vw, 11px);
+}
+
 /* Contact Form (Modal) */
 .cform {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  /* Gap between form rows now tracks viewport height, same reasoning
+     as .contact-box padding above. */
+  gap: clamp(10px, 2.2vh, 26px);
 }
 
 .cform-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: clamp(4px, 0.8vh, 10px);
 }
 
 .cform-group label {
   font-family: "Montserrat", sans-serif;
-  font-size: 0.55rem;
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -1893,10 +2018,8 @@ MODALS
   background: rgba(90, 157, 217, 0.03);
   border: 1px solid rgba(114, 188, 255, 0.15);
   border-radius: 8px;
-  padding: 12px 16px;
   color: var(--ink);
   font-family: "Bricolage Grotesque", sans-serif;
-  font-size: 0.85rem;
   outline: none;
   transition:
     border-color 0.2s,
@@ -1920,13 +2043,12 @@ MODALS
 
 .cform textarea {
   resize: vertical;
-  min-height: 100px;
+  min-height: clamp(70px, 13vh, 170px);
 }
 
 .cform-submit {
   width: 100%;
   justify-content: center;
-  padding: 12px;
   margin-top: 8px;
   /* Removes the outer glowing shadow to stop expensive repaints during modal scale */
   box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3);
