@@ -482,16 +482,6 @@ Applied to Profile, Flagship, Contact
   z-index: 10;
 }
 
-/* Same invisible tap-target expansion as .social-btn: 36px visual
-   circle -> 44px hit area. Doesn't affect the negative-margin trick
-   above since it's absolutely positioned and out of flow. */
-.photo-trigger::before {
-  content: "";
-  position: absolute;
-  inset: -4px;
-  border-radius: inherit;
-}
-
 .photo-trigger:hover {
   background: var(--blue);
   border-color: var(--blue);
@@ -815,16 +805,11 @@ CARD 3 — TECH STACK (SECONDARY)
   color: var(--ink-mute);
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
-  /* Was 0.55rem (8.8px) - bumped for legibility. Paired with the
-     larger padding below, the tap target goes from ~12px tall to
-     ~28px, without the tab row visually overwhelming the card
-     header (a full 44px target here would look oversized next to
-     the compact card-label text beside it). */
-  font-size: 0.68rem;
+  font-size: 0.55rem;
   letter-spacing: 1px;
   text-transform: uppercase;
   cursor: pointer;
-  padding: 6px 6px 8px 6px;
+  padding: 0 0 4px 0;
   border-bottom: 2px solid transparent;
   transition:
     color 0.2s,
@@ -1349,18 +1334,6 @@ CARD 9 — CONTACT (HIGHLIGHTED)
   background: rgba(90, 157, 217, 0.03);
   cursor: pointer;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
-  position: relative;
-}
-
-/* Invisible tap-target expansion: 36px visual circle -> 44px hit area
-   (36 + 4 + 4), meeting the accessibility minimum without changing
-   how the button looks. Exactly matches .contact-socials' 8px gap, so
-   adjacent buttons' hit areas touch with zero overlap. */
-.social-btn::before {
-  content: "";
-  position: absolute;
-  inset: -4px;
-  border-radius: inherit;
 }
 
 .social-btn:hover {
@@ -1654,18 +1627,6 @@ MODALS
     color 0.2s;
 }
 
-/* Invisible tap-target expansion: the 32px mobile-minimum circle
-   above becomes a 44px hit area (32 + 6 + 6). Both modals position
-   this at top/right >= 24px, so the expanded zone stays safely
-   inside the modal's own padding at every size - never clipped,
-   never overlapping the title text next to it. */
-.modal-close::before {
-  content: "";
-  position: absolute;
-  inset: -6px;
-  border-radius: inherit;
-}
-
 #photoModal .modal-close {
   top: clamp(32px, 2.1vw, 46px);
   right: clamp(36px, 2.4vw, 50px);
@@ -1826,18 +1787,6 @@ MODALS
   cursor: pointer;
   font-size: 0.8rem;
   transition: all 0.2s;
-  position: relative;
-}
-
-/* Invisible tap-target expansion: 26px mobile-minimum circle -> 44px
-   hit area (26 + 9 + 9). .gallery-controls has no overflow:hidden, so
-   this stays fully hit-testable even where it pokes slightly past the
-   pill's own rounded edge - harmless, since nothing is painted there. */
-.gallery-nav-btn::before {
-  content: "";
-  position: absolute;
-  inset: -9px;
-  border-radius: inherit;
 }
 
 .gallery-nav-btn:hover {

@@ -1010,19 +1010,7 @@ X and Y are deliberately handled two different ways:
   // MAGNIFICATION" blocks) so JS and CSS can never drift apart.
   var SCALE_QUERY =
     "(min-width: 1440px), (min-width: 900px) and (max-width: 1439px) and (min-aspect-ratio: 8/5) and (min-height: 600px)";
-  var MAX_SCALE = 1.33; // the approved "wide monitor" magnification - holds exactly through 4K
-  /* Beyond 4K, the cap ramps a little further instead of staying flat,
-     so an 8K-class viewport isn't just the 4K card floating in more
-     black padding. WIDE_REF/ULTRA_REF are viewport-width reference
-     points (not the bento's own width) - the ramp is 0% at WIDE_REF
-     (so every width at/below it produces exactly MAX_SCALE, identical
-     to the old single-cap behavior) and 100% at ULTRA_REF, then holds
-     flat at MAX_SCALE_ULTRA for anything wider still (e.g. an 8K TV
-     used as a monitor). This only ever affects viewports wider than a
-     real 4K screen. */
-  var WIDE_REF = 3840; // 4K reference width - ramp starts here, untouched below this
-  var ULTRA_REF = 7680; // 8K reference width - ramp finishes here
-  var MAX_SCALE_ULTRA = 1.5; // new ceiling reached at 8K, held flat beyond
+  var MAX_SCALE = 1.33; // the approved "wide monitor" magnification
   var FALLBACK_GUTTER_Y = 18; // used only if --gap can't be read for some reason
   var frame = null;
 
@@ -1030,7 +1018,6 @@ X and Y are deliberately handled two different ways:
     var pageEl = document.querySelector(".page");
     var el = document.querySelector(".bento-master");
     var gridEl = document.querySelector(".bento-grid");
-    var w = window.innerWidth;
     var h = window.innerHeight;
     if (!pageEl || !el) return;
 
@@ -1058,34 +1045,10 @@ X and Y are deliberately handled two different ways:
     var GUTTER_Y = gridEl
       ? parseFloat(getComputedStyle(gridEl).rowGap) || FALLBACK_GUTTER_Y
       : FALLBACK_GUTTER_Y;
-    /* Hard rule: the rendered card must never be taller than the
-       viewport minus GUTTER_Y on each side, full stop - that's what
-       guarantees there's always at least gap-width breathing room
-       above and below, on every width tier (1440px+ direct, and the
-       900-1439px landscape-laptop branch alike). An earlier version
-       of this file added a legibility floor here (never let the
-       height-driven shrink go below 0.9x) to help very short windows
-       read better, but that floor could force a scale that made the
-       card TALLER than the viewport - which breaks the padding
-       guarantee outright (confirmed at 2560x719 and 1440x719: the
-       card overflowed above and below the fold with zero margin,
-       worse than just being small). Padding integrity wins: no floor,
-       just the true available space. Wide-but-short windows (e.g. a
-       browser at 1380x650) will render their text somewhat smaller as
-       a result - that's the deliberate trade-off. */
-    var availH = Math.max(h - GUTTER_Y * 2, 1);
+    var availH = Math.max(h - GUTTER_Y * 2, rect.height * 0.5);
     if (availW <= 0 || availH <= 0) return;
 
-    // 0 at/below WIDE_REF (4K), 1 at/above ULTRA_REF (8K) - see comment
-    // on the constants above for why this keeps 4K-and-under untouched.
-    var ultraProgress = Math.min(
-      Math.max((w - WIDE_REF) / (ULTRA_REF - WIDE_REF), 0),
-      1
-    );
-    var effectiveCap =
-      MAX_SCALE + ultraProgress * (MAX_SCALE_ULTRA - MAX_SCALE);
-
-    var scale = Math.min(availW / rect.width, availH / rect.height, effectiveCap);
+    var scale = Math.min(availW / rect.width, availH / rect.height, MAX_SCALE);
     if (!isFinite(scale) || scale <= 0) scale = 1;
     root.style.setProperty("--bento-scale", scale.toFixed(4));
   }
