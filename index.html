@@ -1,504 +1,1777 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Kaye Gamana | Overview</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kaye Gamana Portfolio</title>
+  <meta name="description" content="Portfolio of Kaye Christine Gamana, a junior software developer and QA tester from Batangas, Philippines. PHP, JavaScript, MySQL and manual testing.">
+  <meta name="theme-color" content="#00011e">
+  <meta property="og:title" content="Kaye Gamana Portfolio">
+  <meta property="og:description" content="Full-stack developer and QA tester. Available for developer and QA roles.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://kayegamana.github.io/portfolio-1026/assets/img/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Kaye Gamana portfolio: name and photo card on a navy background">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/img/logo.ico" sizes="any">
 
-  <link href="assets/img/logo.ico" rel="icon" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600&family=Caveat:wght@400;500;600&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&amp;family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600&amp;display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
-  <link rel="preload" as="image" href="assets/img/hero-my-card.webp" />
-
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-  <script src="assets/js/main.js" defer></script>
 
-  <main class="page" id="top">
-    <div class="bento-master">
-      <div class="bento-grid">
+  <header class="navbar" id="navbar">
+    <div class="container navbar__inner">
+      <a class="navbar__brand" href="#home">
+        <img src="assets/img/logo.webp" alt="Kaye Gamana logo">
+      </a>
 
-        <article class="card card-profile card-highlight">
-          <img src="assets/img/hero-my-card.webp" alt="Kaye Christine P. Gamana — ID card" class="profile-id-img" />
+      <button class="navbar__toggler" id="nav-toggler" type="button"
+              aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-menu">
+        <span class="navbar__bar"></span>
+        <span class="navbar__bar"></span>
+        <span class="navbar__bar"></span>
+      </button>
 
-          <div class="profile-text">
-            <h1 class="profile-name">Kaye Christine P. <span style="color: var(--blue);">Gamana</span></h1>
-            <p class="profile-intro">
-              A Full-Stack Developer focused on delivering end-to-end IT solutions, from clean web interfaces to secure
-              database architecture and reliable system logic.
+      <nav class="navbar__menu" id="nav-menu" aria-label="Main navigation">
+        <div class="navbar__menu-inner">
+          <ul class="navbar__links">
+            <li><a class="navbar__link" href="#home">Home</a></li>
+            <li><a class="navbar__link" href="#about">About</a></li>
+            <li><a class="navbar__link" href="#experience">Experience</a></li>
+            <li><a class="navbar__link" href="#projects">Projects</a></li>
+            <li><a class="navbar__link" href="#stack">Stack</a></li>
+          </ul>
+          <a class="navbar__cta" href="#contact" data-open-contact aria-haspopup="dialog">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section id="home" class="hero">
+      <div class="container hero__grid">
+
+        <div class="hero__content">
+          <h1 class="hero__name">
+            <img src="assets/img/hero-my-name.webp" alt="Kaye Gamana">
+          </h1>
+
+          <div class="hero__intro-row">
+            <p class="hero__intro">
+              <span class="hero__sentence">An aspiring software developer crafting clarity out of complexity.</span>
+              <span class="hero__sentence">I am currently <span class="hero__status">available for work</span>. Let's build something cool!</span>
             </p>
 
-            <div class="profile-actions">
-              <div class="profile-status" title="Actively looking for opportunities">
-                <span class="status-dot" aria-hidden="true"></span>
-                Available for work
-              </div>
-              <div class="location-pill" title="Location">
-                <i class="bi bi-geo-alt-fill"></i> Philippines · Open to remote
-              </div>
-              <button class="btn-talk openContactTrigger" id="openContactBtn">
-                <i class="bi bi-chat-right-text-fill"></i>
-                </i> Let's Talk
-              </button>
-            </div>
-          </div>
-        </article>
-
-        <article class="card card-facts">
-          <div class="card-label">Fast Facts</div>
-          <ul class="facts-list">
-            <li class="fact-row">
-              <i class="bi bi-award-fill fact-icon" aria-hidden="true"></i>
-              <div class="fact-text">
-                <strong>DOST-SEI RA 7687 Scholar</strong>
-                <span class="sub">National Science Scholarship</span>
-              </div>
-            </li>
-            <li class="fact-row">
-              <i class="bi bi-mortarboard-fill fact-icon" aria-hidden="true"></i>
-              <div class="fact-text">
-                <strong>BS in Information Technology</strong>
-                <span class="sub">Consistent <span style="color: var(--blue); font-weight: 600;">President's
-                    Lister</span><br><span style="color: var(--ink-mute);">Polytechnic University of the
-                    Philippines</span></span>
-              </div>
-            </li>
-            <li class="fact-row">
-              <i class="bi bi-briefcase-fill fact-icon" aria-hidden="true"></i>
-              <div class="fact-text">
-                <strong>Full-Stack Developer Intern</strong>
-                <span class="sub">Developed & deployed <span style="color: var(--blue); font-weight: 700;">3
-                    systems</span><br><span style="color: var(--ink-mute);">ArkTech Philippines</span></span>
-              </div>
-            </li>
-          </ul>
-        </article>
-
-        <article class="card card-techstack">
-          <div class="card-label-group">
-            <div class="tech-tabs">
-              <button class="tech-tab active" data-target="tech-core">Core</button>
-              <button class="tech-tab" data-target="tech-tools">Tools</button>
-            </div>
-            <div class="card-label-line"></div>
-          </div>
-
-          <div class="tech-page active" id="tech-core" role="group" aria-label="Development languages and frameworks">
-            <div class="tech-pill"><img src="assets/img/core/1.webp" alt="HTML"
-                class="custom-tech-icon"><span>HTML</span></div>
-            <div class="tech-pill"><img src="assets/img/core/2.webp" alt="CSS" class="custom-tech-icon"><span>CSS</span>
-            </div>
-            <div class="tech-pill"><img src="assets/img/core/3.webp" alt="JavaScript"
-                class="custom-tech-icon"><span>JavaScript</span></div>
-            <div class="tech-pill"><img src="assets/img/core/4.webp" alt="PHP" class="custom-tech-icon"><span>PHP</span>
-            </div>
-            <div class="tech-pill"><img src="assets/img/core/5.webp" alt="MySQL"
-                class="custom-tech-icon"><span>MySQL</span></div>
-            <div class="tech-pill"><img src="assets/img/core/6.webp" alt="Bootstrap"
-                class="custom-tech-icon"><span>Bootstrap</span></div>
-            <div class="tech-pill"><img src="assets/img/core/7.webp" alt="VS Code" class="custom-tech-icon"><span>VS
-                Code</span></div>
-            <div class="tech-pill"><img src="assets/img/core/8.webp" alt="GitHub"
-                class="custom-tech-icon"><span>GitHub</span></div>
-            <div class="tech-pill"><img src="assets/img/core/9.webp" alt="Git" class="custom-tech-icon"><span>Git</span>
-            </div>
-            <div class="tech-pill"><img src="assets/img/core/10.webp" alt="Figma"
-                class="custom-tech-icon"><span>Figma</span></div>
-            <div class="tech-pill"><img src="assets/img/core/11.webp" alt="C++"
-                class="custom-tech-icon"><span>C++</span></div>
-            <div class="tech-pill"><img src="assets/img/core/12.webp" alt="Java"
-                class="custom-tech-icon"><span>Java</span></div>
-            <div class="tech-pill"><img src="assets/img/core/13.webp" alt="C" class="custom-tech-icon"><span>C</span>
-            </div>
-            <div class="tech-pill"><img src="assets/img/core/14.webp" alt="Python"
-                class="custom-tech-icon"><span>Python</span></div>
-          </div>
-
-          <div class="tech-page" id="tech-tools" role="group" aria-label="Platforms and productivity tools">
-            <div class="tech-pill"><img src="assets/img/tools/1.webp" alt="Google WS" class="custom-tech-icon"
-                loading="lazy"><span>Google WS</span></div>
-            <div class="tech-pill"><img src="assets/img/tools/2.webp" alt="Microsoft 365" class="custom-tech-icon"
-                loading="lazy"><span>MS 365</span></div>
-            <div class="tech-pill"><img src="assets/img/tools/3.webp" alt="Canva" class="custom-tech-icon"
-                loading="lazy"><span>Canva</span></div>
-            <div class="tech-pill"><img src="assets/img/tools/4.webp" alt="CapCut" class="custom-tech-icon"
-                loading="lazy"><span>CapCut</span></div>
-            <div class="tech-pill"><img src="assets/img/tools/5.webp" alt="Eclipse" class="custom-tech-icon"
-                loading="lazy"><span>Eclipse</span></div>
-            <div class="tech-pill"><img src="assets/img/tools/6.webp" alt="WordPress" class="custom-tech-icon"
-                loading="lazy"><span>WordPress</span></div>
-            <div class="tech-pill"><img src="assets/img/tools/7.webp" alt="Packet Tracer" class="custom-tech-icon"
-                loading="lazy"><span>Packet Tracer</span></div>
-            <div class="tech-pill"><img src="assets/img/tools/8.webp" alt="Visual Studio" class="custom-tech-icon"
-                loading="lazy"><span>Visual Studio</span></div>
-            <div class="tech-pill"><img src="assets/img/tools/9.webp" alt="Jupyter" class="custom-tech-icon"
-                loading="lazy"><span>Jupyter</span></div>
-            <div class="tech-pill"><img src="assets/img/tools/10.webp" alt="Salesforce" class="custom-tech-icon"
-                loading="lazy"><span>Salesforce</span></div>
-            <div class="tech-pill"><img src="assets/img/tools/11.webp" alt="Photoshop" class="custom-tech-icon"
-                loading="lazy"><span>Photoshop</span></div>
-            <div class="tech-pill"><img src="assets/img/tools/12.webp" alt="Lightroom" class="custom-tech-icon"
-                loading="lazy"><span>Lightroom</span></div>
-          </div>
-        </article>
-
-        <article class="card card-flagship card-highlight">
-          <div class="card-label-group">
-            <div class="card-label">01 · Flagship</div>
-            <div class="card-label-line" style="margin-right: 12px;"></div>
-            <button class="photo-trigger" data-project="IT Project & Office Task Visualization Suite" data-folder="1ST"
-              data-count="10" aria-label="View project photos"><i class="bi bi-image-fill"></i></button>
-          </div>
-
-          <div class="title-row">
-            <h2 class="card-title flagship-title">IT Project & Office Task Visualization Suite</h2>
-          </div>
-
-          <ul class="flagship-body"
-            style="padding-left: 18px; margin-bottom: 0; display: flex; flex-direction: column; gap: 6px; font-size: 0.82rem;">
-            <li><strong>Transformed</strong> a manual Excel encoding workflow into a <em>centralized task and project
-                management
-                suite</em>, scaling a custom IT Gantt chart into a department-wide platform.</li>
-            <li><strong>Eliminated</strong> data bottlenecks and replaced static spreadsheets with <em>dynamic
-                workflows</em>.</li>
-            <li><strong>Maintained</strong> data integrity with <em>backend concurrency locks</em> and AJAX
-              synchronization.</li>
-            <li><strong>Optimized</strong> performance through a <em>Precision-Day Hybrid Model</em> and lazy loading of
-              <em>4,300+ live records</em> via an <span class="term">IntersectionObserver</span>.
-            </li>
-          </ul>
-
-          <div class="tag-row">
-            <span class="tag">PHP</span>
-            <span class="tag">MySQL</span>
-            <span class="tag">JavaScript</span>
-            <span class="tag">AJAX</span>
-            <span class="tag">Bootstrap</span>
-          </div>
-
-          <div class="flagship-ghost" aria-hidden="true">BEST</div>
-        </article>
-
-        <article class="card card-proj card-proj2">
-          <div class="card-label-group">
-            <div class="card-label">02 · Project</div>
-            <div class="card-label-line" style="margin-right: 12px;"></div>
-            <button class="photo-trigger" data-project="Machine Maintenance Checksheet" data-folder="2ND"
-              data-count="16" aria-label="View project photos"><i class="bi bi-image-fill"></i></button>
-          </div>
-
-          <div class="title-row">
-            <h3 class="card-title">Machine Maintenance Checksheet</h3>
-          </div>
-
-          <div class="card-body">
-            <ul
-              style="padding-left: 1.1rem; margin: 0; display: flex; flex-direction: column; gap: 0.40rem; list-style-type: disc; font-size: 0.825rem; line-height: 1.35;">
-              <li><strong>Digitized</strong> maintenance checksheets into a <span
-                  style="color: var(--blue); font-weight: 500;">hybrid mobile app</span> across <span
-                  style="color: var(--blue); font-weight: 500;">4 machines</span>.</li>
-              <li><strong>Implemented</strong> a <span style="color: var(--blue); font-weight: 500;">two-tier QR
-                  compliance system</span> with multi-stage verification.</li>
-              <li><strong>Developed</strong> a dashboard featuring <span
-                  style="color: var(--blue); font-weight: 500;">real-time analytics</span> and PDF reporting.</li>
+            <ul class="social social--desktop">
+              <li>
+                <a class="social__link" href="https://www.linkedin.com/in/kaye-gamana" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                  <img class="social__icon" src="assets/img/linkedin.webp" alt="">
+                  <img class="social__icon social__icon--hover" src="assets/img/linkedin-hover.webp" alt="">
+                </a>
+              </li>
+              <li>
+                <a class="social__link" href="https://github.com/kayegamana" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                  <img class="social__icon" src="assets/img/github.webp" alt="">
+                  <img class="social__icon social__icon--hover" src="assets/img/github-hover.webp" alt="">
+                </a>
+              </li>
             </ul>
           </div>
 
-          <div class="tag-row">
-            <span class="tag">PHP</span>
-            <span class="tag">MySQL</span>
-            <span class="tag">JS</span>
-            <span class="tag">AJAX</span>
-            <span class="tag">Bootstrap</span>
-          </div>
-        </article>
+          <div class="hero__actions">
+            <a class="hero__button hero__button--primary" href="#contact" data-open-contact aria-haspopup="dialog">
+              <i class="bi bi-chat-right-text-fill"></i>
+              <span>Let's Talk</span>
+            </a>
 
-        <article class="card card-proj card-proj3">
-          <div class="card-label-group">
-            <div class="card-label">03 · Project</div>
-            <div class="card-label-line" style="margin-right: 12px;"></div>
-            <button class="photo-trigger" data-project="GymBoost" data-folder="3RD" data-count="10"
-              aria-label="View project photos"><i class="bi bi-image-fill"></i></button>
-          </div>
+            <button class="hero__button hero__button--copy" type="button"
+                    data-copy-email="kayecgamana@gmail.com" aria-label="Copy email address">
+              <i class="bi bi-copy hero__copy-icon"></i>
+              <i class="bi bi-check2 hero__copy-check"></i>
+              <span class="hero__copy-label">kayecgamana@gmail.com</span>
+              <span class="hero__copy-confirm" aria-hidden="true">Copied!</span>
+            </button>
 
-          <div class="title-row">
-            <h3 class="card-title">GymBoost</h3>
-          </div>
-
-          <div class="card-body">
-            <ul
-              style="padding-left: 1.1rem; margin: 0; display: flex; flex-direction: column; gap: 0.40rem; list-style-type: disc; font-size: 0.825rem; line-height: 1.35;">
-              <li><strong>Developed</strong> a <span style="color: var(--blue); font-weight: 500;">full-stack gym
-                  system</span> integrating <span style="color: var(--blue); font-weight: 500;">RFID</span> and
-                digitized registration.</li>
-              <li><strong>Reduced</strong> check-in time by <span style="color: var(--blue); font-weight: 500;">over
-                  90%</span> and enabled <span style="color: var(--blue); font-weight: 500;">real-time</span> dashboard
-                updates.</li>
-              <li><strong>Achieved</strong> scores of <span style="color: var(--blue); font-weight: 500;">4.83/5</span>
-                in ease of use and <span style="color: var(--blue); font-weight: 500;">4.67/5</span> in performance
-                efficiency.</li>
+            <ul class="social social--mobile">
+              <li>
+                <a class="social__link" href="https://www.linkedin.com/in/kaye-gamana" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                  <img class="social__icon" src="assets/img/linkedin.webp" alt="">
+                  <img class="social__icon social__icon--hover" src="assets/img/linkedin-hover.webp" alt="">
+                </a>
+              </li>
+              <li>
+                <a class="social__link" href="https://github.com/kayegamana" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                  <img class="social__icon" src="assets/img/github.webp" alt="">
+                  <img class="social__icon social__icon--hover" src="assets/img/github-hover.webp" alt="">
+                </a>
+              </li>
             </ul>
           </div>
+        </div>
 
-          <div class="tag-row">
-            <span class="tag">PHP</span>
-            <span class="tag">MySQL</span>
-            <span class="tag">JS</span>
-            <span class="tag">RFID</span>
-            <span class="tag">Bootstrap</span>
-          </div>
-        </article>
+        <div class="hero__card">
+          <img src="assets/img/hero-my-card.webp" alt="Kaye's portfolio ID card">
+        </div>
 
-        <article class="card card-certs" style="justify-content: center;">
-          <div class="certs-grid">
-            <div style="display: flex; flex-direction: column;">
-              <div class="cert-issuer">
-                <i class="bi bi-trophy-fill"></i>
-                Key Achievements
-              </div>
-              <div class="cert-group" style="display: flex; flex-direction: column; gap: 8px;">
-                <div class="cert-item" style="align-items: flex-start; padding-top: 4px; border-bottom: none;">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
-                    style="margin-top: 3px; flex-shrink: 0; filter: drop-shadow(0 2px 4px rgba(255, 215, 0, 0.3));">
-                    <path fill="#FFD700"
-                      d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864 8 0z" />
-                    <path fill="#DAA520" d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z" />
-                    <polygon fill="#FFF"
-                      points="8,1.9 9.3,4.5 12,4.9 10,6.9 10.6,9.6 8,8.2 5.4,9.6 6,6.9 4,4.9 6.7,4.5" />
-                  </svg>
-                  <div style="line-height: 1.3;">
-                    <strong style="color: var(--ink);">Top-Performing Intern</strong><br>
-                    <span style="font-size: 0.7rem; color: var(--ink-soft);">Arktech Philippines Inc.</span>
-                  </div>
-                </div>
-                <div class="cert-item" style="align-items: flex-start; padding-top: 4px; border-bottom: none;">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
-                    style="margin-top: 3px; flex-shrink: 0; filter: drop-shadow(0 2px 4px rgba(205, 127, 50, 0.3));">
-                    <path fill="#CD7F32"
-                      d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864 8 0z" />
-                    <path fill="#A0522D" d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z" />
-                    <polygon fill="#FFF"
-                      points="8,1.9 9.3,4.5 12,4.9 10,6.9 10.6,9.6 8,8.2 5.4,9.6 6,6.9 4,4.9 6.7,4.5" />
-                  </svg>
-                  <div style="line-height: 1.3;">
-                    <strong style="color: var(--ink);">3rd Place Winner</strong><br>
-                    <span style="font-size: 0.7rem; color: var(--ink-soft);">Techno Mini-Hackathon: Idea. Innovation.
-                      Solution.</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div style="display: flex; flex-direction: column;">
-              <div class="cert-issuer">
-                <i class="bi bi-patch-check-fill"></i>
-                Technical Certifications
-              </div>
-              <div class="cert-group" style="display: flex; flex-direction: column;">
-
-                <div class="cert-item" style="align-items: flex-start; padding: 4px 0 10px 0;">
-                  <i class="bi bi-code-square" style="margin-top: 2px; color: var(--blue);"></i>
-                  <div style="line-height: 1.3;">
-                    <strong style="color: var(--ink);">HTML, CSS, & JS Essentials</strong><br>
-                    <span style="font-size: 0.65rem; color: var(--ink-soft);">Cisco & OpenEDG · Dec 2025</span>
-                  </div>
-                </div>
-
-                <div class="cert-item" style="border-bottom: none; padding: 6px 0;">
-                  <i class="bi bi-shield-check" style="color: var(--ink-mute);"></i>
-                  <div style="line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                    <strong style="color: var(--ink-mute);">Cyber Threat Mgt.</strong> <span
-                      style="font-size: 0.65rem; color: var(--ink-soft);">· Cisco</span>
-                  </div>
-                </div>
-
-                <div class="cert-item" style="border-bottom: none; padding: 6px 0;">
-                  <i class="bi bi-graph-up" style="color: var(--ink-mute);"></i>
-                  <div style="line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                    <strong style="color: var(--ink-mute);">Data Science & AI</strong> <span
-                      style="font-size: 0.65rem; color: var(--ink-soft);">· HP LIFE</span>
-                  </div>
-                </div>
-
-                <div class="cert-item" style="border-bottom: none; padding: 6px 0;">
-                  <i class="bi bi-hdd-network" style="color: var(--ink-mute);"></i>
-                  <div style="line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                    <strong style="color: var(--ink-mute);">Python & Networking</strong> <span
-                      style="font-size: 0.65rem; color: var(--ink-soft);">· Cisco</span>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <article class="card card-testimonial" id="testimonialCard">
-          <div class="card-label-group">
-            <div class="card-label">Testimonials</div>
-            <div class="card-label-line" style="margin-right: 16px;"></div>
-            <div class="testimonial-indicators" id="testimonialDots">
-              <span class="t-dot active" data-index="0" aria-label="Go to slide 1"></span>
-            </div>
-          </div>
-
-          <div class="testimonial-slider">
-            <div class="certs-quote t-slide active">
-              <div class="quote-mark" aria-hidden="true">"</div>
-              <p class="quote-text">She really is the kind of person who's
-                always curious to <span class="quote-highlight">build something with quality</span>, who has an eye for
-                what's better, and a teammate you can
-                trust and work with on meaningful projects.
-              </p>
-              <span class="quote-attr">
-                <span class="author-name">Roland Regio</span> <span class="author-divider">|</span> <span
-                  class="author-role">Junior Web Developer</span>
-              </span>
-            </div>
-          </div>
-        </article>
-
-        <article class="card card-contact card-highlight">
-          <div class="card-label">Contact</div>
-
-          <div class="contact-lines">
-            <div class="contact-wrapper no-border">
-              <div class="contact-line">
-                <i class="bi bi-envelope-fill"></i>
-                <span>kayecgamana@gmail.com</span>
-              </div>
-              <button class="copy-btn" id="copyEmailBtn" aria-label="Copy Email" title="Copy email address">
-                <i class="bi bi-copy"></i> <span>Copy</span>
-              </button>
-            </div>
-          </div>
-
-          <div class="contact-bottom-grid">
-            <div class="contact-socials">
-              <a href="mailto:kayecgamana@gmail.com" aria-label="Email" title="Send Email" class="social-btn">
-                <i class="bi bi-envelope-fill"></i>
-              </a>
-              <a href="https://www.linkedin.com/in/kaye-gamana" target="_blank" rel="noopener noreferrer"
-                aria-label="LinkedIn" class="social-btn">
-                <i class="bi bi-linkedin"></i>
-              </a>
-              <a href="https://github.com/kayegamana" target="_blank" rel="noopener noreferrer" aria-label="GitHub"
-                class="social-btn">
-                <i class="bi bi-github"></i>
-              </a>
-            </div>
-
-            <div class="portfolio-redirect-stacked">
-              <p>Got an idea or just saying hi?</p>
-              <button class="btn-alt openContactTrigger" title="Open contact form">
-                <i class="bi bi-send-fill"></i> Drop a Message
-              </button>
-            </div>
-          </div>
-
-          <div class="copyright-notice">
-            © 2026 Kaye Gamana. All rights reserved.
-          </div>
-
-        </article>
       </div>
-    </div>
+    </section>
+
+    <section id="about" class="section section--indigo" aria-labelledby="about-title">
+      <div class="section__inner">
+
+        <div class="section-label">
+          <span class="section-label__number">0001</span>
+          <span class="section-label__text">About</span>
+          <span class="section-label__line"></span>
+        </div>
+
+        <h2 class="section-title section-title--spaced" id="about-title">About me</h2>
+
+        <div class="about">
+          <figure class="about__photo">
+            <img src="assets/img/education/graduation-picture.webp" alt="Kaye in her graduation attire" loading="lazy">
+          </figure>
+
+          <div class="about__text">
+            <p>Hello! I'm <strong>Kaye Christine P. Gamana</strong>, or simply Kaye.</p>
+            <p>I'm someone who <strong>enjoys figuring things out</strong>, especially when it comes to technology. I like <strong>understanding how things work</strong>, exploring different ways to solve problems, and finding opportunities to <strong>make something better than it was before</strong>.</p>
+            <p>For me, working in tech isn't just about writing code or getting things to function. It's also about <strong>thinking through the details</strong>, <strong>learning from challenges</strong>, and <strong>creating something that people can actually benefit from</strong>.</p>
+
+            <ul class="info-list">
+              <li class="info-card">
+                <span class="info-card__icon"><i class="bi bi-geo-alt-fill" aria-hidden="true"></i></span>
+                <div class="info-card__text">
+                  <p class="info-card__label">Based</p>
+                  <p class="info-card__value">Santo Tomas, Batangas, Philippines</p>
+                  <p class="info-card__note">Open to remote</p>
+                </div>
+              </li>
+              <li class="info-card info-card--status">
+                <span class="info-card__icon"><i class="bi bi-briefcase-fill" aria-hidden="true"></i></span>
+                <div class="info-card__text">
+                  <p class="info-card__label">Status</p>
+                  <p class="info-card__value">Available for Developer and QA roles</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 class="subsection-title subsection-title--education">Education</h3>
+        <p class="section-intro">Where I studied, with the recognition I earned along the way.</p>
+
+        <div class="education">
+
+          <div class="education__column">
+            <article class="school">
+              <header class="school__header">
+                <img class="school__logo" src="assets/img/education/ccsis-logo.webp" alt="CCSIS logo" loading="lazy">
+                <div>
+                  <p class="school__name">Calamba City Science Integrated School</p>
+                  <h4 class="school__program">STEM Student</h4>
+                </div>
+              </header>
+              <ul class="facts">
+                <li class="fact">
+                  <div><p class="fact__label">Graduated with</p></div>
+                  <strong class="fact__value">Highest Honors</strong>
+                </li>
+                <li class="fact">
+                  <div>
+                    <p class="fact__label">Graduates ranked, Batch 2022</p>
+                    <p class="fact__note">among 376 students</p>
+                  </div>
+                  <strong class="fact__value">18th</strong>
+                </li>
+              </ul>
+            </article>
+
+            <article class="school">
+              <header class="school__header">
+                <img class="school__logo" src="assets/img/education/pupstb-logo.webp" alt="PUP logo" loading="lazy">
+                <div>
+                  <p class="school__name">Polytechnic University of the Philippines</p>
+                  <h4 class="school__program">BS Information Technology</h4>
+                </div>
+              </header>
+              <ul class="facts">
+                <li class="fact">
+                  <div><p class="fact__label">Graduated with</p></div>
+                  <strong class="fact__value">Magna Cum Laude</strong>
+                </li>
+                <li class="fact">
+                  <div>
+                    <p class="fact__label">Graduates ranked, Batch 2026</p>
+                    <p class="fact__note">among 614 graduates from 11 programs</p>
+                  </div>
+                  <strong class="fact__value">7th</strong>
+                </li>
+                <li class="fact">
+                  <div>
+                    <p class="fact__label">Academic Achiever Awardee</p>
+                    <p class="fact__note">across all BSIT year levels, 1st to 4th year, AY 2025–2026</p>
+                  </div>
+                  <strong class="fact__value">4th</strong>
+                </li>
+                <li class="fact">
+                  <div>
+                    <p class="fact__label">President's Lister</p>
+                    <p class="fact__note">2022–2026</p>
+                  </div>
+                  <strong class="fact__value">4 of 4 yrs</strong>
+                </li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="education__column">
+            <figure class="award award--framed">
+              <img class="award__image" data-zoom src="assets/img/education/dost-award.webp" alt="DOST Magna Cum Laude medal and Certificate of Recognition" loading="lazy">
+              <figcaption class="award__caption">
+                <i class="bi bi-trophy-fill" aria-hidden="true"></i>
+                <div>
+                  <p class="award__label">Special Recognition for Academic Achievements</p>
+                  <p class="award__title">DOST Magna Cum Laude</p>
+                  <p class="award__meta">PUP Sto. Tomas Campus · September 22, 2026</p>
+                </div>
+              </figcaption>
+            </figure>
+
+            <article class="school">
+              <header class="school__header">
+                <img class="school__logo" src="assets/img/education/dostsei-logo.webp" alt="DOST-SEI logo" loading="lazy">
+                <div>
+                  <p class="school__name">Department of Science and Technology – SEI</p>
+                  <h4 class="school__program">RA 7687 Scholar</h4>
+                </div>
+              </header>
+              <ul class="facts">
+                <li class="fact">
+                  <div>
+                    <p class="fact__label">National scholarship</p>
+                    <p class="fact__note">for demonstrated academic excellence</p>
+                  </div>
+                  <strong class="fact__value">2022–2026</strong>
+                </li>
+              </ul>
+            </article>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="section section--blue" aria-labelledby="experience-title">
+      <div class="section__inner">
+
+        <div class="section-label">
+          <span class="section-label__number">0002</span>
+          <span class="section-label__text">Experience</span>
+          <span class="section-label__line"></span>
+        </div>
+
+        <div class="internship__company">
+          <img class="internship__logo" src="assets/img/internship/arktechphilippines-logo.webp" alt="Arktech Philippines Inc. logo" loading="lazy">
+          <div class="internship__employer">
+            <p class="internship__company-name">Arktech Philippines Inc.</p>
+            <ul class="internship__meta">
+              <li><i class="bi bi-briefcase-fill" aria-hidden="true"></i>Internship</li>
+              <li><i class="bi bi-calendar3" aria-hidden="true"></i>Feb – May 2026</li>
+              <li><i class="bi bi-clock-fill" aria-hidden="true"></i>500 hours</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2 class="section-title section-title--job" id="experience-title">Full-Stack Developer</h2>
+        <p class="internship__lead"><span class="internship__lead-key">3 internal systems</span> built and deployed for company operations.</p>
+
+        <div class="internship__intro">
+          <dl class="overview">
+            <div class="overview__row">
+              <dt>Requirements &amp; Planning</dt>
+              <dd>Worked with the IT Manager and department staff to understand existing workflows, identify requirements, and translate them into <mark class="overview__key">system features, interfaces, and access permissions</mark>.</dd>
+            </div>
+            <div class="overview__row">
+              <dt>System Development</dt>
+              <dd>Designed <mark class="overview__key">9 core database tables across 17 modules</mark>, integrated existing employee and attendance records, and implemented task synchronization, database transactions, and data validation.</dd>
+            </div>
+            <div class="overview__row">
+              <dt>Testing &amp; Improvement</dt>
+              <dd>Conducted functional, integration, and user acceptance testing. Resolved defects, optimized database queries and interface performance, and <mark class="overview__key">refined system functionality and usability based on user feedback.</mark></dd>
+            </div>
+          </dl>
+
+          <ul class="internship__aside">
+            <li class="info-card">
+              <span class="info-card__icon"><i class="bi bi-code-slash" aria-hidden="true"></i></span>
+              <div class="info-card__text">
+                <p class="info-card__label">Role</p>
+                <p class="info-card__value">Project lead, developer and QA</p>
+                <p class="info-card__note">Across all three systems</p>
+              </div>
+            </li>
+            <li class="info-card">
+              <span class="info-card__icon"><i class="bi bi-trophy-fill" aria-hidden="true"></i></span>
+              <div class="info-card__text">
+                <p class="info-card__label">Recognition</p>
+                <p class="info-card__value">Top-performing intern</p>
+                <p class="info-card__note">Ranked 1st of 13 interns and recognized by the IT Manager</p>
+              </div>
+            </li>
+            <li class="info-card">
+              <span class="info-card__icon"><i class="bi bi-easel2-fill" aria-hidden="true"></i></span>
+              <div class="info-card__text">
+                <p class="info-card__label">Presented to</p>
+                <p class="info-card__value">13 departments</p>
+                <p class="info-card__note">Across all three systems, ending with the Company President</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="systems">
+
+          <article class="system-card notched">
+            <div class="notched__body system-card__body">
+              <p class="system-card__label">System 01</p>
+              <img class="system-card__image" data-zoom src="assets/img/internship/1st-project/1.webp" alt="Screenshot of the IT Project Visualization system" loading="lazy">
+              <h3 class="system-card__title">IT Project Visualization</h3>
+              <p class="system-card__text">Live project and task tracking for the IT department, with developer status and delay alerts, replacing Excel.</p>
+              <ul class="tag-list system-card__stack">
+                  <li class="tag">PHP</li>
+                  <li class="tag">MySQL</li>
+                  <li class="tag">jQuery</li>
+                  <li class="tag">AJAX</li>
+                  <li class="tag">Bootstrap</li>
+                  <li class="tag tag--more" title="Full tech stack in the case study">+4 more</li>
+                </ul>
+              <button class="system-card__button" type="button" data-case-study="case-study-1" aria-haspopup="dialog">
+                  <span>View case study</span>
+                  <i class="bi bi-arrow-right" aria-hidden="true"></i>
+                </button>
+            </div>
+          </article>
+
+          <article class="system-card notched">
+            <div class="notched__body system-card__body">
+              <p class="system-card__label">System 02</p>
+              <img class="system-card__image" data-zoom src="assets/img/internship/2nd-project/1.webp" alt="Screenshot of the Office Task Visualization system" loading="lazy">
+              <h3 class="system-card__title">Office Task Visualization</h3>
+              <p class="system-card__text">Centralized task management with live staff status, file attachments and an audit trail of every change.</p>
+              <ul class="tag-list system-card__stack">
+                  <li class="tag">PHP</li>
+                  <li class="tag">MySQL</li>
+                  <li class="tag">jQuery</li>
+                  <li class="tag">AJAX</li>
+                  <li class="tag">Chart.js</li>
+                  <li class="tag tag--more" title="Full tech stack in the case study">+3 more</li>
+                </ul>
+              <button class="system-card__button" type="button" data-case-study="case-study-2" aria-haspopup="dialog">
+                  <span>View case study</span>
+                  <i class="bi bi-arrow-right" aria-hidden="true"></i>
+                </button>
+            </div>
+          </article>
+
+          <article class="system-card notched">
+            <div class="notched__body system-card__body">
+              <p class="system-card__label">System 03</p>
+              <img class="system-card__image" data-zoom src="assets/img/internship/3rd-project/1.webp" alt="Screenshot of the Machine Maintenance Checksheet system" loading="lazy">
+              <h3 class="system-card__title">Machine Maintenance Checksheet</h3>
+              <p class="system-card__text">Digital maintenance checks with QR-gated inspections and Checker and Verifier sign-off, replacing paper.</p>
+              <ul class="tag-list system-card__stack">
+                  <li class="tag">PHP</li>
+                  <li class="tag">MySQL</li>
+                  <li class="tag">JavaScript</li>
+                  <li class="tag">AJAX</li>
+                  <li class="tag">Html5-QRCode</li>
+                  <li class="tag tag--more" title="Full tech stack in the case study">+4 more</li>
+                </ul>
+              <button class="system-card__button" type="button" data-case-study="case-study-3" aria-haspopup="dialog">
+                  <span>View case study</span>
+                  <i class="bi bi-arrow-right" aria-hidden="true"></i>
+                </button>
+            </div>
+          </article>
+
+        </div>
+
+        <div class="gallery" id="internship-gallery" tabindex="0" aria-label="Internship photo gallery. Use the left and right arrow keys to change photos.">
+          <h3 class="subsection-title">Internship in pictures</h3>
+          <p class="section-intro">15 weeks and 500 hours, from the first planning session to the final presentations.</p>
+
+          <div class="gallery__layout">
+
+            <div class="gallery__viewer">
+              <div class="gallery__frame" data-zoom>
+                <img class="gallery__photo is-active" src="assets/img/internship/photos/1.webp" alt="Planning session for the IT Project Visualization system" style="object-position: 50% 40%" loading="lazy">
+                <img class="gallery__photo" src="assets/img/internship/photos/2.webp" alt="Presenting the IT Project Visualization system to the IT department" style="object-position: 50% 50%" loading="lazy">
+                <img class="gallery__photo" src="assets/img/internship/photos/3.webp" alt="Development setup at Arktech Philippines Inc." style="object-position: 30% 50%" loading="lazy">
+                <img class="gallery__photo" src="assets/img/internship/photos/4.webp" alt="Presenting the Office Task Visualization system to stakeholders" style="object-position: 40% 50%" loading="lazy">
+                <img class="gallery__photo" src="assets/img/internship/photos/5.webp" alt="Presenting the Machine Maintenance Checksheet system to stakeholders" style="object-position: 50% 52%" loading="lazy">
+                <img class="gallery__photo" src="assets/img/internship/photos/6.webp" alt="With the IT team and fellow interns after completing 500 hours" style="object-position: 50% 55%" loading="lazy">
+                <span class="gallery__counter" aria-hidden="true">01 / 06</span>
+              </div>
+            </div>
+
+            <div class="gallery__details notched">
+              <div class="notched__body gallery__details-body">
+
+                <div class="gallery__captions" aria-live="polite">
+                  <article class="gallery__caption is-active">
+                    <p class="gallery__tag">Planning</p>
+                    <h4 class="gallery__caption-title">Planning Session: IT Project Visualization</h4>
+                    <p class="gallery__caption-text">Brainstorming session for the IT Project Visualization system with the IT Manager and IT staff at Arktech Philippines Inc. After the draft plan was presented, I raised clarifying questions and suggested improvements for development, so we were all aligned before building. This gave us a clearer scope and a smoother start to the project.</p>
+                  </article>
+
+                  <article class="gallery__caption" aria-hidden="true">
+                    <p class="gallery__tag">Presentation · System 01</p>
+                    <h4 class="gallery__caption-title">IT Project Visualization: Presentation to the IT Department</h4>
+                    <p class="gallery__caption-text">Presented the IT Project Visualization system with my co-developer to the IT Manager, IT staff, and fellow IT interns. We introduced its real-time task and project monitoring, which the IT Manager would use to oversee project and task progress across the team. The session let us answer questions and gather recommendations, which the IT Manager approved for the next phase of development.</p>
+                  </article>
+
+                  <article class="gallery__caption" aria-hidden="true">
+                    <p class="gallery__tag">Development</p>
+                    <h4 class="gallery__caption-title">Building Three Enterprise Systems as a 2-Person Team</h4>
+                    <p class="gallery__caption-text">Our day-to-day development setup at Arktech Philippines Inc. As a 2-person team, we divided tasks and built the IT Project Visualization, Office Task Visualization, and Machine Maintenance Checksheet systems together, from initial planning to production deployment.</p>
+                  </article>
+
+                  <article class="gallery__caption" aria-hidden="true">
+                    <p class="gallery__tag">Stakeholder demo · System 02</p>
+                    <h4 class="gallery__caption-title">Presenting the Office Task Visualization System to Stakeholders</h4>
+                    <p class="gallery__caption-text">Presenting the Office Task Visualization system with my co-developer to the IT Manager and stakeholders across 10 departments at Arktech Philippines Inc. Over 3 sessions, we demonstrated the system live and gathered feedback, ending with a final presentation to the Company President.</p>
+                  </article>
+
+                  <article class="gallery__caption" aria-hidden="true">
+                    <p class="gallery__tag">Stakeholder demo · System 03</p>
+                    <h4 class="gallery__caption-title">Presenting the Machine Maintenance Checksheet System to Stakeholders</h4>
+                    <p class="gallery__caption-text">I presented the Machine Maintenance Checksheet System to stakeholders from 2 departments, alongside the IT Manager at Arktech Philippines Inc. I walked them through the Checker, Verifier, and Admin workflows and gathered their feedback on the digital transition from paper-based maintenance checks.</p>
+                  </article>
+
+                  <article class="gallery__caption" aria-hidden="true">
+                    <p class="gallery__tag">Milestone</p>
+                    <h4 class="gallery__caption-title">500 Hours Complete: Wrapping Up My Internship</h4>
+                    <p class="gallery__caption-text">Wrapping up 15 weeks and 500 hours as a Full Stack Developer Intern, with the IT team and fellow interns. Grateful for the trust, guidance, and opportunities that let us build and deliver three enterprise systems for the company.</p>
+                  </article>
+                </div>
+
+                <div class="gallery__controls">
+                  <div class="gallery__dots"></div>
+                  <div class="gallery__arrows">
+                    <button class="circle-button" type="button" data-gallery-prev aria-label="Previous photo"><i class="bi bi-arrow-left"></i></button>
+                    <button class="circle-button" type="button" data-gallery-next aria-label="Next photo"><i class="bi bi-arrow-right"></i></button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="gallery__thumbs">
+            <button class="gallery__thumb is-active" type="button" aria-label="Planning Session: IT Project Visualization">
+              <img src="assets/img/internship/photos/1.webp" alt="" style="object-position: 50% 40%" loading="lazy">
+              <span class="gallery__thumb-number">01</span>
+            </button>
+            <button class="gallery__thumb" type="button" aria-label="IT Project Visualization: Presentation to the IT Department">
+              <img src="assets/img/internship/photos/2.webp" alt="" style="object-position: 50% 50%" loading="lazy">
+              <span class="gallery__thumb-number">02</span>
+            </button>
+            <button class="gallery__thumb" type="button" aria-label="Building Three Enterprise Systems as a 2-Person Team">
+              <img src="assets/img/internship/photos/3.webp" alt="" style="object-position: 30% 50%" loading="lazy">
+              <span class="gallery__thumb-number">03</span>
+            </button>
+            <button class="gallery__thumb" type="button" aria-label="Presenting the Office Task Visualization System to Stakeholders">
+              <img src="assets/img/internship/photos/4.webp" alt="" style="object-position: 40% 50%" loading="lazy">
+              <span class="gallery__thumb-number">04</span>
+            </button>
+            <button class="gallery__thumb" type="button" aria-label="Presenting the Machine Maintenance Checksheet System to Stakeholders">
+              <img src="assets/img/internship/photos/5.webp" alt="" style="object-position: 50% 52%" loading="lazy">
+              <span class="gallery__thumb-number">05</span>
+            </button>
+            <button class="gallery__thumb" type="button" aria-label="500 Hours Complete: Wrapping Up My Internship">
+              <img src="assets/img/internship/photos/6.webp" alt="" style="object-position: 50% 55%" loading="lazy">
+              <span class="gallery__thumb-number">06</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="projects" class="section section--dark" aria-labelledby="projects-title">
+      <div class="section__inner">
+
+        <div class="section-label">
+          <span class="section-label__number">0003</span>
+          <span class="section-label__text">Projects</span>
+          <span class="section-label__line"></span>
+        </div>
+
+        <h2 class="section-title" id="projects-title">Projects</h2>
+        <p class="section-intro section-intro--gray">A selection of my work that demonstrates my experience in software development, technical problem-solving, and testing for functionality and usability.</p>
+
+        <article class="project notched">
+          <div class="notched__body project__body">
+
+            <figure class="award award--project">
+              <img class="award__image" data-zoom src="assets/img/projects/gymboost/award.webp" alt="Gymboost team receiving an award" loading="lazy">
+              <figcaption class="award__caption">
+                <i class="bi bi-trophy-fill" aria-hidden="true"></i>
+                <div>
+                  <p class="award__label">Award</p>
+                  <p class="award__title">Certificate of Recognition · Paper Presentation</p>
+                  <p class="award__meta">1st International In-House PUP MURaLS Conference · July 31, 2026</p>
+                </div>
+              </figcaption>
+            </figure>
+
+            <div class="project__main project__main--reverse">
+              <div class="project__info">
+                <p class="project__period">Capstone project · May–Oct 2025</p>
+                <h3 class="project__title">Gymboost</h3>
+                <p class="project__role">Gym management system · Lead Backend Developer</p>
+                <ul class="project__list">
+                  <li>Cut check-in time by over 90% by replacing manual logging with RFID attendance tracking.</li>
+                  <li>Built 9 backend features: dashboards, analytics, leaderboards, badge management and a Dialogflow chatbot.</li>
+                  <li>Rated 4.60/5.00 across 9 ISO/IEC 25010:2023 characteristics and 4.65/5.00 on TAM in a post-deployment user survey.</li>
+                </ul>
+                <ul class="tag-list">
+                  <li class="tag">PHP</li>
+                  <li class="tag">MySQL</li>
+                  <li class="tag">JavaScript</li>
+                  <li class="tag">Bootstrap</li>
+                  <li class="tag">AJAX</li>
+                  <li class="tag">RFID</li>
+                </ul>
+                <a class="project__link" href="https://github.com/ProjectGymBoost/GymBoost.com" target="_blank" rel="noopener noreferrer">
+                  <span>View repository on GitHub</span>
+                  <span aria-hidden="true">↗</span>
+                </a>
+              </div>
+
+              <div class="project__media carousel carousel--gymboost" data-carousel role="group" aria-label="Gymboost screenshots">
+                <div class="carousel__frame" data-zoom>
+                  <img class="carousel__slide is-active" src="assets/img/projects/gymboost/project/1.webp" alt="Screenshot of the Gymboost gym management system" loading="lazy">
+                  <img class="carousel__slide" data-src="assets/img/projects/gymboost/project/2.webp" alt="Gymboost screenshot 2 of 10">
+                  <img class="carousel__slide" data-src="assets/img/projects/gymboost/project/3.webp" alt="Gymboost screenshot 3 of 10">
+                  <img class="carousel__slide" data-src="assets/img/projects/gymboost/project/4.webp" alt="Gymboost screenshot 4 of 10">
+                  <img class="carousel__slide" data-src="assets/img/projects/gymboost/project/5.webp" alt="Gymboost screenshot 5 of 10">
+                  <img class="carousel__slide" data-src="assets/img/projects/gymboost/project/6.webp" alt="Gymboost screenshot 6 of 10">
+                  <img class="carousel__slide" data-src="assets/img/projects/gymboost/project/7.webp" alt="Gymboost screenshot 7 of 10">
+                  <img class="carousel__slide" data-src="assets/img/projects/gymboost/project/8.webp" alt="Gymboost screenshot 8 of 10">
+                  <img class="carousel__slide" data-src="assets/img/projects/gymboost/project/9.webp" alt="Gymboost screenshot 9 of 10">
+                  <img class="carousel__slide" data-src="assets/img/projects/gymboost/project/10.webp" alt="Gymboost screenshot 10 of 10">
+                </div>
+
+                <div class="carousel__controls">
+                  <div class="carousel__dots"></div>
+                  <div class="carousel__arrows">
+                    <button class="circle-button" type="button" data-carousel-prev aria-label="Previous screenshot"><i class="bi bi-arrow-left"></i></button>
+                    <button class="circle-button" type="button" data-carousel-next aria-label="Next screenshot"><i class="bi bi-arrow-right"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </article>
+
+        <article class="project notched">
+          <div class="notched__body project__body">
+
+            <figure class="award award--project">
+              <img class="award__image" data-zoom src="assets/img/projects/byz/award.webp" alt="Team Byzness Minds receiving 3rd place at the Techno Mini-Hackathon" loading="lazy">
+              <figcaption class="award__caption">
+                <i class="bi bi-trophy-fill" aria-hidden="true"></i>
+                <div>
+                  <p class="award__label">Award</p>
+                  <p class="award__title">3rd place · Techno Mini-Hackathon</p>
+                  <p class="award__meta">Team Byzness Minds · June 5, 2026</p>
+                </div>
+              </figcaption>
+            </figure>
+
+            <div class="project__main project__main--reverse">
+              <div class="project__info">
+                <p class="project__period">Technopreneurship · May 2026</p>
+                <h3 class="project__title">Byz</h3>
+                <p class="project__role">Bus commuter app · UI/UX framework · Market analysis</p>
+                <ul class="project__list">
+                  <li>A UI/UX framework and business proposal for a mobile app that helps bus commuters in the Philippines plan trips with destination-based route planning, live bus locations from driver GPS, arrival estimates and seat availability. A separate driver interface feeds the commuter app.</li>
+                  <li>Co-designed the UI/UX framework: the screens and user flow of the app.</li>
+                  <li>Co-wrote the market analysis: sized the market from national bus ridership down to a Santo Tomas, Batangas pilot, defined three user groups and positioned Byz against existing navigation and transit apps.</li>
+                </ul>
+                <ul class="tag-list">
+                  <li class="tag">UI/UX</li>
+                  <li class="tag">Business proposal</li>
+                </ul>
+              </div>
+
+              <div class="project__media carousel carousel--byz" data-carousel role="group" aria-label="Byz screens">
+                <div class="carousel__frame" data-zoom>
+                  <img class="carousel__slide is-active" src="assets/img/projects/byz/project/1.webp" alt="Screens from the Byz bus commuter app" loading="lazy">
+                  <img class="carousel__slide" data-src="assets/img/projects/byz/project/2.webp" alt="Byz screen 2 of 7">
+                  <img class="carousel__slide" data-src="assets/img/projects/byz/project/3.webp" alt="Byz screen 3 of 7">
+                  <img class="carousel__slide" data-src="assets/img/projects/byz/project/4.webp" alt="Byz screen 4 of 7">
+                  <img class="carousel__slide" data-src="assets/img/projects/byz/project/5.webp" alt="Byz screen 5 of 7">
+                  <img class="carousel__slide" data-src="assets/img/projects/byz/project/6.webp" alt="Byz screen 6 of 7">
+                  <img class="carousel__slide" data-src="assets/img/projects/byz/project/7.webp" alt="Byz screen 7 of 7">
+                </div>
+
+                <div class="carousel__controls">
+                  <div class="carousel__dots"></div>
+                  <div class="carousel__arrows">
+                    <button class="circle-button" type="button" data-carousel-prev aria-label="Previous screen"><i class="bi bi-arrow-left"></i></button>
+                    <button class="circle-button" type="button" data-carousel-next aria-label="Next screen"><i class="bi bi-arrow-right"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </article>
+
+        <h3 class="subsection-title subsection-title--small">Coursework</h3>
+        <p class="section-intro section-intro--gray section-intro--compact">Web projects I developed throughout my BSIT coursework, where I applied different concepts and explored various approaches to web development.</p>
+
+        <h4 class="course-group-title">Web Development · 3rd year, 1st semester</h4>
+        <ul class="course-grid">
+          <li>
+            <a class="course-card" href="https://kayegamana.github.io/WD/project%201/project1.html" target="_blank" rel="noopener noreferrer">
+              <span class="course-card__media">
+                <img class="course-card__image" src="assets/img/projects/wd/project-preview-1.webp" alt="" loading="lazy">
+                <img class="course-card__image course-card__image--hover" data-src="assets/img/projects/wd/project-preview-hover-1.webp" alt="">
+              </span>
+              <span class="course-card__footer">
+                <span class="course-card__name"><span class="course-card__number">01</span>ASUS VivoBook 15<span class="course-card__arrow" aria-hidden="true">↗</span></span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="course-card" href="https://kayegamana.github.io/WD/project%202/projectTwo.html" target="_blank" rel="noopener noreferrer">
+              <span class="course-card__media">
+                <img class="course-card__image" src="assets/img/projects/wd/project-preview-2.webp" alt="" loading="lazy">
+                <img class="course-card__image course-card__image--hover" data-src="assets/img/projects/wd/project-preview-hover-2.webp" alt="">
+              </span>
+              <span class="course-card__footer">
+                <span class="course-card__name"><span class="course-card__number">02</span>Explore Tokyo<span class="course-card__arrow" aria-hidden="true">↗</span></span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="course-card" href="https://kayegamana.github.io/WD/project%203/index.html" target="_blank" rel="noopener noreferrer">
+              <span class="course-card__media">
+                <img class="course-card__image" src="assets/img/projects/wd/project-preview-3.webp" alt="" loading="lazy">
+                <img class="course-card__image course-card__image--hover" data-src="assets/img/projects/wd/project-preview-hover-3.webp" alt="">
+              </span>
+              <span class="course-card__footer">
+                <span class="course-card__name"><span class="course-card__number">03</span>Filipino Food<span class="course-card__arrow" aria-hidden="true">↗</span></span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="course-card" href="https://kayegamana.github.io/WD/project%204/index.html" target="_blank" rel="noopener noreferrer">
+              <span class="course-card__media">
+                <img class="course-card__image" src="assets/img/projects/wd/project-preview-4.webp" alt="" loading="lazy">
+                <img class="course-card__image course-card__image--hover" data-src="assets/img/projects/wd/project-preview-hover-4.webp" alt="">
+              </span>
+              <span class="course-card__footer">
+                <span class="course-card__name"><span class="course-card__number">04</span>Pixplore<span class="course-card__arrow" aria-hidden="true">↗</span></span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="course-card" href="https://kayegamana.github.io/WD/project%205/index.html" target="_blank" rel="noopener noreferrer">
+              <span class="course-card__media">
+                <img class="course-card__image" src="assets/img/projects/wd/project-preview-5.webp" alt="" loading="lazy">
+                <img class="course-card__image course-card__image--hover" data-src="assets/img/projects/wd/project-preview-hover-5.webp" alt="">
+              </span>
+              <span class="course-card__footer">
+                <span class="course-card__name"><span class="course-card__number">05</span>BLACKPINK<span class="course-card__arrow" aria-hidden="true">↗</span></span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="course-card" href="https://kayegamana.github.io/WD/project%206/banner.html" target="_blank" rel="noopener noreferrer">
+              <span class="course-card__media">
+                <img class="course-card__image" src="assets/img/projects/wd/project-preview-6.webp" alt="" loading="lazy">
+                <img class="course-card__image course-card__image--hover" data-src="assets/img/projects/wd/project-preview-hover-6.webp" alt="">
+              </span>
+              <span class="course-card__footer">
+                <span class="course-card__name"><span class="course-card__number">06</span>Super Mario<span class="course-card__arrow" aria-hidden="true">↗</span></span>
+              </span>
+            </a>
+          </li>
+        </ul>
+
+        <h4 class="course-group-title course-group-title--second">Application Development and Emerging Technologies · 3rd year, 2nd semester</h4>
+        <ul class="course-grid">
+          <li>
+            <a class="course-card" href="https://github.com/kayegamana/kayegamana.github.io/tree/main/ADET/A02" target="_blank" rel="noopener noreferrer">
+              <span class="course-card__media">
+                <img class="course-card__image" src="assets/img/projects/adet/project-preview-1.webp" alt="" loading="lazy">
+                <img class="course-card__image course-card__image--hover" data-src="assets/img/projects/adet/project-preview-hover-1.webp" alt="">
+              </span>
+              <span class="course-card__footer">
+                <span class="course-card__name"><span class="course-card__number">01</span>XP Zone<span class="course-card__arrow" aria-hidden="true">↗</span></span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="course-card" href="https://kayegamana.github.io/ADET/A03/index.html" target="_blank" rel="noopener noreferrer">
+              <span class="course-card__media">
+                <img class="course-card__image" src="assets/img/projects/adet/project-preview-2.webp" alt="" loading="lazy">
+                <img class="course-card__image course-card__image--hover" data-src="assets/img/projects/adet/project-preview-hover-2.webp" alt="">
+              </span>
+              <span class="course-card__footer">
+                <span class="course-card__name"><span class="course-card__number">02</span>Uniqlo<span class="course-card__arrow" aria-hidden="true">↗</span></span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="course-card" href="https://kayegamana.github.io/ADET/A04_V1/index.html" target="_blank" rel="noopener noreferrer">
+              <span class="course-card__media">
+                <img class="course-card__image" src="assets/img/projects/adet/project-preview-3.webp" alt="" loading="lazy">
+                <img class="course-card__image course-card__image--hover" data-src="assets/img/projects/adet/project-preview-hover-3.webp" alt="">
+              </span>
+              <span class="course-card__footer">
+                <span class="course-card__name"><span class="course-card__number">03</span>FreshEase<span class="course-card__arrow" aria-hidden="true">↗</span></span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="course-card" href="https://kayegamana.github.io/ADET/A07/index.html" target="_blank" rel="noopener noreferrer">
+              <span class="course-card__media">
+                <img class="course-card__image" src="assets/img/projects/adet/project-preview-4.webp" alt="" loading="lazy">
+                <img class="course-card__image course-card__image--hover" data-src="assets/img/projects/adet/project-preview-hover-4.webp" alt="">
+              </span>
+              <span class="course-card__footer">
+                <span class="course-card__name"><span class="course-card__number">04</span>Outfit Generator<span class="course-card__arrow" aria-hidden="true">↗</span></span>
+              </span>
+            </a>
+          </li>
+        </ul>
+
+      </div>
+    </section>
+
+    <section id="services" class="section section--blue" aria-labelledby="services-title">
+      <div class="section__inner">
+
+        <div class="section-label">
+          <span class="section-label__number">0004</span>
+          <span class="section-label__text">Services</span>
+          <span class="section-label__line"></span>
+        </div>
+
+        <h2 class="visually-hidden" id="services-title">Services</h2>
+        <p class="section-intro">Full-stack development and quality assurance, from requirements to deployment.</p>
+
+        <ul class="services">
+          <li class="service">
+            <div class="service__icon"><i class="bi bi-code-slash" aria-hidden="true"></i></div>
+            <h3 class="service__name">Code</h3>
+            <p class="service__text">Web systems that run in real operations. I build the whole thing, from database to screen, and deploy it to a live server.</p>
+          </li>
+          <li class="service">
+            <div class="service__icon"><i class="bi bi-clipboard2-check-fill" aria-hidden="true"></i></div>
+            <h3 class="service__name">QA</h3>
+            <p class="service__text">Problems caught before your users find them. I write test cases, run regression checks, track defects and test with real users.</p>
+          </li>
+          <li class="service">
+            <div class="service__icon"><i class="bi bi-database-fill" aria-hidden="true"></i></div>
+            <h3 class="service__name">Data</h3>
+            <p class="service__text">Databases that stay clean and fast as records grow. I design the tables, write the queries and check the data that goes in.</p>
+          </li>
+          <li class="service">
+            <div class="service__icon"><i class="bi bi-vector-pen" aria-hidden="true"></i></div>
+            <h3 class="service__name">Design</h3>
+            <p class="service__text">Screens people can follow without a manual. I plan the UI and UX, prototype it in Figma and build it to work on any device.</p>
+          </li>
+          <li class="service">
+            <div class="service__icon"><i class="bi bi-shield-lock-fill" aria-hidden="true"></i></div>
+            <h3 class="service__name">Security</h3>
+            <p class="service__text">Access that matches who people are. Roles and permissions, safe logins and protected data, so everyone sees only what they should.</p>
+          </li>
+        </ul>
+
+      </div>
+    </section>
+
+    <section id="stack" class="section section--indigo" aria-labelledby="stack-title">
+      <div class="section__inner">
+
+        <div class="section-label">
+          <span class="section-label__number">0005</span>
+          <span class="section-label__text">Tech Stack</span>
+          <span class="section-label__line"></span>
+        </div>
+
+        <h2 class="section-title" id="stack-title">Tech Stack</h2>
+        <p class="section-intro">The languages, technologies, and tools I'm familiar with, covering different aspects of software development and quality assurance.</p>
+
+        <div class="stack-collections">
+          <figure class="stack-collection">
+            <figcaption class="stack-collection__label">Languages &amp; frameworks</figcaption>
+            <img src="assets/img/tech-stack/collection-1.webp" alt="HTML5, CSS3, JavaScript, PHP, MySQL, Bootstrap, C++, Java, C, Python, VS Code, GitHub, Git" loading="lazy">
+          </figure>
+          <figure class="stack-collection">
+            <figcaption class="stack-collection__label">Platforms &amp; productivity</figcaption>
+            <img src="assets/img/tech-stack/collection-2.webp" alt="Google Workspace, Copilot, Canva, Figma, CapCut, Eclipse, WordPress, Cisco Packet Tracer, Visual Studio, Jupyter, Salesforce, Photoshop, Lightroom" loading="lazy">
+          </figure>
+        </div>
+
+        <div class="stack-core">
+
+          <div class="stack-column">
+            <h3 class="stack-heading">Development</h3>
+            <dl class="stack-list">
+              <div class="stack-list__row">
+                <dt>Languages</dt>
+                <dd>
+                  <ul class="stack-chips">
+                    <li>HTML5</li>
+                    <li>CSS3</li>
+                    <li>JavaScript</li>
+                    <li>PHP</li>
+                    <li>SQL</li>
+                    <li>Python</li>
+                    <li>Java</li>
+                  </ul>
+                </dd>
+              </div>
+              <div class="stack-list__row">
+                <dt>Front end</dt>
+                <dd>
+                  <ul class="stack-chips">
+                    <li>Bootstrap</li>
+                    <li>jQuery</li>
+                    <li>AJAX</li>
+                  </ul>
+                </dd>
+              </div>
+              <div class="stack-list__row">
+                <dt>Back end and hosting</dt>
+                <dd>
+                  <ul class="stack-chips">
+                    <li>Node.js</li>
+                    <li>Supabase</li>
+                    <li>Vercel</li>
+                  </ul>
+                </dd>
+              </div>
+              <div class="stack-list__row">
+                <dt>Databases</dt>
+                <dd>
+                  <ul class="stack-chips">
+                    <li>MySQL</li>
+                    <li>PostgreSQL</li>
+                  </ul>
+                </dd>
+              </div>
+              <div class="stack-list__row">
+                <dt>Version control</dt>
+                <dd>
+                  <ul class="stack-chips">
+                    <li>Git</li>
+                    <li>GitHub</li>
+                  </ul>
+                </dd>
+              </div>
+              <div class="stack-list__row">
+                <dt>Practices</dt>
+                <dd>
+                  <ul class="stack-chips">
+                    <li>OOP</li>
+                    <li>MVC architecture</li>
+                    <li>Modular architecture</li>
+                  </ul>
+                </dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="stack-column">
+            <h3 class="stack-heading">Testing and QA</h3>
+            <dl class="stack-list">
+              <div class="stack-list__row">
+                <dt>Methodology</dt>
+                <dd>
+                  <ul class="stack-chips">
+                    <li>SDLC</li>
+                    <li>STLC</li>
+                    <li>Agile</li>
+                  </ul>
+                </dd>
+              </div>
+              <div class="stack-list__row">
+                <dt>Approach</dt>
+                <dd>
+                  <ul class="stack-chips">
+                    <li>Manual testing</li>
+                    <li>Test case design</li>
+                    <li>Test scenarios</li>
+                    <li>Defect reporting and tracking</li>
+                  </ul>
+                </dd>
+              </div>
+              <div class="stack-list__row">
+                <dt>Test types</dt>
+                <dd>
+                  <ul class="stack-chips">
+                    <li>Functional</li>
+                    <li>Regression</li>
+                    <li>Integration</li>
+                    <li>Unit</li>
+                    <li>UI</li>
+                    <li>Smoke</li>
+                    <li>Stress</li>
+                  </ul>
+                </dd>
+              </div>
+              <div class="stack-list__row">
+                <dt>Validation</dt>
+                <dd>
+                  <ul class="stack-chips">
+                    <li>API testing</li>
+                    <li>UAT</li>
+                    <li>Database validation</li>
+                    <li>Role-based access testing</li>
+                    <li>Real-device testing</li>
+                  </ul>
+                </dd>
+              </div>
+              <div class="stack-list__row">
+                <dt>Tools</dt>
+                <dd>
+                  <ul class="stack-chips">
+                    <li>Jira</li>
+                    <li>Postman</li>
+                    <li>Chrome DevTools</li>
+                  </ul>
+                </dd>
+              </div>
+            </dl>
+          </div>
+
+        </div>
+
+        <details class="stack-more">
+          <summary class="stack-more__toggle">
+            <span class="stack-more__text">Also worked with</span>
+            <i class="bi bi-chevron-down stack-more__icon" aria-hidden="true"></i>
+          </summary>
+
+          <div class="stack-more__body">
+        <dl class="stack-list">
+          <div class="stack-list__row">
+            <dt>More languages</dt>
+            <dd>
+              <ul class="stack-chips">
+                <li>C</li>
+                <li>C++</li>
+              </ul>
+            </dd>
+          </div>
+          <div class="stack-list__row">
+            <dt>Mobile and desktop</dt>
+            <dd>
+              <ul class="stack-chips">
+                <li>React Native</li>
+                <li>Electron</li>
+              </ul>
+            </dd>
+          </div>
+          <div class="stack-list__row">
+            <dt>Libraries</dt>
+            <dd>
+              <ul class="stack-chips">
+                <li>Chart.js</li>
+                <li>jsPDF</li>
+                <li>Html5-QRCode</li>
+                <li>qrcode-generator</li>
+                <li>SweetAlert2</li>
+                <li>Moment.js</li>
+                <li>iziModal</li>
+              </ul>
+            </dd>
+          </div>
+          <div class="stack-list__row">
+            <dt>Editors and IDEs</dt>
+            <dd>
+              <ul class="stack-chips">
+                <li>VS Code</li>
+                <li>Visual Studio</li>
+                <li>Eclipse</li>
+                <li>Jupyter</li>
+              </ul>
+            </dd>
+          </div>
+          <div class="stack-list__row">
+            <dt>Design and media</dt>
+            <dd>
+              <ul class="stack-chips">
+                <li>Figma</li>
+                <li>Canva</li>
+                <li>Adobe Photoshop</li>
+                <li>Adobe Lightroom</li>
+                <li>CapCut</li>
+              </ul>
+            </dd>
+          </div>
+          <div class="stack-list__row">
+            <dt>Platforms</dt>
+            <dd>
+              <ul class="stack-chips">
+                <li>Google Workspace</li>
+                <li>Microsoft 365</li>
+                <li>WordPress</li>
+                <li>Cisco Packet Tracer</li>
+                <li>Salesforce</li>
+              </ul>
+            </dd>
+          </div>
+        </dl>
+
+          </div>
+        </details>
+
+      </div>
+    </section>
+
+    <section id="credentials" class="section section--dark" aria-labelledby="credentials-title">
+      <div class="section__inner">
+
+        <div class="section-label">
+          <span class="section-label__number">0006</span>
+          <span class="section-label__text">Credentials</span>
+          <span class="section-label__line"></span>
+        </div>
+
+        <h2 class="section-title section-title--large" id="credentials-title">Credentials</h2>
+        <p class="section-intro section-intro--gray section-intro--narrow">A collection of 30 certificates and recognitions I've earned, with those most relevant to software development and QA featured first.</p>
+
+        <div class="cert-sort" role="group" aria-label="Sort certificates">
+          <button class="cert-sort__button is-active" type="button" data-sort="default" aria-pressed="true">Default</button>
+          <button class="cert-sort__button" type="button" data-sort="name" aria-pressed="false">A–Z</button>
+          <button class="cert-sort__button" type="button" data-sort="date" aria-pressed="false">Newest first</button>
+        </div>
+
+        <div class="cert-grid" id="cert-grid">
+          <button class="cert" type="button" data-date="">
+            <img class="cert__image" src="assets/img/certificates/html-essentials.webp" alt="HTML Essentials certificate" loading="lazy">
+            <span class="cert__title">HTML Essentials</span>
+            <span class="cert__issuer">Cisco Networking Academy · 2025</span>
+          </button>
+          <button class="cert" type="button" data-date="">
+            <img class="cert__image" src="assets/img/certificates/css-essentials.webp" alt="CSS Essentials certificate" loading="lazy">
+            <span class="cert__title">CSS Essentials</span>
+            <span class="cert__issuer">Cisco Networking Academy · 2025</span>
+          </button>
+          <button class="cert" type="button" data-date="">
+            <img class="cert__image" src="assets/img/certificates/javascript-essentials-1.webp" alt="JavaScript Essentials 1 certificate" loading="lazy">
+            <span class="cert__title">JavaScript Essentials 1</span>
+            <span class="cert__issuer">Cisco Networking Academy · 2025</span>
+          </button>
+          <button class="cert" type="button" data-date="">
+            <img class="cert__image" src="assets/img/certificates/javascript-essentials-2.webp" alt="JavaScript Essentials 2 certificate" loading="lazy">
+            <span class="cert__title">JavaScript Essentials 2</span>
+            <span class="cert__issuer">Cisco Networking Academy · 2025</span>
+          </button>
+          <button class="cert" type="button" data-date="2026-01-09">
+            <img class="cert__image" src="assets/img/certificates/salesforce.webp" alt="Salesforce Virtual Internship Program 2025 certificate" loading="lazy">
+            <span class="cert__title">Salesforce Virtual Internship Program 2025</span>
+            <span class="cert__issuer">SmartBridge · Skill Wallet · 2026</span>
+          </button>
+          <button class="cert" type="button" data-date="2026-06-05">
+            <img class="cert__image" src="assets/img/certificates/third-place-awardee-byzness-minds.webp" alt="Techno Mini-Hackathon Third Place Awardee certificate for Team Byzness Minds" loading="lazy">
+            <span class="cert__title">Techno Mini-Hackathon Third Place Awardee: Team Byzness Minds</span>
+            <span class="cert__issuer">PUP Institute of Technology · 2026</span>
+          </button>
+          <button class="cert" type="button" data-date="2026-06-05">
+            <img class="cert__image" src="assets/img/certificates/techno-mini-hackathon-idea-innovation-solution.webp" alt="Techno Mini-Hackathon Participant certificate" loading="lazy">
+            <span class="cert__title">Techno Mini-Hackathon Participant</span>
+            <span class="cert__issuer">PUP Institute of Technology · 2026</span>
+          </button>
+          <button class="cert" type="button" data-date="2026-07-31">
+            <img class="cert__image" src="assets/img/certificates/pup-murals-conference-gymboost-presentation.webp" alt="Certificate of Recognition for presenting the Gymboost paper at the 1st International In-House PUP MURaLS Conference" loading="lazy">
+            <span class="cert__title">Paper Presentation: 1st International In-House PUP MURaLS Conference</span>
+            <span class="cert__issuer">IOER · PUP · Certificate of Recognition · 2026</span>
+          </button>
+          <button class="cert" type="button" data-date="2025-11-22">
+            <img class="cert__image" src="assets/img/certificates/techstart.webp" alt="TechSTART GIT READY, SET, COMMIT certificate" loading="lazy">
+            <span class="cert__title">TechSTART GIT READY, SET, COMMIT</span>
+            <span class="cert__issuer">DOST-SEI · START</span>
+          </button>
+          <button class="cert" type="button" data-date="2025-12-22">
+            <img class="cert__image" src="assets/img/certificates/agile-project-management.webp" alt="Agile Project Management certificate" loading="lazy">
+            <span class="cert__title">Agile Project Management</span>
+            <span class="cert__issuer">HP LIFE · 2025</span>
+          </button>
+          <button class="cert" type="button" data-date="2025-11-25">
+            <img class="cert__image" src="assets/img/certificates/pecb-regional-webinar.webp" alt="Mastering Skills and Strategies for Cybersecurity Leadership certificate" loading="lazy">
+            <span class="cert__title">Mastering Skills and Strategies for Cybersecurity Leadership</span>
+            <span class="cert__issuer">PECB · Attestation of Attendance · 2025</span>
+          </button>
+          <button class="cert" type="button" data-date="">
+            <img class="cert__image" src="assets/img/certificates/data-science-analytics.webp" alt="Data Science and Analytics certificate" loading="lazy">
+            <span class="cert__title">Data Science &amp; Analytics</span>
+            <span class="cert__issuer">HP LIFE · 2025</span>
+          </button>
+          <button class="cert" type="button" data-date="2025-12-23">
+            <img class="cert__image" src="assets/img/certificates/critical-thinking-in-the-ai-era.webp" alt="Critical Thinking in the AI Era certificate" loading="lazy">
+            <span class="cert__title">Critical Thinking in the AI Era</span>
+            <span class="cert__issuer">HP LIFE · 2025</span>
+          </button>
+          <button class="cert" type="button" data-date="">
+            <img class="cert__image" src="assets/img/certificates/cyber-threat-management.webp" alt="Cyber Threat Management certificate" loading="lazy">
+            <span class="cert__title">Cyber Threat Management</span>
+            <span class="cert__issuer">Cisco Networking Academy · 2025</span>
+          </button>
+          <button class="cert" type="button" data-date="">
+            <img class="cert__image" src="assets/img/certificates/operating-system-basics.webp" alt="Operating Systems Basics certificate" loading="lazy">
+            <span class="cert__title">Operating Systems Basics</span>
+            <span class="cert__issuer">Cisco Networking Academy · 2025</span>
+          </button>
+          <button class="cert" type="button" data-date="">
+            <img class="cert__image" src="assets/img/certificates/networking-basics.webp" alt="Networking Basics certificate" loading="lazy">
+            <span class="cert__title">Networking Basics</span>
+            <span class="cert__issuer">Cisco Networking Academy · 2025</span>
+          </button>
+          <button class="cert" type="button" data-date="2025-12-22">
+            <img class="cert__image" src="assets/img/certificates/introduction-to-cybersecurity-awareness.webp" alt="Introduction to Cybersecurity Awareness certificate" loading="lazy">
+            <span class="cert__title">Introduction to Cybersecurity Awareness</span>
+            <span class="cert__issuer">HP LIFE · 2025</span>
+          </button>
+          <button class="cert" type="button" data-date="2025-11-21">
+            <img class="cert__image" src="assets/img/certificates/ai-for-beginners.webp" alt="AI for Beginners certificate" loading="lazy">
+            <span class="cert__title">AI for Beginners</span>
+            <span class="cert__issuer">HP LIFE · 2025</span>
+          </button>
+          <button class="cert" type="button" data-date="2025-11-06">
+            <img class="cert__image" src="assets/img/certificates/microsoft-genai-ai-basics.webp" alt="Microsoft GenAI: AI Basics (Part 1) certificate" loading="lazy">
+            <span class="cert__title">Microsoft GenAI: AI Basics (Part 1)</span>
+            <span class="cert__issuer">Microsoft · SEEK · 2025</span>
+          </button>
+          <button class="cert" type="button" data-date="2025-11-06">
+            <img class="cert__image" src="assets/img/certificates/microsoft-genai-generative-ai.webp" alt="Microsoft GenAI: Generative AI (Part 2) certificate" loading="lazy">
+            <span class="cert__title">Microsoft GenAI: Generative AI (Part 2)</span>
+            <span class="cert__issuer">Microsoft · SEEK · 2025</span>
+          </button>
+          <button class="cert" type="button" data-date="2025-11-06">
+            <img class="cert__image" src="assets/img/certificates/microsoft-genai-boost-your-productivity-with-copilot.webp" alt="Microsoft GenAI: Boost Your Productivity with Copilot (Part 4) certificate" loading="lazy">
+            <span class="cert__title">Microsoft GenAI: Boost Your Productivity with Copilot (Part 4)</span>
+            <span class="cert__issuer">Microsoft · SEEK · 2025</span>
+          </button>
+          <button class="cert" type="button" data-date="2025-11-06">
+            <img class="cert__image" src="assets/img/certificates/microsoft-genai-internet-search-and-beyond.webp" alt="Microsoft GenAI: Internet Search and Beyond (Part 3) certificate" loading="lazy">
+            <span class="cert__title">Microsoft GenAI: Internet Search and Beyond (Part 3)</span>
+            <span class="cert__issuer">Microsoft · SEEK · 2025</span>
+          </button>
+          <button class="cert" type="button" data-date="2025-11-06">
+            <img class="cert__image" src="assets/img/certificates/microsoft-genai-responsible-ai-ai-for-all.webp" alt="Microsoft GenAI: Responsible AI and AI for All (Part 5) certificate" loading="lazy">
+            <span class="cert__title">Microsoft GenAI: Responsible AI &amp; AI for All (Part 5)</span>
+            <span class="cert__issuer">Microsoft · SEEK · 2025</span>
+          </button>
+          <button class="cert" type="button" data-date="">
+            <img class="cert__image" src="assets/img/certificates/data-science-essentials-with-python.webp" alt="Data Science Essentials with Python certificate" loading="lazy">
+            <span class="cert__title">Data Science Essentials with Python</span>
+            <span class="cert__issuer">Cisco Networking Academy · 2025</span>
+          </button>
+          <button class="cert" type="button" data-date="">
+            <img class="cert__image" src="assets/img/certificates/ai-for-business-professionals.webp" alt="AI for Business Professionals certificate" loading="lazy">
+            <span class="cert__title">AI for Business Professionals</span>
+            <span class="cert__issuer">HP LIFE · 2025</span>
+          </button>
+          <button class="cert" type="button" data-date="2025-12-24">
+            <img class="cert__image" src="assets/img/certificates/it-for-business-success.webp" alt="IT for Business Success certificate" loading="lazy">
+            <span class="cert__title">IT for Business Success</span>
+            <span class="cert__issuer">HP LIFE · 2025</span>
+          </button>
+          <button class="cert" type="button" data-date="2025-12-22">
+            <img class="cert__image" src="assets/img/certificates/introduction-to-digital-business-skills.webp" alt="Introduction to Digital Business Skills certificate" loading="lazy">
+            <span class="cert__title">Introduction to Digital Business Skills</span>
+            <span class="cert__issuer">HP LIFE · 2025</span>
+          </button>
+          <button class="cert" type="button" data-date="2025-11-21">
+            <img class="cert__image" src="assets/img/certificates/professional-networking-for-career-growth.webp" alt="Professional Networking for Career Growth certificate" loading="lazy">
+            <span class="cert__title">Professional Networking for Career Growth</span>
+            <span class="cert__issuer">HP LIFE · 2025</span>
+          </button>
+          <button class="cert" type="button" data-date="2025-12-19">
+            <img class="cert__image" src="assets/img/certificates/customer-experience-for-business-success.webp" alt="Customer Experience (CX) for Business Success certificate" loading="lazy">
+            <span class="cert__title">Customer Experience (CX) for Business Success</span>
+            <span class="cert__issuer">HP LIFE · 2025</span>
+          </button>
+          <button class="cert" type="button" data-date="2025-12-24">
+            <img class="cert__image" src="assets/img/certificates/inventory-management.webp" alt="Inventory Management certificate" loading="lazy">
+            <span class="cert__title">Inventory Management</span>
+            <span class="cert__issuer">HP LIFE · 2025</span>
+          </button>
+        </div>
+
+        <div class="cert-more">
+          <button class="cert-more__button" id="cert-more" type="button" aria-controls="cert-grid">
+            Show more
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="words" class="section section--indigo" aria-labelledby="words-title">
+      <div class="section__inner">
+
+        <div class="section-label">
+          <span class="section-label__number">0007</span>
+          <span class="section-label__text">Testimonials</span>
+          <span class="section-label__line"></span>
+        </div>
+
+        <h2 class="visually-hidden" id="words-title">Testimonials</h2>
+
+        <div class="testimonial">
+          <figure class="testimonial__quote">
+            <div class="testimonial__mark" aria-hidden="true">“</div>
+            <blockquote class="testimonial__text">
+              <p>She really is the kind of person who's always curious to build something with <span class="highlight">quality</span>, who has <span class="highlight">an eye for what's better</span>, and <span class="highlight">a teammate you can trust</span> on meaningful projects.</p>
+            </blockquote>
+            <figcaption>
+              <span class="testimonial__name">Roland Regio</span>
+              <span class="testimonial__role">Junior Web Developer</span>
+            </figcaption>
+          </figure>
+
+          <div class="testimonial__side">
+            <img class="testimonial__art" src="assets/img/testimonial.webp" alt="" loading="lazy">
+
+            <div class="testimonial__invite">
+              <p class="testimonial__invite-title">Worked with me?</p>
+              <p class="testimonial__invite-text">You can send one through a short form. I'll ask before publishing it.</p>
+              <a class="testimonial__button" href="#contact" data-open-contact data-contact-mode="testimonial" aria-haspopup="dialog">Leave a testimonial</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="contact" class="section section--blue" aria-labelledby="contact-title">
+      <div class="section__inner">
+
+        <div class="section-label">
+          <span class="section-label__number">0008</span>
+          <span class="section-label__text">Contact</span>
+          <span class="section-label__line"></span>
+        </div>
+
+        <div class="contact">
+
+          <div class="contact__info">
+            <h2 class="section-title section-title--large section-title--job" id="contact-title">Contact</h2>
+            <p class="contact__text">I'm seeking opportunities in junior software development and quality assurance, and I'm also open to freelance projects. Feel free to reach out through the contact form, email, or LinkedIn. I usually respond within a day.</p>
+
+            <ul class="contact__links">
+              <li>
+                <a class="contact__link" href="mailto:kayecgamana@gmail.com">
+                  <span class="contact__link-main">
+                    <span class="contact__icon"><i class="bi bi-envelope-fill" aria-hidden="true"></i></span>
+                    <span class="contact__link-text">kayecgamana@gmail.com</span>
+                  </span>
+                  <span aria-hidden="true">↗</span>
+                </a>
+              </li>
+              <li>
+                <a class="contact__link" href="https://www.linkedin.com/in/kaye-gamana" target="_blank" rel="noopener noreferrer">
+                  <span class="contact__link-main">
+                    <span class="contact__icon"><i class="bi bi-linkedin" aria-hidden="true"></i></span>
+                    <span class="contact__link-text">/in/kaye-gamana</span>
+                  </span>
+                  <span aria-hidden="true">↗</span>
+                </a>
+              </li>
+              <li>
+                <a class="contact__link" href="https://github.com/kayegamana" target="_blank" rel="noopener noreferrer">
+                  <span class="contact__link-main">
+                    <span class="contact__icon"><i class="bi bi-github" aria-hidden="true"></i></span>
+                    <span class="contact__link-text">github.com/kayegamana</span>
+                  </span>
+                  <span aria-hidden="true">↗</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <form class="form" data-contact-form>
+            <h3 class="form__title" data-form-title>Send a message</h3>
+
+            <div class="form__row">
+              <label class="form__field">
+                Name
+                <input class="form__input" name="name" type="text" required placeholder="Your full name" autocomplete="name">
+              </label>
+              <label class="form__field">
+                Email
+                <input class="form__input" name="email" type="email" required placeholder="you@example.com" autocomplete="email">
+              </label>
+            </div>
+
+            <label class="form__field">
+              Subject
+              <input class="form__input" name="topic" type="text" required placeholder="Job, project, or inquiry">
+            </label>
+
+            <label class="form__field">
+              Message
+              <textarea class="form__input form__input--textarea" name="message" rows="5" required placeholder="Tell me about the role, project, or your inquiry."></textarea>
+            </label>
+
+            <label class="form__checkbox">
+              <input type="checkbox" name="request_resume" value="yes">
+              <span>Please include a copy of your résumé in your reply.</span>
+            </label>
+
+            <input type="checkbox" name="botcheck" hidden tabindex="-1" autocomplete="off">
+
+            <div class="form__footer">
+              <p class="form__status" data-form-status aria-live="polite"></p>
+              <button class="form__submit" type="submit">
+                <span class="form__submit-label">Send message</span>
+                <i class="bi bi-send-fill" aria-hidden="true"></i>
+              </button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <div class="modal-overlay" id="photoModal" role="dialog" aria-modal="true" aria-labelledby="modalProjectName"
-    aria-hidden="true">
-    <div class="modal-backdrop" data-close="photoModal"></div>
-    <div class="modal-box">
-      <div class="modal-head">
-        <div class="modal-eyebrow">Project Gallery</div>
-        <button class="modal-close" data-close="photoModal" aria-label="Close gallery">×</button>
-      </div>
-
-      <div class="modal-gallery-wrapper">
-        <div class="modal-main-image-container">
-          <img src="" alt="Project zoomable image" id="mainGalleryImage" decoding="async" style="opacity:0;">
-        </div>
-        <div class="modal-thumbnails" id="galleryThumbnails">
-          <!-- populated dynamically on open -->
-        </div>
-      </div>
-
-      <div class="modal-footer">
-        <div class="modal-title" id="modalProjectName"></div>
-        <div class="gallery-controls">
-          <button class="gallery-nav-btn" id="galleryPrev" aria-label="Previous image">
-            <i class="bi bi-chevron-left"></i>
-          </button>
-          <div class="image-counter" id="galleryCounter">1 / 8</div>
-          <button class="gallery-nav-btn" id="galleryNext" aria-label="Next image">
-            <i class="bi bi-chevron-right"></i>
-          </button>
-        </div>
-      </div>
+  <footer class="footer">
+    <div class="footer__inner">
+      <span>© 2026 Kaye Christine P. Gamana</span>
+      <span class="footer__tagline">Design • Code • Data • QA • Security</span>
+      <span class="footer__social">
+        <a href="mailto:kayecgamana@gmail.com" aria-label="Email"><i class="bi bi-envelope-fill"></i></a>
+        <a href="https://www.linkedin.com/in/kaye-gamana" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        <a href="https://github.com/kayegamana" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="bi bi-github"></i></a>
+      </span>
     </div>
-  </div>
+  </footer>
 
-  <div class="modal-overlay" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle"
-    aria-hidden="true">
-    <div class="modal-backdrop" data-close="contactModal"></div>
-    <div class="modal-box contact-box">
-      <div class="modal-head">
-        <div>
-          <div class="modal-eyebrow">Get In Touch</div>
-          <div class="modal-title" id="contactModalTitle">Let's build something cool.</div>
-        </div>
-        <button class="modal-close" data-close="contactModal" aria-label="Close contact form">×</button>
-      </div>
+  <button class="back-to-top" id="back-to-top" type="button" aria-label="Back to top" title="Back to top">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
 
-      <form action="https://api.web3forms.com/submit" method="POST" class="cform" id="contactForm">
-        <input type="hidden" name="access_key" value="e7722b7d-8a84-44b2-9c7f-6680cae33eed">
-        
-        <input type="checkbox" name="botcheck" style="display:none;" tabindex="-1">
-        <input type="hidden" name="from_name" value="Portfolio Contact Form">
-        <input type="hidden" name="replyto" value="email">
+  <dialog class="contact-modal" id="contact-modal" aria-labelledby="modal-form-title">
+    <div class="contact-modal__panel">
+      <form class="form" data-contact-form>
+        <h3 class="form__title" id="modal-form-title" data-form-title>Send a message</h3>
 
-        <div class="cform-row">
-          <div class="cform-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" placeholder="John Doe" required>
-          </div>
-          <div class="cform-group">
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" placeholder="user@example.com" required>
-          </div>
-        </div>
-        <div class="cform-group">
-          <label for="topic">Subject</label>
-          <input type="text" id="topic" name="topic" placeholder="Role, project, or just a hello" required>
-        </div>
-        <div class="cform-group">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" placeholder="Tell me a little about what you're working on."
-            required></textarea>
+        <div class="form__row">
+          <label class="form__field">
+            Name
+            <input class="form__input" name="name" type="text" required placeholder="Your full name" autocomplete="name" autofocus>
+          </label>
+          <label class="form__field">
+            Email
+            <input class="form__input" name="email" type="email" required placeholder="you@example.com" autocomplete="email">
+          </label>
         </div>
 
-        <button type="submit" class="btn-talk cform-submit">
-          <i class="bi bi-send-fill"></i> Send Message
-        </button>
+        <label class="form__field">
+          <span data-label="topic">Subject</span>
+          <input class="form__input" name="topic" type="text" required placeholder="Job, project, or inquiry">
+        </label>
+
+        <label class="form__field">
+          <span data-label="message">Message</span>
+          <textarea class="form__input form__input--textarea" name="message" rows="5" required placeholder="Tell me about the role, project, or your inquiry."></textarea>
+        </label>
+
+        <label class="form__checkbox" data-resume-option>
+          <input type="checkbox" name="request_resume" value="yes">
+          <span>Please include a copy of your résumé in your reply.</span>
+        </label>
+
+        <input type="checkbox" name="botcheck" hidden tabindex="-1" autocomplete="off">
+
+        <div class="form__footer">
+          <p class="form__status" data-form-status aria-live="polite"></p>
+          <button class="form__submit" type="submit">
+            <span class="form__submit-label">Send message</span>
+            <i class="bi bi-send-fill" aria-hidden="true"></i>
+          </button>
+        </div>
       </form>
     </div>
-  </div>
 
-  <div class="lightbox-overlay" id="imageLightbox" aria-hidden="true">
-    <button class="lightbox-close" id="lightboxCloseBtn" aria-label="Close fullscreen view">×</button>
-    <div class="lightbox-scroll-area" id="lightboxScrollArea">
-      <img src="" alt="Fullscreen view" class="lightbox-img" id="lightboxImage" decoding="async">
+    <button class="contact-modal__close" type="button" data-modal-close aria-label="Close contact form">
+      <i class="bi bi-x-lg" aria-hidden="true"></i>
+    </button>
+  </dialog>
+
+  <dialog class="case-study" id="case-study-1" aria-labelledby="case-study-1-title">
+    <div class="case-study__panel">
+
+      <div class="case-study__bar">
+        <p class="case-study__label">System 01 · Case study</p>
+        <button class="case-study__close" type="button" data-modal-close aria-label="Close case study">
+          <i class="bi bi-x-lg" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <div class="case-study__scroll" role="region" aria-labelledby="case-study-1-title" tabindex="0" autofocus>
+
+        <header class="case-study__header">
+          <h3 class="case-study__title" id="case-study-1-title">IT Project Visualization</h3>
+          <p class="case-study__role">Project lead, lead developer and QA · 2-person team · Arktech Philippines Inc. · Feb–Mar 2026</p>
+          <ul class="tag-list">
+            <li class="tag">PHP</li>
+            <li class="tag">MySQL</li>
+            <li class="tag">jQuery</li>
+            <li class="tag">AJAX</li>
+            <li class="tag">Bootstrap</li>
+            <li class="tag">Chart.js</li>
+            <li class="tag">SweetAlert2</li>
+            <li class="tag">Moment.js</li>
+            <li class="tag">iziModal</li>
+          </ul>
+        </header>
+
+        <div class="carousel carousel--auto" data-carousel role="group" aria-label="IT Project Visualization screenshots">
+          <div class="carousel__frame" data-zoom>
+            <img class="carousel__slide is-active" src="assets/img/internship/1st-project/1.webp" alt="Screenshot of the IT Project Visualization system" data-caption="Timeline of one project's tasks, with each task's progress and schedule status." loading="lazy">
+            <img class="carousel__slide" data-src="assets/img/internship/1st-project/2.webp" alt="IT Project Visualization screenshot 2 of 5" data-caption="Overall timeline of the department's projects in one view.">
+            <img class="carousel__slide" data-src="assets/img/internship/1st-project/3.webp" alt="IT Project Visualization screenshot 3 of 5" data-caption="All Projects list with progress bars, state, status and ongoing tasks.">
+            <img class="carousel__slide" data-src="assets/img/internship/1st-project/4.webp" alt="IT Project Visualization screenshot 4 of 5" data-caption="Developer status cards (present, idle or absent) and the unassigned tasks.">
+            <img class="carousel__slide" data-src="assets/img/internship/1st-project/5.webp" alt="IT Project Visualization screenshot 5 of 5" data-caption="Analytics with Work State and Schedule Status charts and an Action Required list.">
+          </div>
+
+          <div class="carousel__controls">
+            <div class="carousel__dots"></div>
+            <div class="carousel__arrows">
+              <button class="circle-button" type="button" data-carousel-prev aria-label="Previous screenshot"><i class="bi bi-arrow-left"></i></button>
+              <button class="circle-button" type="button" data-carousel-next aria-label="Next screenshot"><i class="bi bi-arrow-right"></i></button>
+            </div>
+          </div>
+
+          <p class="carousel__caption" data-carousel-caption></p>
+        </div>
+
+        <ul class="facts">
+          <li class="fact">
+            <div>
+              <p class="fact__label">Replaced</p>
+              <p class="fact__note">task and project tracking workflows</p>
+            </div>
+            <strong class="fact__value">Manual Excel</strong>
+          </li>
+          <li class="fact">
+            <div>
+              <p class="fact__label">Task records</p>
+              <p class="fact__note">tracked in the system</p>
+            </div>
+            <strong class="fact__value">2,300+</strong>
+          </li>
+          <li class="fact">
+            <div>
+              <p class="fact__label">Used by</p>
+              <p class="fact__note">IT staff and fellow IT interns</p>
+            </div>
+            <strong class="fact__value">IT department</strong>
+          </li>
+        </ul>
+
+        <div class="case-study__sections">
+          <div class="case-study__col">
+          <section class="case-study__section">
+              <h4 class="case-study__heading">The problem</h4>
+              <p>The IT department tracked its tasks and projects in manual Excel files. The IT Manager needed one place to see progress, spot delays and check who was available.</p>
+            </section>
+
+          <section class="case-study__section">
+              <h4 class="case-study__heading">What I did</h4>
+              <ul class="project__list">
+              <li>Led the project as lead developer and QA in a 2-person team. I planned it, created and delegated the tasks between me and my co-developer, and followed it through the Agile cycle from requirements to deployment.</li>
+              <li>Met the IT Manager and IT staff to gather requirements, raised clarifying questions and suggested improvements so the scope was clear before building.</li>
+              <li>Designed the database from scratch: the projects and tasks tables, planned versus actual dates, and soft deletion that keeps history. Task status is calculated on the fly instead of stored.</li>
+              <li>Developed the My Tasks page (add, sort, filter, edit, delete), the Projects management page with full CRUD, search and admin-only access, the Analytics page, the unassigned tasks pool, and role-based access with session control. I designed the UI and UX of these, responsive on mobile, tablet and desktop.</li>
+              <li>Built the workflow rules and transaction-safe checks that stop a developer from running two tasks at once, then optimized the SQL and cut the polling load so live updates stay fast.</li>
+              <li>Tested my own code, features and UI/UX, then QA'd my co-developer's modules too, so both parts worked well together and matched what we agreed.</li>
+              <li>Made the project presentation deck, presented the system to the IT Manager and IT staff, and deployed and tested updates on the live Arktech server.</li>
+              </ul>
+            </section>
+          </div>
+
+          <div class="case-study__col">
+          <section class="case-study__section">
+              <h4 class="case-study__heading">What I built</h4>
+              <p>My part of a project and task tracker for the IT department: the database, the My Tasks and Projects pages (with admin-only controls and soft deletion), and an Analytics page with Work State and Schedule Status charts, plus an Action Required list for overdue and due-today tasks that my co-developer and I built together, where I refined the logic and shaped the UI design. Updates appear live without a page reload. Each task's status (Advanced, On Track or Delayed) is calculated automatically from its target dates, and developers can't run two tasks at once. Managers control every task and developers manage their own.</p>
+            </section>
+
+          <section class="case-study__section">
+              <h4 class="case-study__heading">Testing and feedback</h4>
+              <p>Functional, integration and user acceptance testing, with rounds of stakeholder feedback. My features were tested by me and cross-checked by my co-developer. After we presented the system, the IT Manager approved the recommendations for the next phase of development.</p>
+            </section>
+          </div>
+        </div>
+
+      </div>
+
     </div>
-  </div>
+  </dialog>
 
+  <dialog class="case-study" id="case-study-2" aria-labelledby="case-study-2-title">
+    <div class="case-study__panel">
+
+      <div class="case-study__bar">
+        <p class="case-study__label">System 02 · Case study</p>
+        <button class="case-study__close" type="button" data-modal-close aria-label="Close case study">
+          <i class="bi bi-x-lg" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <div class="case-study__scroll" role="region" aria-labelledby="case-study-2-title" tabindex="0" autofocus>
+
+        <header class="case-study__header">
+          <h3 class="case-study__title" id="case-study-2-title">Office Task Visualization</h3>
+          <p class="case-study__role">Project lead, lead developer and QA · 2-person team · Arktech Philippines Inc. · Mar–Apr 2026</p>
+          <ul class="tag-list">
+            <li class="tag">PHP</li>
+            <li class="tag">MySQL</li>
+            <li class="tag">jQuery</li>
+            <li class="tag">AJAX</li>
+            <li class="tag">Bootstrap</li>
+            <li class="tag">Chart.js</li>
+            <li class="tag">SweetAlert2</li>
+            <li class="tag">jsPDF</li>
+          </ul>
+        </header>
+
+        <div class="carousel carousel--auto" data-carousel role="group" aria-label="Office Task Visualization screenshots">
+          <div class="carousel__frame" data-zoom>
+            <img class="carousel__slide is-active" src="assets/img/internship/2nd-project/1.webp" alt="Screenshot of the Office Task Visualization system" data-caption="Dashboard of staff cards with live status and today's, monthly and department task counts." loading="lazy">
+            <img class="carousel__slide" data-src="assets/img/internship/2nd-project/2.webp" alt="Office Task Visualization screenshot 2 of 5" data-caption="Staff details with an hourly timeline of one person's tasks.">
+            <img class="carousel__slide" data-src="assets/img/internship/2nd-project/3.webp" alt="Office Task Visualization screenshot 3 of 5" data-caption="Staff status overview, filterable by On Track, Idle or Absent.">
+            <img class="carousel__slide" data-src="assets/img/internship/2nd-project/4.webp" alt="Office Task Visualization screenshot 4 of 5" data-caption="My Tasks page with Work State and Schedule Status charts and the task table.">
+            <img class="carousel__slide" data-src="assets/img/internship/2nd-project/5.webp" alt="Office Task Visualization screenshot 5 of 5" data-caption="Edit task details: assignee, target dates, evidence and file attachments.">
+          </div>
+
+          <div class="carousel__controls">
+            <div class="carousel__dots"></div>
+            <div class="carousel__arrows">
+              <button class="circle-button" type="button" data-carousel-prev aria-label="Previous screenshot"><i class="bi bi-arrow-left"></i></button>
+              <button class="circle-button" type="button" data-carousel-next aria-label="Next screenshot"><i class="bi bi-arrow-right"></i></button>
+            </div>
+          </div>
+
+          <p class="carousel__caption" data-carousel-caption></p>
+        </div>
+
+        <ul class="facts">
+          <li class="fact">
+            <div>
+              <p class="fact__label">Departments</p>
+              <p class="fact__note">using one task management system</p>
+            </div>
+            <strong class="fact__value">10</strong>
+          </li>
+          <li class="fact">
+            <div>
+              <p class="fact__label">Task records</p>
+              <p class="fact__note">supported by the system</p>
+            </div>
+            <strong class="fact__value">2,000+</strong>
+          </li>
+          <li class="fact">
+            <div>
+              <p class="fact__label">Live demo sessions</p>
+              <p class="fact__note">then a final presentation to the Company President</p>
+            </div>
+            <strong class="fact__value">3</strong>
+          </li>
+        </ul>
+
+        <div class="case-study__sections">
+          <div class="case-study__col">
+          <section class="case-study__section">
+              <h4 class="case-study__heading">The problem</h4>
+              <p>Task management for 10 departments needed to move into one centralized system, where managers could see what each person was working on and catch delays early.</p>
+            </section>
+
+          <section class="case-study__section">
+              <h4 class="case-study__heading">What I did</h4>
+              <ul class="project__list">
+              <li>Led the project as lead developer and QA in a 2-person team. I planned it, created and delegated the tasks with my co-developer, and met the IT Manager and department staff to gather requirements before building.</li>
+              <li>Designed the database tables for tasks, attachments and action logs.</li>
+              <li>Developed the My Tasks page, the department pool for unassigned tasks, the Analytics page with CSV import, the file and evidence attachments (drag-and-drop, image previews, size limits) and the action logs that keep old and new values (my co-developer later polished and populated them), and role-based access for staff, department admins and super admins. I designed the UI and UX of these.</li>
+              <li>Expanded the dashboard, analytics and personal task modules for multi-department use and, together with my co-developer, reorganized MyTasks and Analytics into cleaner modules and added lazy loading so the pages stay fast as records grew.</li>
+              <li>Built an impersonation feature for role-based testing, tested my own code and features, then QA'd my co-developer's modules so they worked well and stayed aligned with mine.</li>
+              <li>Made the project deck and demonstrated the system live, with my co-developer, to the IT Manager and stakeholders across 10 departments over 3 sessions, then presented to the Company President together, and handled their feedback.</li>
+              </ul>
+            </section>
+          </div>
+
+          <div class="case-study__col">
+          <section class="case-study__section">
+              <h4 class="case-study__heading">What I built</h4>
+              <p>My part of a company-wide task system for 10 departments: the database, the My Tasks page, a department pool where unassigned tasks wait until someone picks them up, and an Analytics page with Work State and Schedule Status charts and bulk CSV import. Files and evidence can be attached to any task, every change is saved in an action log with its old and new values, and a master list controls access for super admins (all departments), department admins (their own) and staff (My Tasks).</p>
+            </section>
+
+          <section class="case-study__section">
+              <h4 class="case-study__heading">Testing and feedback</h4>
+              <p>Functional, integration and user acceptance testing, with rounds of stakeholder feedback. Each live session gathered feedback from the departments, and the project ended with a final presentation to the Company President.</p>
+            </section>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </dialog>
+
+  <dialog class="case-study" id="case-study-3" aria-labelledby="case-study-3-title">
+    <div class="case-study__panel">
+
+      <div class="case-study__bar">
+        <p class="case-study__label">System 03 · Case study</p>
+        <button class="case-study__close" type="button" data-modal-close aria-label="Close case study">
+          <i class="bi bi-x-lg" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <div class="case-study__scroll" role="region" aria-labelledby="case-study-3-title" tabindex="0" autofocus>
+
+        <header class="case-study__header">
+          <h3 class="case-study__title" id="case-study-3-title">Machine Maintenance Checksheet</h3>
+          <p class="case-study__role">Project lead, lead developer and QA · 2-person team · Arktech Philippines Inc. · May 2026 · 2 weeks</p>
+          <ul class="tag-list">
+            <li class="tag">PHP</li>
+            <li class="tag">MySQL</li>
+            <li class="tag">JavaScript</li>
+            <li class="tag">jQuery</li>
+            <li class="tag">AJAX</li>
+            <li class="tag">Html5-QRCode</li>
+            <li class="tag">qrcode-generator</li>
+            <li class="tag">jsPDF</li>
+            <li class="tag">SweetAlert2</li>
+          </ul>
+        </header>
+
+        <div class="carousel carousel--auto" data-carousel role="group" aria-label="Machine Maintenance Checksheet screenshots">
+          <div class="carousel__frame" data-zoom>
+            <img class="carousel__slide is-active" src="assets/img/internship/3rd-project/1.webp" alt="Screenshot of the Machine Maintenance Checksheet system" data-caption="Checker flow: sign in, see your machines, review the checkpoints, then scan the machine QR." loading="lazy">
+            <img class="carousel__slide" data-src="assets/img/internship/3rd-project/2.webp" alt="Machine Maintenance Checksheet screenshot 2 of 16" data-caption="Admin log detail: every step's result, NG photo, verdict and verifier remark.">
+            <img class="carousel__slide" data-src="assets/img/internship/3rd-project/3.webp" alt="Machine Maintenance Checksheet screenshot 3 of 16" data-caption="Admin machines list with a printable QR code generated for each machine.">
+            <img class="carousel__slide" data-src="assets/img/internship/3rd-project/4.webp" alt="Machine Maintenance Checksheet screenshot 4 of 16" data-caption="Checkpoint templates: admins add steps, set the answer type and require a QR scan per step.">
+            <img class="carousel__slide" data-src="assets/img/internship/3rd-project/5.webp" alt="Machine Maintenance Checksheet screenshot 5 of 16" data-caption="Check logs: full history with round, status, NG count and verifier, searchable and filterable.">
+            <img class="carousel__slide" data-src="assets/img/internship/3rd-project/6.webp" alt="Machine Maintenance Checksheet screenshot 6 of 16" data-caption="Check entries: every answered step across all logs, with results, verdicts and remarks.">
+            <img class="carousel__slide" data-src="assets/img/internship/3rd-project/7.webp" alt="Machine Maintenance Checksheet screenshot 7 of 16" data-caption="NG trends: NG count per machine and the checkpoints that fail most.">
+            <img class="carousel__slide" data-src="assets/img/internship/3rd-project/8.webp" alt="Machine Maintenance Checksheet screenshot 8 of 16" data-caption="PDF export: pick a date range, sections and machines to generate the paper-style checksheets.">
+            <img class="carousel__slide" data-src="assets/img/internship/3rd-project/9.webp" alt="Machine Maintenance Checksheet screenshot 9 of 16" data-caption="Checker flow: answer each step OK or NG, review the summary, submit and return to the dashboard.">
+            <img class="carousel__slide" data-src="assets/img/internship/3rd-project/10.webp" alt="Machine Maintenance Checksheet screenshot 10 of 16" data-caption="Verifier flow: sign in, see pending checks, review the checkpoints and scan the machine QR.">
+            <img class="carousel__slide" data-src="assets/img/internship/3rd-project/11.webp" alt="Machine Maintenance Checksheet screenshot 11 of 16" data-caption="Verifier flow: approve or reject each step with a reason, then return the rejected step to the checker.">
+            <img class="carousel__slide" data-src="assets/img/internship/3rd-project/12.webp" alt="Machine Maintenance Checksheet screenshot 12 of 16" data-caption="Revision flow: the checker's returned check appears under For revision, ending at the QR scan.">
+            <img class="carousel__slide" data-src="assets/img/internship/3rd-project/13.webp" alt="Machine Maintenance Checksheet screenshot 13 of 16" data-caption="Revision flow: only the rejected step is re-answered, with the verifier's note, then resubmitted.">
+            <img class="carousel__slide" data-src="assets/img/internship/3rd-project/14.webp" alt="Machine Maintenance Checksheet screenshot 14 of 16" data-caption="Re-evaluation flow: the verifier sees the resubmitted check (Round 2) and scans the QR to reevaluate.">
+            <img class="carousel__slide" data-src="assets/img/internship/3rd-project/15.webp" alt="Machine Maintenance Checksheet screenshot 15 of 16" data-caption="Re-evaluation flow: approve the revised step, approved steps stay locked, and the check is marked Verified.">
+            <img class="carousel__slide" data-src="assets/img/internship/3rd-project/16.webp" alt="Machine Maintenance Checksheet screenshot 16 of 16" data-caption="Admin dashboard: today's machine status, pending and verified counts, and the day's logs.">
+          </div>
+
+          <div class="carousel__controls">
+            <div class="carousel__dots"></div>
+            <div class="carousel__arrows">
+              <button class="circle-button" type="button" data-carousel-prev aria-label="Previous screenshot"><i class="bi bi-arrow-left"></i></button>
+              <button class="circle-button" type="button" data-carousel-next aria-label="Next screenshot"><i class="bi bi-arrow-right"></i></button>
+            </div>
+          </div>
+
+          <p class="carousel__caption" data-carousel-caption></p>
+        </div>
+
+        <ul class="facts">
+          <li class="fact">
+            <div>
+              <p class="fact__label">Machines</p>
+              <p class="fact__note">covered by the digital checksheet</p>
+            </div>
+            <strong class="fact__value">4</strong>
+          </li>
+          <li class="fact">
+            <div>
+              <p class="fact__label">Verification</p>
+              <p class="fact__note">Checker inspects, Verifier approves, with QR scans at machine and checkpoint level</p>
+            </div>
+            <strong class="fact__value">2 steps</strong>
+          </li>
+          <li class="fact">
+            <div>
+              <p class="fact__label">Replaced</p>
+              <p class="fact__note">paper maintenance checks</p>
+            </div>
+            <strong class="fact__value">Paper</strong>
+          </li>
+        </ul>
+
+        <div class="case-study__sections">
+          <div class="case-study__col">
+          <section class="case-study__section">
+              <h4 class="case-study__heading">The problem</h4>
+              <p>Daily machine maintenance checks were recorded on paper. Sheets could be lost or damaged, records were hard to back up, and nothing stopped a checker from skipping steps.</p>
+            </section>
+
+          <section class="case-study__section">
+              <h4 class="case-study__heading">What I did</h4>
+              <ul class="project__list">
+              <li>Led the project from the ground up as project lead, lead developer and QA. I planned the system, created and delegated nearly all of the tasks, 125 in total tracked in our IT Project Visualization system, 81 mine and 44 for my co-developer, 42 of which I assigned.</li>
+              <li>Gathered requirements from the IT Manager, my supervisor and the target users, pitched the idea to executives, and ran the consultation rounds whose confirmed bug fixes and change requests went into the final version.</li>
+              <li>Designed the database tables (templates, check entries, check logs and machine QR tokens) and created and linked them in the Arktech database.</li>
+              <li>Developed the Checker and Verifier modules (QR scanning, step forms with progress, NG photo capture, review and submit, verdict review, revision and re-evaluation rounds), the login and access control, and the connection to the Arktech V4 portal. I designed their UI and UX and wrote the PDF export code.</li>
+              <li>Tested my own modules as I built them, on real company phones and under stress, audited access for every role, and QA'd my co-developer's Admin module so everything stayed aligned and worked well.</li>
+              <li>Made the project deck and demo, presented the system to stakeholders from 2 departments alongside the IT Manager, and ran a user session for department revision requests.</li>
+              <li>After my co-developer's last tasks on May 13, I finished the rest on my own: Admin polish and PDF styling, the restricted and no-access pages, code cleanup, final smoke and stress tests, and the final presentation and demo to company executives on May 18. I also wrote the user manual, workflow guide, developer guide, READMEs and schema documentation for turnover.</li>
+              </ul>
+            </section>
+          </div>
+
+          <div class="case-study__col">
+          <section class="case-study__section">
+              <h4 class="case-study__heading">What I built</h4>
+              <p>A digital checksheet for 4 machines with three roles: Checkers and Verifiers on mobile, Admins on desktop. I built the Checker and Verifier modules end to end. Checkers scan the machine's QR, then each checkpoint's QR, before answering OK or NG (or a numeric value against set limits), with a photo required for every NG. Verifiers approve or reject each checkpoint, rejected ones return for re-inspection while approved ones stay locked. My co-developer built the Admin module (machines and QR codes, templates, dashboard, logs), which I tested, polished and took over to finish the remaining tasks. Admins export PDFs that match the paper checksheets, and access is limited by department and position.</p>
+            </section>
+
+          <section class="case-study__section">
+              <h4 class="case-study__heading">Testing and feedback</h4>
+              <p>Unit, integration, smoke and stress testing on the live server, real-device QR scanning tests and user acceptance testing, with rounds of stakeholder feedback. Change requests from target users went into the final version, and the presentation gathered feedback on the move from paper to digital.</p>
+            </section>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </dialog>
+
+  <dialog class="lightbox" id="lightbox" aria-label="Image preview">
+    <img class="lightbox__image" id="lightbox-image" src="" alt="">
+    <button class="lightbox__close" id="lightbox-close" type="button" aria-label="Close preview">
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </dialog>
+
+  <script src="js/script.js" defer></script>
 </body>
-
 </html>
