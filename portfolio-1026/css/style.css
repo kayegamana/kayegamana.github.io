@@ -2773,6 +2773,10 @@ main {
   cursor: pointer;
 }
 
+.form__checkbox[hidden] {
+  display: none;
+}
+
 .form__checkbox input {
   flex: none;
   width: 20px;

@@ -608,11 +608,18 @@ function initContactModal() {
   if (!modal || typeof modal.showModal !== "function") return;
 
   const closeButton = modal.querySelector("[data-modal-close]");
+  const form = modal.querySelector("[data-contact-form]");
 
   document.querySelectorAll("[data-open-contact]").forEach(function (opener) {
     opener.addEventListener("click", function (event) {
       event.preventDefault();
-      if (!modal.open) modal.showModal();
+
+      if (!modal.open) {
+        form.dispatchEvent(new CustomEvent("contact:mode", {
+          detail: opener.dataset.contactMode || "message"
+        }));
+        modal.showModal();
+      }
     });
   });
 
@@ -631,20 +638,39 @@ function setupContactForm(form) {
   const status = form.querySelector("[data-form-status]");
   const submitButton = form.querySelector(".form__submit");
   const submitLabel = form.querySelector(".form__submit-label");
-  const subjectInput = form.elements.topic;
-  const messageInput = form.elements.message;
+  const nameInput = form.elements.namedItem("name");
+  const emailInput = form.elements.namedItem("email");
+  const subjectInput = form.elements.namedItem("topic");
+  const messageInput = form.elements.namedItem("message");
+  const subjectLabel = form.querySelector('[data-label="topic"]');
+  const messageLabel = form.querySelector('[data-label="message"]');
+  const resumeOption = form.querySelector("[data-resume-option]");
+  const resumeInput = form.elements.namedItem("request_resume");
 
   const modal = form.closest("dialog");
   let closeTimer;
+  let mode = "message";
 
   const FORM_TEXT = {
     message: {
       title: "Send a message",
-      placeholder: "Tell me about the role, project, or your inquiry."
+      submit: "Send message",
+      subjectLabel: subjectLabel ? subjectLabel.textContent : "",
+      messageLabel: messageLabel ? messageLabel.textContent : "",
+      name: nameInput.placeholder,
+      email: emailInput.placeholder,
+      subject: subjectInput.placeholder,
+      message: messageInput.placeholder
     },
     testimonial: {
       title: "Leave a testimonial",
-      placeholder: "How did we work together?"
+      submit: "Send testimonial",
+      subjectLabel: "Role or company",
+      messageLabel: "Testimonial",
+      name: "Your full name",
+      email: "you@example.com",
+      subject: "Your job title and company",
+      message: "Share your experience working with me."
     }
   };
 
@@ -654,15 +680,38 @@ function setupContactForm(form) {
     status.classList.toggle("is-error", type === "error");
   }
 
-  function setFormMode(mode) {
-    title.textContent = FORM_TEXT[mode].title;
-    messageInput.placeholder = FORM_TEXT[mode].placeholder;
+  function setFormMode(newMode) {
+    const text = FORM_TEXT[newMode];
+    const isTestimonial = newMode === "testimonial";
+
+    mode = newMode;
+    title.textContent = text.title;
+    submitLabel.textContent = text.submit;
+    nameInput.placeholder = text.name;
+    emailInput.placeholder = text.email;
+    subjectInput.placeholder = text.subject;
+    messageInput.placeholder = text.message;
+
+    if (subjectLabel) subjectLabel.textContent = text.subjectLabel;
+    if (messageLabel) messageLabel.textContent = text.messageLabel;
+
+    if (resumeOption) resumeOption.hidden = isTestimonial;
+    if (resumeInput) {
+      resumeInput.disabled = isTestimonial;
+      if (isTestimonial) resumeInput.checked = false;
+    }
   }
 
   function setSending(isSending) {
     submitButton.disabled = isSending;
-    submitLabel.textContent = isSending ? "Sending…" : "Send message";
+    submitLabel.textContent = isSending ? "Sending…" : FORM_TEXT[mode].submit;
   }
+
+  form.addEventListener("contact:mode", function (event) {
+    if (event.detail !== mode) form.reset();
+    setStatus("");
+    setFormMode(event.detail);
+  });
 
   function closeModalSoon(delay) {
     if (!modal) return;
@@ -684,7 +733,9 @@ function setupContactForm(form) {
     const body =
       "Name: " + formData.get("name") + "\n" +
       "Email: " + formData.get("email") + "\n" +
-      "Resume requested: " + (wantsResume ? "YES" : "no") + "\n\n" +
+      (mode === "testimonial"
+        ? "Role or company: " + formData.get("topic") + "\n\n"
+        : "Resume requested: " + (wantsResume ? "YES" : "no") + "\n\n") +
       formData.get("message");
 
     setStatus("Opening your mail app…");
@@ -715,8 +766,12 @@ function setupContactForm(form) {
 
       if (response.ok && result.success) {
         form.reset();
-        setFormMode("message");
-        setStatus("Sent. I'll reply within a day.", "success");
+        setStatus(
+          mode === "testimonial"
+            ? "Thank you! I'll check with you before publishing."
+            : "Sent. I'll reply within a day.",
+          "success"
+        );
         closeModalSoon(2500);
       } else {
         setStatus(result.message || "Something went wrong. Try emailing me directly.", "error");
@@ -733,7 +788,8 @@ function setupContactForm(form) {
 
     const formData = new FormData(form);
     const wantsResume = formData.get("request_resume") === "yes";
-    const prefix = wantsResume ? "[RÉSUMÉ REQUEST] " : "New message from your portfolio — ";
+    let prefix = wantsResume ? "[RÉSUMÉ REQUEST] " : "New message from your portfolio — ";
+    if (mode === "testimonial") prefix = "[TESTIMONIAL] ";
     const subject = prefix + formData.get("topic");
 
     if (config.web3formsAccessKey) {
@@ -743,31 +799,10 @@ function setupContactForm(form) {
     }
   });
 
-  return {
-    isInModal: Boolean(modal),
-    setTestimonialMode: function () {
-      setFormMode("testimonial");
-      subjectInput.value = "[TESTIMONIAL] ";
-    }
-  };
 }
 
 function initContactForm() {
-  const forms = document.querySelectorAll("[data-contact-form]");
-  let pageForm = null;
-
-  forms.forEach(function (form) {
-    const contactForm = setupContactForm(form);
-    if (!contactForm.isInModal) pageForm = contactForm;
-  });
-
-  const testimonialLink = document.querySelector("[data-testimonial-link]");
-
-  if (testimonialLink && pageForm) {
-    testimonialLink.addEventListener("click", function () {
-      pageForm.setTestimonialMode();
-    });
-  }
+  document.querySelectorAll("[data-contact-form]").forEach(setupContactForm);
 }
 
 function cleanUpReveal(event) {

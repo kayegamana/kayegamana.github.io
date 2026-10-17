@@ -1133,8 +1133,8 @@
 
             <div class="testimonial__invite">
               <p class="testimonial__invite-title">Worked with me?</p>
-              <p class="testimonial__invite-text">You can send one through the contact form. I'll ask before publishing it.</p>
-              <a class="testimonial__button" href="#contact" data-testimonial-link>Leave a testimonial</a>
+              <p class="testimonial__invite-text">You can send one through a short form. I'll ask before publishing it.</p>
+              <a class="testimonial__button" href="#contact" data-open-contact data-contact-mode="testimonial" aria-haspopup="dialog">Leave a testimonial</a>
             </div>
           </div>
         </div>
@@ -1269,16 +1269,16 @@
         </div>
 
         <label class="form__field">
-          Subject
+          <span data-label="topic">Subject</span>
           <input class="form__input" name="topic" type="text" required placeholder="Job opportunity, project, or general inquiry">
         </label>
 
         <label class="form__field">
-          Message
+          <span data-label="message">Message</span>
           <textarea class="form__input form__input--textarea" name="message" rows="5" required placeholder="Tell me about the role, project, or your inquiry."></textarea>
         </label>
 
-        <label class="form__checkbox">
+        <label class="form__checkbox" data-resume-option>
           <input type="checkbox" name="request_resume" value="yes">
           <span>Please include a copy of your résumé in your reply.</span>
         </label>
