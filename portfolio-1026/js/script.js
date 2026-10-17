@@ -3,6 +3,13 @@ const PORTFOLIO_CONFIG = {
   contactEmail: "kayecgamana@gmail.com"
 };
 
+// Images written with data-src instead of src are fetched only when this runs
+function loadImage(img) {
+  if (!img || !img.dataset.src) return;
+  img.src = img.dataset.src;
+  img.removeAttribute("data-src");
+}
+
 function initNavbar() {
   const navbar = document.getElementById("navbar");
   const toggler = document.getElementById("nav-toggler");
@@ -323,8 +330,13 @@ function initProjectCarousels() {
       dots.push(dot);
     });
 
-    function showSlide(index) {
+    function showSlide(index, preload = true) {
       currentIndex = (index + total) % total;
+
+      if (preload) {
+        loadImage(slides[currentIndex]);
+        loadImage(slides[(currentIndex + 1) % total]);
+      }
 
       slides.forEach(function (slide, i) {
         const isActive = i === currentIndex;
@@ -369,7 +381,7 @@ function initProjectCarousels() {
       showSlide(distance < 0 ? currentIndex + 1 : currentIndex - 1);
     }, { passive: true });
 
-    showSlide(0);
+    showSlide(0, false);
   });
 }
 
@@ -383,6 +395,8 @@ function initCaseStudies() {
 
     opener.addEventListener("click", function () {
       dialog.showModal();
+
+      loadImage(dialog.querySelectorAll(".carousel__slide")[1]);
 
       scrollArea.scrollTop = 0;
     });
@@ -452,6 +466,33 @@ function initLightbox() {
 
     event.preventDefault();
     openLightbox(getZoomPicture(zoomable));
+  });
+}
+
+function initHoverImages() {
+  // Touch screens never hover, so they never need these images
+  if (!window.matchMedia("(hover: hover)").matches) return;
+
+  const grids = document.querySelectorAll(".course-grid");
+
+  if (!("IntersectionObserver" in window)) {
+    grids.forEach(function (grid) {
+      grid.querySelectorAll("img[data-src]").forEach(loadImage);
+    });
+    return;
+  }
+
+  const observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+
+      entry.target.querySelectorAll("img[data-src]").forEach(loadImage);
+      observer.unobserve(entry.target);
+    });
+  }, { rootMargin: "200px 0px" });
+
+  grids.forEach(function (grid) {
+    observer.observe(grid);
   });
 }
 
@@ -803,6 +844,7 @@ initInternshipGallery();
 initProjectCarousels();
 initCaseStudies();
 initLightbox();
+initHoverImages();
 initCertificates();
 initContactModal();
 initContactForm();
