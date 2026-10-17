@@ -3,7 +3,6 @@ const PORTFOLIO_CONFIG = {
   contactEmail: "kayecgamana@gmail.com"
 };
 
-// Images written with data-src instead of src are fetched only when this runs
 function loadImage(img) {
   if (!img || !img.dataset.src) return;
   img.src = img.dataset.src;
@@ -470,7 +469,6 @@ function initLightbox() {
 }
 
 function initHoverImages() {
-  // Touch screens never hover, so they never need these images
   if (!window.matchMedia("(hover: hover)").matches) return;
 
   const grids = document.querySelectorAll(".course-grid");
@@ -502,7 +500,6 @@ function initCertificates() {
 
   if (!grid) return;
 
-  const ROWS_PER_CLICK = 2;
   const cardCount = grid.children.length;
   let rowsShown = 0;
 
@@ -511,7 +508,11 @@ function initCertificates() {
   }
 
   function getStartRows() {
-    return getColumns() >= 4 ? 3 : 2;
+    return getColumns() === 3 ? 2 : 3;
+  }
+
+  function getRowsPerClick() {
+    return getColumns() <= 2 ? 3 : 2;
   }
 
   function showCards() {
@@ -538,7 +539,7 @@ function initCertificates() {
         showCards();
         grid.scrollIntoView({ behavior: "smooth", block: "start" });
       } else {
-        rowsShown += ROWS_PER_CLICK;
+        rowsShown += getRowsPerClick();
         showCards();
       }
     });
@@ -839,8 +840,6 @@ function initScrollReveal() {
     return item.getBoundingClientRect().top;
   });
 
-  // Items that enter the screen in the same batch (a row of cards, a title
-  // and its intro) get a short stagger instead of all popping in together
   function showItems(entries) {
     let order = 0;
 
@@ -861,9 +860,6 @@ function initScrollReveal() {
     rootMargin: "0px 0px -10% 0px"
   });
 
-  // Anything already on screen (or above it) is left alone, so the hero
-  // and the first view never flash. Hidden certificates are included so
-  // they animate when "Show more" is pressed.
   items.forEach(function (item, index) {
     if (item.hidden || tops[index] > window.innerHeight) {
       item.classList.add("reveal");
