@@ -11,7 +11,6 @@ MODALS LOGIC
     if (!modal) return;
     clearTimeout(modal._hideTimeout);
 
-    // Simplified synchronous trigger avoids CPU thrashing on weak devices
     modal.classList.add("open");
     modal.setAttribute("aria-hidden", "false");
     document.documentElement.style.overflow = "hidden";
@@ -34,31 +33,25 @@ MODALS LOGIC
         document.documentElement.style.overflow = "";
         document.dispatchEvent(new CustomEvent("overlay:change"));
       }
-    }, 100); // Wait for CSS transition to finish natively
+    }, 100);
   }
 
   window.openModal = openModal;
   window.closeModal = closeModal;
 
-  // Photo Modal Triggers — dynamically populate gallery per project
   document.querySelectorAll(".photo-trigger").forEach(function (btn) {
-    // --- PREFETCH LOGIC: Download first image instantly on hover/touch ---
     function prefetchFirstImage() {
       var folder = this.dataset.folder;
       var preloadImg = new Image();
       preloadImg.src =
         "assets/img/projects-documentation/" + folder + "/display/1.webp";
     }
-    // Desktop gets a head start on hover. Phones have no hover event at all,
-    // so without this they got zero benefit from the trick above; touchstart
-    // fires ~100-300ms before "click", which is enough to give Android the
-    // same instant-first-image feel that desktop already had.
+
     btn.addEventListener("mouseenter", prefetchFirstImage, { once: true });
     btn.addEventListener("touchstart", prefetchFirstImage, {
       once: true,
       passive: true,
     });
-    // ---------------------------------------------------------------
 
     btn.addEventListener("click", function (e) {
       e.stopPropagation();
@@ -66,7 +59,6 @@ MODALS LOGIC
       var count = parseInt(btn.dataset.count) || 10;
       var basePath = "assets/img/projects-documentation/" + folder + "/";
 
-      // Build three parallel src lists: thumb (strip), display (main view), zoom (deep zoom)
       var thumbSrcs = [];
       var displaySrcs = [];
       var zoomSrcs = [];
@@ -79,13 +71,11 @@ MODALS LOGIC
       document.getElementById("modalProjectName").textContent =
         btn.dataset.project;
 
-      // Init gallery with all three src lists, then open modal
       initGallery(thumbSrcs, displaySrcs, zoomSrcs);
       openModal("photoModal");
     });
   });
 
-  // Contact Modal Trigger
   document.querySelectorAll(".openContactTrigger").forEach(function (btn) {
     btn.addEventListener("click", function (e) {
       e.stopPropagation();
@@ -93,7 +83,6 @@ MODALS LOGIC
     });
   });
 
-  // Close Triggers
   document.querySelectorAll("[data-close]").forEach(function (btn) {
     btn.addEventListener("click", function () {
       closeModal(btn.dataset.close);
@@ -180,14 +169,11 @@ TESTIMONIAL CAROUSEL LOGIC
 
   if (!slides.length) return;
 
-  // Dynamically calculate font-size based on the exact character count
-  // This ensures short quotes enlarge to fill the space, and long quotes shrink to fit without getting cut off.
   slides.forEach(function (slide) {
     var textEl = slide.querySelector(".quote-text");
     if (textEl) {
       var charCount = textEl.textContent.trim().length;
 
-      // Dialed back bounds to find the sweet spot between filling space and retaining elegant padding
       if (charCount < 100) {
         textEl.style.fontSize = "clamp(1rem, 5.5cqi, 1.4rem)";
         textEl.style.lineHeight = "1.55";
@@ -221,7 +207,6 @@ TESTIMONIAL CAROUSEL LOGIC
 
   function startAutoplay() {
     interval = setInterval(function () {
-      // Hardware check: Only slide automatically if on desktop
       if (window.innerWidth >= 720) {
         nextSlide();
       }
@@ -237,7 +222,7 @@ TESTIMONIAL CAROUSEL LOGIC
     dot.addEventListener("click", function () {
       var index = parseInt(this.getAttribute("data-index"));
       showSlide(index);
-      resetAutoplay(); // Reset the timer so it doesn't instantly jump after clicking
+      resetAutoplay();
     });
   });
 
@@ -247,10 +232,8 @@ TESTIMONIAL CAROUSEL LOGIC
     dot.addEventListener("click", function () {
       var index = parseInt(this.getAttribute("data-index"));
       showSlide(index);
-      // resetAutoplay(); // Reset the timer so it doesn't instantly jump after clicking
     });
   });
-  // startAutoplay();
 })();
 
 /* ─────────────────────────────────────
@@ -269,22 +252,16 @@ GALLERY & ZOOM LOGIC
   var photoModal = document.getElementById("photoModal");
   var maxVisible = 5;
 
-  // ── Gallery state ──
-  var thumbSrcs = []; // small thumbnail-strip images
-  var displaySrcs = []; // main gallery view images
-  var zoomSrcs = []; // full-res deep zoom images
+  var thumbSrcs = [];
+  var displaySrcs = [];
+  var zoomSrcs = [];
   var activeIndex = 0;
   var wrappers = [];
-  var navigating = false; // debounce rapid fire
+  var navigating = false;
 
-  // Reused across every navigation instead of allocating a fresh Image()
-  // object (and closure) per call. Rapid tapping through the gallery was
-  // creating and discarding a new Image() on every single step, churn that
-  // lines up with occasional GC pauses right during interaction.
   var mainLoader = new Image();
   var lightboxLoader = new Image();
 
-  // ── Cache-safe image swap via opacity crossfade ──
   function setMainImage(src, instant) {
     if (instant) {
       mainImage.src = src;
@@ -294,7 +271,6 @@ GALLERY & ZOOM LOGIC
     mainImage.style.opacity = "0";
     mainLoader.onload = mainLoader.onerror = function () {
       mainImage.src = src;
-      // Decode the image asynchronously off the main thread before animating
       mainImage
         .decode()
         .then(function () {
@@ -313,7 +289,6 @@ GALLERY & ZOOM LOGIC
     mainLoader.src = src;
   }
 
-  // ── Update thumbnail active state & counter ──
   function updateThumbs(index) {
     wrappers.forEach(function (w) {
       w.classList.remove("active");
@@ -328,7 +303,6 @@ GALLERY & ZOOM LOGIC
     activeIndex = index;
   }
 
-  // ── Navigate ──
   function navigate(direction, exact) {
     if (navigating) return;
     navigating = true;
@@ -348,7 +322,6 @@ GALLERY & ZOOM LOGIC
     updateThumbs(next);
     setMainImage(displaySrcs[next], false);
 
-    // Sync lightbox if open (always resets to display tier; deep zoom re-fetches zoom tier on next click)
     if (lightbox.classList.contains("active")) {
       lightboxImg.style.opacity = "0";
       lightboxLoader.onload = lightboxLoader.onerror = function () {
@@ -375,7 +348,6 @@ GALLERY & ZOOM LOGIC
     }
   }
 
-  // ── Event Delegation for Thumbnails ──
   thumbContainer.addEventListener("click", function (e) {
     var wrapper = e.target.closest(".thumb-wrapper");
     if (!wrapper) return;
@@ -383,12 +355,10 @@ GALLERY & ZOOM LOGIC
     if (!isNaN(index)) navigate("exact", index);
   });
 
-  // ── Build thumbnail strip (Recycling Nodes) ──
   function buildThumbs() {
     var existingWrappers = thumbContainer.children;
     var numNeeded = thumbSrcs.length;
 
-    // 1. Inflate pool if missing nodes
     while (existingWrappers.length < numNeeded) {
       var wrapper = document.createElement("div");
       wrapper.className = "thumb-wrapper";
@@ -401,14 +371,12 @@ GALLERY & ZOOM LOGIC
 
     wrappers = Array.from(existingWrappers);
 
-    // 2. Recycle existing DOM nodes (Zero allocations, zero GC pauses)
     for (var i = 0; i < wrappers.length; i++) {
       var wrapper = wrappers[i];
       if (i < numNeeded) {
         wrapper.setAttribute("data-index", i);
         var img = wrapper.querySelector("img");
 
-        // Only touch DOM property if changed to avoid invalidation
         if (img.src.indexOf(thumbSrcs[i]) === -1) img.src = thumbSrcs[i];
 
         img.alt = "Thumbnail " + (i + 1);
@@ -436,7 +404,6 @@ GALLERY & ZOOM LOGIC
     }
   }
 
-  // ── Public init — called by photo trigger with fresh thumb/display/zoom src arrays ──
   window.initGallery = function (newThumbSrcs, newDisplaySrcs, newZoomSrcs) {
     thumbSrcs = newThumbSrcs;
     displaySrcs = newDisplaySrcs;
@@ -444,13 +411,11 @@ GALLERY & ZOOM LOGIC
     activeIndex = 0;
     navigating = false;
 
-    // Instantly update text and blank out old thumbnails to prevent ghosting
     counter.textContent = "1 / " + displaySrcs.length;
     wrappers.forEach(function (w) {
       w.style.display = "none";
     });
 
-    // Load first image: instant on first paint (modal not yet visible)
     mainImage.style.transition = "none";
     mainImage.style.opacity = "0";
     mainImage.src = "";
@@ -478,7 +443,6 @@ GALLERY & ZOOM LOGIC
     };
     mainLoader.src = displaySrcs[0];
 
-    // Defer thumbnail DOM writes just enough to clear the 80ms opacity fade.
     clearTimeout(window._thumbRenderTimeout);
     window._thumbRenderTimeout = setTimeout(function () {
       buildThumbs();
@@ -486,7 +450,6 @@ GALLERY & ZOOM LOGIC
     }, 80);
   };
 
-  // ── Arrow buttons ──
   prevBtn.addEventListener("click", function (e) {
     e.stopPropagation();
     navigate("prev");
@@ -496,7 +459,6 @@ GALLERY & ZOOM LOGIC
     navigate("next");
   });
 
-  // ── Lightbox open on main image click ──
   mainImage.addEventListener("click", function () {
     if (!this.src || this.style.opacity === "0") return;
     clearTimeout(lightbox._hideTimeout);
@@ -514,7 +476,6 @@ GALLERY & ZOOM LOGIC
     document.dispatchEvent(new CustomEvent("overlay:change"));
   });
 
-  // ── Lightbox close ──
   function closeLightbox() {
     if (lightbox.contains(document.activeElement)) {
       document.activeElement.blur();
@@ -527,7 +488,6 @@ GALLERY & ZOOM LOGIC
     document.dispatchEvent(new CustomEvent("overlay:change"));
 
     clearTimeout(lightbox._hideTimeout);
-    // Element hides automatically via CSS visibility transition delay
   }
 
   lightboxCloseBtn.addEventListener("click", closeLightbox);
@@ -535,23 +495,18 @@ GALLERY & ZOOM LOGIC
     if (e.target === lightboxScrollArea) closeLightbox();
   });
 
-  // ── Continuous zoom + pan (deep zoom) ──
-  // The image never changes its CSS layout box, everything from a tiny
-  // wheel nudge to a full pinch is a translate3d + scale transform, so
-  // there is zero layout work at any point during a zoom or a pan.
   function clamp(val, min, max) {
     return Math.min(max, Math.max(min, val));
   }
 
   var MIN_SCALE = 1;
   var MAX_SCALE = 3.5;
-  var ZOOM_TIER_THRESHOLD = 1.15; // scale at which we upgrade to the full-res zoom tier
-
+  var ZOOM_TIER_THRESHOLD = 1.15;
   var scale = 1;
   var panX = 0,
     panY = 0;
   var baseWidth = 0,
-    baseHeight = 0; // the image's "fit to screen" size at scale 1
+    baseHeight = 0;
   var usingZoomTier = false;
 
   var isDragging = false,
@@ -567,9 +522,6 @@ GALLERY & ZOOM LOGIC
     pendingPanX = 0,
     pendingPanY = 0;
 
-  // Figures out the image's rendered "fit" box from its natural pixel size,
-  // without touching the DOM, so it stays correct no matter what transform
-  // is currently applied.
   function computeBaseSize(naturalW, naturalH) {
     naturalW = naturalW || 1;
     naturalH = naturalH || 1;
@@ -604,8 +556,6 @@ GALLERY & ZOOM LOGIC
     lightboxImg.classList.toggle("is-zoomed", scale > 1.01);
     pendingFrame = null;
 
-    // Upgrade to the full-res zoom tier once meaningfully zoomed in, and
-    // just keep it loaded rather than swapping back and forth as scale wobbles.
     if (!usingZoomTier && scale >= ZOOM_TIER_THRESHOLD) {
       usingZoomTier = true;
       var hiRes = new Image();
@@ -637,7 +587,6 @@ GALLERY & ZOOM LOGIC
     lightboxImg.classList.remove("is-zoomed");
   }
 
-  // Zooms to newScale while keeping the point under (cx, cy) fixed on screen
   function zoomAt(cx, cy, newScale) {
     newScale = clamp(newScale, MIN_SCALE, MAX_SCALE);
     var cx0 = window.innerWidth / 2,
@@ -665,7 +614,6 @@ GALLERY & ZOOM LOGIC
     return { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 };
   }
 
-  // ── Wheel: zoom in/out anchored on the cursor ──
   lightboxImg.addEventListener(
     "wheel",
     function (e) {
@@ -685,7 +633,6 @@ GALLERY & ZOOM LOGIC
     { passive: false },
   );
 
-  // ── Pointer: single finger/mouse pans, two fingers pinch-zoom ──
   lightboxImg.addEventListener("pointerdown", function (e) {
     this.style.willChange = "transform";
     this.setPointerCapture(e.pointerId);
@@ -710,7 +657,6 @@ GALLERY & ZOOM LOGIC
     delete activePointers[e.pointerId];
     var pts = pointerList();
     if (pts.length === 1) {
-      // Dropped from two fingers to one mid-gesture, resume panning cleanly
       isDragging = true;
       wasDragged = true;
       dragStartX = pts[0].x;
@@ -750,7 +696,6 @@ GALLERY & ZOOM LOGIC
     scheduleTransform(scale, dragBaseX + dx, dragBaseY + dy);
   });
 
-  // ── Click: quick toggle between fit and a preset zoom level ──
   lightboxImg.addEventListener("click", function (e) {
     e.stopPropagation();
     if (wasDragged) {
@@ -764,7 +709,6 @@ GALLERY & ZOOM LOGIC
     }
   });
 
-  // ── Keyboard: Esc / arrows ──
   document.addEventListener("keydown", function (e) {
     var lbActive = lightbox.classList.contains("active");
     var modalActive = photoModal.classList.contains("open");
@@ -785,9 +729,6 @@ GALLERY & ZOOM LOGIC
     }
   });
 
-  // ── Mouse wheel navigation (only outside the image itself, see above) ──
-  // Only attached while a modal or the lightbox is actually open, so the rest
-  // of the page never pays the cost of a non-passive wheel listener on window.
   var wheelAttached = false;
 
   function handleWheel(e) {
@@ -827,9 +768,6 @@ PERFORMANCE LOGIC: PAUSE OFF-SCREEN ANIMATIONS
 
   var isIntersecting = false;
 
-  // Runs whenever visibility OR overlay state changes, so the animation
-  // is only ever running when it's actually visible: in view AND not
-  // covered by a modal or the lightbox.
   function syncPlayState() {
     var overlayOpen = !!document.querySelector(
       ".modal-overlay.open, .lightbox-overlay.active",
@@ -866,15 +804,12 @@ CONTACT FORM AJAX SUBMISSION
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    // Cache original layout elements
     var originalBtnContent = submitBtn.innerHTML;
 
-    // Trigger explicit CSS loading state
     submitBtn.innerHTML =
       '<i class="bi bi-arrow-repeat spin-icon"></i> Sending...';
     submitBtn.disabled = true;
 
-    // Marshall object graph into standard payload format
     var formData = new FormData(form);
     var object = Object.fromEntries(formData);
     var json = JSON.stringify(object);
@@ -891,13 +826,11 @@ CONTACT FORM AJAX SUBMISSION
         var jsonResponse = await response.json();
 
         if (response.status === 200) {
-          // Commit Success Presentation State
           submitBtn.innerHTML =
             '<i class="bi bi-check-circle-fill"></i> Message Sent';
           submitBtn.classList.add("btn-success-state");
           form.reset();
 
-          // Reset presentation components and hide layout context gracefully
           setTimeout(function () {
             submitBtn.innerHTML = originalBtnContent;
             submitBtn.disabled = false;
@@ -927,18 +860,16 @@ SMOOTH SCROLL FADE-IN LOGIC
 (function () {
   var cards = document.querySelectorAll(".card");
 
-  // Inject CSS class dynamically
   cards.forEach(function (card) {
     card.classList.add("fade-in-section");
   });
 
-  // Watch elements and trigger animation when visible
   var observer = new IntersectionObserver(
     function (entries, obs) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add("is-visible");
-          obs.unobserve(entry.target); // Only animate once
+          obs.unobserve(entry.target);
         }
       });
     },
@@ -953,53 +884,11 @@ SMOOTH SCROLL FADE-IN LOGIC
   });
 })();
 
-/* ─────────────────────────────────────
-FLUID DESKTOP SCALE (≥1440px)
-Continuously scales the bento canvas instead of snapping to a fixed
-133% zoom. The canvas is measured at its true, unscaled size on every
-recalculation, then:
-
-  scale = min(pageContentWidth / naturalWidth,
-              availableHeight  / naturalHeight,
-              maxScale)
-
-Both axes are checked, not just width - so on a screen that's wide
-but short (e.g. 2560x1024), or narrow but tall for its width
-(e.g. 1440x1024), the canvas scales down just enough to fit the
-tighter axis, instead of overflowing it.
-
-1424px (1360px canvas + the page's 64px of horizontal padding) is
-the exact width where the dense grid first fits at its own native,
-unscaled size. The breakpoint here is set a little past that, at
-1440px, as a safety margin so a vertical scrollbar can never drag
-the starting scale just under 1x. Below 1440px there's no
-guaranteed room to show the dense grid at 1x, so the "Mid & Narrow
-Desktop" 2-column layout (900-1439px, in style.css) is used instead
-- it's a genuinely fluid CSS Grid, not this fixed-canvas-plus-zoom
-system, so it never needs to shrink below its own natural
-proportions. The zoom system only takes over once the canvas can be
-shown at ≥1x, which is what keeps this tier feeling like a smooth
-"zoom in as you widen the window" rather than a shrink-then-grow.
-
-X and Y are deliberately handled two different ways:
-
-- X: "pageContentWidth" is .page's own content box - its real,
-  rendered width minus its own CSS padding (set in style.css), read
-  via getComputedStyle. That real, guaranteed padding is what fixes
-  the gutter reliably at every width, including the narrow band right
-  above the 1440px breakpoint where an inferred (not CSS-guaranteed)
-  margin was proving unreliable.
-
-- Y: kept as a plain computed value (viewport height minus a fixed
-  gutter), matching the vertical behavior already confirmed to look
-  right. This is intentional - only the horizontal gutter needed the
-  more robust treatment above, and it stays scoped to X only.
-──────────────────────────────────────── */
 (function () {
   var root = document.documentElement;
-  var BREAKPOINT = 1440; // matches the CSS media query
-  var MAX_SCALE = 1.33; // the approved "wide monitor" magnification
-  var GUTTER_Y = 32; // minimum top/bottom breathing room, in px, per side
+  var BREAKPOINT = 1440;
+  var MAX_SCALE = 1.33;
+  var GUTTER_Y = 32;
   var frame = null;
 
   function updateBentoScale() {
@@ -1013,15 +902,14 @@ X and Y are deliberately handled two different ways:
       return;
     }
 
-    // Reset to unscaled before measuring anything, so every reading
-    // below reflects the same, unscaled layout pass.
     root.style.setProperty("--bento-scale", "1");
 
     var rect = el.getBoundingClientRect();
     if (!rect.width || !rect.height) return;
 
     var cs = getComputedStyle(pageEl);
-    var padX = (parseFloat(cs.paddingLeft) || 0) + (parseFloat(cs.paddingRight) || 0);
+    var padX =
+      (parseFloat(cs.paddingLeft) || 0) + (parseFloat(cs.paddingRight) || 0);
     var availW = pageEl.clientWidth - padX;
     var availH = Math.max(h - GUTTER_Y * 2, rect.height * 0.5);
     if (availW <= 0 || availH <= 0) return;

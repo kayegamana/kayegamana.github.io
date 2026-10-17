@@ -2,34 +2,21 @@
 TOKENS
 ═══════════════════════════════════════════ */
 :root {
-  /* Main Backgrounds */
   --bg-deep: #00011e;
-  /* Prussian Blue - Overall Page Background */
   --bg-mid: #020b61;
-  /* Deep Twilight 4 - Modal Backgrounds */
 
-  /* Typography */
   --ink: #fdfdfe;
-  /* White */
   --ink-mute: #bec0d5;
-  /* Muted Grey-Blue */
   --ink-soft: #6da1e0;
-  /* Soft Blue */
 
-  /* Accents */
   --blue: #72bcff;
-  /* Cool Sky - Main Highlight */
   --blue-soft: rgba(114, 188, 255, 0.8);
 
-  /* Structural Lines */
   --hairline: rgba(114, 188, 255, 0.2);
   --hairline-soft: rgba(114, 188, 255, 0.08);
 
   --green: #6fd49a;
 
-  /* Fluid desktop scale (set by JS, see main.js).
-     Safe default of 1 = original unscaled design,
-     used before JS runs or if it's unavailable. */
   --bento-scale: 1;
 
   --gap: 18px;
@@ -37,8 +24,6 @@ TOKENS
   --px: 24px;
   --py: 20px;
 
-  /* Premium Surface Tokens */
-  /* Procedural SVG replaced with static compressed Base64 PNG for massive performance gain */
   --noise: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAGFBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/c7atAAAABnRSTlMAERERERHjBAM0AAAAU0lEQVQ4y2NgQAX8DIxgwgSjwAgmjEIgjEIgjEIgjEIgjEIgjEIgjEIgjEIgjEIgjEIgjEIgjEIgjEIgjEIgjEIgjEIgjEIgjEIgjEIgjEIgjEIADF8D/03v2tAAAAAASUVORK5CYII=");
   --shadow-base:
     0 8px 24px -8px rgba(0, 1, 30, 0.6), 0 3px 10px -3px rgba(0, 1, 30, 0.5);
@@ -105,7 +90,6 @@ body {
   min-height: 100svh;
   overflow-x: hidden;
 
-  /* Forces crisp text rendering on lower-density screens */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -230,13 +214,11 @@ CARD BASE (Secondary / Receding)
     border-color 0.3s ease,
     transform 0.3s ease;
 
-  /* Hardware Acceleration & Containment */
   contain: layout style paint;
   transform: translateZ(0);
-  will-change: transform; /* Removed box-shadow to prevent repaint jitter */
+  will-change: transform;
 }
 
-/* Hardware-Accelerated Glowing Shadow Element */
 .card:not(.card-flagship)::after {
   content: "";
   position: absolute;
@@ -260,7 +242,6 @@ CARD BASE (Secondary / Receding)
     var(--inner-glow-strong);
 }
 
-/* Specular highlight streak across top edge */
 .card:not(.card-flagship)::before {
   content: "";
   position: absolute;
@@ -291,7 +272,6 @@ CARD BASE (Secondary / Receding)
 
 /* ═══════════════════════════════════════════
 CARD HIGHLIGHT (Primary / Elevated)
-Applied to Profile, Flagship, Contact
 ═══════════════════════════════════════════ */
 .card.card-highlight {
   background:
@@ -331,7 +311,6 @@ Applied to Profile, Flagship, Contact
   transform: translateY(-3px);
 }
 
-/* ── Label ── */
 .card-label {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
@@ -383,7 +362,6 @@ Applied to Profile, Flagship, Contact
   margin-left: 8px;
 }
 
-/* ── Title ── */
 .card-title {
   font-family: "Montserrat", sans-serif;
   font-weight: 800;
@@ -396,7 +374,6 @@ Applied to Profile, Flagship, Contact
   z-index: 1;
 }
 
-/* ── Title row (title + photo btn) ── */
 .title-row {
   display: flex;
   align-items: center;
@@ -404,7 +381,7 @@ Applied to Profile, Flagship, Contact
   margin-bottom: 10px;
   position: relative;
   z-index: 1;
-  /* Creates a safe zone on the right so text wraps early, avoiding the hanging image button */
+
   padding-right: 46px;
 }
 
@@ -414,7 +391,6 @@ Applied to Profile, Flagship, Contact
   min-width: 0;
 }
 
-/* ── Body ── */
 .card-body {
   font-family: "Bricolage Grotesque", sans-serif;
   font-size: clamp(0.75rem, 0.85vw, 0.85rem);
@@ -424,7 +400,6 @@ Applied to Profile, Flagship, Contact
   z-index: 1;
 }
 
-/* ── Tags ── */
 .tag-row {
   display: flex;
   flex-wrap: wrap;
@@ -443,12 +418,12 @@ Applied to Profile, Flagship, Contact
   letter-spacing: 1.2px;
   text-transform: uppercase;
   color: var(--blue);
-  /* Increased opacity to fake glass depth without blur calculations */
+
   background: rgba(1, 10, 84, 0.85);
   border: 1px solid rgba(114, 188, 255, 0.15);
   border-radius: 4px;
   padding: 4px 8px;
-  /* Sharper top highlight to fake glass edge */
+
   box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.12);
 }
 
@@ -457,16 +432,15 @@ Applied to Profile, Flagship, Contact
   font-weight: 500;
 }
 
-/* ── Photo trigger button ── */
 .photo-trigger {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 36px;
   height: 36px;
-  /* Top is 0 to perfectly respect the 20px card padding */
+
   margin-top: 0;
-  /* Bottom offset absorbs the extra height to keep the title visually close */
+
   margin-bottom: -24px;
   flex-shrink: 0;
   border-radius: 50%;
@@ -636,39 +610,6 @@ CARD 1 — PROFILE (HIGHLIGHTED)
   overflow: hidden;
 }
 
-/* .btn-talk::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -150%;
-  width: 120%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.35) 50%,
-    transparent 100%
-  );
-transform: skewX(-20deg) translateX(0%);
-  animation: futuristicSweep 3s ease-in-out infinite;
-  pointer-events: none;
-  will-change: transform;
-} */
-
-/* Accessibility: Kill sweep animation if user prefers reduced motion
-@media (prefers-reduced-motion: reduce) {
-  .btn-talk::after {
-    animation: none !important;
-    display: none !important;
-  }
-} */
-
-/* Previously animated `left`, which forces layout on every single frame,
-   forever, for the life of the page. `left`/`right` percentages are
-   relative to the containing block, but `translateX()` percentages are
-   relative to this element's own box (120% of the button), so the two
-   aren't directly interchangeable, 291.7% here covers the same absolute
-   travel distance the old -150% -> 200% left animation covered. */
 @keyframes futuristicSweep {
   0% {
     transform: skewX(-20deg) translateX(0%);
@@ -679,7 +620,6 @@ transform: skewX(-20deg) translateX(0%);
   }
 }
 
-/* Performance Override: Kill the looping animation globally whenever a modal is open */
 html:has(.modal-overlay.open) .btn-talk::after {
   animation: none !important;
   display: none !important;
@@ -828,7 +768,7 @@ CARD 3 — TECH STACK (SECONDARY)
   display: none;
   flex-wrap: wrap;
   gap: 5px;
-  /* Tight gap to maximize horizontal space */
+
   align-content: flex-start;
   animation: fadeIn 0.3s ease;
 }
@@ -853,19 +793,18 @@ CARD 3 — TECH STACK (SECONDARY)
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  /* Closer proximity between icon and text */
+
   padding: 5px 9px;
-  /* Slimmer padding to fit all items */
+
   background:
     var(--noise),
-    /* Solidified gradient alpha for fake glass */
     linear-gradient(148deg, rgba(1, 10, 84, 0.85) 0%, rgba(2, 7, 62, 0.85) 100%);
   border: 1px solid rgba(114, 188, 255, 0.12);
   border-radius: 6px;
   cursor: default;
   box-shadow:
     0 2px 6px -1px rgba(0, 0, 0, 0.2),
-    /* Sharper top highlight */ inset 0 1px 1px rgba(255, 255, 255, 0.12);
+    inset 0 1px 1px rgba(255, 255, 255, 0.12);
 }
 
 .tech-pill i {
@@ -886,7 +825,7 @@ CARD 3 — TECH STACK (SECONDARY)
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 0.58rem;
-  /* Scaled down slightly to save horizontal width */
+
   letter-spacing: 0.2px;
   color: var(--ink);
   white-space: nowrap;
@@ -908,28 +847,6 @@ CARD 4 — FLAGSHIP (HIGHLIGHTED & ANIMATED)
   --snake-base: rgba(6, 26, 128, 0.4);
 }
 
-/* .card.card-flagship::before {
-  content: "";
-  position: absolute;
-  top: -100%;
-  left: -100%;
-  width: 300%;
-  height: 300%;
-  background: conic-gradient(
-    var(--snake-base) 0%,
-    var(--snake-base) 75%,
-    var(--blue) 90%,
-    var(--snake-base) 100%
-  );
-  animation: snake-spin 7s linear infinite;
-  animation-play-state: var(--play-state, running);
-  z-index: -2;
-  pointer-events: none;
-  will-change: transform;
-  transform: translateZ(0);
-} */
-
-/* Masking the inner background beautifully to perfectly match highlight theme */
 .card.card-flagship::after {
   content: "";
   position: absolute;
@@ -1082,7 +999,6 @@ CARD 8 — TESTIMONIAL (SECONDARY)
   display: flex;
   flex-direction: column;
   padding: var(--px);
-  /* Enforces equal 24px padding on all sides */
 }
 
 .testimonial-indicators {
@@ -1095,11 +1011,10 @@ CARD 8 — TESTIMONIAL (SECONDARY)
   width: 6px;
   height: 6px;
   border-radius: 6px;
-  /* Changed to fixed pixels to maintain rounded edges when stretched */
+
   background: rgba(90, 157, 217, 0.2);
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  /* Smoother expansion animation */
 }
 
 .t-dot:hover {
@@ -1108,7 +1023,7 @@ CARD 8 — TESTIMONIAL (SECONDARY)
 
 .t-dot.active {
   width: 18px;
-  /* Expands into a dash to emphasize the active state */
+
   background: var(--blue);
   box-shadow: 0 0 5px var(--blue);
 }
@@ -1119,11 +1034,10 @@ CARD 8 — TESTIMONIAL (SECONDARY)
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* Fluidly centers content on tall desktop screens */
+
   container-type: inline-size;
-  /* Universally prevents height collapse */
+
   padding-top: 0.5rem;
-  /* Natural optical balance against the header */
 }
 
 .certs-quote {
@@ -1131,7 +1045,7 @@ CARD 8 — TESTIMONIAL (SECONDARY)
   flex-direction: column;
   width: 100%;
   position: absolute;
-  /* Inactive slides hide without taking up structural space */
+
   inset: 0;
   z-index: 1;
   opacity: 0;
@@ -1147,21 +1061,20 @@ CARD 8 — TESTIMONIAL (SECONDARY)
   pointer-events: auto;
   transform: translateY(0);
   position: relative;
-  /* Active slide natively dictates parent height on unconstrained layouts */
+
   height: max-content;
-  /* Shrink-wraps exactly to text flow, preventing jumping glitches */
 }
 
 .quote-mark {
   font-family: "Montserrat", sans-serif;
   font-weight: 900;
   font-size: clamp(5rem, 22cqi, 8rem);
-  /* Scales smoothly relative to the container width */
+
   line-height: 1;
   color: rgba(114, 188, 255, 0.07);
   position: absolute;
   top: -0.28em;
-  /* Slightly more negative to nudge it up, but stays dynamic via em units */
+
   left: -0.1em;
   user-select: none;
   pointer-events: none;
@@ -1173,7 +1086,7 @@ CARD 8 — TESTIMONIAL (SECONDARY)
   font-weight: 400;
   color: var(--ink);
   margin: 0 0 1.25rem 0;
-  /* Clean, scalable spacing replacing 'auto' guesswork */
+
   width: 100%;
   max-width: 100%;
   text-align: left;
@@ -1201,12 +1114,11 @@ CARD 8 — TESTIMONIAL (SECONDARY)
 
 .author-name {
   color: var(--ink-soft);
-  /* Soft blue tone */
 }
 
 .author-role {
   color: var(--ink-mute);
-  /* Muted gray tone to distinguish from the name */
+
   font-weight: 600;
 }
 
@@ -1260,13 +1172,11 @@ CARD 9 — CONTACT (HIGHLIGHTED)
   transition: color 0.2s;
 }
 
-/* Removed .contact-line:hover to prevent false clickability perception */
-
 .copy-btn {
   background: rgba(90, 157, 217, 0.08);
   border: 1px solid rgba(114, 188, 255, 0.15);
   color: var(--ink-soft);
-  padding: 5px 14px; /* Slightly increased side padding for the pill shape */
+  padding: 5px 14px;
   border-radius: 50px;
   display: flex;
   align-items: center;
@@ -1293,7 +1203,6 @@ CARD 9 — CONTACT (HIGHLIGHTED)
   border-color: var(--green);
 }
 
-/* Contact bottom area (2 columns) */
 .contact-bottom-grid {
   display: flex;
   align-items: center;
@@ -1359,7 +1268,6 @@ CARD 9 — CONTACT (HIGHLIGHTED)
   font-size: 0.55rem;
 }
 
-/* Stack contact bottom area on extremely narrow devices */
 @media (max-width: 374px) {
   .contact-bottom-grid {
     flex-direction: column;
@@ -1405,7 +1313,6 @@ MODALS
   contain: layout style paint;
   overscroll-behavior: none;
 
-  /* FIXED: Use hardware acceleration properly and remove 'visibility' */
   transform: translateZ(0);
   will-change: opacity, transform;
 }
@@ -1428,7 +1335,7 @@ MODALS
 .modal-box {
   position: relative;
   z-index: 1;
-  /* Removed expensive base64 noise and complex gradients to skip texture decoding */
+
   background: var(--bg-mid);
   border: 1px solid rgba(90, 157, 217, 0.15);
   border-radius: 20px;
@@ -1437,10 +1344,9 @@ MODALS
   max-height: 88vh;
   overflow-y: auto;
   overscroll-behavior: contain;
-  /* Replaced 45px blur radius. Gaussian blurs natively throttle weak mobile GPUs */
+
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.8);
 
-  /* Hardware Acceleration & Containment */
   contain: layout style paint;
 }
 
@@ -1509,20 +1415,18 @@ MODALS
   color: var(--ink);
 }
 
-/* Modal Gallery & Zoom */
 .modal-gallery-wrapper {
   display: grid;
   grid-template-columns: 1fr 80px;
   gap: 12px;
   align-items: stretch;
-  /* Both columns stretch to perfectly match */
 }
 
 .modal-main-image-container {
   position: relative;
   background: transparent;
   border-radius: 8px;
-  /* Subtle rounded edges */
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1531,18 +1435,17 @@ MODALS
 .modal-main-image-container img {
   width: 100%;
   height: auto;
-  /* Image drives the container height naturally */
+
   max-height: 70vh;
-  /* Safeguard for unusually tall screenshots */
+
   object-fit: contain;
   border-radius: 8px;
-  /* Applies the subtle rounding directly to the image */
+
   display: block;
   cursor: zoom-in;
   transition: transform 0.3s ease;
 }
 
-/* Two-Step Zoom & Lightbox Behavior */
 .lightbox-overlay {
   position: fixed;
   inset: 0;
@@ -1591,7 +1494,6 @@ MODALS
   transition: opacity 0.25s ease;
 }
 
-/* Step 2: The Deep Zoom, purely a transform now, the layout box never changes */
 .lightbox-img.is-zoomed {
   cursor: grab;
   user-select: none;
@@ -1680,14 +1582,13 @@ MODALS
   gap: 8px;
   padding-right: 0;
   height: 100%;
-  /* Takes full height defined by main image */
 }
 
 .thumb-wrapper {
   position: relative;
   width: 100%;
   flex: 1;
-  /* Dynamically stretches to perfectly match the main image height */
+
   border-radius: 6px;
   cursor: pointer;
   overflow: hidden;
@@ -1695,9 +1596,8 @@ MODALS
   transition: border-color 0.2s ease;
   background: rgba(90, 157, 217, 0.05);
   background-clip: padding-box;
-  /* Eliminates background bleed at the rounded corners */
+
   transform: translateZ(0);
-  /* Hardware acceleration fix for strict corner clipping */
 }
 
 .thumb-wrapper.active {
@@ -1729,13 +1629,8 @@ MODALS
   position: absolute;
   inset: 0;
   border-radius: 4px;
-  /* Perfectly matches the inner curve (6px wrapper radius - 2px border) */
-  background: rgba(
-    0,
-    1,
-    30,
-    0.92
-  ); /* Darkened slightly to compensate for blur removal */
+
+  background: rgba(0, 1, 30, 0.92);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1747,7 +1642,6 @@ MODALS
   pointer-events: none;
 }
 
-/* Contact Form (Modal) */
 .cform {
   display: flex;
   flex-direction: column;
@@ -1791,7 +1685,7 @@ MODALS
     border-color 0.2s,
     background 0.2s;
   box-shadow: inset 0 2px 4px rgba(0, 1, 30, 0.2);
-  /* Push native form controls to their own GPU layer to prevent text re-rasterization during modal scale transitions */
+
   transform: translateZ(0);
   backface-visibility: hidden;
 }
@@ -1817,20 +1711,18 @@ MODALS
   justify-content: center;
   padding: 12px;
   margin-top: 8px;
-  /* Removes the outer glowing shadow to stop expensive repaints during modal scale */
+
   box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3);
 }
 
-/* Kills the infinite sweeping animation specifically inside the contact form */
 .cform-submit::after {
   animation: none !important;
   display: none !important;
 }
 
 .cform-submit:hover {
-  /* Removes the enhanced outer glow on hover */
   box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4);
-  /* Prevents GPU layer shifting on low-end devices */
+
   transform: none;
 }
 
@@ -1848,11 +1740,6 @@ PERFORMANCE OVERRIDES (TOUCH DEVICES)
     transform: none !important;
   }
 
-  /* Touch devices never fire :hover, so there is no transform animation
-     for the permanent will-change/translateZ layer promotion on .card to
-     serve. It just sits in GPU memory the whole time instead, competing
-     with the modal's own backdrop-filter layer for the same budget.
-     Same pixels either way, since nothing on .card actually animates here. */
   .card {
     will-change: auto;
     transform: none;
@@ -1866,11 +1753,7 @@ DESKTOP SCALING & LOCKED VIEWPORT (1440px+)
   body {
     height: 100vh;
     height: 100svh;
-    /* Vertical safety net: if the scaled canvas is ever taller than the
-       viewport (e.g. a short browser window), it scrolls instead of
-       being silently clipped. Horizontal stays locked since the scale
-       formula already guarantees the canvas never exceeds the
-       viewport's width. */
+
     overflow-y: auto;
     overflow-x: hidden;
   }
@@ -1881,20 +1764,15 @@ DESKTOP SCALING & LOCKED VIEWPORT (1440px+)
     min-height: unset;
     align-items: center;
     justify-content: center;
-    /* Horizontal only. Real, guaranteed breathing room on the x-axis -
-       main.js reads this exact value (via getComputedStyle) to size
-       the canvas, so the two can never drift apart. Vertical stays at
-       0 here; that axis is handled purely in JS (see main.js), left
-       untouched from the version already confirmed to look right. */
     padding: 0 32px;
   }
 
   .bento-master {
     width: 1360px;
-    /* Auto allows the grid to define its true natural size */
+
     height: auto;
     max-width: none;
-    /* Clean slate to avoid sizing conflicts */
+
     transform: none;
   }
 
@@ -1911,28 +1789,6 @@ DESKTOP SCALING & LOCKED VIEWPORT (1440px+)
   }
 }
 
-/*
-  FLUID DESKTOP MAGNIFICATION (1440px+)
-  Instead of snapping straight to a fixed 133% zoom (which overflowed
-  and got clipped on any viewport narrower than ~1873px), the zoom
-  level is a continuous ratio computed in main.js:
-
-    scale = min(viewportWidth / 1360, 1.33)
-
-  Because the canvas's own natural width (1360px) is part of the
-  formula, the zoomed canvas can mathematically never exceed the
-  viewport width, whatever it is. 1424px (1360px canvas + the page's
-  64px of horizontal padding) is the exact width at which the dense
-  grid first fits at its own native, unscaled size; the breakpoint is
-  set a little past that, at 1440px, as a safety margin so a vertical
-  scrollbar (which shaves some width off the usable viewport) can
-  never drag the starting scale just under 1x - so this tier
-  reliably starts at a true 1.00x and grows smoothly up from there to the
-  approved 1.33x "wide monitor" look once the viewport comfortably
-  fits it (~1873px+), then holds steady at 1.33x for anything wider
-  (2560px, 3440px ultrawide, etc). No shrink phase below 1x, no
-  clipped content, no manual per-monitor tuning.
-*/
 @media (min-width: 1440px) {
   .bento-master {
     zoom: var(--bento-scale);
@@ -1941,38 +1797,32 @@ DESKTOP SCALING & LOCKED VIEWPORT (1440px+)
 
 /* ═══════════════════════════════════════════
 MID & NARROW DESKTOP (900px - 1439px)
-Custom 2-Column Split Layout
 ═══════════════════════════════════════════ */
 @media (min-width: 900px) and (max-width: 1439px) {
-  /* Left column: Profile card spans vertically */
   .card-profile {
-    grid-column: 1 / 9; /* 8 columns wide (perfect 1/3 of the layout) */
+    grid-column: 1 / 9;
     grid-row: 1 / 3;
   }
 
-  /* Allow intro text to span the full widened card */
   .profile-intro {
     max-width: 100%;
   }
 
-  /* Right column (Row 1): Fast Facts & Tech Stack (Equal width: 8 cols each) */
   .card-facts {
-    grid-column: 9 / 17; /* 8 columns wide */
+    grid-column: 9 / 17;
     grid-row: 1;
   }
 
   .card-techstack {
-    grid-column: 17 / 25; /* 8 columns wide */
+    grid-column: 17 / 25;
     grid-row: 1;
   }
 
-  /* Right column (Row 2): Flagship spanning below the previous two */
   .card-flagship {
-    grid-column: 9 / 25; /* 16 columns wide */
+    grid-column: 9 / 25;
     grid-row: 2;
   }
 
-  /* Push secondary projects to Row 3 */
   .card-proj2 {
     grid-column: 1 / 13;
     grid-row: 3;
@@ -1983,19 +1833,16 @@ Custom 2-Column Split Layout
     grid-row: 3;
   }
 
-  /* Occupies its own full row above the bottom cards */
   .card-certs {
     grid-column: 1 / 25;
     grid-row: 4;
   }
 
-  /* Shares the bottom row (50% width) */
   .card-testimonial {
     grid-column: 1 / 13;
     grid-row: 5;
   }
 
-  /* Shares the bottom row (50% width) */
   .card-contact {
     grid-column: 13 / 25;
     grid-row: 5;
@@ -2073,7 +1920,7 @@ IPAD PORTRAIT ONLY (581px - 899px)
   }
 
   .profile-actions {
-    display: contents; /* Unboxes elements to join the main flex row */
+    display: contents;
   }
 
   .profile-status {
@@ -2088,20 +1935,19 @@ IPAD PORTRAIT ONLY (581px - 899px)
 
   .profile-intro {
     order: 4;
-    flex-basis: 100%; /* Forces the intro to take a full row below */
-    margin-top: 6px; /* Adds a gentle optical balance from the row above */
+    flex-basis: 100%;
+    margin-top: 6px;
     margin-bottom: 0;
     max-width: 100%;
   }
 
   .profile-actions .btn-talk {
     order: 5;
-    margin-left: auto; /* Pushes the button to the far right edge below intro */
+    margin-left: auto;
     align-self: center;
     margin-top: 4px;
   }
 
-  /* Pulls Testimonial and Contact out of the full-width stack so they share one row */
   .card-testimonial,
   .card-contact {
     grid-column: auto;
@@ -2112,7 +1958,6 @@ IPAD PORTRAIT ONLY (581px - 899px)
 DESKTOP AND IPAD ONLY ANIMATION
 ═══════════════════════════════════════════ */
 @media (min-width: 720px) {
-  /* 1. Add Let's Talk Button Sweep */
   .btn-talk::after {
     content: "";
     position: absolute;
@@ -2132,7 +1977,6 @@ DESKTOP AND IPAD ONLY ANIMATION
     will-change: transform;
   }
 
-  /* 2. Add Flagship Snake Border */
   .card.card-flagship::before {
     content: "";
     position: absolute;
@@ -2159,7 +2003,6 @@ DESKTOP AND IPAD ONLY ANIMATION
 MOBILE  ≤ 580px
 ═══════════════════════════════════════════ */
 @media (max-width: 580px) {
-  /* Hardware Optimization: Kill heavy sweep animation on phone GPUs */
   .btn-talk::after {
     animation: none !important;
     display: none !important;
@@ -2221,12 +2064,11 @@ MOBILE  ≤ 580px
 
   .modal-main-image-container {
     height: auto;
-    /* Restores organic height, eliminates massive whitespace */
   }
 
   .modal-main-image-container img {
     max-height: 40vh;
-    /* Safe max height for mobile screens */
+
     width: 100%;
     object-fit: contain;
   }
@@ -2236,7 +2078,7 @@ MOBILE  ≤ 580px
     justify-content: space-between;
     flex-wrap: nowrap;
     overflow: hidden;
-    /* No scrolling needed, all 5 fit perfectly */
+
     padding-bottom: 0;
     height: auto;
     gap: 8px;
@@ -2249,16 +2091,15 @@ MOBILE  ≤ 580px
   .thumb-wrapper {
     width: 100%;
     flex: 1;
-    /* Stretches equally to completely fill the row */
+
     height: auto;
     aspect-ratio: 1 / 1;
-    /* Mathematically enforces a perfect square based on fluid width */
   }
 
   .modal-footer {
     flex-direction: column;
     align-items: center;
-    /* Beautifully centers both title and controls */
+
     gap: 16px;
     text-align: center;
   }
@@ -2272,10 +2113,6 @@ MOBILE  ≤ 580px
     grid-template-columns: 1fr;
   }
 
-  /* Phone rotated to landscape. The page already scrolls comfortably
-     here, so this is purely a visual refinement (a huge profile photo
-     looks disproportionate in a wide, short viewport) rather than
-     anything load-bearing for fitting content. */
   @media (max-height: 480px) {
     .profile-id-img {
       width: 140px;
@@ -2319,7 +2156,7 @@ FORM SUBMISSION UTILITIES
 }
 
 .btn-success-state::after {
-  display: none !important; /* Temporarily suspends the top sweeping shimmer effect on success */
+  display: none !important;
 }
 
 /* ═══════════════════════════════════════════
@@ -2341,8 +2178,6 @@ SECTION FADE-IN ANIMATION
 
 /* ═══════════════════════════════════════════
 RESPONSIVE CTA OVERRIDE (< 1440px)
-Morphs the secondary footer button into a primary 
-CTA when the layout becomes a scrollable stack.
 ═══════════════════════════════════════════ */
 @media (max-width: 1439px) {
   .card-contact .btn-alt {
