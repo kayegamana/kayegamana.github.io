@@ -2993,7 +2993,7 @@ body:has(dialog[open]) {
 
 @media (max-width: 600px) {
   :root {
-    --section-space: 44px;
+    --section-space: 60px;
     --section-gutter: 18px;
     --nav-offset: 62px;
   }
@@ -3017,7 +3017,7 @@ body:has(dialog[open]) {
 
   .section-label {
     gap: 10px;
-    margin-bottom: 24px;
+    margin-bottom: 32px;
     font-size: 12px;
     letter-spacing: 2px;
   }
@@ -3027,7 +3027,7 @@ body:has(dialog[open]) {
   }
 
   .section-title {
-    margin-bottom: 14px;
+    margin-bottom: 16px;
     font-size: 30px;
   }
 
@@ -3036,11 +3036,11 @@ body:has(dialog[open]) {
   }
 
   .section-title--spaced {
-    margin-bottom: 28px;
+    margin-bottom: 36px;
   }
 
   .section-title--job {
-    margin-bottom: 14px;
+    margin-bottom: 16px;
   }
 
   .subsection-title {
@@ -3052,7 +3052,7 @@ body:has(dialog[open]) {
   }
 
   .section-intro {
-    margin-bottom: 28px;
+    margin-bottom: 36px;
     font-size: 16px;
   }
 
@@ -3091,7 +3091,7 @@ body:has(dialog[open]) {
   .hero {
     min-height: calc(100vh - 64px);
     min-height: calc(100svh - 64px);
-    padding: 1.25rem 0 1.75rem;
+    padding: 1.25rem 0 2.5rem;
   }
 
   .hero__card img {
@@ -3125,7 +3125,7 @@ body:has(dialog[open]) {
   }
 
   .about {
-    gap: 28px;
+    gap: 36px;
   }
 
   .about__photo {
@@ -3141,7 +3141,7 @@ body:has(dialog[open]) {
   }
 
   .about__text > p:last-of-type {
-    margin-bottom: 22px;
+    margin-bottom: 28px;
   }
 
   .info-list {
@@ -3168,15 +3168,15 @@ body:has(dialog[open]) {
   }
 
   .subsection-title--education {
-    margin-top: 56px;
+    margin-top: 76px;
   }
 
   .education {
-    gap: 36px;
+    gap: 48px;
   }
 
   .education__column {
-    gap: 32px;
+    gap: 40px;
   }
 
   .school {
@@ -3242,7 +3242,7 @@ body:has(dialog[open]) {
 
   .internship__company {
     gap: 14px 16px;
-    margin-bottom: 20px;
+    margin-bottom: 28px;
   }
 
   .internship__logo {
@@ -3267,14 +3267,14 @@ body:has(dialog[open]) {
   }
 
   .internship__lead {
-    margin-bottom: 28px;
+    margin-bottom: 40px;
     font-size: 17px;
     line-height: 1.5;
   }
 
   .internship__intro {
-    gap: 24px;
-    margin-bottom: 40px;
+    gap: 28px;
+    margin-bottom: 56px;
   }
 
   .overview__row {
@@ -3292,7 +3292,7 @@ body:has(dialog[open]) {
   }
 
   .systems {
-    gap: 28px;
+    gap: 44px;
   }
 
   .system-card__body {
@@ -3379,11 +3379,11 @@ body:has(dialog[open]) {
   }
 
   .gallery {
-    margin-top: 48px;
+    margin-top: 76px;
   }
 
   .gallery__layout {
-    gap: 24px;
+    gap: 32px;
   }
 
   .gallery__frame {
@@ -3422,8 +3422,8 @@ body:has(dialog[open]) {
 
   .gallery__thumbs {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 8px;
-    margin-top: 24px;
+    gap: 10px;
+    margin-top: 32px;
   }
 
   .circle-button {
@@ -3438,11 +3438,11 @@ body:has(dialog[open]) {
     --pad: 16px;
     --shadow-offset: 6px;
 
-    margin-bottom: 48px;
+    margin-bottom: 64px;
   }
 
   .project__body {
-    gap: 18px;
+    gap: 22px;
   }
 
   .project__main {
@@ -3488,16 +3488,16 @@ body:has(dialog[open]) {
   }
 
   .course-group-title {
-    margin-bottom: 12px;
+    margin-bottom: 18px;
   }
 
   .course-group-title--second {
-    margin-top: 36px;
+    margin-top: 56px;
   }
 
   .course-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px 12px;
+    gap: 22px 14px;
   }
 
   .course-card__media {
@@ -3518,7 +3518,7 @@ body:has(dialog[open]) {
   }
 
   .services {
-    gap: 10px;
+    gap: 14px;
   }
 
   .service {
@@ -3546,8 +3546,8 @@ body:has(dialog[open]) {
   }
 
   .stack-collections {
-    gap: 28px;
-    margin-bottom: 40px;
+    gap: 36px;
+    margin-bottom: 52px;
   }
 
   .stack-collection:nth-child(2) {
@@ -3564,7 +3564,7 @@ body:has(dialog[open]) {
   }
 
   .stack-core {
-    gap: 36px;
+    gap: 48px;
   }
 
   .stack-heading {
@@ -3622,7 +3622,7 @@ body:has(dialog[open]) {
   }
 
   .stack-more {
-    margin-top: 28px;
+    margin-top: 40px;
   }
 
   .stack-more__toggle {
@@ -3635,7 +3635,7 @@ body:has(dialog[open]) {
   }
 
   .cert-sort {
-    margin-top: 0;
+    margin-top: 4px;
   }
 
   .cert-sort__button {
@@ -3643,8 +3643,8 @@ body:has(dialog[open]) {
   }
 
   .cert-grid {
-    gap: 12px;
-    margin-top: 20px;
+    gap: 14px;
+    margin-top: 28px;
   }
 
   .cert {
@@ -3661,7 +3661,7 @@ body:has(dialog[open]) {
   }
 
   .cert-more {
-    margin-top: 28px;
+    margin-top: 40px;
   }
 
   .cert-more__button {
@@ -3686,7 +3686,7 @@ body:has(dialog[open]) {
   }
 
   .testimonial {
-    gap: 24px;
+    gap: 36px;
   }
 
   .testimonial__mark {
@@ -3725,11 +3725,11 @@ body:has(dialog[open]) {
   }
 
   .contact {
-    gap: 28px;
+    gap: 44px;
   }
 
   .contact__text {
-    margin-bottom: 22px;
+    margin-bottom: 28px;
     font-size: 16px;
   }
 
@@ -3866,6 +3866,7 @@ body:has(dialog[open]) {
 
 @media (max-width: 380px) {
   :root {
+    --section-space: 52px;
     --section-gutter: 14px;
   }
 
